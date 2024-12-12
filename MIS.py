@@ -21,9 +21,12 @@ G.add_edges_from(edges)
 sampler = LeapHybridSampler()
 indepNodes = dnx.maximum_independent_set(G, sampler)
 
+# Generate a BQM
+# dimod.generators.maximum_independent_set(G.edges, G.nodes) 
+
 print(indepNodes)
 
-pos = nx.spring_layout(G) # Force specfici layout
+pos = nx.spring_layout(G) # Force specific layout
 
 plt.figure(0)
 nx.draw_networkx(G, pos=pos)
