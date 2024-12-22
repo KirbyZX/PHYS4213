@@ -28,11 +28,17 @@ edges = [
 G = nx.Graph()
 G.add_edges_from(edges)
 
-sampler = LeapHybridSampler()
-indepNodes = dnx.maximum_independent_set(G, sampler)
+sampler = LeapHybridSampler() # TODO: CHANGE TO QUANTUM ANNEALER
+indepNodes = dnx.maximum_independent_set(G, sampler) # Should return multiple solutions
+# Check calculations by hand and compare
+# Calculate Hamiltonian and find ground state
+# sampleset_to_dataframe to print solutions
+# Energy levels, energy differences, solution repeats, chain breaks
+# Compare to classical methods
+# Compare classical algorithms, what problem are they solving? Could this be run on an annealer?
 
 # Generate a BQM
-# dimod.generators.maximum_independent_set(G.edges, G.nodes) 
+# dimod.generators.maximum_independent_set(G.edges, G.nodes)
 
 print(indepNodes)
 
