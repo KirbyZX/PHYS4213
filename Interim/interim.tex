@@ -72,19 +72,23 @@
 
 % Understanding of physical problem.
 
+The general form of a QUBO is
 \begin{equation}
-    f(E)=\begin{cases}
-        1\qquad & E\le E_F \\
-        0\qquad & E>E_F
-    \end{cases}
+    f(x)=\sum_iQ_{i,i}x_i+\sum_{i<j}Q_{i,j}x_ix_j
+    \label{eq:QUBO}
+\end{equation}
+where $Q$ is a coefficient matrix (??).
+
+\section{D-Wave}
+
+The maximum independent set (MIS) QUBO takes the form
+\begin{equation}
+    f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
+    \label{eq:MIS}
 \end{equation}
 
-\begin{equation}
-    E_F=\frac{k_F^2}{2m_e} \,.
-\end{equation}
 
-
-\section{Degenerate case}
+\section{Problem formulation}
 
 %Identify most important results clearly and convincingly
 %Shows that computer code works correctly (numerical convergences, systematic errors, random errors, etc.)
