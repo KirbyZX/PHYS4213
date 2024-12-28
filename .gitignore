@@ -1,6 +1,5 @@
-*.afdesign
-*.afdesign~lock~
-__pycache__
+__pycache__/
+Demo/
 
 *.aux
 *.bbl
