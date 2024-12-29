@@ -7,19 +7,9 @@ from dwave.system import DWaveSampler, EmbeddingComposite
 import dimod
 
 
-def solveMIS(G: nx.Graph, num_reads: int = 100) -> pd.DataFrame:
+def solveWeightedMIS(G: nx.Graph, weights: list[tuple] = [], num_reads: int = 100, strength_multiplier: float = 2) -> pd.DataFrame:
     
-    bqm = dimod.generators.maximum_independent_set(G.edges, G.nodes)
-
-    sampler = EmbeddingComposite(DWaveSampler())
-    sampleset = sampler.sample(bqm, num_reads = num_reads)
-
-    return sampleset.to_pandas_dataframe(True)
-
-
-def solveWeightedMIS(G: nx.Graph, weights: list[tuple] = [], num_reads: int = 100) -> pd.DataFrame:
-    
-    bqm = dimod.generators.maximum_weight_independent_set(G.edges, weights)
+    bqm = dimod.generators.maximum_weight_independent_set(G.edges, weights, strength_multiplier=strength_multiplier)
 
     sampler = EmbeddingComposite(DWaveSampler())
     sampleset = sampler.sample(bqm, num_reads = num_reads)

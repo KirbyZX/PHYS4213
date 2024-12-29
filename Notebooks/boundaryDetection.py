@@ -38,7 +38,7 @@ def extractPhrases(stream: stream.Stream, boundaries: list, identifier: str = "p
     return phrases
 
 
-def identifyBoundaries(stream: stream.Stream, threshold: float) -> tuple[stream.Stream, list]:
+def identifyBoundaries(stream: stream.Stream, threshold: float, annotate: bool = False) -> list[int]:
 
     noteStream = stream.recurse().getElementsByClass("Note").stream()
     pitchStrengths = np.empty(len(noteStream))
@@ -62,12 +62,14 @@ def identifyBoundaries(stream: stream.Stream, threshold: float) -> tuple[stream.
         total = 0.3*pitchStrengths[i] + 0.6*offsetStrengths[i]
 
         if total >= threshold:
-            n.addLyric(round(total, 3))
             boundaries.append(n.getOffsetInHierarchy(stream))
+            
+            if annotate:
+                n.addLyric(round(total, 3))
 
     boundaries.append(stream.duration.quarterLength)
 
-    return noteStream, boundaries
+    return boundaries
 
 
 def normalise(data: np.array) -> np.array:
