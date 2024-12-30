@@ -2,13 +2,13 @@ from music21 import stream, note
 import math
 import numpy as np
 
-def noteDistribution(stream: stream.Stream) -> tuple:
+def noteDistribution(stream: stream.Stream) -> tuple[dict, dict]:
     '''
     Returns the distribution of notes in a stream as a tuple of two dictionaries.
     '''
 
     pitchCount = {}
-    durationCount = {}
+    durationCount = {} # TODO: Change to IOI
 
     for n in stream.recurse().getElementsByClass("Note"):
 
@@ -22,7 +22,10 @@ def noteDistribution(stream: stream.Stream) -> tuple:
         else:
             durationCount[n.duration.quarterLength] += 1
 
-    return pitchCount, durationCount
+    pitchDistribution = {k: v / sum(pitchCount.values()) for k, v in pitchCount.items()}
+    durationDistribution = {k: v / sum(durationCount.values()) for k, v in durationCount.items()}
+
+    return pitchDistribution, durationDistribution
 
 
 def noteEntropy(note: note.Note, distribution: tuple) -> float:
@@ -43,5 +46,11 @@ def noteEntropy(note: note.Note, distribution: tuple) -> float:
     return pitchEntropy + durationEntropy
 
 
-def streamEntropy(stream: stream.Stream, distribution: tuple) -> float:
-    return sum([noteEntropy(n, distribution) for n in stream.recurse().getElementsByClass("Note")])
+def streamEntropy(stream: stream.Stream) -> float:
+
+    pitchCount, durationCount = noteDistribution(stream)
+    
+    pitchEntropy = -sum([x * math.log2(x) for x in pitchCount.values()])
+    durationEntropy = -sum([x * math.log2(x) for x in durationCount.values()])
+     
+    return pitchEntropy + durationEntropy

@@ -18,8 +18,6 @@ def extractPhrases(stream: stream.Stream, boundaries: list, identifier: str = "p
     Identifies phrases in a stream based on a list of boundaries.
     '''
 
-    distribution = noteDistribution(stream)
-
     phrases = []
     n = 1
     start = 0
@@ -31,7 +29,8 @@ def extractPhrases(stream: stream.Stream, boundaries: list, identifier: str = "p
         phrase.id = f"{identifier}_{n}"
         n += 1
 
-        phrase.entropy = streamEntropy(phrase, distribution)
+        distribution = noteDistribution(phrase)
+        phrase.entropy = streamEntropy(phrase)
 
         phrases.append(phrase)
     
