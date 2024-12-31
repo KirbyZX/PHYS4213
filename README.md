@@ -7,6 +7,8 @@ graph TD;
     B-->D;
     C-->D;
 ```
+Quantum Instrument Rearrangement By Expression (Entropy?) Evaluation
+
 ## Classical methods
 
 Classical methods of producing music normally revolves around expansion from a simple melody line or chord progression.
