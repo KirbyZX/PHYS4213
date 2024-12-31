@@ -83,42 +83,66 @@ Computational complexity "One of the roles of computational complexity theory is
 
 This paper will focus on a subset of arrangement known as \textit{reduction}—taking a score written for a large number of parts and reducing it to a smaller number of parts, whilst still retaining the musicality and structure of the original. This is a common task in music production, where a piece written for a full orchestra may need to be arranged for a smaller ensemble, such as a string quartet. This forgoes the need to generate new music, as all notes in the arrangement are taken from the original score, and is more readily available to analyse as an optimisation problem. Quantum music generation is currently a developing field \cite{miranda_quantum_2022}, but beyond the scope of this paper. 
 
-\section{Theory} 
+\section{Theory}
 
-Annealing, in metallurgical terms, is the process of heating and cooling a material to alter its physical properties. The cooling stage is typically slow to allow the material soften \cite{oed_annealing_2024}. In the context of quantum computing, quantum annealing is a computational technique that uses quantum fluctuations to find the global minimum of a given function. Much like its metallurgical counterpart, quantum annealing is a slow process that allows the system to settle into a low-energy state.
+Annealing, in metallurgical terms, is the process of heating and cooling a material to alter its physical properties. The cooling stage is typically slow, allowing particles to arrange themselves into regular lattice structures, making the material softer and less brittle \cite{oed_annealing_2024}. In the context of quantum computing, quantum annealing is the process of slowly changing a quantum system from one Hamiltonian to another. Much like its metallurgical counterpart, this computational technique allows the system to settle into a more useful final state.
 
-The system is first prepared in a ground state $H_0$, and then allowed to evolve to a second state $H_P$ according to
+The typical time evolution of a quantum annealer looks like
 \begin{equation}
-    H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_P \,.
+    H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p \,,
     \label{eq:time-evolution}
 \end{equation}
-If this is done adiabatically, with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_P$. This is the principle of quantum annealing.
+where $H_0$ is the initial ground state, which is allowed to evolve to a second state $H_p$ across time $T$. If this is done adiabatically, with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_P$ at time $T$. This is the principle of quantum annealing.
 
-Quantum annealing can be used to solved combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If we prepare $H_P$ such that its ground state encodes the solution to the optimisation problem, then as long as $H_0$ and $H_P$ do not commute, the solution will be given at the end of the annealing process.
+The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If we prepare $H_p$ such that its ground state encodes the solution to the optimisation problem, then as long as $H_0$ and $H_p$ do not commute, the solution will be given at the end of the annealing process.
 
-
+Problem Hamiltonians take the form of an Ising spin glass, a random arrangement of "magnetic dipole moments of atomic spins that can be in one of two states". The quantum version of a spin glass with $N$ spins takes the form
+\begin{equation}
+    H_p = -\sum_{i<j}J_{ij}\sigma_i^z\sigma_j^z - \sum_{i=1}^{N}h_i\sigma_i^z
+    \label{eq:ising}
+\end{equation}
+where $\sigma_i^z$ is a Pauli matrix, $J_{ij}$ are the coupling strengths, and $h_j$ are the field strengths. In the quantum case, the discrete variables are called \textit{qubits} and are the foundation of the process. The ground state is prepared with the Hamiltonian
+\begin{equation}
+    H_0 = -h_0\sum_{i=1}^{N}\sigma_i^x
+\end{equation}
+which is an "equal superposition of all possible states in the eigenbasis of $H_p$".
 
 \section{Embedding}
 
-The general form of a QUBO is
+The mapping of a logical problem to a spin glass state is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). The general form of a QUBO is
 \begin{equation}
     f(x)=\sum_iQ_{i,i}x_i+\sum_{i<j}Q_{i,j}x_ix_j
     \label{eq:QUBO}
 \end{equation}
-where $Q$ is a coefficient matrix (??).
+where $x$ is a vector of binary variables, and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. As its name suggests, a QUBO can only have terms up to the second power, restricting coupling to pairwise interactions [WHY?].
+
+This form can easily for transformed to an Ising model using
+\begin{equation}
+    s_i = \frac{2x_i - 1}{2}
+    \label{eq:qubo-ising}
+\end{equation}
+
+D-Wave is one of the only providers of public access to quantum processing units (QPUs). The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms as nodes and quadratic terms as couplers. However, the topology of these graphs often don't allow an exact one-to-one mapping; the solution to this is the introduction of chains. A chain of physical qubits can act like a single logical variable, with the chain strength determining how strongly the chain is coupled. Chain strength is an important parameter that can affect the quality of solutions [DISCUSS MORE].
+
+The full embedding process is often handled entirely by the QPU, done "on the fly" each time a problem is submitted. 
 
 \section{Problem formulation}
 
 Previous approaches to the automatic arrangement of music have been based on the use of genetic algorithms and neural networks. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, we propose a new approach to the automatic arrangement of music based on quantum annealing.
 
-It has been shown that the automatic arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}. Given a set of musical phrases, the goal is to find an optimal arrangement of these phrases such that the overall quality of the arrangement is maximised. This problem can be formulated as a maximum independent set (MIS) problem, which is a well-known optimisation problem. The MIS problem can then be solved using quantum annealing, which already has well-known QUBO formulations \cite{lucas_ising_2014}.
+It has been shown that the automatic arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}. Given a set of musical phrases, the goal is to find an optimal arrangement of these phrases such that the overall quality of the arrangement is maximised, whilst considering the compatibility of the phrases. This problem can be formulated as a maximum independent set (MIS) problem, which is a well-known optimisation problem. The MIS problem can then be solved using quantum annealing, which already has well-known QUBO formulations \cite{lucas_ising_2014}.
+
+Given a graph $G$ with nodes $x_i$ and edges $E$, the aim is to find the largest set of nodes such that no nodes within the set are connected by an edge. Formally, this can be written as
+% GRAPH THEORY EQUATION
 
 The maximum independent set (MIS) QUBO takes the form
 \begin{equation}
-    f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
+    f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i\,,
     \label{eq:MIS}
 \end{equation}
+where we take $x_i=1$ as the inclusion of that node in the solution set. The first term penalises any edges in the solution by increasing the energy by $A$, whilst the second term is the objective term, that is, the quantity we are trying the minimise.
 
+% Have simple graph example here with figure
 
 
 
