@@ -59,6 +59,7 @@ def identifyBoundaries(stream: stream.Stream, threshold: float, annotate: bool =
 
     for i,n in enumerate(noteStream):
         total = 0.3*pitchStrengths[i] + 0.6*offsetStrengths[i]
+        n.boundaryStrength = total
 
         if total >= threshold:
             boundaries.append(n.getOffsetInHierarchy(stream))

@@ -36,8 +36,7 @@ def noteEntropy(note: note.Note, distribution: tuple) -> float:
     pitch = note.name
     duration = note.duration.quarterLength
 
-    pitchCount = distribution[0]
-    durationCount = distribution[1]
+    pitchCount, durationCount = distribution
     totalNotes = sum(pitchCount.values())
 
     pitchEntropy = - (pitchCount[pitch] / totalNotes) * math.log2(pitchCount[pitch] / totalNotes)
