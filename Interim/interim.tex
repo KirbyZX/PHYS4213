@@ -208,6 +208,14 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ [EQU
 % TODO: replace with pdf
 \begin{figure}[h]
     \centering
+    \includegraphics[width=\linewidth]{../Figures/boundary_offset.pdf}
+    \caption{Boundary strengths for each note of the viola part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$). Notes above the threshold value are considered as boundaries for phrases.}
+    \label{fig:boundary-strengths}
+\end{figure}
+
+% TODO: replace with pdf
+\begin{figure}[h]
+    \centering
     \includegraphics[width=\linewidth]{../Trials/1_graph.png}
     \caption{The representation of Fig.\ \ref{fig:excerpt} as a graph. The nodes are the identified musical phrases, with edges connecting them if they overlap.}
     \label{fig:graph}
@@ -232,6 +240,8 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ [EQU
 \section{Conclusions}
 
 One advantage this method has over classical algorithms is that no training data is needed. Genetic and deep learning approaches require refinement of their models on large datasets, using considerable time and resources. Due to the required constraints, the QPU will (mostly) always provide a feasible solution, without any knowledge of previous arrangements.
+
+Another benefit is the solve time. For 1000 reads, the D-Wave QPU access time averages at $163\,\textrm{ms}$
 
 Future work would include expansion to polyphonic music, allowing more than one phrase to be played simultaneously. This could take the form of arranging for a polyphonic instrument such as the piano, or for multiple monophonic instruments. The MIS formulation would need to be altered to a colouring one, with the different colours representing allocations of phrases to each "track".
 
