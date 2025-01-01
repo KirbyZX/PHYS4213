@@ -1,4 +1,4 @@
-# Towards Automated Music Arrangement via Quantum Annealing
+# Quantum Instrument Rearrangement By Expression (Entropy?) Evaluation
 
 ```mermaid
 graph TD;
@@ -7,7 +7,6 @@ graph TD;
     B-->D;
     C-->D;
 ```
-Quantum Instrument Rearrangement By Expression (Entropy?) Evaluation
 
 ## Classical methods
 
