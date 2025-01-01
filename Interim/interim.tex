@@ -92,16 +92,16 @@ The typical time evolution of a quantum annealer looks like
     H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p \,,
     \label{eq:time-evolution}
 \end{equation}
-where $H_0$ is the initial ground state, which is allowed to evolve to a second state $H_p$ across time $T$. If this is done adiabatically, with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_P$ at time $T$. This is the principle of quantum annealing.
+where $H_0$ is the initial ground state, which is allowed to evolve to a second state $H_p$ across time $T$. If this is done adiabatically, with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_p$ at time $T$. This is the principle of quantum annealing.
 
 The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If we prepare $H_p$ such that its ground state encodes the solution to the optimisation problem, then as long as $H_0$ and $H_p$ do not commute, the solution will be given at the end of the annealing process.
 
-Problem Hamiltonians take the form of an Ising spin glass, a random arrangement of "magnetic dipole moments of atomic spins that can be in one of two states". The quantum version of a spin glass with $N$ spins takes the form
+Problem Hamiltonians take the form of an Ising spin glass, a random arrangement of "magnetic dipole moments of atomic spins that can be in one of two states", typically spin up or down. A spin glass with $N$ spins $s_i$ takes the form
 \begin{equation}
-    H_p = -\sum_{i<j}J_{ij}\sigma_i^z\sigma_j^z - \sum_{i=1}^{N}h_i\sigma_i^z
+    H_p = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
     \label{eq:ising}
 \end{equation}
-where $\sigma_i^z$ is a Pauli matrix, $J_{ij}$ are the coupling strengths, and $h_j$ are the field strengths. In the quantum case, the discrete variables are called \textit{qubits} and are the foundation of the process. The ground state is prepared with the Hamiltonian
+where $J_{ij}$ are the coupling strengths, and $h_i$ are the field strengths. In the quantum case, the discrete variables are called \textit{qubits} and the spins $s_i$ are replaced with Pauli matrices $\sigma_i^z$. The ground state is prepared with the Hamiltonian
 \begin{equation}
     H_0 = -h_0\sum_{i=1}^{N}\sigma_i^x
 \end{equation}
@@ -109,22 +109,30 @@ which is an "equal superposition of all possible states in the eigenbasis of $H_
 
 \section{Embedding}
 
-The mapping of a logical problem to a spin glass state is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). The general form of a QUBO is
+The mapping of a logical problem to a spin glass state is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
 \begin{equation}
     f(x)=\sum_iQ_{i,i}x_i+\sum_{i<j}Q_{i,j}x_ix_j
     \label{eq:QUBO}
 \end{equation}
 where $x$ is a vector of binary variables, and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. As its name suggests, a QUBO can only have terms up to the second power, restricting coupling to pairwise interactions [WHY?].
-
 This form can easily for transformed to an Ising model using
 \begin{equation}
-    s_i = \frac{2x_i - 1}{2}
+    s_i = x_i - \frac{1}{2}
     \label{eq:qubo-ising}
 \end{equation}
 
-D-Wave is one of the only providers of public access to quantum processing units (QPUs). The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms as nodes and quadratic terms as couplers. However, the topology of these graphs often don't allow an exact one-to-one mapping; the solution to this is the introduction of chains. A chain of physical qubits can act like a single logical variable, with the chain strength determining how strongly the chain is coupled. Chain strength is an important parameter that can affect the quality of solutions [DISCUSS MORE].
+Once a QUBO has been expressed, it can be sent to a quantum processing unit (QPU) to be solved. The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms as nodes and quadratic terms as couplers. However, the topology of these graphs often don't allow an exact one-to-one mapping; the solution to this is the introduction of chains. A chain of physical qubits can act like a single logical variable, with the chain strength determining how strongly the chain is coupled. Chain strength is an important parameter that can affect the quality of solutions [DISCUSS MORE].
 
-The full embedding process is often handled entirely by the QPU, done "on the fly" each time a problem is submitted. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{../Figures/pegasus.pdf}
+    \caption{A graph of 144 qubits in a D-Wave QPU, using the Pegasus topology. The qubits are represented by the nodes, and the couplers by the edges.}
+    \label{fig:pegasus}
+\end{figure}
+
+The qubits and their couplers define what can be seen as an energy landscape. Different combinations of qubit spins will have different energies, with the lowest energy state being the solution to the problem. A solver (or "sampler") attempts to characterise the shape of the energy landscape using a random range of input, and returns a number of samples with the lowest energy states. Note that the "true" ground state cannot be guaranteed; it could be part of the returned sampleset, or may not even be found at all. It is the parameters of the annealing process that can reduce local minima and increase the likelihood of finding the ground state.
+
+The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture. The D-Wave QPU used in this study is the Advantage system, which has a Pegasus architecture. This is a highly connected graph, with 15 qubits per unit cell, and 16 unit cells. The Pegasus graph is a two-dimensional lattice, with each qubit connected to 15 others. This allows for a high degree of connectivity, but also introduces the possibility of long chains, which can degrade the quality of solutions.
 
 \section{Problem formulation}
 
