@@ -29,7 +29,6 @@ def extractPhrases(stream: stream.Stream, boundaries: list, identifier: str = "p
         phrase.id = f"{identifier}_{n}"
         n += 1
 
-        distribution = noteDistribution(phrase)
         phrase.entropy = streamEntropy(phrase)
 
         phrases.append(phrase)
