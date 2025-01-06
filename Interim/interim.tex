@@ -20,6 +20,10 @@
 \usepackage{amsmath} 						% Maths package
 
 \usepackage{siunitx} % SI units, alignment in tables
+\sisetup{
+    round-mode = figures,
+    round-precision = 3
+}
 
 \usepackage{lipsum}
 \usepackage[british]{babel} % British date system
@@ -29,6 +33,7 @@
 
 \usepackage{hyperref} % For hyperreferences
 
+\usepackage{float}
 
 % Customise date to preferred format
 \usepackage{etoolbox}
@@ -78,6 +83,8 @@ The combination of quantum computing and music is a relatively new field, but on
 Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as a optimisation problems where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding [CITE], financial portfolio optimisation [CITE], and traffic flow optimisation [CITE].
 
 This paper will focus on a subset of arrangement known as \textit{reduction}—taking a score written for a large number of parts and reducing it to a smaller number of parts, whilst still retaining the musicality and structure of the original. This is a common task in music production, where a piece written for a full orchestra may need to be arranged for a smaller ensemble, such as a string quartet. This forgoes the need to generate new music, as all notes in the arrangement are taken from the original score, and is more readily available to analyse as an optimisation problem. In this study, music arrangement is formulated as an NP-hard optimisation problem, and solved via quantum annealing to produce a valid reduction.
+
+% More motivation???
 \clearpage
 
 \section{Theory}
@@ -148,7 +155,7 @@ The MIS QUBO takes the form
     f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i\,,
     \label{eq:MIS}
 \end{equation}
-where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes.
+where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes. $A$ and $B$ are known as Lagrange parameters, and can be chosen to balance the two terms accordingly.
 
 \begin{figure}[h]
     \centering
@@ -179,86 +186,99 @@ where $W$ is a vector of real weights. This way, fewer nodes may be chosen as lo
 
 \section{Methods}
 
-D-Wave Systems operates the first and only quantum annealer for public access [CITE]. All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others. This allows for a high degree of connectivity, but also introduces the possibility of long chains, which can degrade the quality of solutions.
-Since interaction with the D-Wave QPUs is handled in Python, the surrounding manipulation of music is also written in this way. The Python module \verb|music21| provides extensive resources for manipulating, translating, and creating music, allowing scores to be broken down and reconstructed as fit.
+D-Wave Systems operates the first and only quantum annealer for commerical access, introduced in 2011 \cite{dwave_manufactured_2011}. All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others (see Fig.\ \ref{fig:pegasus}).
+Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create QUBOs for the QPU to solve.
 
-There are many formats that allow the digital manipulation of music, each with their own benefits—this study primarily uses MusicXML \cite{musicxml}. This format focuses on the representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into measures (bars), parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PNG, PDF) and audio (MIDI) formats.
+Music can be represented by many digital formats, each with their own benefits—this study primarily uses MusicXML \cite{musicxml}. This format focuses on the representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into measures (bars), parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PNG, PDF) and audio (MIDI) formats. The Python module \verb|music21| provides extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.
 
-To begin processing, a MusicXML file of the original score is first interpreted by the program. Embedded metadata within the score allows it to be broken down into its constituent instrument parts, measures, and notes. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece. [CAN ELABORATE HERE]
+The reduction process begins by interpreting a MusicXML file of the original score. Embedded metadata within the score allows it to be broken down into its constituent parts, measures, and notes, as well as containing information about the instrumentation and structure. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score).
 
-To construct the graph, each part needs to be split into a sequence of musical phrases. The approach taken here is the local boundary detection model (LBDM) [Cambouropoulos 2001] due to its easy implementation and good performance. The boundaries segmenting a musical line into phrases are identified using the degree of change between successive notes; larger differences between notes would show an increased likelihood of a boundary. Boundary strengths are calculated over two parameters, pitch and inter-onset interval (IOI), which is the difference between the starts of two notes. This is chosen over note duration as it is often more noticeable to the listener [CITE]. The strength at note $i$ with parameter $x_i$ is given by
+To construct the problem graph, each individual part needs to be split into a sequence of musical phrases. The approach taken here is the local boundary detection model (LBDM) due to its easy implementation and good performance \cite{cambouropoulos_lbdm_2011}. The boundaries segmenting a part into phrases are identified using the degree of change between successive notes; larger differences between notes would show an increased likelihood of a boundary. Boundary strengths are calculated over two parameters, pitch and inter-onset interval (IOI), which is the difference between the starts of two notes. This is chosen over note duration as it is often more noticeable to the listener. The strength at note $i$ with parameter $x_i$ is given by
 \begin{equation}
     S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
     \label{eq:boundary-strength}
 \end{equation}
-where $r_{i, i+1}$ is the degree of change of a parameter between notes $i$ and $i+1$ and given by
+where $r_{i, i+1}$ is the degree of change of a parameter between notes $i$ and $i+1$, given by
 \begin{equation}
     r_{i, i+1}=\frac{|x_{i}-x_{i+1}|}{x_{i}+x_{i+1}} \,.
     \label{eq:degree-change}
 \end{equation}
 In this way, a note with a high boundary strength would signal the start of a new musical phrase. Each parameter's strength is normalised to the range $[0,1]$ according to the set of all strengths $S$ via
 \begin{equation}
-    S_i'=\frac{S_i-\min(S)}{\max(S)-\min(S)}
+    S_i'=\frac{S_i-\min(S)}{\max(S)-\min(S)} \,.
     \label{eq:normalisation}
 \end{equation}
-Finally, to find the total boundary strength, the strengths of each parameter are summed with a weighting, using weights derived by trial-and-error ($0.3$ for pitch and $0.6$ for IOI) [CITE]. If a note's total boundary strength surpasses a specified threshold, it is considered a boundary. Boundaries are always taken at the beginning and end of a part.
+Finally, to find the total boundary strength, the strengths of each parameter are summed with a weighting, using weights derived by trial-and-error ($0.3$ for pitch and $0.6$ for IOI) \cite{cambouropoulos_lbdm_2011}. If a note's total boundary strength surpasses a specified threshold, it is considered a boundary. Boundaries are always taken at the beginning and end of a part.
 
 Once a list of boundaries is identified, the phrases are extracted by taking all the elements between subsequent boundaries. Each phrase is labelled according to the part it belongs to and its index within that part, allowing the phrases to be easily referenced and reconstructed into a new score once the optimisation is complete.
 
-In order to construct the graph, each phrase is checked against every other phrase for an overlap in time. Phrases are then represented by nodes, with edges connecting phrases that overlap. The phrase nodes can be assigned a weighting based on their entropy. The entropy of a phrase can be seen as how much musical information it contains, with a higher entropy indicating a more complex phrase. Maximisation of phrase entropy can be used to create richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
+To arrange the phrases into a graph, each phrase is checked against every other phrase for an overlap in time. Phrases are then represented by nodes, with edges connecting phrases that overlap. The weight of each node is taken here to be the entropy of the phrase. Entropy can be seen as how much  information a variable contains; in this context, a phrase with a higher entropy would indicate a higher level of complexity. increasing the likelihood of it being more ``musical''. Maximisation of phrase entropy would then result in the creation richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
 \begin{equation}
     H(X):=-\sum_i P(x_i)\log_2 P(x_i)
     \label{eq:entropy}
 \end{equation}
-where each $x_i$ is a possible value of $X$. In this context, the random variable is a musical note, considering its possible values both in terms of pitch and rhythm.
+where each $x_i$ is a possible value of $X$ and $\sum_i P(x_i)=1$. In this context, the random variable is a musical note, considering its possible values both in terms of pitch and rhythm.
 
 Pitch entropy is calculated by considering the distribution of pitches in a phrase. The probabilities of each pitch $x_i$ can be found by
 \begin{equation}
     P(x_i)=\frac{n_i}{N}
     \label{eq:pitch-prob}
 \end{equation}
-where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more "interesting" in the final arrangement.
-
-Rhythm entropy is calculated in a similar way, but instead of considering the duration of notes, the inter-onset interval (IOI) is used instead. This is also calculated using Eq.\ \ref{eq:pitch-prob}, but instead considering $x_i$ as possible IOI values.
+where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more ``interesting'' in the final arrangement.
+Rhythm entropy is calculated in a similar way, but considering the duration of the note instead. This is also calculated using Eq.\ \ref{eq:pitch-prob}, but instead considering $x_i$ as possible duration values.
 The total entropy of a phrase is then the sum of the pitch and rhythm entropies.
 
-Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ [EQUATION] and sent to the D-Wave QPU to be solved. The solutions returned are sets of phrases that are compatible with each other and form the final arrangement. These are then reconstructed into a new object which can be translated into sheet music or audio.
-
-% TODO: Make this list of phrases selected? With their entropies?
-\begin{table}[ht] % Table environment specifies caption, label, location
-    \caption{Summary of frational changes to best-fit parameters due to electron energy density and electrostatic corrections.}
-    \label{tab:corrections}
-    \setlength{\tabcolsep}{12pt} % Column spacing
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{c|c|c|c} % S aligns to decimal point
-        \toprule
-        \textbf{Correction} & $|\Delta A|/A$ & $|\Delta B|/B$ & $|\Delta q|/q$\\
-        \midrule
-        $\varepsilon_\mathrm{elec}$ & 0.026 & 0.0031 & 0.0442 \\
-        $p_c$ & 0.009 & 0.0114 & 0.0005 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref{eq:weightedMIS}, the Lagrange parameters chosen, and sent to the D-Wave QPU to be solved. The lowest energy solutions returned are sets of nodes that are not connected by edges, whilst maximising their total weighting. The qubits are then matched back to their corresponding phrases, which are reconstructed into a new score, the final reduction.
 
 \section{Results}
 
+\begin{figure*}[!t]
+    \centering
+    \begin{subfigure}[b]{0.5\linewidth}
+        \includegraphics[width=0.9\linewidth]{../Figures/problemGraph.pdf}
+        \caption{The problem graph of Fig.\ \ref{fig:excerpt}. The nodes are the identified musical phrases, with edges connecting them if they overlap. The entropy of each phrase is represented by the colour of the node.}
+        \label{fig:problem-graph}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.5\linewidth}
+        \includegraphics[width=0.9\linewidth]{../Figures/solutionGraph.pdf}
+        \caption{The solution graph, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a feasible arrangement which can be seen in Fig.\ \ref{fig:arrangement}.}
+        \label{fig:solution-graph}
+    \end{subfigure}
+    \caption{Graph representations of the original score and final arrangement.}
+    \label{fig:graphs}
+\end{figure*}
+
 The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, making it easier to identify and arrange the musical phrases. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score.
 
-Phrases identified using the LBDM model are shown in Fig.\ \ref{fig:phrases}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy}. A graph representation of the phrases can be seen in Fig.\ \ref{fig:graph}, with the nodes representing the phrases and the edges connecting overlapping phrases. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, which can be seen as distinct musical ideas that are separtated by rests from the other phrases (for example, the first two measures of the piece). A non-negligibile number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm.
+Phrases identified using the LBDM model are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, which can be seen as distinct musical ideas that are separtated by rests from the other phrases (for example, the first two measures of the piece). A non-negligibile number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm.
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
     \includegraphics[width=\linewidth]{../Figures/boundary_offset.pdf}
-    \caption{Boundary strengths for each note of the viola part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$). Notes above the threshold value are considered as boundaries for phrases.}
+    \caption{Boundary strengths for each note of the violin part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$), which identifies five total phrases. Note that the beginning and end of the piece are always considered boundaries.}
     \label{fig:boundary-strengths}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\linewidth]{../Figures/problemGraph.pdf}
-    \caption{The representation of Fig.\ \ref{fig:phrases} as a graph. The nodes are the identified musical phrases, with edges connecting them if they overlap. The entropy of each phrase is represented by the colour of the node.}
-    \label{fig:graph}
-\end{figure}
+\begin{table}[hb]
+    \caption{Summary of the boundary strengths and entropy for the identified phrases of the violin part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
+    \label{tab:corrections}
+    \setlength{\tabcolsep}{12pt}
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabular}{
+        S[round-mode = places, round-precision = 0]
+        S
+        S}
+        \toprule
+        \textbf{Start of phrase} & \textbf{Boundary strength} & \textbf{Entropy} \\
+        \midrule
+        0 & 0 & 0 \\
+        2.000000 & 0.511722 & 3.169925 \\
+        8.000000 & 0.698769 & 4.000000 \\
+        16.000000 & 0.610942 & 4.757191 \\
+        36.000000 & 0.401487 & 3.807936 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave QPU returned a sampleset of solutions, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had the same energy but used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
 
@@ -269,30 +289,22 @@ After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave Q
     \label{fig:histogram}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\linewidth]{../Figures/solutionGraph.pdf}
-    \caption{The graph of Fig.\ \ref{fig:graph} but with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a feasible arrangement, which can be seen in Fig.\ \ref{fig:arrangement}.}
-    \label{fig:solution}
-\end{figure}
-
 \begin{figure*}[h]
-    \newcommand{\subfigurewidth}{0.9\linewidth}
     \centering
-    \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=\subfigurewidth]{../Figures/excerpt-1.png}
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{../Figures/excerpt-1.png}
         \caption{Original excerpt.}
         \label{fig:excerpt}
     \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=\subfigurewidth]{../Figures/selected-1.png}
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{../Figures/selected-1.png}
         \caption{Selected phrases from solving the MIS problem.}
         \label{fig:selected}
-    \end{subfigure}\hfill
+    \end{subfigure}
     \par\bigskip
     \begin{subfigure}[t]{0.5\linewidth}
         \centering
-        \includegraphics[width=\subfigurewidth]{../Figures/arrangement-1.png}
+        \includegraphics[width=\linewidth]{../Figures/arrangement-1.png}
         \caption{Final arrangement.}
         \label{fig:arrangement}
     \end{subfigure}
@@ -307,10 +319,11 @@ After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave Q
 It is clear that this method works for the excerpt shown here; future work would include testing this process on a wide range of pieces from different musical styles.
 
 The MIS formulation works well for reducing a score into a single polyphonic part, as the inclusion of a phrase within the final arrangement has a direct match to the binary variables used. However, a more useful application would be the ability to reduce a score to any number of parts, whether that be multiple monophonic instruments (e.g.\ string quartet) or a polyphonic instrument (e.g.\ piano). One formulation that could solve this would be "colouring", that is, colouring each node of the graph such that no two nodes of the same colour are connected by edges. In this case, each colour would represent a monophonic part, and the set of colours combined would represent the final instrumentation.
+This allows for a high degree of connectivity, but also introduces the possibility of long chains, which can degrade the quality of solutions.
 
 One advantage this method has over classical algorithms is that no training data is needed. Genetic and deep learning approaches require refinement of their models on large datasets, using considerable time and resources. Due to the required constraints, the QPU will (mostly) always provide a feasible solution, without any knowledge of previous arrangements.
 
-Another benefit is the solve time. For 1000 reads, the D-Wave QPU access time averages at $163\,\textrm{ms}$
+Another benefit is the solve time. For 1000 reads, the D-Wave QPU access time averages at $163$ \unit{\ms}.
 
 Although it can be argued that music cannot be objectively "scored", nonetheless, the quality of the produced arrangements needs to be judged in some way. One suggestion is that the "goodness" of music can only be measured via a Turing-like test, where human subjects are presented with a selection of both human- and computer-generated scores, and asked to categorise them \cite{pearce_towards_2001}. To this extent, a good measure of the arrangements produced by this method would be to compare them against popular arrangements of the same score composed by human professionals, via a series of blind trials. If the participants fail to identify the computer compositions from the human ones more often than random chance, then it can be said that the generated arrangements are of sufficiently good quality.
 
