@@ -39,19 +39,19 @@
 \makeatother
 
 \usepackage{fancyhdr}
-\pagestyle{fancy}                           % Insert header
+\pagestyle{fancy} % Insert header
 \renewcommand{\headrulewidth}{0pt}
-\lhead{L.\ Kirby}                           % Header name
-\rhead{Towards the automatic arrangement of music via quantum annealing}            % Header title              
+\lhead{L.\ Kirby}
+\rhead{Towards the automatic arrangement of music via quantum annealing}
 
-\def\bibsection{\section*{References}}      % Defining bibsection
+\def\bibsection{\section*{References}} % Defining bibsection
  
 \begin{document}
 
 \title{Towards the automatic arrangement of music via quantum annealing}
-\author{L.\ Kirby}                              % Author
-\affiliation{Durham University}                % Subtitle
-\date{Submitted: \today{}}     % Date
+\author{L.\ Kirby} % Author
+\affiliation{Durham University} % Subtitle
+\date{Submitted: \today{}} % Date
 
 \begin{abstract}              
 
@@ -65,23 +65,20 @@
 
 \section{Introduction} 
 
-Music is often seen as a very human endeavour.
+Music is often seen as a very human endeavour. For centuries, only skilled musicians could compose and perform such sequences of sound that would be considered art. Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
+Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging whilst still remaining faithful to the source material—a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
 
-Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging, a challenging and often time-consuming process, requiring a great deal of skill and experience. Perhaps it is unsurprising, then, that there has been interest in automating this process.
+One of the earliest examples of this can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century. The roll of dice would determine the order of pre-composed musical phrases, allowing for the creation of new music without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
+The introduction of computers in the 20th century allowed for more sophisticated methods of music arrangement. Composers could now transpose and manipulate musical parts digitally, without the need to calculate parts by hand. Moving into the 21st century, more advanced techniques such as genetic algorithms and neural networks have been used to arrange music, with varying degrees of success. However, these methods are limited by the complexity of the problem and the need for extensive training data.
 
-One of the earliest examples of this can be seen in the \textit{Musikalisches Würfelspiel} ("musical dice game") system popular in the 18th century. The roll of dice would determine the order of pre-composed musical phrases, allowing for the creation of new music without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
+The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be more efficient than its classical counterpart. Since then, two types of quantum computers have been developed: gate-based and annealing. Gate-based quantum computers, such as those developed by IBM and Google, use quantum gates to manipulate qubits and perform calculations. Quantum annealers, such as those developed by D-Wave, use quantum fluctuations to find the global minimum of a given function. Each are suited to solving different classes of problems, with gate-based computers being more versatile and annealers being more efficient for certain optimisation problems. 
 
-The introduction of computers in the 20th century allowed for more sophisticated methods of music arrangement. Genetic algorithms and neural networks have been used to arrange music, with varying degrees of success. However, these methods are limited by the complexity of the problem and the need for extensive training data.
+The combination of quantum computing and music is a relatively new field, but one that has shown promise. Quantum computers have been used to write melodies \cite{arya_music_2022}, harmonies \cite{freedline_algorhythms_2021}, create synthesisers \cite{miranda_hello_2020}, and compose remixes \cite{miranda_impossible_2022}, using a mixture of gate-based and annealing methods. However, most of these efforts have been directed at music \textit{composition}, that is, the generation of entirely new sequences and sounds, rather than music \textit{arrangement}. Quantum computers, specifically quantum annealers, have the potential to solve complex optimisation problems that are intractable for classical computers, and music arrangement is one such problem.
 
-With the advent of quantum computers, there become growth in a new field of quantum computer music.
+Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as a optimisation problems where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding [CITE], financial portfolio optimisation [CITE], and traffic flow optimisation [CITE].
 
-The combination of quantum computing and music is a relatively new field, but one that has shown promise. Quantum computers have the potential to solve complex optimisation problems that are intractable for classical computers, and music arrangement is one such problem.
-
-Quantum computing comes in two flavours: gate-based and annealing. Gate-based quantum computers, such as those developed by IBM and Google, use quantum gates to manipulate qubits and perform calculations. Quantum annealers, such as those developed by D-Wave, use quantum fluctuations to find the global minimum of a given function. Each are suited to solving different classes of problems, with gate-based computers being more versatile and annealers being more efficient for certain optimisation problems. 
-
-Computational complexity "One of the roles of computational complexity theory is to determine the practical limits on what computers can and cannot do". Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows exponentially with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding [CITE], financial portfolio optimisation [CITE], and traffic flow optimisation [CITE].
-
-This paper will focus on a subset of arrangement known as \textit{reduction}—taking a score written for a large number of parts and reducing it to a smaller number of parts, whilst still retaining the musicality and structure of the original. This is a common task in music production, where a piece written for a full orchestra may need to be arranged for a smaller ensemble, such as a string quartet. This forgoes the need to generate new music, as all notes in the arrangement are taken from the original score, and is more readily available to analyse as an optimisation problem. Quantum music generation is currently a developing field \cite{miranda_quantum_2022}, but beyond the scope of this paper. 
+This paper will focus on a subset of arrangement known as \textit{reduction}—taking a score written for a large number of parts and reducing it to a smaller number of parts, whilst still retaining the musicality and structure of the original. This is a common task in music production, where a piece written for a full orchestra may need to be arranged for a smaller ensemble, such as a string quartet. This forgoes the need to generate new music, as all notes in the arrangement are taken from the original score, and is more readily available to analyse as an optimisation problem. In this study, music arrangement is formulated as an NP-hard optimisation problem, and solved via quantum annealing to produce a valid reduction.
+\clearpage
 
 \section{Theory}
 
@@ -92,90 +89,100 @@ The typical time evolution of a quantum annealer looks like
     H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p \,,
     \label{eq:time-evolution}
 \end{equation}
-where $H_0$ is the initial ground state, which is allowed to evolve to a second state $H_p$ across time $T$. If this is done adiabatically, with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_p$ at time $T$. This is the principle of quantum annealing.
+where $H_0$ is the initial ground state, allowed to evolve to a second state $H_p$ across time $T$. If this is done adiabatically, with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_p$ at time $T$. This is the principle of quantum annealing.
 
 The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If we prepare $H_p$ such that its ground state encodes the solution to the optimisation problem, then as long as $H_0$ and $H_p$ do not commute, the solution will be given at the end of the annealing process.
 
-Problem Hamiltonians take the form of an Ising spin glass, a random arrangement of "magnetic dipole moments of atomic spins that can be in one of two states", typically spin up or down. A spin glass with $N$ spins $s_i$ takes the form
+In order to encode a problem, $H_p$ Hamiltonians take the form of an Ising spin glass, a random arrangement of magnetic dipole moments that can be in one of two states, typically spin-up ($+1$) or spin down ($-1$). A spin glass with a vector $s$ of $N$ spins takes the form
 \begin{equation}
-    H_p = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
+    H(s) = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
     \label{eq:ising}
 \end{equation}
-where $J_{ij}$ are the coupling strengths, and $h_i$ are the field strengths. In the quantum case, the discrete variables are called \textit{qubits} and the spins $s_i$ are replaced with Pauli matrices $\sigma_i^z$. The ground state is prepared with the Hamiltonian
+where $J_{ij}$ are the coupling strengths, and $h_i$ are the field strengths. The quantum case can be expressed as
+\begin{equation}
+    H_p = H(\sigma^z)
+\end{equation}
+where we have replaced the spins with Pauli matrices. This is the \textit{Ising model}. The discrete variables are now \textit{qubits}—binary variables like their classical counterparts, but existing in a superposition of the two states until measurement. The ground state is prepared with the Hamiltonian 
 \begin{equation}
     H_0 = -h_0\sum_{i=1}^{N}\sigma_i^x
 \end{equation}
-which is an "equal superposition of all possible states in the eigenbasis of $H_p$".
+which is an equal superposition of all possible states in the eigenbasis of $H_p$ \cite{lucas_ising_2014}.
 
-\section{Embedding}
-
-The mapping of a logical problem to a spin glass state is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
+The mapping of a logical problem to an Ising model is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
 \begin{equation}
-    f(x)=\sum_iQ_{i,i}x_i+\sum_{i<j}Q_{i,j}x_ix_j
+    f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
     \label{eq:QUBO}
 \end{equation}
-where $x$ is a vector of binary variables, and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. As its name suggests, a QUBO can only have terms up to the second power, restricting coupling to pairwise interactions [WHY?].
+where $x$ is a vector of binary variables (taking the values $0$ or $1$), and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. The off-diagonal $Q_{i,j}$ terms are known as quadratic coefficients, and diagonal $Q_{i,i}$ terms as linear coefficients. As its name suggests, a QUBO can only include terms up to the second power, restricting coupling to pairwise interactions just as the Ising model.
 This form can easily for transformed to an Ising model using
 \begin{equation}
-    s_i = x_i - \frac{1}{2}
+    s_i = 2x_i - 1 \,.
     \label{eq:qubo-ising}
 \end{equation}
 
-Once a QUBO has been expressed, it can be sent to a quantum processing unit (QPU) to be solved. The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms as nodes and quadratic terms as couplers. However, the topology of these graphs often don't allow an exact one-to-one mapping; the solution to this is the introduction of chains. A chain of physical qubits can act like a single logical variable, with the chain strength determining how strongly the chain is coupled. Chain strength is an important parameter that can affect the quality of solutions [DISCUSS MORE].
+Once a QUBO has been expressed, it can be sent to a quantum processing unit (QPU) to be solved. The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms ($x_i$) as nodes and quadratic terms ($x_ix_j$) as couplers. An embedded system can then be prepared in its initial ground state, and allowed to evolve adiabatically to its final state to obtain the solution.
+
+However, the topology of these graphs often doesn't allow an exact one-to-one mapping; it may be the case that the problem requires a qubit to have more couplers than physically allowed. The solution to this is the introduction of chains. A chain of physical qubits can act like a single logical variable, allowing more connections. The chain strength determines how strongly the chain is coupled, enforcing all qubits within the chain to have the same value. Chain strength is an important parameter that can affect the quality of solutions: if it is too weak, a final state may include chain breaks that return an infeasible solution; if it is too strong, it can overpower the other terms in the QUBO.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{../Figures/pegasus.pdf}
-    \caption{A graph of 144 qubits in a D-Wave QPU, using the Pegasus topology. The qubits are represented by the nodes, and the couplers by the edges.}
+    \caption{A graph of 144 qubits in a D-Wave QPU, using their Pegasus topology. Qubits are represented by nodes, and couplers by edges.}
     \label{fig:pegasus}
 \end{figure}
 
-The qubits and their couplers define what can be seen as an energy landscape. Different combinations of qubit spins will have different energies, with the lowest energy state being the solution to the problem. A solver (or "sampler") attempts to characterise the shape of the energy landscape using a random range of input, and returns a number of samples with the lowest energy states. Note that the "true" ground state cannot be guaranteed; it could be part of the returned sampleset, or may not even be found at all. It is the parameters of the annealing process that can reduce local minima and increase the likelihood of finding the ground state.
+The qubits and their couplers define what can be seen as an energy landscape. Different combinations of qubit spins will have different energies, with the lowest energy state being the solution to the problem. A solver (or ``sampler'') attempts to characterise the shape of the energy landscape using a random range of input, and returns a number of samples with the lowest energy states. Note that the ``true'' ground state cannot be guaranteed; it could be part of the returned sampleset, or may not even be found at all. It is the parameters of the annealing process that can reduce local minima and increase the likelihood of finding the ground state.
 
-The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture. The D-Wave QPU used in this study is the Advantage system, which has a Pegasus architecture. This is a highly connected graph, with 15 qubits per unit cell, and 16 unit cells. The Pegasus graph is a two-dimensional lattice, with each qubit connected to 15 others. This allows for a high degree of connectivity, but also introduces the possibility of long chains, which can degrade the quality of solutions.
+The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture. 
 
 \section{Problem formulation}
 
-Previous approaches to the automatic arrangement of music have been based on the use of genetic algorithms and neural networks. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, we propose a new approach to the automatic arrangement of music based on quantum annealing.
+Previous approaches to the automatic arrangement of music rely on neural networks [CITE] or recursive classical algorithms [CITE]. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, we propose a new approach to the automatic arrangement of music by applying quantum annealing.
 
-It has been shown that the automatic arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}. Given a set of musical phrases, the goal is to find an optimal arrangement of these phrases such that the overall quality of the arrangement is maximised, whilst considering the compatibility of the phrases. This problem can be formulated as a maximum independent set (MIS) problem, which is a well-known optimisation problem. The MIS problem can then be solved using quantum annealing, which already has well-known QUBO formulations \cite{lucas_ising_2014}.
+It has been shown that the automatic arrangement of music can be formulated as a combinatorial optimisation problem: given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the boolean expression is satisfied, corresponding to phrases included in the final arrangement \cite{moses_computational_2016}. Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant if split up.
 
-Given a graph $G$ with nodes $x_i$ and edges $E$, the aim is to find the largest set of nodes such that no nodes within the set are connected by an edge. Formally, this can be written as
-% GRAPH THEORY EQUATION
+This paper focuses on the reduction of polyphonic (multi-part) music to a single monophonic part, where only one note can be played at a time. A reduction of this form would be relevant for arranging a string quartet for solo violin, for example, whilst still retaining all the important elements from across the instrument parts. This problem can be solved using a reduction of the SAT problem known as the maximum independent set (MIS) problem \cite{lucas_ising_2014}. Consider a set of musical phrases, each represented by a node $x_i$ in a graph $G$, with nodes connected by an edge if the phrases overlap. The aim is to find the largest subset of nodes such that no nodes within the subset are connected by an edge—the phrases corresponding to these nodes form the final arrangement. A formulation of this sort ensures that the reduction remains strictly monophonic, as no two chosen phrases play at the same time.
 
-The maximum independent set (MIS) QUBO takes the form
+The MIS QUBO takes the form
 \begin{equation}
     f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i\,,
     \label{eq:MIS}
 \end{equation}
-where we take $x_i=1$ as the inclusion of that node in the solution set. The first term penalises any edges in the solution by increasing the energy by $A$, whilst the second term is the objective term, that is, the quantity we are trying the minimise.
+where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes.
 
-This can further be expanded to include weights on the nodes, which can be used to represent the quality of the phrases. The MIS QUBO then becomes
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+        \includegraphics[width=\linewidth]{../Figures/toy-1.png}
+        \caption{An example score of three parts, with each phrase coloured.}
+        \label{fig:simple-excerpt}
+    \end{subfigure}
+    \par\bigskip
+    \begin{subfigure}[b]{\linewidth}
+        \includegraphics[width=\linewidth]{../Figures/toy_graph.pdf}
+        \caption{A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases.}
+        \label{fig:simple-graph}
+    \end{subfigure}
+    \caption{A toy example demonstrating the construction of the problem graph. It is trivial to see that the maximal independent set contains two nodes.}
+    \label{fig:toy}
+\end{figure}
+
+To increase the quality of the final arrangement, this formulation can further be expanded to include weights on the nodes, which can be used to represent the ``musicality'' of the phrases. The MIS QUBO then becomes
 \begin{equation}
     f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i W_ix_i\,,
     \label{eq:weightedMIS}
 \end{equation}
-where $W$ is a vector of real weights.
-
-% Have simple graph example here with figure
-
-
-
-%Identify most important results clearly and convincingly
-%Shows that computer code works correctly (numerical convergences, systematic errors, random errors, etc.)
-
-
+where $W$ is a vector of real weights. This way, fewer nodes may be chosen as long as it increases the overall perceived quality of the arrangement. 
 
 % Physical implication of results
 % Does code work? Comparison to literature, tests (IMPORTANT)
-% Demonstrate student's contribution and motivation
 
-\newpage
 \section{Methods}
 
-There are many formats that allow the digital manipulation of music, each with their own benefits—this study primarily uses MusicXML \cite{musicxml}. This format focuses on the representation of standard sheet music, allowing for musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into measures (bars) and parts. It is widely supported by music notation software, allowing translation of music between graphic, textual, and audio formats.
-
+D-Wave Systems operates the first and only quantum annealer for public access [CITE]. All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others. This allows for a high degree of connectivity, but also introduces the possibility of long chains, which can degrade the quality of solutions.
 Since interaction with the D-Wave QPUs is handled in Python, the surrounding manipulation of music is also written in this way. The Python module \verb|music21| provides extensive resources for manipulating, translating, and creating music, allowing scores to be broken down and reconstructed as fit.
+
+There are many formats that allow the digital manipulation of music, each with their own benefits—this study primarily uses MusicXML \cite{musicxml}. This format focuses on the representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into measures (bars), parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PNG, PDF) and audio (MIDI) formats.
 
 To begin processing, a MusicXML file of the original score is first interpreted by the program. Embedded metadata within the score allows it to be broken down into its constituent instrument parts, measures, and notes. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece. [CAN ELABORATE HERE]
 
@@ -233,7 +240,6 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ [EQU
     \end{tabular}
 \end{table}
 
-\newpage
 \section{Results}
 
 The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, making it easier to identify and arrange the musical phrases. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score.
@@ -279,22 +285,18 @@ After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave Q
         \label{fig:excerpt}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=\subfigurewidth]{../Figures/excerpt-1.png}
-        \caption{Musical phrases are identified and labelled with their entropy.}
-        \label{fig:phrases}
-    \end{subfigure}
-    \par\bigskip
-    \begin{subfigure}[b]{0.5\linewidth}
         \includegraphics[width=\subfigurewidth]{../Figures/selected-1.png}
         \caption{Selected phrases from solving the MIS problem.}
+        \label{fig:selected}
     \end{subfigure}\hfill
+    \par\bigskip
     \begin{subfigure}[t]{0.5\linewidth}
         \centering
         \includegraphics[width=\subfigurewidth]{../Figures/arrangement-1.png}
         \caption{Final arrangement.}
         \label{fig:arrangement}
     \end{subfigure}
-    \caption{The beginning of String Quartet No.\ 15 in A minor, Op.\ 132, by Ludwig van Beethoven.}
+    \caption{The beginning of String Quartet No.\ 15 in A minor, Op.\ 132, by Ludwig van Beethoven, reduced to a single part.}
     \label{fig:results}
 \end{figure*}
 
@@ -302,11 +304,15 @@ After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave Q
 
 \section{Conclusions}
 
+It is clear that this method works for the excerpt shown here; future work would include testing this process on a wide range of pieces from different musical styles.
+
+The MIS formulation works well for reducing a score into a single polyphonic part, as the inclusion of a phrase within the final arrangement has a direct match to the binary variables used. However, a more useful application would be the ability to reduce a score to any number of parts, whether that be multiple monophonic instruments (e.g.\ string quartet) or a polyphonic instrument (e.g.\ piano). One formulation that could solve this would be "colouring", that is, colouring each node of the graph such that no two nodes of the same colour are connected by edges. In this case, each colour would represent a monophonic part, and the set of colours combined would represent the final instrumentation.
+
 One advantage this method has over classical algorithms is that no training data is needed. Genetic and deep learning approaches require refinement of their models on large datasets, using considerable time and resources. Due to the required constraints, the QPU will (mostly) always provide a feasible solution, without any knowledge of previous arrangements.
 
 Another benefit is the solve time. For 1000 reads, the D-Wave QPU access time averages at $163\,\textrm{ms}$
 
-Future work would include expansion to polyphonic music, allowing more than one phrase to be played simultaneously. This could take the form of arranging for a polyphonic instrument such as the piano, or for multiple monophonic instruments. The MIS formulation would need to be altered to a colouring one, with the different colours representing allocations of phrases to each "track".
+Although it can be argued that music cannot be objectively "scored", nonetheless, the quality of the produced arrangements needs to be judged in some way. One suggestion is that the "goodness" of music can only be measured via a Turing-like test, where human subjects are presented with a selection of both human- and computer-generated scores, and asked to categorise them \cite{pearce_towards_2001}. To this extent, a good measure of the arrangements produced by this method would be to compare them against popular arrangements of the same score composed by human professionals, via a series of blind trials. If the participants fail to identify the computer compositions from the human ones more often than random chance, then it can be said that the generated arrangements are of sufficiently good quality.
 
 \nocite{*}
 \bibliographystyle{unsrt}\bibliography{interim}
