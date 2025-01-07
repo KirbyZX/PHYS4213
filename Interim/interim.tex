@@ -60,7 +60,7 @@
 
 \begin{abstract}              
 
-\lipsum[1]
+Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music. This method is tested on an excerpt of Beethoven's String Quartet No. 10 in E-flat major; in this case, the optimisation process is successful, and selects compatible phrases that produce a suitable arrangement.
 
 \end{abstract}
 
@@ -83,9 +83,6 @@ The combination of quantum computing and music is a relatively new field, but on
 Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as a optimisation problems where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding [CITE], financial portfolio optimisation [CITE], and traffic flow optimisation [CITE].
 
 This paper will focus on a subset of arrangement known as \textit{reduction}—taking a score written for a large number of parts and reducing it to a smaller number of parts, whilst still retaining the musicality and structure of the original. This is a common task in music production, where a piece written for a full orchestra may need to be arranged for a smaller ensemble, such as a string quartet. This forgoes the need to generate new music, as all notes in the arrangement are taken from the original score, and is more readily available to analyse as an optimisation problem. In this study, music arrangement is formulated as an NP-hard optimisation problem, and solved via quantum annealing to produce a valid reduction.
-
-% More motivation???
-\clearpage
 
 \section{Theory}
 
@@ -259,11 +256,11 @@ Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, al
     \label{fig:boundary-strengths}
 \end{figure}
 
-\begin{table}[hb]
+\begin{table}[b]
     \caption{Summary of the boundary strengths and entropy for the identified phrases of the Violin I part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
     \label{tab:boundaries}
     \setlength{\tabcolsep}{12pt}
-    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \renewcommand{\arraystretch}{1.2} % Row spacing
     \begin{tabular}{
         S[round-mode = places, round-precision = 0]
         S
