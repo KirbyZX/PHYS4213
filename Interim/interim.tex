@@ -131,7 +131,7 @@ Once a QUBO has been expressed, it can be sent to a quantum processing unit (QPU
 
 However, the topology of these graphs often doesn't allow an exact one-to-one mapping; it may be the case that the problem requires a qubit to have more couplers than physically allowed. The solution to this is the introduction of chains. A chain of physical qubits can act like a single logical variable, allowing more connections. The chain strength determines how strongly the chain is coupled, enforcing all qubits within the chain to have the same value. Chain strength is an important parameter that can affect the quality of solutions: if it is too weak, a final state may include chain breaks that return an infeasible solution; if it is too strong, it can overpower the other terms in the QUBO.
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
     \includegraphics[width=\linewidth]{../Figures/pegasus.pdf}
     \caption{A graph of 144 qubits in a D-Wave QPU, using their Pegasus topology. Qubits are represented by nodes, and couplers by edges.}
@@ -157,7 +157,7 @@ The MIS QUBO takes the form
 \end{equation}
 where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes. $A$ and $B$ are known as Lagrange parameters, and can be chosen to balance the two terms accordingly.
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \begin{subfigure}[b]{\linewidth}
         \includegraphics[width=\linewidth]{../Figures/toy-1.png}
@@ -248,9 +248,9 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref
     \label{fig:graphs}
 \end{figure*}
 
-The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, making it easier to identify and arrange the musical phrases. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score.
+The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, keeping the problem graph relatively small. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score, taken from a MusicXML file in public domain.
 
-Phrases identified using the LBDM model are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, which can be seen as distinct musical ideas that are separtated by rests from the other phrases (for example, the first two measures of the piece). A non-negligibile number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm.
+Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ \ref{tab:boundaries}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligibile number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
 
 \begin{figure}[b]
     \centering
@@ -260,8 +260,8 @@ Phrases identified using the LBDM model are shown in Fig.\ \ref{fig:problem-grap
 \end{figure}
 
 \begin{table}[hb]
-    \caption{Summary of the boundary strengths and entropy for the identified phrases of the violin part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
-    \label{tab:corrections}
+    \caption{Summary of the boundary strengths and entropy for the identified phrases of the Violin I part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
+    \label{tab:boundaries}
     \setlength{\tabcolsep}{12pt}
     \renewcommand{\arraystretch}{1.5} % Row spacing
     \begin{tabular}{
@@ -280,7 +280,7 @@ Phrases identified using the LBDM model are shown in Fig.\ \ref{fig:problem-grap
     \end{tabular}
 \end{table}
 
-After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave QPU returned a sampleset of solutions, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had the same energy but used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
+The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh the benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sampleset of solutions was returned, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had degenerate energies—the lowest energy was \num{-26.821803} with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution-graph}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
 
 \begin{figure}[h]
     \centering
@@ -316,16 +316,19 @@ After submitting a QUBO calculated using Eq.\ \ref{eq:weightedMIS}, the D-Wave Q
 
 \section{Conclusions}
 
-It is clear that this method works for the excerpt shown here; future work would include testing this process on a wide range of pieces from different musical styles.
+In the case of Beethoven's String Quartet No.\ 10, this method can be said to be successful in reducing the score to a single monophonic part. A sufficient number of phrases are identified to allow the key melodic lines to be picked out from each part, and the weighted MIS formulation results in a final arrangement that is not musically uninteresting. Here, only one solution was picked arbitrarily; if desired, each of the degenerate lowest energy solutions could be examined individually to isolate the one that is considered most ``musical'', safe in the knowledge that all of them are valid.
 
-The MIS formulation works well for reducing a score into a single polyphonic part, as the inclusion of a phrase within the final arrangement has a direct match to the binary variables used. However, a more useful application would be the ability to reduce a score to any number of parts, whether that be multiple monophonic instruments (e.g.\ string quartet) or a polyphonic instrument (e.g.\ piano). One formulation that could solve this would be "colouring", that is, colouring each node of the graph such that no two nodes of the same colour are connected by edges. In this case, each colour would represent a monophonic part, and the set of colours combined would represent the final instrumentation.
-This allows for a high degree of connectivity, but also introduces the possibility of long chains, which can degrade the quality of solutions.
+One advantage this method has over classical algorithms is that no training data is needed. Genetic and deep learning approaches require refinement of their models on large datasets, ``teaching'' what a valid arrangement looks like, which uses considerable time and resources. By using a QPU, these ``rules'' can effectively be encoded using constraints, such as the penalty term introduced into the QUBO; as long as these constraints are fulfilled, the QPU will always provide a feasible solution, without any knowledge of previous arrangements.
 
-One advantage this method has over classical algorithms is that no training data is needed. Genetic and deep learning approaches require refinement of their models on large datasets, using considerable time and resources. Due to the required constraints, the QPU will (mostly) always provide a feasible solution, without any knowledge of previous arrangements.
+Another benefit is the solve time: for the problem graph shown in Fig.\ \ref{fig:problem-graph}, the D-Wave QPU access time (the time taken to embed and solve the problem) is approximately \num{150} \unit{\ms} for 1000 reads. Compared to classical methods using a similar number of phrases, the quantum process is faster by at least one order of magnitude \cite{huang_towards_2012}. For classical computers, the time taken to solve NP-hard problems increases exponentially with the problem size, so this speed advntage will only improve as the scores get more complex.
 
-Another benefit is the solve time. For 1000 reads, the D-Wave QPU access time averages at $163$ \unit{\ms}.
+Future work would include testing this process on a wide range of pieces from different musical styles. Scores from different time periods (Baroque vs.\ Romantic, for example) have wildly different structures, and so the effectiveness of the LBDM could vary in identifying suitable musical phrases. The treatment of melodic lines between different ensembles, whether that be a string quartet or symphony orchestra, also varies, and the isolation of important melodic lines may become more difficult.
 
-Although it can be argued that music cannot be objectively "scored", nonetheless, the quality of the produced arrangements needs to be judged in some way. One suggestion is that the "goodness" of music can only be measured via a Turing-like test, where human subjects are presented with a selection of both human- and computer-generated scores, and asked to categorise them \cite{pearce_towards_2001}. To this extent, a good measure of the arrangements produced by this method would be to compare them against popular arrangements of the same score composed by human professionals, via a series of blind trials. If the participants fail to identify the computer compositions from the human ones more often than random chance, then it can be said that the generated arrangements are of sufficiently good quality.
+The MIS formulation works well for reducing a score into a single polyphonic part, as the inclusion of a phrase within the final arrangement lends naturally to the binary variables used. However, a more useful application would be the ability to reduce a score to any fewer number of parts, whether that be multiple monophonic instruments (e.g.\ string quartet) or a polyphonic instrument (e.g.\ piano). To achieve this, the QUBO would need to be altered to allow some edges into the final subset. One suitable formulation would be a graph colouring problem: colouring the vertices of a graph $G$ with a set of $n$ colours such that no edge connects two vertices of the same color. In this context, the number of colours would be the number of desired parts—after solving, each disjoint set of colours would become a monophonic part, the combination of which becomes the final reduction (in this way, the MIS problem can be seen as a colouring problem where $n=1$).
+
+Although it can be argued that music cannot be objectively ``scored'', nonetheless, the quality of the produced arrangements needs to be judged in some way. One suggestion is that the ``goodness'' of music can only be measured via a Turing-like test, where human subjects are presented with a selection of both human- and computer-generated scores, and asked to categorise them \cite{pearce_towards_2001}. To this extent, a good measure of the arrangements produced by this method would be to compare them against popular arrangements of the same score composed by human professionals, via a series of blind trials. If the participants fail to identify the computer compositions from the human ones more often than random chance, then it can be said that the generated arrangements are of sufficiently good quality.
+
+To conclude, this paper has shown the automatic reduction of music via quantum annealing. By formulating a score into a function to be minimised, the annealing process can identify parts of the original to become the final arrangement. An automatic process of this sort would be useful to a wide calibre of musicians, removing the time and skill barrier to produce such arrangements, whilst still retaining a sufficient level of quality, keeping music accessible to all. Just as science and business do already, it can be hoped that the arts take advantage of promising new technologies as well.
 
 \nocite{*}
 \bibliographystyle{unsrt}\bibliography{interim}
