@@ -50,13 +50,13 @@
 \pagestyle{fancy} % Insert header
 \renewcommand{\headrulewidth}{0pt}
 \lhead{L.\ Kirby}
-\rhead{Arrangement of music via quantum annealing}
+\rhead{Automatic Music Arrangement via Quantum Annealing}
 
 \def\bibsection{\section*{References}} % Defining bibsection
  
 \begin{document}
 
-\title{Arrangement of music via quantum annealing}
+\title{Automatic Music Arrangement via Quantum Annealing}
 \author{L.\ Kirby} % Author
 \affiliation{Durham University} % Subtitle
 \date{Submitted: \today{}} % Date
@@ -81,7 +81,7 @@ The introduction of computers in the 20th century allowed for more sophisticated
 
 The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be faster and more powerful than its classical counterpart. Since then, two types of quantum computers have been developed: gate-based and annealing. Gate-based quantum computers, such as those developed by IBM \cite{ibm} and Google \cite{google}, use quantum gates to manipulate qubits, the quantum equivalent of classical bits, and perform calculations. Quantum annealers, such as those developed by D-Wave Systems \cite{d-wave}, use quantum fluctuations to find the global minimum of a given function. Each are suited to solving different classes of problems, with gate-based computers being more versatile and annealers being more efficient for certain optimisation problems. 
 
-Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as an optimisation problems where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding \cite{perdomo-ortiz_protein_2012}, financial portfolios \cite{phillipson_portfolio_2021}, and traffic flow \cite{inoue_traffic_2021}.
+Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as an optimisation problem where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding \cite{perdomo-ortiz_protein_2012}, financial portfolios \cite{phillipson_portfolio_2021}, and traffic flow \cite{inoue_traffic_2021}.
 
 The combination of quantum computing and music is a relatively new field, but one that has shown promise. Quantum computers have been used to write melodies \cite{arya_music_2022}, harmonies \cite{freedline_algorhythms_2021}, create synthesisers \cite{miranda_hello_2020}, and even produce variations of original scores \cite{miranda_impossible_2022}, using a mixture of gate-based and annealing methods. However, most of these efforts have been directed at music \textit{composition}, that is, the generation of entirely new sequences and sounds, rather than music \textit{arrangement}, an aspect with very practical use. Quantum computers have the potential to solve complex problems that are intractable for classical computers, and it is proposed that music arrangement is one such problem.
 
@@ -345,8 +345,8 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 
 \onecolumngrid % Puts summary into single column
 
-\section*{Scientific Summary for a General Audience}
+\section*{Scientific Summary for a General Audience} % 200 words
 
-\lipsum[1]
+The arrangement of music by hand is usually a difficult and time-consuming process, requiring a deep understanding of musical theory and structure. This study aims to automate this process via a quantum computing, a technique that relies on the use of qubits, which can exist in a superposition of states. A music score can be split up into a sequence of phrases and turned into a graph representation with nodes and edges, where each node is a phrase, and edges between nodes mean they overlap. This graph can then be sent to a quantum computer in order to select nodes according to a set of rules that determine the properties of the arrangement. Once the nodes have been selected, the corresponding phrases can be reconstructed to create the final score. Here, an excerpt of Beethoven's String Quartet No.\ 10 is reduced to a single part, suitable for a solo instrument.
 
 \end{document}
