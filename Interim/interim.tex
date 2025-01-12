@@ -7,6 +7,8 @@
 
 \usepackage{silence} % NB: put *before* package you want to silence
 \WarningFilter{caption}{Unknown document class} % Caption package does not support revtex4
+\WarningFilter{revtex4-2}{Repair the float}
+\WarningFilter{nameref}{The definition of}
 
 \usepackage{times} % Times New Roman
 
@@ -32,6 +34,7 @@
 \usepackage{booktabs} % Nice table separators
 
 \usepackage{hyperref} % For hyperreferences
+\usepackage{natbib}
 
 \usepackage{float}
 
@@ -47,13 +50,13 @@
 \pagestyle{fancy} % Insert header
 \renewcommand{\headrulewidth}{0pt}
 \lhead{L.\ Kirby}
-\rhead{Towards the automatic arrangement of music via quantum annealing}
+\rhead{Arrangement of music via quantum annealing}
 
 \def\bibsection{\section*{References}} % Defining bibsection
  
 \begin{document}
 
-\title{Towards the automatic arrangement of music via quantum annealing}
+\title{Arrangement of music via quantum annealing}
 \author{L.\ Kirby} % Author
 \affiliation{Durham University} % Subtitle
 \date{Submitted: \today{}} % Date
@@ -76,9 +79,9 @@ Traditionally, the arrangement of music is a complex process that requires a dee
 One of the earliest examples of this can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century. The roll of dice would determine the order of pre-composed musical phrases, allowing for the creation of new music without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
 The introduction of computers in the 20th century allowed for more sophisticated methods of music arrangement. Composers could now transpose and manipulate musical parts digitally, without the need to transcribe parts by hand. Moving into the 21st century, more advanced techniques such as genetic algorithms and neural networks have been used to arrange music, with varying degrees of success. However, these methods are limited by the complexity of the problem and the need for extensive training data.
 
-The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be faster and more powerful than its classical counterpart. Since then, two types of quantum computers have been developed: gate-based and annealing. Gate-based quantum computers, such as those developed by IBM [CITE] and Google [CITE], use quantum gates to manipulate qubits, the quantum equivalent of classical bits, and perform calculations. Quantum annealers, such as those developed by D-Wave Systems, use quantum fluctuations to find the global minimum of a given function. Each are suited to solving different classes of problems, with gate-based computers being more versatile and annealers being more efficient for certain optimisation problems. 
+The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be faster and more powerful than its classical counterpart. Since then, two types of quantum computers have been developed: gate-based and annealing. Gate-based quantum computers, such as those developed by IBM \cite{ibm} and Google \cite{google}, use quantum gates to manipulate qubits, the quantum equivalent of classical bits, and perform calculations. Quantum annealers, such as those developed by D-Wave Systems \cite{d-wave}, use quantum fluctuations to find the global minimum of a given function. Each are suited to solving different classes of problems, with gate-based computers being more versatile and annealers being more efficient for certain optimisation problems. 
 
-Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as an optimisation problems where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding [CITE], financial portfolio optimisation [CITE], and traffic flow optimisation [CITE].
+Quantum annealers are particularly well-suited to solving a class of problems known as NP-hard, defined in the field of computational complexity as an optimisation problems where the time taken to find a solution scales exponentially with the input size. A well-known example of an NP-hard problem is the travelling salesman problem, where the goal is to find the shortest route that visits a set of cities exactly once. This problem is difficult to solve because the number of possible routes grows rapidly with the number of cities. Quantum annealers have been shown to be effective at solving NP-hard problems, and have been used to find solutions to a variety of optimisation problems, such as protein folding \cite{perdomo-ortiz_protein_2012}, financial portfolios \cite{phillipson_portfolio_2021}, and traffic flow \cite{inoue_traffic_2021}.
 
 The combination of quantum computing and music is a relatively new field, but one that has shown promise. Quantum computers have been used to write melodies \cite{arya_music_2022}, harmonies \cite{freedline_algorhythms_2021}, create synthesisers \cite{miranda_hello_2020}, and even produce variations of original scores \cite{miranda_impossible_2022}, using a mixture of gate-based and annealing methods. However, most of these efforts have been directed at music \textit{composition}, that is, the generation of entirely new sequences and sounds, rather than music \textit{arrangement}, an aspect with very practical use. Quantum computers have the potential to solve complex problems that are intractable for classical computers, and it is proposed that music arrangement is one such problem.
 
@@ -251,15 +254,6 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref
 
 The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, keeping the problem graph relatively small. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score, taken from a MusicXML file in public domain.
 
-Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ \ref{tab:boundaries}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligibile number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
-
-\begin{figure}[b]
-    \centering
-    \includegraphics[width=\linewidth]{../Figures/boundary_offset.pdf}
-    \caption{Boundary strengths for each note of the violin part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$), which identifies five total phrases. Note that the beginning and end of the piece are always considered boundaries.}
-    \label{fig:boundary-strengths}
-\end{figure}
-
 \begin{table}[b]
     \caption{Summary of the boundary strengths and entropy for the identified phrases of the Violin I part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
     \label{tab:boundaries}
@@ -281,12 +275,21 @@ Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, al
     \end{tabular}
 \end{table}
 
-The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh the benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sampleset of solutions was returned, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had degenerate energies—the lowest energy was \num{-26.821803} with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution-graph}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
+Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ \ref{tab:boundaries}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligibile number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
 
-\begin{figure}[h]
+\begin{figure}[b]
+    \centering
+    \includegraphics[width=\linewidth]{../Figures/boundary_offset.pdf}
+    \caption{Boundary strengths for each note of the violin part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$), which identifies five total phrases. Note that the beginning and end of the piece are always considered boundaries.}
+    \label{fig:boundary-strengths}
+\end{figure}
+
+The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh any possible benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sampleset of solutions was returned, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had degenerate energies—the lowest energy was \num{-26.821803} with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution-graph}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
+
+\begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{../Figures/histogram.pdf}
-    \caption{A histogram of the solutions returned by the QPU, over 1000 total reads. Solutions with energies above zero are omitted.}
+    \caption{A histogram of the solutions returned by the QPU over 1000 total reads. Solutions with energies above zero are omitted.}
     \label{fig:histogram}
 \end{figure}
 
@@ -336,7 +339,7 @@ Although it can be argued that music cannot be objectively ``scored'', nonethele
 To conclude, this paper has shown the automatic reduction of music via quantum annealing. By formulating a score into a function to be minimised, the annealing process can identify parts of the original to become the final arrangement. An automatic process of this sort would be useful to a wide calibre of musicians, removing the time and skill barrier to produce such arrangements, whilst still retaining a sufficient level of quality, keeping music accessible to all. Just as science and business do already, it can be hoped that the arts take advantage of promising new technologies as well.
 
 \nocite{*}
-\bibliographystyle{unsrt}\bibliography{interim}
+\bibliographystyle{unsrtnat}\bibliography{interim}
 
 \clearpage
 
