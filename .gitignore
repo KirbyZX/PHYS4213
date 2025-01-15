@@ -11,3 +11,6 @@ Demo
 *.out
 *.synctex.gz
 *Notes.bib
+*.nav
+*.snm
+*.toc
