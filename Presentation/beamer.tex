@@ -1,4 +1,6 @@
 \documentclass{beamer}
+%\setbeameroption{hide notes} % Only slides
+%\setbeameroption{show only notes} % Only notes
 \setbeameroption{show notes on second screen=right}
 
 \usepackage{esint}
@@ -44,27 +46,26 @@
 
 \begin{frame}{Overview}
     \tableofcontents
-\end{frame}
 
-% Example centered frame
-\begin{frame}[standout]
-    \centering
-    What is flux?
+    \note[item]{Welcome to the talk!}
+    \note[item]{As you can see, this slidedeck is a work in progress.}
 \end{frame}
 
 \section{Theory}
-\subsection{Arrangement}
-\subsection{Quantum annealing}
 
-\begin{frame}{Column layout}
+\subsection{Music arrangement}
+
+
+
+\begin{frame}{Music arrangement}
     \begin{columns} % Two column layout
 
         \begin{column}{0.6\textwidth} % Left column slightly bigger
             \begin{itemize} % Bullet points (\enumerate for numbers)
                 % Reveal bullet points at a time
-                \item<2-> \color{red} Net flux of liquid is zero
-                \item<3-> \color{blue} Sources provide net outwards flow
-                \item<4-> \color{green} Sinks provide net inwards flow
+                \item<2-> Adaptation of previously composed pieces for practical or artistic reasons
+                \item<3-> Traditionally complex and time-consuming
+                \item<4-> This study focuses on \textbf{reduction}
             \end{itemize}
         \end{column}
 
@@ -77,6 +78,40 @@
         \end{column}
 
     \end{columns}
+\end{frame}
+
+\subsection{Quantum annealing}
+
+\begin{frame}{Quantum annealing}
+    \begin{itemize}
+        \item<2-> \textit{Materials} | heating and cooling a material to alter its physical properties
+        \item<3-> \textit{Quantum} | changing a quantum system from one Hamiltonian to another
+        \item<4-> Done slowly and adiabatically to remain in the ground state
+    \end{itemize}
+    \vfill
+    \begin{equation*}
+        \onslide<5->{H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{QUBO}
+    \begin{exampleblock}{Ising model}
+        \begin{equation*}
+            H(s) = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
+        \end{equation*}
+    \end{exampleblock}
+
+    \begin{alertblock}{QUBO}
+        Quadratic Unconstrained Binary Optimisation
+        \begin{equation*}
+            f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
+        \end{equation*}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}[standout]
+    \centering
+    How to combine them?
 \end{frame}
 
 \section{Methods}
