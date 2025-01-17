@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[handout]{beamer}
 %\setbeameroption{hide notes} % Only slides
 %\setbeameroption{show only notes} % Only notes
 \setbeameroption{show notes on second screen=right}
@@ -102,6 +102,7 @@
     \end{exampleblock}
 
     \begin{alertblock}{QUBO}
+        \vspace{0.5em}
         Quadratic Unconstrained Binary Optimisation
         \begin{equation*}
             f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
@@ -115,7 +116,77 @@
 \end{frame}
 
 \section{Methods}
+
+\begin{frame}{Problem formulation}
+    \begin{enumerate}
+        \item Split parts into phrases
+        \item Arrange phrases into a graph
+        \item Solve graph problem using QPU
+        \item Construct arrangement from solution
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Toy example}
+    \begin{figure}
+        \centering
+        \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics<1-2>[width=0.6\textwidth]{../Figures/toy_graph.pdf}
+        \includegraphics<2->[width=0.6\textwidth]{../Figures/toy_solution.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Toy example}
+    \begin{figure}
+        \centering
+        \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics<1->[width=0.6\textwidth]{../Figures/toy_solution.pdf}
+    \end{figure}
+\end{frame}
+
 \section{Results}
+
+\begin{frame}{Excerpt}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{../Figures/excerpt-1.png}
+        \caption{String Quartet No.\ 10 by Ludwig van Beethoven}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Phrase detection}
+    Local boundary detection model (LBDM)
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{../Figures/boundary_offset.pdf}
+        \caption{Boundary strengths for the Violin I part}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Problem graph}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{../Figures/problemGraph.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Solutions}
+    \note{Lowest energy solution was -26.8 with a degeneracy of 34}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{../Figures/histogram.pdf}
+        \caption{Solutions returned by the QPU}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Example solution}
+
+\end{frame}
 
 \begin{frame}{Blocks}
     \begin{equation*}
@@ -135,21 +206,6 @@
         This is an example.
     \end{exampleblock}
         
-\end{frame}
-
-\begin{frame}{Equation alignment}
-    \begin{align*} % Aligning on [=]
-        \onslide<1-5>{F&=-\frac{GMm}{r^2}} \\
-        \onslide<2-5>{g&=-\frac{GM}{r^2}} \\
-        \onslide<3-5>{g\cdot 4\pi r^2&=-4\pi GM} \\
-        \onslide<4-5>{g \oiint_A dA&=-4\pi GM}\\
-        \onslide<5->{\oiint_A g\cdot dA&=-4\pi GM}
-    \end{align*}
-
-    \begin{block}{}<6-> 
-        \centering
-        The gravitational flux through any closed surface is proportional to the enclosed mass.
-    \end{block}
 \end{frame}
 
 \begin{frame}{Apperance sync}
