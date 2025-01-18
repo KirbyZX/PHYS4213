@@ -55,25 +55,21 @@
 \subsection{Music arrangement}
 
 \begin{frame}{Music arrangement}
-    \begin{columns} % Two column layout
-
-        \begin{column}{0.6\textwidth} % Left column slightly bigger
-            \begin{itemize} % Bullet points (\enumerate for numbers)
-                % Reveal bullet points at a time
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
                 \item<2-> Adaptation of previously composed pieces for practical or artistic reasons
                 \item<3-> Traditionally complex and time-consuming
                 \item<4-> This study focuses on \textbf{reduction}
             \end{itemize}
         \end{column}
-
         \begin{column}{0.4\textwidth}
             \begin{figure}
                 \centering
-                    \includegraphics<1->[width=\textwidth]{../Figures/problemGraph.pdf} % Reveal order after \command
-                    \caption{\color{orange} Source: Wikimedia Commons}
+                    \includegraphics<1->[width=\textwidth]{../Figures/excerpt-1.png}
+                    \caption{Beethoven's String Quartet No.\ 10}
                 \end{figure}
         \end{column}
-
     \end{columns}
 \end{frame}
 
@@ -92,14 +88,18 @@
 \end{frame}
 
 \begin{frame}{QUBO}
+    Encodes problem solution into Hamiltonian's ground state
+    \note[item]{Lattice of spins with two discrete values}
+    \note[item]{Coupling strengths $J_{ij}$ and field strengths $h_i$}
     \begin{exampleblock}{Ising model}
         \begin{equation*}
             H(s) = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
         \end{equation*}
     \end{exampleblock}
 
+    \note[item]{QUBO is a function to be minimised}
     \begin{alertblock}{QUBO}
-        \vspace{0.5em}
+        \vspace{0.1em}
         Quadratic Unconstrained Binary Optimisation
         \begin{equation*}
             f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
