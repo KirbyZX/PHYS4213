@@ -5,6 +5,8 @@
 
 \usepackage{esint}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-among-us}
 \usepackage{caption}
 \usepackage[british]{babel}
 %\usepackage{kpfonts}
@@ -46,16 +48,11 @@
 
 \begin{frame}{Overview}
     \tableofcontents
-
-    \note[item]{Welcome to the talk!}
-    \note[item]{As you can see, this slidedeck is a work in progress.}
 \end{frame}
 
 \section{Theory}
 
 \subsection{Music arrangement}
-
-
 
 \begin{frame}{Music arrangement}
     \begin{columns} % Two column layout
@@ -119,33 +116,76 @@
 
 \begin{frame}{Problem formulation}
     \begin{enumerate}
-        \item Split parts into phrases
-        \item Arrange phrases into a graph
-        \item Solve graph problem using QPU
-        \item Construct arrangement from solution
+        \item<2-> Split parts into phrases
+        \item<3-> Arrange phrases into a graph
+        \item<4-> Solve graph problem using QPU
+        \item<5-> Construct arrangement from solution
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Toy example}
+\begin{frame}{1. Split parts}
+    \begin{block}{}
+        \centering
+        Local boundary detection model (LBDM)
+        \begin{equation*}
+            S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
+        \end{equation*}
+    \end{block}
     \begin{figure}
         \centering
         \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
-    \end{figure}
-    \begin{figure}
-        \centering
-        \includegraphics<1-2>[width=0.6\textwidth]{../Figures/toy_graph.pdf}
-        \includegraphics<2->[width=0.6\textwidth]{../Figures/toy_solution.pdf}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Toy example}
+\begin{frame}{2. Create graph}
+    \note{Each phrase becomes a node}
+    \note{Edges between nodes if phrases overlap}
+
     \begin{figure}
         \centering
         \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
     \begin{figure}
         \centering
-        \includegraphics<1->[width=0.6\textwidth]{../Figures/toy_solution.pdf}
+        \includegraphics[width=0.5\textwidth]{../Figures/toy_graph.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{3. Solve graph}
+    \begin{alertblock}{Maximal independent set (MIS)}
+        Largest subset of nodes such that no nodes within the subset are connected by an edge.
+        \begin{equation*}
+            f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
+        \end{equation*}
+    \end{alertblock}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{../Figures/toy_graph.pdf}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.9\textwidth]{../Figures/toy_solution.pdf}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{4. Construct arrangement}
+    \note{Take selected nodes and combine to create final arrangement}
+
+    \begin{figure}
+        \centering
+        \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
+    \end{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw [thick, -latex](0,0) -- (0,-1);
+    \end{tikzpicture}
+    \begin{figure}
+        \centering
+        \includegraphics<2->[width=0.8\textwidth]{../Figures/toy_arrangement-1.png}
     \end{figure}
 \end{frame}
 
