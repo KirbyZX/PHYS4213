@@ -1,14 +1,15 @@
 \documentclass[handout]{beamer}
-%\setbeameroption{hide notes} % Only slides
-%\setbeameroption{show only notes} % Only notes
-\setbeameroption{show notes on second screen=right}
+\setbeameroption{hide notes}
+%show notes on second screen=right
+%show only notes
+%hide notes
 
 \usepackage{esint}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usepackage{tikz-among-us}
 \usepackage{caption}
 \usepackage[british]{babel}
+\usepackage{appendixnumberbeamer}
 %\usepackage{kpfonts}
 
 % Theme (Boadilla, Hannover, metropolis, Pittsburgh)
@@ -153,6 +154,7 @@
 
 \begin{frame}{3. Solve graph}
     \begin{alertblock}{Maximal independent set (MIS)}
+        \vspace{0.1em}
         Largest subset of nodes such that no nodes within the subset are connected by an edge.
         \begin{equation*}
             f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
@@ -161,13 +163,15 @@
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{figure}
-                \centering
                 \includegraphics[width=0.9\textwidth]{../Figures/toy_graph.pdf}
+                \caption{Problem graph}
             \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \centering
-            \includegraphics[width=0.9\textwidth]{../Figures/toy_solution.pdf}
+            \begin{figure}
+                \includegraphics[width=0.9\textwidth]{../Figures/toy_solution.pdf}
+                \caption{Solution graph}
+            \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
@@ -275,6 +279,8 @@
 \end{frame}
 
 \section{Conclusions}
+
+\appendix
 
 \begin{frame}{Equation gather}
     \begin{gather*} % Multiple equations if alignment not important
