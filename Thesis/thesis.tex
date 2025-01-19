@@ -54,8 +54,8 @@
 \begin{document}
 
 \title{Automatic Music Arrangement via Quantum Annealing}
-\author{L.\ Kirby} % Author
-\affiliation{Master of Physics (MPhys)\\Supervisor: Professor X. Surname\\Department of Physics, Durham University}
+\author{Lucas Kirby} % Author
+\affiliation{Master of Physics (MPhys)\\Supervisors: Dr Robert Potvliege \& Dr Omer Rathore\\Department of Physics, Durham University}
 \date{Submitted: \today{}}
 
 \begin{abstract}              
@@ -134,7 +134,7 @@ However, the topology of these graphs often doesn't allow an exact one-to-one ma
 
 \begin{figure}[b]
     \centering
-    \includegraphics[width=\linewidth]{../Figures/pegasus.pdf}
+    \includegraphics[width=0.5\linewidth]{../Figures/pegasus.pdf}
     \caption{A graph of 144 qubits in a D-Wave QPU, using their Pegasus topology. Qubits are represented by nodes, and couplers by edges.}
     \label{fig:pegasus}
 \end{figure}
@@ -158,16 +158,14 @@ The MIS QUBO takes the form
 \end{equation}
 where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes. $A$ and $B$ are known as Lagrange parameters, and can be chosen to balance the two terms accordingly. In this case, the condition $A>B$ must be satisfied, such that any penalty introduced by a node will outweigh its energy reduction.
 
-\begin{figure}[t]
-    \centering
-    \begin{subfigure}[b]{\linewidth}
-        \includegraphics[width=\linewidth]{../Figures/toy-1.png}
+\begin{figure}[h]
+    \begin{subfigure}[t]{0.5\linewidth}
+        \includegraphics[width=0.95\linewidth]{../Figures/toy_trim-1.png}
         \caption{An example score of three parts, with each phrase coloured.}
         \label{fig:simple-excerpt}
-    \end{subfigure}
-    \par\bigskip
-    \begin{subfigure}[b]{\linewidth}
-        \includegraphics[width=\linewidth]{../Figures/toy_graph.pdf}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.5\linewidth}
+        \includegraphics[width=0.95\linewidth]{../Figures/toy_graph.pdf}
         \caption{A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases.}
         \label{fig:simple-graph}
     \end{subfigure}
@@ -233,7 +231,30 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref
 
 \section{Results}
 
-\begin{figure}[!t]
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.5\linewidth}
+        \includegraphics[width=0.95\linewidth]{../Figures/excerpt_trim-1.png}
+        \caption{Original excerpt.}
+        \label{fig:excerpt}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.5\linewidth}
+        \includegraphics[width=0.95\linewidth]{../Figures/selected_trim-1.png}
+        \caption{Selected phrases from solving the MIS problem.}
+        \label{fig:selected}
+    \end{subfigure}
+    \par\bigskip
+    \begin{subfigure}[t]{0.5\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{../Figures/arrangement_trim-1.png}
+        \caption{Final arrangement.}
+        \label{fig:arrangement}
+    \end{subfigure}
+    \caption{The beginning of String Quartet No.\ 15 in A minor, Op.\ 132, by Ludwig van Beethoven, reduced to a single part.}
+    \label{fig:results}
+\end{figure}
+
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.5\linewidth}
         \includegraphics[width=0.9\linewidth]{../Figures/problemGraph.pdf}
@@ -251,11 +272,10 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref
 
 The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, keeping the problem graph relatively small. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score, taken from a MusicXML file in the public domain.
 
-\begin{table}[b]
+\begin{table}[h]
     \caption{Summary of the boundary strengths and entropy for the identified phrases of the Violin I part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
     \label{tab:boundaries}
     \setlength{\tabcolsep}{12pt}
-    \renewcommand{\arraystretch}{1.2} % Row spacing
     \begin{tabular}{
         S[round-mode = places, round-precision = 0]
         S
@@ -272,48 +292,23 @@ The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, O
     \end{tabular}
 \end{table}
 
-Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ \ref{tab:boundaries}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligible number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
-
-\begin{figure}[b]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{../Figures/boundary_offset.pdf}
+    \includegraphics[width=0.5\linewidth]{../Figures/boundary_offset.pdf}
     \caption{Boundary strengths for each note of the violin part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$), which identifies five total phrases. Note that the beginning and end of the piece are always considered boundaries.}
     \label{fig:boundary-strengths}
 \end{figure}
 
-The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh any possible benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sample set of solutions was returned, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had degenerate energies—the lowest energy was \num{-26.821803} with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution-graph}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
-
-\begin{figure}[t]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{../Figures/histogram.pdf}
+    \includegraphics[width=0.5\linewidth]{../Figures/histogram.pdf}
     \caption{A histogram of the solutions returned by the QPU over 1000 total reads. Solutions with energies above zero are omitted.}
     \label{fig:histogram}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{../Figures/excerpt-1.png}
-        \caption{Original excerpt.}
-        \label{fig:excerpt}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{../Figures/selected-1.png}
-        \caption{Selected phrases from solving the MIS problem.}
-        \label{fig:selected}
-    \end{subfigure}
-    \par\bigskip
-    \begin{subfigure}[t]{0.5\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{../Figures/arrangement-1.png}
-        \caption{Final arrangement.}
-        \label{fig:arrangement}
-    \end{subfigure}
-    \caption{The beginning of String Quartet No.\ 15 in A minor, Op.\ 132, by Ludwig van Beethoven, reduced to a single part.}
-    \label{fig:results}
-\end{figure}
+Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ \ref{tab:boundaries}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligible number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
 
-\clearpage
+The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh any possible benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sample set of solutions was returned, which can be seen in Fig.\ \ref{fig:histogram}. Many solutions had degenerate energies—the lowest energy was \num{-26.821803} with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\ \ref{fig:solution-graph}, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\ \ref{fig:arrangement}.
 
 \section{Conclusions}
 
