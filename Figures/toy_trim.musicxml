@@ -14,45 +14,45 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="P2c1a1b2db140eef52dfe6d6b4f62de37">
+    <score-part id="Pf78efb18a28996e85a9d2886d0659efb">
       <part-name>Flute</part-name>
       <part-abbreviation>Fl</part-abbreviation>
-      <score-instrument id="I8b0483a449565ee3e3d07392be255365">
+      <score-instrument id="I01af610258a8ccbd1dc505316a450477">
         <instrument-name>Flute</instrument-name>
         <instrument-abbreviation>Fl</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I8b0483a449565ee3e3d07392be255365">
+      <midi-instrument id="I01af610258a8ccbd1dc505316a450477">
         <midi-channel>1</midi-channel>
         <midi-program>74</midi-program>
       </midi-instrument>
     </score-part>
-    <score-part id="Pc0c45e60474ddd99c355891f14245e26">
+    <score-part id="P4aab40d524ae15f110516d0113afccb7">
       <part-name>Violin</part-name>
       <part-abbreviation>Vln</part-abbreviation>
-      <score-instrument id="Ie6843e5bd4aa88769a57cf3af00e69bc">
+      <score-instrument id="I127bcff2164f6470b2f0b12e41575ab4">
         <instrument-name>Violin</instrument-name>
         <instrument-abbreviation>Vln</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="Ie6843e5bd4aa88769a57cf3af00e69bc">
+      <midi-instrument id="I127bcff2164f6470b2f0b12e41575ab4">
         <midi-channel>2</midi-channel>
         <midi-program>41</midi-program>
       </midi-instrument>
     </score-part>
-    <score-part id="P18fd351637b7fc5bd1aa840e05e7ba45">
+    <score-part id="Pd1db63d66833017a04c953cee1e5f343">
       <part-name>Bassoon</part-name>
       <part-abbreviation>Bsn</part-abbreviation>
-      <score-instrument id="I0d3e9cf8baf6a757e93cd80e24260f46">
+      <score-instrument id="I871bc353f8f60e801d005254bf3d22a0">
         <instrument-name>Bassoon</instrument-name>
         <instrument-abbreviation>Bsn</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I0d3e9cf8baf6a757e93cd80e24260f46">
+      <midi-instrument id="I871bc353f8f60e801d005254bf3d22a0">
         <midi-channel>3</midi-channel>
         <midi-program>71</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="P2c1a1b2db140eef52dfe6d6b4f62de37">
+  <part id="Pf78efb18a28996e85a9d2886d0659efb">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -169,7 +169,7 @@
     </measure>
   </part>
   <!--=========================== Part 2 ===========================-->
-  <part id="Pc0c45e60474ddd99c355891f14245e26">
+  <part id="P4aab40d524ae15f110516d0113afccb7">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -229,7 +229,7 @@
     </measure>
   </part>
   <!--=========================== Part 3 ===========================-->
-  <part id="P18fd351637b7fc5bd1aa840e05e7ba45">
+  <part id="Pd1db63d66833017a04c953cee1e5f343">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
