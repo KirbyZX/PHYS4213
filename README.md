@@ -1,5 +1,16 @@
 # Quantum Instrument Rearrangement By Expression (Entropy?) Evaluation
 
+- Thermal fluctuations vs quantum tunnelling
+- Quantum vs classical advantage
+
+AQC is broader umbrella, universal, deterministic, can be applied to anything
+annealing relaxes the adiabaticity, turns into stochastic, might end up with excited states
+heuristic, not deterministic
+
+change in scheduling time
+look into minimum energy gap
+"fast quenches"
+
 ```mermaid
 graph TD;
     A-->B;
