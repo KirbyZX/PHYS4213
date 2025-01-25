@@ -18,7 +18,8 @@
 % Uses Fira fonts - compile with xelatex to use
 % Features [standout] frames
 
-\usetheme[progressbar=frametitle]{metropolis}
+%background=dark
+\usetheme[progressbar=frametitle, background=dark]{metropolis}
 
 % Colours (owl, dolphin, seagull)
 
@@ -76,10 +77,10 @@
 
 \subsection{Quantum annealing}
 
-\begin{frame}{Quantum annealing}
+\begin{frame}{Adiabatic quantum computing (AQC)}
     \begin{itemize}
         \item<2-> \textit{Materials} | heating and cooling a material to alter its physical properties
-        \item<3-> \textit{Quantum} | changing a quantum system from one Hamiltonian to another
+        \item<3-> \textit{Quantum} | changing a quantum system from one Hamiltonian to another (AQC)
         \item<4-> Done slowly and adiabatically to remain in the ground state
     \end{itemize}
     \vfill
@@ -88,24 +89,46 @@
     \end{equation*}
 \end{frame}
 
-\begin{frame}{QUBO}
-    Encodes problem solution into Hamiltonian's ground state
+\begin{frame}{Quantum annealing}
+    
     \note[item]{Lattice of spins with two discrete values}
     \note[item]{Coupling strengths $J_{ij}$ and field strengths $h_i$}
     \begin{exampleblock}{Ising model}
         \begin{equation*}
-            H(s) = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
+            H_p(\sigma^z) = \sum_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
         \end{equation*}
     \end{exampleblock}
 
+    \note[item]{Initial state is a superposition of all possible states}
+    \begin{alertblock}{Initial state}
+        \begin{equation*}
+            H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
+        \end{equation*}
+    \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Quantum annealing}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{../Figures/nature10012.png}
+        \caption{MW Johnson \textit{et al.}\ \textit{Nature} \textbf{473}, 194–198 (2011) doi:10.1038/nature10012}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{QUBO}
     \note[item]{QUBO is a function to be minimised}
-    \begin{alertblock}{QUBO}
+    \begin{block}{Quadratic Unconstrained Binary Optimisation}
         \vspace{0.1em}
-        Quadratic Unconstrained Binary Optimisation
         \begin{equation*}
             f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
         \end{equation*}
-    \end{alertblock}
+    \end{block}
+    \begin{itemize}
+        \item Encodes problem solution into Hamiltonian's ground state
+        \item Remains in low-energy state via quantum tunneling
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[standout]
