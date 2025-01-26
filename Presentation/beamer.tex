@@ -1,5 +1,5 @@
 \documentclass[handout]{beamer}
-\setbeameroption{hide notes}
+\setbeameroption{show notes on second screen=right}
 %show notes on second screen=right
 %show only notes
 %hide notes
@@ -37,10 +37,9 @@
 
 %\logo{\includegraphics[height=2cm]{}}
 \title{Music Arrangement via Quantum Annealing}
-\subtitle{}
 \author{Lucas Kirby}
-\institute{\color{violet} Durham University}
-\date{\today}
+\institute{Department of Physics, Durham University}
+\date{30 January 2025}
 
 \begin{document}
 
@@ -51,8 +50,14 @@
 \begin{frame}{Overview}
     \tableofcontents
 \end{frame}
+\note[itemize]{
+    \item{What is music arrangement? What is quantum annealing?}
+    \item{Methods used to solve the music arrangement problem}
+    \item{Preliminary results from application of the method}
+    \item{Concluding thoughts about this process}
+}
 
-\section{Theory}
+\section{Theory} %%%%%%%%%%
 
 \subsection{Music arrangement}
 
@@ -74,13 +79,20 @@
         \end{column}
     \end{columns}
 \end{frame}
+\note[itemize]{
+    \item{Adaptation of music in terms of instrumentation, medium, or style}
+    \item{Traditionally a complex process that requires a deep understanding of musical theory and structure}
+    \item{Musically interesting whilst still remaining faithful to the source material}
+    \item{Interest in automating this process}
+    \item{Reduction is the rewriting of music for a smaller number of instruments (for example string quartet to solo)}
+}
 
 \subsection{Quantum annealing}
 
 \begin{frame}{Adiabatic quantum computing (AQC)}
     \begin{itemize}
         \item<2-> \textit{Materials} | heating and cooling a material to alter its physical properties
-        \item<3-> \textit{Quantum} | changing a quantum system from one Hamiltonian to another (AQC)
+        \item<3-> \textit{Quantum} | changing a quantum system from one Hamiltonian to another
         \item<4-> Done slowly and adiabatically to remain in the ground state
     \end{itemize}
     \vfill
@@ -88,25 +100,32 @@
         \onslide<5->{H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p}
     \end{equation*}
 \end{frame}
+\note[itemize]{
+    \item{Materials science, annealing is a slow heating/cooling process to make a material softer and less brittle}
+    \item{Quantum computing, slow evolution of a system between Hamiltonians}
+    \item{Done adiabatically (closed system), system remains in ground state}
+}
 
 \begin{frame}{Quantum annealing}
-    
-    \note[item]{Lattice of spins with two discrete values}
-    \note[item]{Coupling strengths $J_{ij}$ and field strengths $h_i$}
     \begin{exampleblock}{Ising model}
         \begin{equation*}
-            H_p(\sigma^z) = \sum_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
+            H_p(\sigma^z) = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
         \end{equation*}
     \end{exampleblock}
-
-    \note[item]{Initial state is a superposition of all possible states}
+    \pause
     \begin{alertblock}{Initial state}
         \begin{equation*}
             H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
         \end{equation*}
     \end{alertblock}
-
 \end{frame}
+\note[itemize]{
+    \item{How is this used to solve problems?}
+    \item{Ising model, create a lattice of variables with two discrete values (spin up/down)}
+    \item{Problem Hamiltonian, qubits $\sigma^z$, coupling strengths $J_{ij}$ and field strengths $h_i$}
+    \item{Initial state is a superposition of all possible states}
+    \item{If problem solution is encoded within the ground state, system will give solution after evolution}
+}
 
 \begin{frame}{Quantum annealing}
     \begin{figure}
@@ -114,29 +133,41 @@
         \includegraphics[width=\textwidth]{../Figures/nature10012.png}
         \caption{MW Johnson \textit{et al.}\ \textit{Nature} \textbf{473}, 194–198 (2011) doi:10.1038/nature10012}
     \end{figure}
-
 \end{frame}
+\note[itemize]{
+    \item{What does this look like?}
+    \item{Evolution of superposition to a particular state}
+    \item{More efficiently escape from local minima via quantum tunneling}
+    \item{Can solve harder problems with a more turbulent energy landscape}
+}
 
 \begin{frame}{QUBO}
-    \note[item]{QUBO is a function to be minimised}
     \begin{block}{Quadratic Unconstrained Binary Optimisation}
         \vspace{0.1em}
         \begin{equation*}
-            f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
+            f(x)=\sum^N_{i<j}Q_{i,j}x_ix_j + \sum^N_iQ_{i,i}x_i
         \end{equation*}
     \end{block}
     \begin{itemize}
-        \item Encodes problem solution into Hamiltonian's ground state
-        \item Remains in low-energy state via quantum tunneling
+        \item<2-> Encodes problem solution into Hamiltonian's ground state
+        \item<2-> Remains in low-energy state via quantum tunneling
     \end{itemize}
 \end{frame}
+\note[itemize]{
+    \item{How to encode a problem into a Hamiltonian?}
+    \item{QUBO is a function to be minimised}
+    \item{Set of binary variables $x$, matrix $Q$ of real weights that describes interactions between variables}
+}
 
 \begin{frame}[standout]
     \centering
     How to combine them?
 \end{frame}
+\note[itemize]{
+    \item{How to apply quantum annealing to the problem of music arrangement?}
+}
 
-\section{Methods}
+\section{Methods} %%%%%%%%%%
 
 \begin{frame}{Problem formulation}
     \begin{enumerate}
