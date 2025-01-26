@@ -8,7 +8,9 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage[british]{babel}
+\usepackage{mathtools}
 \usepackage{appendixnumberbeamer}
 %\usepackage{kpfonts}
 
@@ -20,6 +22,7 @@
 
 %background=dark
 \usetheme[progressbar=frametitle, background=dark]{metropolis}
+\setbeamercolor{normal text}{fg=white}
 
 % Colours (owl, dolphin, seagull)
 
@@ -33,6 +36,7 @@
 \useoutertheme{}                       % Header/footer style
 \setbeamerfont{caption}{size=\tiny}         % Caption size
 \captionsetup[figure]{labelformat=empty}    % Remove figure labels
+\captionsetup[subfigure]{labelformat=empty}
 \usefonttheme[onlymath]{serif}
 
 %\logo{\includegraphics[height=2cm]{}}
@@ -160,7 +164,6 @@
 }
 
 \begin{frame}[standout]
-    \centering
     How to combine them?
 \end{frame}
 \note[itemize]{
@@ -177,34 +180,47 @@
         \item<5-> Construct arrangement from solution
     \end{enumerate}
 \end{frame}
+\note[itemize]{
+    \item{Formulating arrangement as a problem to be solved via annealing}
+    \item{Four-step process}
+    \item{Split parts into musical phrases}
+    \item{Arrange phrases into a graph (nodes and edges)}
+    \item{Solve corresponding graph problem using quantum computing}
+    \item{Construct final arrangement from the solution returned}
+}
 
 \begin{frame}{1. Split parts}
-    \begin{block}{}
-        \centering
-        Local boundary detection model (LBDM)
+    \begin{block}{Local boundary detection model (LBDM)}
+        \vspace{0.1em}
         \begin{equation*}
             S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
         \end{equation*}
     \end{block}
     \begin{figure}
-        \centering
         \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{First stage to separate each part of original score into phrases}
+    \item{Phrases | smallest unit of music that preserves melody and structure}
+    \item{Boundaries between phrases found using LBDM}
+    \item{Measures the degree of change of a certain parameter between notes (explain equation)}
+    \item{Check pitch and IOI}
+    \item{Strengths above a threshold value are considered phrases}
+}
 
 \begin{frame}{2. Create graph}
-    \note{Each phrase becomes a node}
-    \note{Edges between nodes if phrases overlap}
-
     \begin{figure}
-        \centering
-        \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
+        \includegraphics[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
     \begin{figure}
-        \centering
         \includegraphics[width=0.5\textwidth]{../Figures/toy_graph.pdf}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{Construct problem graph}
+    \item{Each phrase becomes a node, edges between nodes if phrases overlap}
+}
 
 \begin{frame}{3. Solve graph}
     \begin{alertblock}{Maximal independent set (MIS)}
@@ -214,6 +230,7 @@
             f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
         \end{equation*}
     \end{alertblock}
+    \pause
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -229,10 +246,17 @@
         \end{column}
     \end{columns}
 \end{frame}
+\note[itemize]{
+    \item{Solve problem graph using a graph theory problem called MIS}
+    \item{Special case for reducing to a single monophonic part (one phrase played at a time)}
+    \item{Find largest subset of nodes such that no nodes within the subset are connected by an edge}
+    \item{Enforces that only one simultaneous phrase can be played at once}
+    \item{Constraint term enforces no edges}
+    \item{Objective term is quantity to be minimised}
+    \item[Lagrange paramters $A$/$B$ determine the balance between constraint and objective]
+}
 
 \begin{frame}{4. Construct arrangement}
-    \note{Take selected nodes and combine to create final arrangement}
-
     \begin{figure}
         \centering
         \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
@@ -246,103 +270,159 @@
         \includegraphics<2->[width=0.8\textwidth]{../Figures/toy_arrangement-1.png}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{Take solution graph and combine selected nodes to create final arrangement}
+}
 
-\section{Results}
+\section{Results} %%%%%%%%%%
 
 \begin{frame}{Excerpt}
     \begin{figure}
-        \centering
         \includegraphics[width=0.5\textwidth]{../Figures/excerpt-1.png}
         \caption{String Quartet No.\ 10 by Ludwig van Beethoven}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{Excerpt of String Quartet No. 10 in E-flat major, Op. 74, by Ludwig van Beethoven}
+    \item{Chosen due to its relatively simple structure and smaller instrumentation, keeping the problem graph small}
+}
 
 \begin{frame}{Phrase detection}
-    Local boundary detection model (LBDM)
     \begin{figure}
-        \centering
-        \includegraphics[width=0.75\textwidth]{../Figures/boundary_offset.pdf}
+        \includegraphics[width=0.75\textwidth]{../Figures/boundaryStrength_pad.pdf}
         \caption{Boundary strengths for the Violin I part}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{Example of the LBDM finding suitable boundaries for phrases}
+    \item{Threshold value of $0.4$ chosen, finds five phrases}
+}
 
 \begin{frame}{Problem graph}
     \begin{figure}
-        \centering
-        \includegraphics[width=0.75\textwidth]{../Figures/problemGraph.pdf}
+        \includegraphics[width=.6\textwidth]{../Figures/problemGraph_pad.pdf}
+        \caption{Problem graph with 33 nodes and 70 edges}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{33 identified phrases (nodes) with 70 overlaps (edges)}
+    \item{Nodes are weighted by the phrase entropy, how musically interesting the distribution of notes is}
+}
 
 \begin{frame}{Solutions}
-    \note{Lowest energy solution was -26.8 with a degeneracy of 34}
     \begin{figure}
-        \centering
-        \includegraphics[width=0.9\textwidth]{../Figures/histogram.pdf}
-        \caption{Solutions returned by the QPU}
+        \includegraphics[width=0.8\textwidth]{../Figures/histogram_pad.pdf}
+        \caption{Returned solutions for 1000 reads}
     \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{Histogram of the returned solutions, only energies below zero shown}
+    \item{Distribution of solutions due to the stochastic nature of annealing}
+    \item{Not always guaranteed the ground state during evolution}
+    \item{Lowest energy solution $-26.8$ with a degeneracy of 34}
+}
 
 \begin{frame}{Example solution}
-
+    \begin{figure}
+        \includegraphics[width=.6\textwidth]{../Figures/solutionGraph_pad.pdf}
+        \caption{Solution graph returning a subset of 11 nodes}
+    \end{figure}
 \end{frame}
+\note[itemize]{
+    \item{Selected nodes from one of the lowest energy solutions}
+    \item{Note in the cliques only one node could be selected}
+}
 
-\begin{frame}{Blocks}
-    \begin{equation*}
-        \oiint_A E\cdot dA=\frac{Q}{\varepsilon_0}
-    \end{equation*}
-    \pause
-    \begin{block}{} % Empty title
-        \centering
-        The \emph{net electric flux} through any \alert{closed} surface is proportional to the \textbf{enclosed charge}.
-    \end{block}
-
-    \begin{alertblock}{Alert}
-        This is an alert.
-    \end{alertblock}
-
-    \begin{exampleblock}{Example}
-        This is an example.
-    \end{exampleblock}
-        
+\begin{frame}{Final arrangement}
+    \begin{figure}
+        \begin{subfigure}{0.5\linewidth}
+            \includegraphics[width=.95\linewidth]{../Figures/selected-1.png}
+            \caption{Selected phrases}
+        \end{subfigure}\hfill
+        \begin{subfigure}{0.5\linewidth}
+            \includegraphics[width=.95\linewidth]{../Figures/arrangement-1.png}
+            \caption{Final arrangement}
+        \end{subfigure}
+    \end{figure}
 \end{frame}
-
-\begin{frame}{Apperance sync}
-    \begin{columns}
-
-        \begin{column}{0.6\textwidth}
-            \begin{itemize}
-                \item<2-> Volume rate of flow equal to divergence
-                \item<3-> Summed over entire volume
-                \item<4-> Equal to net flow across the boundary
-            \end{itemize}
-        \end{column}
-
-        \begin{column}{0.4\textwidth}
-            \begin{figure}
-                \centering
-                    \includegraphics[width=\textwidth]{../Figures/problemGraph.pdf}
-                    \caption{Source: Wikimedia Commons}
-            \end{figure}
-            \begin{equation*}
-                % Syncing equation appearance with bullet points
-                \onslide<3->{\iiint_V}\onslide<2->{\nabla\cdot\textbf{F}}\onslide<3->{\,dV}\onslide<4->{=\oiint_A \textbf{F}\cdot d\textbf{A}}
-            \end{equation*}
-        \end{column}
-
-    \end{columns}
-\end{frame}
+\note[itemize]{
+    \item{Selected phrases from solution graph highlighted}
+    \item{Phrases concatenated to create the final arrangement}
+}
 
 \section{Conclusions}
 
+\begin{frame}{Conclusions}
+    \begin{itemize}
+        \item Successful in creating a valid single-part reduction
+        \item Advantage over classical algorithms (deep learning, genetic)
+        \begin{itemize}
+            \item No training data needed
+            \item Faster solve time
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\note[itemize]{
+    \item{}
+}
+
+\begin{frame}{Future work}
+    \begin{itemize}
+        \item Increased problem size
+        \item Parametric variation of LBDM
+        \item Physical limitations of instruments
+        \item Reduction to more than one part
+        \item Quality comparison of computer arrangements
+    \end{itemize}
+\end{frame}
+\note[itemize]{
+    \item{}
+}
+
+\begin{frame}[standout]
+    Thank you!
+\end{frame}
+
 \appendix
 
-\begin{frame}{Equation gather}
-    \begin{gather*} % Multiple equations if alignment not important
-        \nabla\cdot \textbf{E}=\frac{\rho}{\varepsilon_0} \\
-        \nabla\cdot \textbf{B}=0 \\
-        \nabla\times \textbf{E}=-\frac{\partial \textbf{B}}{\partial t} \\
-        \nabla\times \textbf{B}=\frac1{c^2}\frac{\partial \textbf{E}}{\partial t}+\mu_0I
-    \end{gather*}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{LBDM}
+    \begin{block}{Boundary strength}
+        \begin{equation*}
+            S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
+        \end{equation*}
+    \end{block}
+    \begin{block}{Degree of change}
+        \begin{equation*}
+            r_{i, i+1}=\frac{|x_{i}-x_{i+1}|}{x_{i}+x_{i+1}}
+        \end{equation*}
+    \end{block}
+    \begin{block}{Normalisation}
+        \begin{equation*}
+            S_i'=\frac{S_i-\min(S)}{\max(S)-\min(S)}
+        \end{equation*}
+    \end{block}
+    \begin{block}{Weighting}
+        \begin{equation*}
+            S=\frac{1}{3}\left( S_\mathrm{pitch} + 2 S_\mathrm{IOI} \right)
+        \end{equation*}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Phrase entropy}
+    \begin{block}{Shannon entropy}
+        \begin{equation*}
+            H(X)\coloneq-\sum_i P(x_i)\log_2 P(x_i)
+        \end{equation*}
+    \end{block}
+    \begin{block}{Probability distribution}
+        \begin{equation*}
+            P(x_i)=\frac{n_i}{N}
+        \end{equation*}
+    \end{block}
 \end{frame}
 
 \end{document}
