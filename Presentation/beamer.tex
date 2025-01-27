@@ -1,8 +1,9 @@
 \documentclass[handout]{beamer}
-\setbeameroption{show notes on second screen=right}
+\setbeameroption{hide notes}
 %show notes on second screen=right
 %show only notes
 %hide notes
+%[handout]
 
 \usepackage{esint}
 \usepackage{graphicx}
@@ -20,7 +21,7 @@
 % Uses Fira fonts - compile with xelatex to use
 % Features [standout] frames
 
-%background=dark
+%background=dark/light
 \usetheme[progressbar=frametitle, background=dark]{metropolis}
 \setbeamercolor{normal text}{fg=white}
 
@@ -31,6 +32,7 @@
 % Has [snowy] variant
 
 \usecolortheme{}
+%\usebackgroundtemplate{\tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{../Figures/manuscript.jpg}};}
 
 \useinnertheme{}                            % Bullet point style (circles usually best)
 \useoutertheme{}                       % Header/footer style
@@ -68,16 +70,16 @@
 \begin{frame}{Music arrangement}
     \begin{columns}
         \begin{column}{0.6\textwidth}
-            \begin{itemize}
-                \item<2-> Adaptation of previously composed pieces for practical or artistic reasons
-                \item<3-> Traditionally complex and time-consuming
-                \item<4-> This study focuses on \textbf{reduction}
+            \begin{itemize}[<+->]
+                \item Adaptation of previously composed pieces for practical or artistic reasons
+                \item Traditionally complex and time-consuming
+                \item This study focuses on \textbf{reduction}
             \end{itemize}
         \end{column}
         \begin{column}{0.4\textwidth}
             \begin{figure}
                 \centering
-                    \includegraphics<1->[width=\textwidth]{../Figures/excerpt-1.png}
+                    \includegraphics[width=\textwidth]{../Figures/excerpt-1.png}
                     \caption{Beethoven's String Quartet No.\ 10}
                 \end{figure}
         \end{column}
@@ -94,15 +96,17 @@
 \subsection{Quantum annealing}
 
 \begin{frame}{Adiabatic quantum computing (AQC)}
-    \begin{itemize}
-        \item<2-> \textit{Materials} | heating and cooling a material to alter its physical properties
-        \item<3-> \textit{Quantum} | changing a quantum system from one Hamiltonian to another
-        \item<4-> Done slowly and adiabatically to remain in the ground state
+    \begin{itemize}[<+->]
+        \item \textit{Materials} | heating and cooling a material to alter its physical properties
+        \item \textit{Quantum} | changing a quantum system from one Hamiltonian to another
+        \item Done slowly and adiabatically to remain in the ground state
     \end{itemize}
     \vfill
+    \pause
     \begin{equation*}
-        \onslide<5->{H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p}
+        H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p
     \end{equation*}
+    \hfill\cite{lucas_ising_2014}
 \end{frame}
 \note[itemize]{
     \item{Materials science, annealing is a slow heating/cooling process to make a material softer and less brittle}
@@ -122,6 +126,7 @@
             H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
         \end{equation*}
     \end{alertblock}
+    \hfill\cite{lucas_ising_2014}
 \end{frame}
 \note[itemize]{
     \item{How is this used to solve problems?}
@@ -135,7 +140,7 @@
     \begin{figure}
         \centering
         \includegraphics[width=\textwidth]{../Figures/nature10012.png}
-        \caption{MW Johnson \textit{et al.}\ \textit{Nature} \textbf{473}, 194–198 (2011) doi:10.1038/nature10012}
+        \caption{\cite{dwave_manufactured_2011}}
     \end{figure}
 \end{frame}
 \note[itemize]{
@@ -152,9 +157,10 @@
             f(x)=\sum^N_{i<j}Q_{i,j}x_ix_j + \sum^N_iQ_{i,i}x_i
         \end{equation*}
     \end{block}
+    \pause
     \begin{itemize}
-        \item<2-> Encodes problem solution into Hamiltonian's ground state
-        \item<2-> Remains in low-energy state via quantum tunneling
+        \item Encodes problem solution into Hamiltonian's ground state
+        \item Remains in low-energy state via quantum tunneling
     \end{itemize}
 \end{frame}
 \note[itemize]{
@@ -173,11 +179,11 @@
 \section{Methods} %%%%%%%%%%
 
 \begin{frame}{Problem formulation}
-    \begin{enumerate}
-        \item<2-> Split parts into phrases
-        \item<3-> Arrange phrases into a graph
-        \item<4-> Solve graph problem using QPU
-        \item<5-> Construct arrangement from solution
+    \begin{enumerate}[<+->]
+        \item Split parts into phrases
+        \item Arrange phrases into a graph
+        \item Solve graph problem using QPU
+        \item Construct arrangement from solution
     \end{enumerate}
 \end{frame}
 \note[itemize]{
@@ -195,7 +201,9 @@
         \begin{equation*}
             S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
         \end{equation*}
+        \hfill \cite{cambouropoulos_lbdm_2011}
     \end{block}
+    \pause
     \begin{figure}
         \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
@@ -213,6 +221,7 @@
     \begin{figure}
         \includegraphics[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
+    \pause
     \begin{figure}
         \includegraphics[width=0.5\textwidth]{../Figures/toy_graph.pdf}
     \end{figure}
@@ -225,23 +234,22 @@
 \begin{frame}{3. Solve graph}
     \begin{alertblock}{Maximal independent set (MIS)}
         \vspace{0.1em}
-        Largest subset of nodes such that no nodes within the subset are connected by an edge.
+        Largest subset of nodes such that no nodes within the subset are connected by an edge
         \begin{equation*}
             f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
         \end{equation*}
+        \hfill\cite{lucas_ising_2014}
     \end{alertblock}
     \pause
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{figure}
                 \includegraphics[width=0.9\textwidth]{../Figures/toy_graph.pdf}
-                \caption{Problem graph}
             \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
                 \includegraphics[width=0.9\textwidth]{../Figures/toy_solution.pdf}
-                \caption{Solution graph}
             \end{figure}
         \end{column}
     \end{columns}
@@ -253,21 +261,22 @@
     \item{Enforces that only one simultaneous phrase can be played at once}
     \item{Constraint term enforces no edges}
     \item{Objective term is quantity to be minimised}
-    \item[Lagrange paramters $A$/$B$ determine the balance between constraint and objective]
+    \item{Lagrange paramters $A$/$B$ determine the balance between constraint and objective}
 }
 
 \begin{frame}{4. Construct arrangement}
     \begin{figure}
         \centering
-        \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
+        \includegraphics[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
+    \pause
     \centering
     \begin{tikzpicture}
         \draw [thick, -latex](0,0) -- (0,-1);
     \end{tikzpicture}
     \begin{figure}
         \centering
-        \includegraphics<2->[width=0.8\textwidth]{../Figures/toy_arrangement-1.png}
+        \includegraphics[width=0.8\textwidth]{../Figures/toy_arrangement-1.png}
     \end{figure}
 \end{frame}
 \note[itemize]{
@@ -353,30 +362,47 @@
 \section{Conclusions}
 
 \begin{frame}{Conclusions}
-    \begin{itemize}
+    \begin{itemize}[<+->]
         \item Successful in creating a valid single-part reduction
+        \begin{itemize}
+            \item Monophonic lowest-energy solution
+            \item Sufficient number of phrases selected
+            \item Musically interesting final arrangement
+        \end{itemize}
         \item Advantage over classical algorithms (deep learning, genetic)
         \begin{itemize}
             \item No training data needed
-            \item Faster solve time
+            \item Faster solve time \cite{huang_towards_2012}
         \end{itemize}
     \end{itemize}
+    \begin{figure}
+        \includegraphics[width=.5\linewidth]{../Figures/arrangement-1.png}
+    \end{figure}
 \end{frame}
 \note[itemize]{
-    \item{}
+    \item{Valid reduction gained from implemented method}
+    \item{Preferred arrangement found in lowest-energy solution}
+    \item{Phrase identification and selection result in musically interesting final arrangement}
+    \item{Displays some advantages over classical algorithms}
+    \item{Does not require training, costly in both time and resources}
+    \item{Faster solve time compared to similarly-sized problems}
 }
 
 \begin{frame}{Future work}
-    \begin{itemize}
+    \begin{itemize}[<+->]
         \item Increased problem size
         \item Parametric variation of LBDM
         \item Physical limitations of instruments
         \item Reduction to more than one part
-        \item Quality comparison of computer arrangements
+        \item Quality comparison of computer arrangements \cite{pearce_towards_2001}
     \end{itemize}
 \end{frame}
 \note[itemize]{
-    \item{}
+    \item{Problem size | full piece has upwards of 1000 phrases, compare solve times with classical algorithms}
+    \item{LBDM parameters | phrases should be short and similar in length, prevents important notes being hidden in long phrases with low entropy}
+    \item{Physical limitations | note ranges, note change speed}
+    \item{Multiple parts | need different problem formulation, colouring problem with each colour representing a reduced part}
+    \item{Quality judgement | Turing-like test, present subjects with human-/computer-generated scores}
 }
 
 \begin{frame}[standout]
@@ -387,6 +413,11 @@
 
 \begin{frame}
     \titlepage
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike} %alpha
+    \bibliography{beamer}
 \end{frame}
 
 \begin{frame}{LBDM}
@@ -410,7 +441,12 @@
             S=\frac{1}{3}\left( S_\mathrm{pitch} + 2 S_\mathrm{IOI} \right)
         \end{equation*}
     \end{block}
+    \hfill\cite{cambouropoulos_lbdm_2011}
 \end{frame}
+\note[itemize]{
+    \item{Boundaries always taken at beginning/end of piece}
+    \item{Weightings derived by trial and error}
+}
 
 \begin{frame}{Phrase entropy}
     \begin{block}{Shannon entropy}
@@ -423,6 +459,11 @@
             P(x_i)=\frac{n_i}{N}
         \end{equation*}
     \end{block}
+    \hfill\cite{li_automatic_2019}
 \end{frame}
+\note[itemize]{
+    \item{Shannon entropy units in bits due to $\log_2$}
+    \item{Distribution calculated for pitch and duration}
+}
 
 \end{document}
