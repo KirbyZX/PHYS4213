@@ -3,7 +3,7 @@
 <score-partwise version="4.0">
   <identification>
     <encoding>
-      <encoding-date>2025-01-19</encoding-date>
+      <encoding-date>2025-01-29</encoding-date>
       <software>music21 v.9.3.0</software>
     </encoding>
   </identification>
@@ -68,7 +68,7 @@
           <slur number="1" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -76,9 +76,9 @@
         <duration>15120</duration>
         <type>quarter</type>
         <dot />
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>A</step>
           <alter>-1</alter>
@@ -86,7 +86,7 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <notations>
           <slur number="1" type="stop" />
@@ -95,7 +95,7 @@
     </measure>
     <!--========================= Measure 2 ==========================-->
     <measure implicit="no" number="2">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>D</step>
           <alter>-1</alter>
@@ -103,7 +103,7 @@
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <rest />
@@ -874,14 +874,14 @@
     </measure>
     <!--========================= Measure 4 ==========================-->
     <measure implicit="no" number="4">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <rest />
@@ -1059,14 +1059,14 @@
     </measure>
     <!--========================= Measure 9 ==========================-->
     <measure implicit="no" number="9">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <rest />
@@ -1096,7 +1096,7 @@
           <wedge number="2" spread="0" type="crescendo" />
         </direction-type>
       </direction>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -1104,24 +1104,24 @@
         <duration>7560</duration>
         <type>eighth</type>
         <dot />
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
         <notations>
           <slur number="1" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>G</step>
           <octave>4</octave>
         </pitch>
         <duration>2520</duration>
         <type>16th</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>A</step>
           <alter>-1</alter>
@@ -1129,23 +1129,23 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>F</step>
           <octave>4</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <notations>
           <slur number="1" type="stop" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1153,10 +1153,10 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1164,7 +1164,7 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
       </note>
       <direction placement="below">
@@ -1183,14 +1183,14 @@
         </direction-type>
         <sound dynamics="44" />
       </direction>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <rest />
@@ -1207,20 +1207,20 @@
           <words default-y="1" enclosure="none" relative-x="-6">espress.</words>
         </direction-type>
       </direction>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <notations>
           <slur number="2" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1228,10 +1228,10 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>A</step>
           <alter>-1</alter>
@@ -1239,13 +1239,13 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
       </note>
     </measure>
     <!--========================= Measure 12 =========================-->
     <measure implicit="no" number="12">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1253,16 +1253,16 @@
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="2" type="stop" />
         </notations>
@@ -1272,7 +1272,7 @@
         <duration>5040</duration>
         <type>eighth</type>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>D</step>
           <alter>-1</alter>
@@ -1280,23 +1280,23 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <notations>
           <slur number="3" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1304,22 +1304,22 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
       </note>
     </measure>
     <!--========================= Measure 13 =========================-->
     <measure implicit="no" number="13">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>D</step>
           <alter>-1</alter>
@@ -1327,7 +1327,7 @@
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="3" type="stop" />
         </notations>
@@ -1340,7 +1340,7 @@
         </direction-type>
         <sound dynamics="88" />
       </direction>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <alter>-1</alter>
@@ -1348,10 +1348,10 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <chord />
         <pitch>
           <step>B</step>
@@ -1360,7 +1360,7 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <rest />
@@ -1406,7 +1406,7 @@
           <words default-y="-70" enclosure="none" relative-x="-6">sotto voce</words>
         </direction-type>
       </direction>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1414,7 +1414,7 @@
         </pitch>
         <duration>20160</duration>
         <type>half</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <pitch>
@@ -1523,7 +1523,7 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -1531,7 +1531,7 @@
         <duration>10080</duration>
         <tie type="start" />
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <tied type="start" />
         </notations>
@@ -1539,16 +1539,16 @@
     </measure>
     <!--========================= Measure 5 ==========================-->
     <measure implicit="no" number="5">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <octave>4</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -1556,7 +1556,7 @@
         <duration>20160</duration>
         <tie type="start" />
         <type>half</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <tied type="start" />
         </notations>
@@ -1564,19 +1564,19 @@
     </measure>
     <!--========================= Measure 6 ==========================-->
     <measure implicit="no" number="6">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>F</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="6" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <alter>-1</alter>
@@ -1584,9 +1584,9 @@
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -1594,7 +1594,7 @@
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
       <note>
         <pitch>
@@ -1610,7 +1610,7 @@
     </measure>
     <!--========================= Measure 7 ==========================-->
     <measure implicit="no" number="7">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>A</step>
           <alter>-1</alter>
@@ -1618,12 +1618,12 @@
         </pitch>
         <duration>20160</duration>
         <type>half</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="1" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>D</step>
           <octave>3</octave>
@@ -1631,9 +1631,9 @@
         <duration>15120</duration>
         <type>quarter</type>
         <dot />
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <alter>-1</alter>
@@ -1641,7 +1641,7 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <notations>
           <slur number="1" type="stop" />
@@ -1650,37 +1650,37 @@
     </measure>
     <!--========================= Measure 8 ==========================-->
     <measure implicit="no" number="8">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="2" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>F</step>
           <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>D</step>
           <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <alter>-1</alter>
@@ -1688,7 +1688,7 @@
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="2" type="stop" />
         </notations>
@@ -2087,7 +2087,7 @@
     </measure>
     <!--========================= Measure 3 ==========================-->
     <measure implicit="no" number="3">
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>E</step>
           <alter>-1</alter>
@@ -2095,12 +2095,12 @@
         </pitch>
         <duration>20160</duration>
         <type>half</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="4" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>D</step>
           <alter>-1</alter>
@@ -2109,16 +2109,16 @@
         <duration>15120</duration>
         <type>quarter</type>
         <dot />
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>C</step>
           <octave>3</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <beam number="1">continue</beam>
         <notations>
           <slur number="4" type="stop" />
@@ -2188,14 +2188,14 @@
           <slur number="6" type="start" />
         </notations>
       </note>
-      <note color="#22A884">
+      <note color="#D62728">
         <pitch>
           <step>A</step>
           <octave>2</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#22A884" parentheses="no">normal</notehead>
+        <notehead color="#D62728" parentheses="no">normal</notehead>
         <notations>
           <slur number="6" type="stop" />
         </notations>

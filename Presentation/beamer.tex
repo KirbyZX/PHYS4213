@@ -55,13 +55,14 @@
 
 \begin{frame}{Overview}
     \tableofcontents
+
+    \note<1->{\begin{itemize}
+        \item{What is music arrangement? What is quantum annealing?}
+        \item{Methods used to solve the music arrangement problem}
+        \item{Preliminary results from application of the method}
+        \item{Concluding thoughts about this process}
+    \end{itemize}}
 \end{frame}
-\note[itemize]{
-    \item{What is music arrangement? What is quantum annealing?}
-    \item{Methods used to solve the music arrangement problem}
-    \item{Preliminary results from application of the method}
-    \item{Concluding thoughts about this process}
-}
 
 \section{Theory} %%%%%%%%%%
 
@@ -167,7 +168,7 @@
     \pause
     \begin{itemize}
         \item Encodes problem solution into Hamiltonian's ground state
-        \item Remains in low-energy state via quantum tunneling
+        \item Sent to the QPU for optimisation
     \end{itemize}
 
     \note<1->{\begin{itemize} 
@@ -191,7 +192,7 @@
 
 \begin{frame}{Problem formulation}
     \begin{enumerate}[<+(1)->]
-        \item Split parts into phrases
+        \item Split score into musical phrases
         \item Arrange phrases into a graph
         \item Solve graph problem using QPU
         \item Construct arrangement from solution
@@ -206,7 +207,7 @@
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{1. Split parts}
+\begin{frame}{1.\ Split score}
     \pause
     \begin{block}{Local boundary detection model (LBDM)}
         \vspace{0.1em}
@@ -230,7 +231,7 @@
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{2. Create graph}
+\begin{frame}{2.\ Create graph}
     \begin{figure}
         \includegraphics[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
@@ -245,14 +246,10 @@
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{3. Solve graph}
+\begin{frame}{3.\ Solve graph}
     \uncover<2->{\begin{alertblock}{Maximal independent set (MIS)}
         \vspace{0.1em}
-        Largest subset of nodes such that no nodes within the subset are connected by an edge
-        \begin{equation*}
-            f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i
-        \end{equation*}
-        \hfill\cite{lucas_ising_2014}}
+        Largest subset of nodes such that no nodes within the subset are connected by an edge}
     \end{alertblock}
     \begin{columns}
         \begin{column}{0.5\textwidth}
@@ -270,15 +267,13 @@
     \note<1->{\begin{itemize}
         \item{Special case for reducing to a single monophonic part (one phrase played at a time)}
         \item{Solve problem graph using a graph theory problem called MIS}
-        \item{Find largest subset of nodes such that no nodes within the subset are connected by an edge}
         \item{Enforces that only one simultaneous phrase can be played at once}
-        \item{Constraint term enforces no edges}
-        \item{Objective term is quantity to be minimised}
-        \item{Lagrange paramters $A$/$B$ determine the balance between constraint and objective}
+        \item{Nodes can also be weighted to introduce preference for certain nodes e.g.\ musicality}
+        
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{4. Construct arrangement}
+\begin{frame}{4.\ Construct arrangement}
     \begin{figure}
         \begin{subfigure}{0.6\linewidth}
             \includegraphics[width=0.9\linewidth]{../Figures/toy-1.png}
@@ -348,8 +343,8 @@
     \note<1->{\begin{itemize}
         \item{Histogram of the returned solutions, only energies below zero shown}
         \item{Distribution of solutions due to the stochastic nature of annealing}
-        \item{Not always guaranteed the ground state during evolution}
-        \item{Lowest energy solution $-26.8$ with a degeneracy of 34}
+        \item{Lowest energy solution most musically interesting due to construction of weighted MIS QUBO}
+        \item{(Lowest energy solution $-26.8$ with a degeneracy of 34)}
     \end{itemize}}
 \end{frame}
 
@@ -461,6 +456,21 @@
     \note{\begin{itemize}
         \item{Boundaries always taken at beginning/end of piece}
         \item{Weightings derived by trial and error}
+    \end{itemize}}
+\end{frame}
+
+\begin{frame}{MIS}
+
+    \begin{equation*}
+        f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i W_ix_i
+    \end{equation*}
+    \hfill\cite{lucas_ising_2014}
+
+    $A/B>=2\max(W)$ to weight the constraint term more heavily than any objective term
+
+    \note{\begin{itemize}
+        \item{Weighted MIS QUBO}
+        \item{Lagrange paramters $A$/$B$ determine the balance between constraint and objective}
     \end{itemize}}
 \end{frame}
 
