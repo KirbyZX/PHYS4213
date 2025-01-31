@@ -1,5 +1,5 @@
-\documentclass{beamer}
-\setbeameroption{show notes on second screen=right}
+\documentclass[handout]{beamer}
+\setbeameroption{hide notes}
 %show notes on second screen=right
 %show only notes
 %hide notes
@@ -13,6 +13,10 @@
 \usepackage[british]{babel}
 \usepackage{mathtools}
 \usepackage{appendixnumberbeamer}
+
+\usepackage{csquotes}
+\usepackage[style=verbose]{biblatex}
+\bibliography{beamer}
 %\usepackage{kpfonts}
 
 % Theme (Boadilla, Hannover, metropolis, Pittsburgh)
@@ -62,6 +66,19 @@
         \item{Preliminary results from application of the method}
         \item{Concluding thoughts about this process}
     \end{itemize}}
+\end{frame}
+
+\section{Motivations}
+
+\begin{frame}{Motivations}
+
+    \begin{itemize}
+        \item Small lit review\footcite{cambouropoulos_lbdm_2011}
+        \item Quantum computer music
+        \item My own novel adaption of the method
+        \item THIS IS MY OWN IDEA
+    \end{itemize}
+
 \end{frame}
 
 \section{Theory} %%%%%%%%%%
@@ -143,11 +160,6 @@
 \end{frame}
 
 \begin{frame}{Quantum annealing}
-    \begin{figure}
-        \centering
-        \includegraphics[width=\textwidth]{../Figures/nature10012.png}
-        \caption{\cite{dwave_manufactured_2011}}
-    \end{figure}
 
     \note<1->{\begin{itemize}
         \item{What does this look like?}
@@ -427,11 +439,6 @@
 
 \begin{frame}
     \titlepage
-\end{frame}
-
-\begin{frame}[allowframebreaks]{References}
-    \bibliographystyle{apalike} %alpha
-    \bibliography{beamer}
 \end{frame}
 
 \begin{frame}{LBDM}

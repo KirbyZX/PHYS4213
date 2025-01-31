@@ -5,13 +5,15 @@ Interim
 
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.fdb_latexmk
 *.fls
 *.log
-*.out
-*.synctex.gz
-*Notes.bib
 *.nav
+*.out
+*.run.xml
 *.snm
+*.synctex.gz
 *.toc
+*Notes.bib
