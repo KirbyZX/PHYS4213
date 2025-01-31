@@ -13,17 +13,19 @@ def hasOverlap(s1: stream.Stream, s2: stream.Stream) -> bool:
 
     return start(s1) < end(s2) and start(s2) < end(s1)
 
-def extractPhrases(stream: stream.Stream, boundaries: list, identifier: str = "p") -> list[stream.Stream]:
+def extractPhrases(stream: stream.Stream, threshold: float, weightings: list[float], identifier: str = "p") -> dict[str, stream.Stream]:
     '''
-    Identifies phrases in a stream based on a list of boundaries.
+    Identifies phrases in a stream using the LBDM.
     '''
 
-    phrases = []
+    boundaries = identifyBoundaries(stream, threshold, weightings)
+    flat = stream.flatten()
+    phrases = {}
     n = 1
     start = 0
     for b in boundaries:
 
-        phrase = stream.flatten().getElementsByOffset(start, b, includeEndBoundary=False).stream()
+        phrase = flat.getElementsByOffset(start, b, includeEndBoundary=False).stream()
         start = b
         
         phrase.id = f"{identifier}_{n}"
@@ -31,12 +33,12 @@ def extractPhrases(stream: stream.Stream, boundaries: list, identifier: str = "p
 
         phrase.entropy = streamEntropy(phrase)
 
-        phrases.append(phrase)
+        phrases[phrase.id] = phrase
     
     return phrases
 
 
-def identifyBoundaries(stream: stream.Stream, threshold: float, annotate: bool = False) -> list[int]:
+def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: list[float], annotate: bool = False) -> list[int]:
 
     noteStream = stream.recurse().getElementsByClass("Note").stream()
     pitchStrengths = np.empty(len(noteStream))
@@ -57,7 +59,7 @@ def identifyBoundaries(stream: stream.Stream, threshold: float, annotate: bool =
     boundaries = []
 
     for i,n in enumerate(noteStream):
-        total = 0.3*pitchStrengths[i] + 0.6*offsetStrengths[i]
+        total = weightings[0] * pitchStrengths[i] + weightings[1] * offsetStrengths[i]
         n.boundaryStrength = total
 
         if total >= threshold:
