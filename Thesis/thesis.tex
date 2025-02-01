@@ -294,7 +294,7 @@ The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, O
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\linewidth]{../Figures/boundary_offset.pdf}
+    \includegraphics[width=0.5\linewidth]{../Figures/boundaryStrength.pdf}
     \caption{Boundary strengths for each note of the violin part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$), which identifies five total phrases. Note that the beginning and end of the piece are always considered boundaries.}
     \label{fig:boundary-strengths}
 \end{figure}
@@ -335,10 +335,46 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 
 \clearpage
 
-\onecolumngrid % Puts summary into single column
-
 \section*{Scientific Summary for a General Audience} % 200 words
 
 The arrangement of music by hand is usually a difficult and time-consuming process, requiring a deep understanding of musical theory and structure. This study aims to automate this process via quantum computing, a technique that relies on the use of qubits, which can exist in a superposition of states. A music score can be split up into a sequence of phrases by looking at how much adjacent notes differ from each other, and turned into a graph representation with nodes and edges, where each node is a phrase, and edges between nodes mean they overlap. This graph can then be sent to a quantum computer in order to select nodes according to a set of rules that determine the properties of the arrangement. Once the nodes have been selected, the corresponding phrases can be reconstructed to create the final score. Here, an excerpt of Beethoven's String Quartet No.\ 10 is reduced to a single part, suitable for a solo instrument.
+
+\clearpage
+
+Start with an undirected graph $G=(V,E)$ and a set of $n$ colours, which represent the parts for which we are arranging, with each being an independent set. Denote $x_{v,i}$ to be a binary variable such that
+\begin{equation*}
+    x_{v,i} =
+    \begin{cases}
+        1 & \text{if vertex $v$ is colour $i$} \\
+        0 & \text{otherwise}
+    \end{cases}
+    \,,
+\end{equation*}
+which requires $nV$ variables. The energy is
+\begin{equation*}
+    H = H_A + H_B + H_C + H_D \,.
+\end{equation*}
+
+Each vertex is coloured exactly once:
+\begin{equation*}
+    H_A = A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2
+\end{equation*}
+
+Vertices of the same colour are not connected by an edge:
+\begin{equation*}
+    H_B = B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}
+\end{equation*}
+
+Maximise the weighting of selected vertices:
+\begin{equation*}
+    H_C = -C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}
+\end{equation*}
+
+Maximise the weighting of included edges:
+\begin{equation*}
+    H_D = -D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}
+\end{equation*}
+
+It can be seen that for $n=1$ this reduces to the MIS problem. For a score with $p$ parts, it will be impossible to colour the graph exactly with $n<p$; the parameter $A$ should be small enough to allow for some vertices to remain uncoloured. The lowest energy solutions will return coloured independent subsets of $G$ that each represents a monophonic part of the final arrangement.
 
 \end{document}
