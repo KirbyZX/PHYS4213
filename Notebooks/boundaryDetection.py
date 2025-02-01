@@ -1,26 +1,24 @@
-from music21 import stream, note
 import numpy as np
+from music21 import stream, note
 
-from calculators import noteDistribution, streamEntropy
+from calculators import streamEntropy
+
 
 def hasOverlap(s1: stream.Stream, s2: stream.Stream) -> bool:
     '''
     Returns True if two streams have overlapping notes.
     '''
 
-    def start(s: stream.Stream) -> float: return s.flatten().notes.stream().first().offset
-    def end(s: stream.Stream) -> float: return s.flatten().notes.stream().last().offset + s.flatten().notes.stream().last().duration.quarterLength
-
     return start(s1) < end(s2) and start(s2) < end(s1)
 
-def extractPhrases(stream: stream.Stream, threshold: float, weightings: list[float], identifier: str = "p") -> dict[str, stream.Stream]:
+def extractPhrases(stream: stream.Stream, threshold: float, weightings: tuple[float], identifier: str = "p") -> list[stream.Stream]:
     '''
     Identifies phrases in a stream using the LBDM.
     '''
 
     boundaries = identifyBoundaries(stream, threshold, weightings)
     flat = stream.flatten()
-    phrases = {}
+    phrases = []
     n = 1
     start = 0
     for b in boundaries:
@@ -32,13 +30,14 @@ def extractPhrases(stream: stream.Stream, threshold: float, weightings: list[flo
         n += 1
 
         phrase.entropy = streamEntropy(phrase)
-
-        phrases[phrase.id] = phrase
+        phrases.append(phrase)
     
     return phrases
 
-
-def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: list[float], annotate: bool = False) -> list[int]:
+def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: tuple[float], annotate: bool = False) -> list[int]:
+    '''
+    Calculates the boundary strengths and returns notes above the threshold.
+    '''
 
     noteStream = stream.recurse().getElementsByClass("Note").stream()
     pitchStrengths = np.empty(len(noteStream))
@@ -72,14 +71,17 @@ def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: list
 
     return boundaries
 
+def start(s: stream.Stream) -> float:
+    return s.flatten().notes.stream().first().offset
+
+def end(s: stream.Stream) -> float:
+    return s.flatten().notes.stream().last().offset + s.flatten().notes.stream().last().duration.quarterLength
 
 def normalise(data: np.array) -> np.array:
     return (data - np.min(data)) / (np.max(data) - np.min(data))
 
-
 def pitchDegree(n1: note.Note, n2: note.Note) -> float:
     return abs(n1.pitch.ps - n2.pitch.ps) / (n1.pitch.ps + n2.pitch.ps)
-
 
 def offsetDegree(n1: note.Note, n2: note.Note, stream: stream.Stream) -> float:
     return abs(n1.getOffsetInHierarchy(stream) - n2.getOffsetInHierarchy(stream)) / (n1.getOffsetInHierarchy(stream) + n2.getOffsetInHierarchy(stream))
