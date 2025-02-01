@@ -1,4 +1,4 @@
-# Quantum Instrument Rearrangement By Expression (Entropy?) Evaluation
+# Quantum annealing and its application to music arrangement
 
 - Thermal fluctuations vs quantum tunnelling
 - Quantum vs classical advantage
