@@ -11,14 +11,14 @@ from boundaryDetection import hasOverlap
 identifier = "haydn_opus1no1_movement1"
 phraseLists = pickle.load(open(f"./Pickles/{identifier}_phrases.pkl", "rb"))
 
-cores = 4
+cores = 2
 chunksize = 100
 
 def updateGraph(phraseTuple):
         p1, p2 = phraseTuple
         print(f"Checking overlap between {p1.id} and {p2.id}", end='\r', flush=True)
         if hasOverlap(p1, p2):
-            return (p1.id, p2.id)
+            return (p1.id, p2.id, abs(p1.entropy-p2.entropy))
 
 if __name__ == '__main__':
 
@@ -32,5 +32,6 @@ if __name__ == '__main__':
                 edges.append(result)
 
     G.add_nodes_from([phrase.id for part in phraseLists for phrase in part])
-    G.add_edges_from(edges)
+    G.add_weighted_edges_from(edges)
+    print("\nGraph created!")
     pickle.dump(G, open(f"./Pickles/{identifier}_graph.pkl", "wb"))
