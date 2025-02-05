@@ -11,7 +11,7 @@ from boundaryDetection import hasOverlap
 identifier = "haydn_opus1no1_movement1"
 phraseLists = pickle.load(open(f"./Pickles/{identifier}_phrases.pkl", "rb"))
 
-cores = 2
+cores = 4
 chunksize = 100
 
 def updateGraph(phraseTuple):
