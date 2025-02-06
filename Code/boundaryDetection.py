@@ -1,6 +1,5 @@
 import numpy as np
-import pickle
-from music21 import stream, note, corpus
+from music21 import stream, note
 from entropy import streamEntropy
 
 
@@ -29,6 +28,8 @@ def extractPhrases(score: stream.Stream, threshold: float, weightings: tuple[flo
         
         phraseLists.append(phrases)
         print(f"{len(phrases)} phrases created!")
+
+    return phraseLists
 
 def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: tuple[float], annotate: bool = False) -> list[int]:
     '''
