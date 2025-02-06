@@ -1,38 +1,34 @@
 import numpy as np
-from music21 import stream, note
+import pickle
+from music21 import stream, note, corpus
+from entropy import streamEntropy
 
-from calculators import streamEntropy
 
-
-def hasOverlap(s1: stream.Stream, s2: stream.Stream) -> bool:
+def extractPhrases(score: stream.Stream, threshold: float, weightings: tuple[float]) -> list[list[stream.Stream]]:
     '''
-    Returns True if two streams have overlapping notes.
+    Identifies phrases in a score using the LBDM.
     '''
+    phraseLists = []
+    for part in score.parts:
+        print(f"Creating phrases for {part.id} part...")
+        boundaries = identifyBoundaries(part, threshold, weightings)
+        flat = part.flatten()
+        phrases = []
+        n = 1
+        start = 0
+        for b in boundaries:
 
-    return start(s1) < end(s2) and start(s2) < end(s1)
+            phrase = flat.getElementsByOffset(start, b, includeEndBoundary=False).stream()
+            start = b
+            
+            phrase.id = f"{part.id}_{n}"
+            n += 1
 
-def extractPhrases(stream: stream.Stream, threshold: float, weightings: tuple[float], identifier: str = "p") -> list[stream.Stream]:
-    '''
-    Identifies phrases in a stream using the LBDM.
-    '''
-
-    boundaries = identifyBoundaries(stream, threshold, weightings)
-    flat = stream.flatten()
-    phrases = []
-    n = 1
-    start = 0
-    for b in boundaries:
-
-        phrase = flat.getElementsByOffset(start, b, includeEndBoundary=False).stream()
-        start = b
+            phrase.entropy = streamEntropy(phrase)
+            phrases.append(phrase)
         
-        phrase.id = f"{identifier}_{n}"
-        n += 1
-
-        phrase.entropy = streamEntropy(phrase)
-        phrases.append(phrase)
-    
-    return phrases
+        phraseLists.append(phrases)
+        print(f"{len(phrases)} phrases created!")
 
 def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: tuple[float], annotate: bool = False) -> list[int]:
     '''
@@ -70,6 +66,13 @@ def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: tupl
     boundaries.append(stream.duration.quarterLength)
 
     return boundaries
+
+def hasOverlap(s1: stream.Stream, s2: stream.Stream) -> bool:
+    '''
+    Returns `True` if two streams have overlapping notes.
+    '''
+
+    return start(s1) < end(s2) and start(s2) < end(s1)
 
 def start(s: stream.Stream) -> float:
     return s.flatten().notes.stream().first().offset
