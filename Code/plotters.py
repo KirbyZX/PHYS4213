@@ -3,7 +3,61 @@ from colours import Viridis as V
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
+import networkx as nx
+import re
 
+
+def plotArrangement(sample: dict, phrases: list, instruments: dict):
+    '''
+    Create an arrangement score from a sample
+    '''
+    parts = {}
+    for col, inst in instruments.items():
+        part = stream.Part()
+        part.append(inst())
+        parts[col] = part
+
+    chosen = extractChosen(sample)
+
+    for phrase in [phrase for part in phrases for phrase in part]:
+        if phrase.id in chosen:
+            parts[chosen[phrase.id]].mergeElements(phrase.notes.stream()) # Focus on JUST NOTES for now 
+
+    arrangement = stream.Score(parts.values())
+    arrangement.show("midi")
+    arrangement.show()
+
+def plotSample(sample: dict, G: nx.Graph, phrases: list) -> None:
+    '''
+    Plots the first lowest energy solution of a dataframe on a graph.
+    '''
+    chosen = extractChosen(sample)
+
+    plt.figure(0)
+    pos = nx.spring_layout(G, k=0.5, seed=8)
+    #nx.draw_networkx_edges(G, pos, width=0.2)
+    #nx.draw_networkx_nodes(G, pos, nodelist=chosen.keys(), node_color=chosen.values(), node_size=15)
+
+    plt.figure(1, figsize=(12,6))
+
+    for node in G.nodes():
+        if node in chosen:
+            G.nodes[node]["colour"] = chosen[node]
+        else:
+            G.nodes[node]["colour"] = "black"
+    pos = nx.multipartite_layout(G, "colour", "horizontal", 2)
+
+    nx.draw_networkx_nodes(G, pos, node_color=[G.nodes[node]["colour"] for node in G.nodes()], node_size=[10*(p.entropy+.1) for p in phrases])
+    nx.draw_networkx_edges(G, pos, width=[d["weight"]/10 for _, _, d in G.edges.data()])
+    plt.show()
+    #plt.savefig(f"../Figures/{identifier}_colouredGraph.pdf", pad_inches=0, bbox_inches="tight")
+
+def extractChosen(sample: dict) -> dict:
+    '''
+    Extract the chosen phrases from a sample in the form "phrase": "colour".
+    '''
+    processNode = lambda node : re.match(r"(.*_\d+)_(\w+)", node).groups()
+    return {processNode(x)[0]:processNode(x)[1] for x in sample if sample[x] == 1}
 
 def plotHistogram(sampleset: pd.DataFrame, filename: str = None) -> None:
     '''
