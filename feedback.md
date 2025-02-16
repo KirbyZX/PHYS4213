@@ -60,3 +60,8 @@ https://www.beamer.plus/Creating-Overlays.html
 ## Report
 
 https://thomas.deselaers.de/computing/texsqueezing.html
+
+- Make it clear this is a physics project (as discussed in person already), in terms of detail given to descriptions of different components etc. 
+- If you are including figures, it is imperative that each figure is directly referenced in text and a relevant description to help the reader understand your intended take away points included. This was not always the case in your report.  
+- It was not immediately clear why we should use quantum for this problem. Ways to address this would be to discuss the reasons for a potential quantum advantage in the theory section but also to focus on the existence or lack thereof of an actual advantage in the discussions. 
+- Several places are missing an adequate reference.

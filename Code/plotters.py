@@ -11,6 +11,7 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict):
     '''
     Create an arrangement score from a sample
     '''
+
     parts = {}
     for col, inst in instruments.items():
         part = stream.Part()
@@ -31,6 +32,7 @@ def plotSample(sample: dict, G: nx.Graph, phrases: list) -> None:
     '''
     Plots the first lowest energy solution of a dataframe on a graph.
     '''
+
     chosen = extractChosen(sample)
 
     plt.figure(0)
@@ -56,6 +58,7 @@ def extractChosen(sample: dict) -> dict:
     '''
     Extract the chosen phrases from a sample in the form "phrase": "colour".
     '''
+
     processNode = lambda node : re.match(r"(.*_\d+)_(\w+)", node).groups()
     return {processNode(x)[0]:processNode(x)[1] for x in sample if sample[x] == 1}
 
@@ -64,7 +67,6 @@ def plotHistogram(sampleset: pd.DataFrame, filename: str = None) -> None:
     Plots the histogram of a sampleset.
     '''
 
-    plt.figure(figsize=(6,4))
     N, _, patches = plt.hist(sampleset["energy"], bins=500, log=True)
 
     norm = mpl.colors.LogNorm(1, N.max())
@@ -77,7 +79,6 @@ def plotHistogram(sampleset: pd.DataFrame, filename: str = None) -> None:
     #plt.xscale("symlog", linthresh=20, linscale=0.1)
     #plt.xlim(-30,0)
     #plt.xticks([-30,-20,-10,0])
-    plt.show()
     
     if filename is not None:
         plt.savefig(f"..\Figures\{filename}.pdf", pad_inches=0, bbox_inches="tight")
