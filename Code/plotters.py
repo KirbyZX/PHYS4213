@@ -30,7 +30,7 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict):
 
 def plotSample(sample: dict, G: nx.Graph, phrases: list) -> None:
     '''
-    Plots the first lowest energy solution of a dataframe on a graph.
+    Plots a sample as a graph.
     '''
 
     chosen = extractChosen(sample)
