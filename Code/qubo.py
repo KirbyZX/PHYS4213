@@ -1,6 +1,10 @@
 import networkx as nx
 import itertools as iter
+from music21 import instrument
 from dimod import BinaryQuadraticModel
+import sys
+import pickle
+import json
 
 
 def createBQM(G: nx.Graph, phrases: list, instruments: list):
@@ -27,3 +31,19 @@ def createBQM(G: nx.Graph, phrases: list, instruments: list):
         bqm.add_quadratic_from([(f"{u}_{i}", f"{v}_{j}", -d["weight"]) for i,j in iter.product(instruments.keys(), repeat=2)])
 
     return bqm
+
+
+if __name__ == "__main__":
+    
+    identifier = sys.argv[1]
+    path = f"../Pickles/{identifier}/{identifier}_"
+
+    G = nx.read_graphml(path + "graph.graphml")
+    phrases = pickle.load(open(path + "phrases.pkl", "rb"))
+    instruments = {key: getattr(instrument, value) for (key, value) in json.load(open(path + "instruments.json")).items()}
+
+    bqm = createBQM(G, phrases, instruments)
+    print("BQM created!")
+
+    with open(path + "bqm.json", "w") as f: 
+        json.dump(bqm.to_serializable(), f)

@@ -1,5 +1,7 @@
 import numpy as np
-from music21 import stream, note
+import sys
+import pickle
+from music21 import stream, note, converter
 from entropy import streamEntropy
 
 
@@ -89,3 +91,14 @@ def pitchDegree(n1: note.Note, n2: note.Note) -> float:
 
 def offsetDegree(n1: note.Note, n2: note.Note, stream: stream.Stream) -> float:
     return abs(n1.getOffsetInHierarchy(stream) - n2.getOffsetInHierarchy(stream)) / (n1.getOffsetInHierarchy(stream) + n2.getOffsetInHierarchy(stream))
+
+
+if __name__ == "__main__":
+
+    identifier = sys.argv[1]
+    path = f"../Pickles/{identifier}/{identifier}_"
+
+    score = converter.parse(path + "score.musicxml")
+
+    phrases = extractPhrases(score, 0.3, (0.33, 0.66))
+    pickle.dump(phrases, open(path + "phrases.pkl", "wb"))
