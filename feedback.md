@@ -44,8 +44,10 @@
 
 - Explain graph theory more thoroughly
     - Introduce the idea of a graph earlier
+    - Point out nodes, edges etc.
 
 - Highlight notes in score better
+    - Draw boxes
 
 - Mention small literature review
     - Quantum computer music
