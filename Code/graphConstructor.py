@@ -17,7 +17,7 @@ def createGraph(phraseLists: list, cores: int, chunksize: int) -> nx.Graph:
             if result is not None:
                 edges.append(result)
 
-    G.add_nodes_from([phrase.id for part in phraseLists for phrase in part])
+    G.add_nodes_from([(phrase.id, {"entropy": phrase.entropy}) for part in phraseLists for phrase in part])
     G.add_weighted_edges_from(edges)
     print("\nGraph created!")
 

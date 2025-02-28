@@ -28,15 +28,15 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict):
     arrangement.show("midi")
     arrangement.show()
 
-def plotSample(sample: dict, G: nx.Graph, phrases: list) -> None:
+def plotSampleGraph(sample: dict, G: nx.Graph) -> None:
     '''
     Plots a sample as a graph.
     '''
 
     chosen = extractChosen(sample)
 
-    plt.figure(0)
-    pos = nx.spring_layout(G, k=0.5, seed=8)
+    #plt.figure(0)
+    #pos = nx.spring_layout(G, k=0.5, seed=8)
     #nx.draw_networkx_edges(G, pos, width=0.2)
     #nx.draw_networkx_nodes(G, pos, nodelist=chosen.keys(), node_color=chosen.values(), node_size=15)
 
@@ -49,7 +49,7 @@ def plotSample(sample: dict, G: nx.Graph, phrases: list) -> None:
             G.nodes[node]["colour"] = "black"
     pos = nx.multipartite_layout(G, "colour", "horizontal", 2)
 
-    nx.draw_networkx_nodes(G, pos, node_color=[G.nodes[node]["colour"] for node in G.nodes()], node_size=[10*(p.entropy+.1) for p in phrases])
+    nx.draw_networkx_nodes(G, pos, node_color=[G.nodes[node]["colour"] for node in G.nodes()], node_size=[10*(e[1]+.1) for e in G.nodes.data("entropy")])
     nx.draw_networkx_edges(G, pos, width=[d["weight"]/10 for _, _, d in G.edges.data()])
     plt.show()
     #plt.savefig(f"../Figures/{identifier}_colouredGraph.pdf", pad_inches=0, bbox_inches="tight")
