@@ -7,13 +7,14 @@ import pickle
 import json
 
 
-def createBQM(G: nx.Graph, phrases: list, instruments: list):
+def createBQM(G: nx.Graph, phrases: list, instruments: list, multiplier: int = 10):
     '''
     Creates a binary quadratic model for the graph colouring problem.
     '''
 
     bqm = BinaryQuadraticModel(vartype="BINARY")
     allPhrases = [phrase for part in phrases for phrase in part]
+    instruments = {key: getattr(instrument, value) for (key, value) in instruments.items()}
 
     # Add all vertices for each colour
     bqm.add_variables_from([(f"{phrase.id}_{i}", 0)for phrase in allPhrases for i in instruments.keys()])
@@ -27,7 +28,7 @@ def createBQM(G: nx.Graph, phrases: list, instruments: list):
 
     for u, v, d in G.edges.data():
         # Adjacent vertices have different colours
-        bqm.add_quadratic_from([(f"{u}_{i}", f"{v}_{i}", 2*maxEntropy) for i in instruments.keys()])
+        bqm.add_quadratic_from([(f"{u}_{i}", f"{v}_{i}", multiplier * maxEntropy) for i in instruments.keys()])
         # Maximise edge weighting
         bqm.add_quadratic_from([(f"{u}_{i}", f"{v}_{j}", -d["weight"]) for i,j in iter.product(instruments.keys(), repeat=2)])
 
@@ -41,7 +42,7 @@ if __name__ == "__main__":
 
     G = nx.read_graphml(path + "graph.graphml")
     phrases = pickle.load(open(path + "phrases.pkl", "rb"))
-    instruments = {key: getattr(instrument, value) for (key, value) in json.load(open(path + "instruments.json")).items()}
+    instruments = json.load(open(path + "instruments.json"))
 
     bqm = createBQM(G, phrases, instruments)
     print("BQM created!")
