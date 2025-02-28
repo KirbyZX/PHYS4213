@@ -1,4 +1,4 @@
-from music21 import stream, graph
+from music21 import stream, graph, instrument
 from colours import Viridis as V
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict):
     parts = {}
     for col, inst in instruments.items():
         part = stream.Part()
-        part.append(inst())
+        part.append(getattr(instrument, inst)())
         parts[col] = part
 
     chosen = extractChosen(sample)
