@@ -7,16 +7,20 @@
 
 \usepackage{esint}
 \usepackage{graphicx}
+\graphicspath{{../Figures/}}
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[british]{babel}
 \usepackage{mathtools}
 \usepackage{appendixnumberbeamer}
+\usepackage{lmodern}
+\usepackage{svg}
 
+\usepackage[backend=biber, style=authortitle]{biblatex}
 \usepackage{csquotes}
-\usepackage[style=verbose,backend=biber]{biblatex}
 \bibliography{beamer}
+
 %\usepackage{kpfonts}
 
 % Theme (Boadilla, Hannover, metropolis, Pittsburgh)
@@ -39,6 +43,7 @@
 %\usebackgroundtemplate{\tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{../Figures/manuscript.jpg}};}
 
 \setbeamerfont{caption}{size=\tiny}         % Caption size
+\setbeamerfont{footnote}{size=\tiny}
 \captionsetup[figure]{labelformat=empty}    % Remove figure labels
 \captionsetup[subfigure]{labelformat=empty}
 \usefonttheme[onlymath]{serif}
@@ -71,101 +76,92 @@
 \begin{frame}{Motivations}
     
     \begin{itemize}
-        \item Small lit review\footnotemark
+        \item Small lit review\footcite{cambouropoulos_lbdm_2011}
         \item Quantum computer music
         \item My own novel adaption of the method
         \item THIS IS MY OWN IDEA
     \end{itemize}
     
-    \tiny\footnotetext{\tiny\cite{cambouropoulos_lbdm_2011}}
 \end{frame}
 
 \section{Theory} %%%%%%%%%%
 
-\subsection{Music arrangement}
+\subsection{Adiabatic quantum computing}
 
-\begin{frame}{Music arrangement}
-    \begin{columns}
-        \begin{column}{0.6\textwidth}
-            \begin{itemize}[<+(1)->]
-                \item Adaptation of previously composed pieces for practical or artistic reasons
-                \item Traditionally complex and time-consuming
-                \item This study focuses on \textbf{reduction}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.4\textwidth}
-            \begin{figure}
-                \centering
-                    \includegraphics[width=\textwidth]{../Figures/excerpt-1.png}
-                    \caption{Beethoven's String Quartet No.\ 10}
-                \end{figure}
-        \end{column}
-    \end{columns}
-    
-    \note<1->{\begin{itemize}
-        \item Adaptation of music in terms of instrumentation, medium, or style
-        \item Traditionally a complex process that requires a deep understanding of musical theory and structure
-        \item Musically interesting whilst still remaining faithful to the source material
-        \item Interest in automating this process
-        \item Reduction is the rewriting of music for a smaller number of instruments (for example string quartet)
-    \end{itemize}}
-\end{frame}
+\begin{frame}{Adiabatic quantum computing}
 
-
-\subsection{Quantum annealing}
-
-\begin{frame}{Adiabatic quantum computing (AQC)}
-    \begin{itemize}[<+(1)->]
-        \item \emph{Materials} | heating and cooling a material to alter its physical properties
-        \item \emph{Quantum} | changing a quantum system from one Hamiltonian to another
-        \item Done slowly and adiabatically to remain in the ground state
-    \end{itemize}
+    \begin{alertblock}{Adiabatic principle}
+        \vspace{0.1em}
+        A system remains in its instantaneous eigenstate if a given perturbation is acting on it slowly enough.\footcite{born_beweis_1928}
+    \end{alertblock}
     \pause
-    \vfill
     \begin{equation*}
         H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p
     \end{equation*}
-    \hfill\cite{lucas_ising_2014}
+
+    \begin{itemize}[<+(1)->]
+        \item Universal and guaranteed
+        \item A system that starts in a ground state, ends in a ground state
+        \item Not possible in practice
+    \end{itemize}
     
     \note<1->{\begin{itemize}
-        \item Materials science, annealing is a slow heating/cooling process to make a material softer and less brittle
-        \item Quantum computing, slow evolution of a system between Hamiltonians
-        \item Done adiabatically (closed system), system remains in ground state
+        \item Equation shows evolution from initial Hamiltonian $H_0$ to final $H_p$
+        \item If done truly adiabatically (closed system), system remains in ground state
+        \item Impossible in practice as true adiabatic evolution would take infinite time
     \end{itemize}}
 \end{frame}
 
+\subsection{Quantum annealing}
+
 \begin{frame}{Quantum annealing}
-    \pause
-    \begin{exampleblock}{Ising model}
-        \begin{equation*}
-            H_p(\sigma^z) = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
-        \end{equation*}
-    \end{exampleblock}
+
+    \begin{itemize}[<+(1)->]
+        \item Relaxes the adiabaticity
+        \item Rate of change determined heuristically
+        \item Final state is probabilistic, not deterministic
+    \end{itemize}
+
+    \note<1->{\begin{itemize}
+        \item{Evolution time shortened (order of a few $\mu\mathrm{s}$)}
+        \item{Evolution of superposition to a particular state}
+        \item{More efficiently escape from local minima via quantum tunneling}
+        \item{Possible to end in ground state, but also not}
+    \end{itemize}}
+\end{frame}
+
+\begin{frame}{Model}
     \pause
     \begin{alertblock}{Initial state}
         \begin{equation*}
             H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
         \end{equation*}
     \end{alertblock}
-    \hfill\cite{lucas_ising_2014}
+    \pause
+    \begin{exampleblock}{Ising model}
+        \begin{equation*}
+            H_p(\sigma^z) = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
+        \end{equation*}
+    \end{exampleblock}
     
     \note<1->{\begin{itemize}
-        \item{How is this used to solve problems?}
+        \item{What does this look like?}
+        \item{Start with initial state, a superposition of all possible states}
         \item{Ising model, create a lattice of variables with two discrete values (spin up/down)}
         \item{Problem Hamiltonian, qubits $\sigma^z$, coupling strengths $J_{ij}$ and field strengths $h_i$}
-        \item{Initial state is a superposition of all possible states}
         \item{If problem solution is encoded within the ground state, system will give solution after evolution}
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{Quantum annealing}
+\begin{frame}{Uses}
 
-    \note<1->{\begin{itemize}
-        \item{What does this look like?}
-        \item{Evolution of superposition to a particular state}
-        \item{More efficiently escape from local minima via quantum tunneling}
-        \item{Can solve harder problems with a more turbulent energy landscape}
-    \end{itemize}}
+    \begin{figure}
+        \centering
+        \input{../Figures/quantum-annealing-analogy.pdf_tex}
+        
+        \caption{By Brianlechthaler - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=112382195}
+    \end{figure}
+    
 \end{frame}
 
 \begin{frame}{QUBO}
@@ -188,6 +184,35 @@
         \item{QUBO is a function to be minimised}
         \item{Set of binary variables $x$, matrix $Q$ of real weights that describes interactions between variables}
         \item{Can read out variable values after evolution to give solution}
+    \end{itemize}}
+\end{frame}
+
+\subsection{Music arrangement}
+
+\begin{frame}{Music arrangement}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}[<+(1)->]
+                \item Adaptation of previously composed pieces for practical or artistic reasons
+                \item Traditionally complex and time-consuming
+                \item This study focuses on \textbf{reduction}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                    \includegraphics[width=\textwidth]{excerpt-1.png}
+                    \caption{Beethoven's String Quartet No.\ 10}
+                \end{figure}
+        \end{column}
+    \end{columns}
+
+    \note<1->{\begin{itemize}
+        \item Adaptation of music in terms of instrumentation, medium, or style
+        \item Traditionally a complex process that requires a deep understanding of musical theory and structure
+        \item Musically interesting whilst still remaining faithful to the source material
+        \item Interest in automating this process
+        \item Reduction is the rewriting of music for a smaller number of instruments (for example string quartet)
     \end{itemize}}
 \end{frame}
 
@@ -497,6 +522,10 @@
         \item{Shannon entropy units in bits due to $\log_2$}
         \item{Distribution calculated for pitch and duration}
     \end{itemize}}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+    \printbibliography[heading=none]
 \end{frame}
 
 \end{document}
