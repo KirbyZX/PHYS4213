@@ -15,7 +15,7 @@
 \usepackage{appendixnumberbeamer}
 
 \usepackage{csquotes}
-\usepackage[style=verbose]{biblatex}
+\usepackage[style=verbose,backend=biber]{biblatex}
 \bibliography{beamer}
 %\usepackage{kpfonts}
 
@@ -38,18 +38,16 @@
 \usecolortheme{}
 %\usebackgroundtemplate{\tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{../Figures/manuscript.jpg}};}
 
-\useinnertheme{}                            % Bullet point style (circles usually best)
-\useoutertheme{}                       % Header/footer style
 \setbeamerfont{caption}{size=\tiny}         % Caption size
 \captionsetup[figure]{labelformat=empty}    % Remove figure labels
 \captionsetup[subfigure]{labelformat=empty}
 \usefonttheme[onlymath]{serif}
 
 %\logo{\includegraphics[height=2cm]{}}
-\title{Music Arrangement via Quantum Annealing}
+\title{Quantum Annealing for Music Arrangement}
 \author{Lucas Kirby}
 \institute{Department of Physics, Durham University}
-\date{30 January 2025}
+\date{4 March 2025}
 
 \begin{document}
 
@@ -71,14 +69,15 @@
 \section{Motivations}
 
 \begin{frame}{Motivations}
-
+    
     \begin{itemize}
-        \item Small lit review\footcite{cambouropoulos_lbdm_2011}
+        \item Small lit review\footnotemark
         \item Quantum computer music
         \item My own novel adaption of the method
         \item THIS IS MY OWN IDEA
     \end{itemize}
-
+    
+    \tiny\footnotetext{\tiny\cite{cambouropoulos_lbdm_2011}}
 \end{frame}
 
 \section{Theory} %%%%%%%%%%
