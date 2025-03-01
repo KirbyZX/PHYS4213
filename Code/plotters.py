@@ -33,26 +33,34 @@ def plotSampleGraph(sample: dict, G: nx.Graph) -> None:
     Plots a sample as a graph.
     '''
 
-    chosen = extractChosen(sample)
-
     #plt.figure(0)
     #pos = nx.spring_layout(G, k=0.5, seed=8)
     #nx.draw_networkx_edges(G, pos, width=0.2)
     #nx.draw_networkx_nodes(G, pos, nodelist=chosen.keys(), node_color=chosen.values(), node_size=15)
 
-    plt.figure(1, figsize=(12,6))
+    annotated = annotateSampleGraph(sample, G)
 
+    plt.figure(1, figsize=(12,6))
+    pos = nx.multipartite_layout(annotated, "colour", "horizontal", 2)
+
+    nx.draw_networkx_nodes(annotated, pos, node_color=[annotated.nodes[node]["colour"] for node in annotated.nodes()], node_size=[10*(e[1]+.1) for e in annotated.nodes.data("entropy")])
+    nx.draw_networkx_edges(annotated, pos, width=[d["weight"]/10 for _, _, d in annotated.edges.data()])
+    plt.show()
+    #plt.savefig(f"../Figures/{identifier}_colouredGraph.pdf", pad_inches=0, bbox_inches="tight")
+
+def annotateSampleGraph(sample: dict, G: nx.Graph) -> nx.Graph:
+    '''
+    Annotates a sample graph with the chosen phrases.
+    '''
+
+    chosen = extractChosen(sample)
     for node in G.nodes():
         if node in chosen:
             G.nodes[node]["colour"] = chosen[node]
         else:
             G.nodes[node]["colour"] = "black"
-    pos = nx.multipartite_layout(G, "colour", "horizontal", 2)
 
-    nx.draw_networkx_nodes(G, pos, node_color=[G.nodes[node]["colour"] for node in G.nodes()], node_size=[10*(e[1]+.1) for e in G.nodes.data("entropy")])
-    nx.draw_networkx_edges(G, pos, width=[d["weight"]/10 for _, _, d in G.edges.data()])
-    plt.show()
-    #plt.savefig(f"../Figures/{identifier}_colouredGraph.pdf", pad_inches=0, bbox_inches="tight")
+    return G
 
 def extractChosen(sample: dict) -> dict:
     '''
