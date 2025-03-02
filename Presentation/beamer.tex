@@ -122,50 +122,61 @@
         \item Final state is probabilistic, not deterministic
     \end{itemize}
 
+    \begin{figure}
+        \includegraphics[width=.6\textwidth]{histogram_pad.pdf}
+        \caption{Own work}
+    \end{figure}
+
     \note<1->{\begin{itemize}
-        \item{Evolution time shortened (order of a few $\mu\mathrm{s}$)}
-        \item{Evolution of superposition to a particular state}
-        \item{More efficiently escape from local minima via quantum tunneling}
-        \item{Possible to end in ground state, but also not}
+        \item Evolution time shortened (order of a few $\mu\mathrm{s}$)
+        \item Able to run the evolution many times
+        \item Probabilistic distribution of outcomes
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{Model}
-    \pause
-    \begin{alertblock}{Initial state}
-        \begin{equation*}
-            H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
-        \end{equation*}
-    \end{alertblock}
-    \pause
-    \begin{exampleblock}{Ising model}
-        \begin{equation*}
-            H_p(\sigma^z) = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
-        \end{equation*}
-    \end{exampleblock}
-    
-    \note<1->{\begin{itemize}
-        \item{What does this look like?}
-        \item{Start with initial state, a superposition of all possible states}
-        \item{Ising model, create a lattice of variables with two discrete values (spin up/down)}
-        \item{Problem Hamiltonian, qubits $\sigma^z$, coupling strengths $J_{ij}$ and field strengths $h_i$}
-        \item{If problem solution is encoded within the ground state, system will give solution after evolution}
-    \end{itemize}}
-\end{frame}
+\begin{frame}{Advantages}
 
-\begin{frame}{Uses}
+    \begin{itemize}[<+(1)->]
+        \item Find the ground state of a complicated Hamiltonian
+        \item Quantum tunneling overcomes local minima
+    \end{itemize}
 
     \begin{figure}
-        \centering
         {
             \def\svgwidth{.8\textwidth}
             \tiny\selectfont
             \input{../Figures/qa-analogy.pdf_tex}
         }
-        
         \caption{By Brianlechthaler - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=112382195}
     \end{figure}
+
+    \note<1->{\begin{itemize}
+        \item{Energy against configuration space of the system}
+    \end{itemize}}
     
+\end{frame}
+
+\begin{frame}{Ising model}
+    \pause
+    \begin{exampleblock}{Initial Hamiltonian}
+        \begin{equation*}
+            H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
+        \end{equation*}
+    \end{exampleblock}
+    \pause
+    \begin{alertblock}{Problem Hamiltonian}
+        \begin{equation*}
+            H_p(\sigma^z) = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
+        \end{equation*}
+    \end{alertblock}
+    
+    \note<1->{\begin{itemize}
+        \item{Ising model, a lattice of variables with two discrete values (spin up/down), acted on by spin operators $\sigma$}
+        \item{Start with initial Hamiltonian, a superposition of all possible states}
+        \item{Easy to prepare and find the ground state}
+        \item{Problem Hamiltonian, coupling strengths $J_{ij}$ and field strengths $h_i$}
+        \item{If problem solution is encoded within the ground state, system will give solution after evolution}
+    \end{itemize}}
 \end{frame}
 
 \begin{frame}{QUBO}
@@ -178,20 +189,29 @@
     \end{block}
     \pause
     \begin{itemize}
+        \item Difficult to solve analytically
+        \item Mapped to $H_p$ using simple change of variable
         \item Encodes problem solution into Hamiltonian's ground state
-        \item Sent to the QPU for optimisation
     \end{itemize}
 
     \note<1->{\begin{itemize} 
-        \item{How to encode a problem into a Hamiltonian?}
-        \item{Similar form to the Ising model, but with binary variables (0 or 1)}
-        \item{QUBO is a function to be minimised}
-        \item{Set of binary variables $x$, matrix $Q$ of real weights that describes interactions between variables}
-        \item{Can read out variable values after evolution to give solution}
+        \item How to encode a problem into a Hamiltonian?
+        \item Similar form to the Ising model, but with binary variables (0 or 1)
+        \item QUBO is a function to be minimised
+        \item Set of binary variables $x$, matrix $Q$ of real weights that describes interactions between variables
+        \item Can read out variable values after evolution to give solution
     \end{itemize}}
 \end{frame}
 
 \subsection{Music arrangement}
+
+\begin{frame}[standout]
+    What problems can we solve?
+
+    \note<1->{\begin{itemize}
+        \item What problems can we solve using this technique?
+    \end{itemize}}
+\end{frame}
 
 \begin{frame}{Music arrangement}
     \begin{columns}
@@ -199,32 +219,26 @@
             \begin{itemize}[<+(1)->]
                 \item Adaptation of previously composed pieces for practical or artistic reasons
                 \item Traditionally complex and time-consuming
-                \item This study focuses on \textbf{reduction}
+                \item \emph{Reduction} can be shown to be computationally complex\footnotemark
             \end{itemize}
         \end{column}
         \begin{column}{0.4\textwidth}
             \begin{figure}
                 \centering
                     \includegraphics[width=\textwidth]{excerpt-1.png}
-                    \caption{Beethoven's String Quartet No.\ 10}
+                    \caption{REPLACE WITH HAYDN}
                 \end{figure}
         \end{column}
     \end{columns}
 
+    \footnotetext{\cite{moses_computational_2016}}
+
     \note<1->{\begin{itemize}
         \item Adaptation of music in terms of instrumentation, medium, or style
         \item Traditionally a complex process that requires a deep understanding of musical theory and structure
-        \item Musically interesting whilst still remaining faithful to the source material
-        \item Interest in automating this process
         \item Reduction is the rewriting of music for a smaller number of instruments (for example string quartet)
-    \end{itemize}}
-\end{frame}
-
-\begin{frame}[standout]
-    How to combine them?
-
-    \note<1->{\begin{itemize}
-        \item{How to apply quantum annealing to the problem of music arrangement?}
+        \item Very large configuration space, many different combinations of notes that could produce the final arrangement
+        \item NP-hard in computational complexity theory, cannot be solved in polynomial time
     \end{itemize}}
 \end{frame}
 
@@ -234,7 +248,8 @@
     \begin{enumerate}[<+(1)->]
         \item Split score into musical phrases
         \item Arrange phrases into a graph
-        \item Solve graph problem using QPU
+        \item Formulate graph optimisation problem
+        \item Solve problem using QPU
         \item Construct arrangement from solution
     \end{enumerate}
 
@@ -248,30 +263,37 @@
 \end{frame}
 
 \begin{frame}{1.\ Split score}
+    \begin{itemize}[<+(1)->]
+        \item Musical phrases chosen as smallest unit of music
+        \item Preserve melody and structure when arranged
+    \end{itemize}
     \pause
-    \begin{block}{Local boundary detection model (LBDM)}
+    \begin{block}{Local boundary detection model (LBDM)\footcite{cambouropoulos_lbdm_2011}}
         \vspace{0.1em}
         \begin{equation*}
             S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
         \end{equation*}
-        \hfill \cite{cambouropoulos_lbdm_2011}
     \end{block}
     \pause
     \begin{figure}
-        \includegraphics<1->[width=0.8\textwidth]{../Figures/toy-1.png}
+        \includegraphics<1->[width=0.7\textwidth]{toy-1.png}
     \end{figure}
 
     \note<1->{\begin{itemize}
-        \item{First stage to separate each part of original score into phrases}
-        \item{Phrases | smallest unit of music that preserves melody and structure}
-        \item{Boundaries between phrases found using LBDM}
-        \item{Measures the degree of change of a certain parameter between notes (explain equation)}
-        \item{Check pitch and IOI}
-        \item{Strengths above a threshold value are considered phrases}
+        \item First stage to separate each part of original score into phrases
+        \item Phrases | smallest unit of music that preserves melody and structure
+        \item Boundaries between phrases found using LBDM
+        \item Measures the degree of change of a certain parameter between notes (explain equation)
+        \item Check pitch and IOI
+        \item Strengths above a threshold value are considered phrases
     \end{itemize}}
 \end{frame}
 
 \begin{frame}{2.\ Create graph}
+    \begin{itemize}
+        \item Vertices (nodes) connected by edges
+        \item Models pairwise relations between objects
+    \end{itemize}
     \begin{figure}
         \includegraphics[width=0.8\textwidth]{../Figures/toy-1.png}
     \end{figure}
@@ -286,11 +308,24 @@
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{3.\ Solve graph}
-    \uncover<2->{\begin{alertblock}{Maximal independent set (MIS)}
+\begin{frame}{3.\ Create optimisation problem}
+    \begin{exampleblock}{Proper vertex colouring}
         \vspace{0.1em}
-        Largest subset of nodes such that no nodes within the subset are connected by an edge}
-    \end{alertblock}
+        Colour each vertex such that no edge connects two vertices of the same colour
+    \end{exampleblock}
+
+    \begin{align*}
+        f(x) = &A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2 + B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i} \\-&C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i} -D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}
+    \end{align*}
+
+    \note<1->{\begin{itemize}
+        \item Solve problem graph using a graph theory problem called proper vertex colouring
+        \item Here each colour represents an instrument we are arranging for
+        \item Nodes can also be weighted to introduce preference for certain nodes e.g.\ musicality
+    \end{itemize}}
+\end{frame}
+
+\begin{frame}{3.\ Create optimisation problem}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -303,23 +338,29 @@
             \end{figure}
         \end{column}
     \end{columns}
-
-    \note<1->{\begin{itemize}
-        \item{Special case for reducing to a single monophonic part (one phrase played at a time)}
-        \item{Solve problem graph using a graph theory problem called MIS}
-        \item{Enforces that only one simultaneous phrase can be played at once}
-        \item{Nodes can also be weighted to introduce preference for certain nodes e.g.\ musicality}
-        
-    \end{itemize}}
 \end{frame}
 
-\begin{frame}{4.\ Construct arrangement}
+\begin{frame}{4.\ Solve problem}
+
+    \begin{itemize}
+        \item Problem embedded onto D-Wave quantum hardware
+        \item True quantum annealer optimises QUBO formulation
+        \item Returns a sampleset of results
+    \end{itemize}
+
+    \begin{figure}
+        \includegraphics[width=.5\textwidth]{pegasus.pdf}
+        \caption{D-Wave Advantage QPU topology. Own work.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{5.\ Construct arrangement}
     \begin{figure}
         \begin{subfigure}{0.6\linewidth}
-            \includegraphics[width=0.9\linewidth]{../Figures/toy-1.png}
+            \includegraphics[width=0.9\linewidth]{toy-1.png}
         \end{subfigure}\hfill
         \begin{subfigure}{0.4\linewidth}
-            \includegraphics[width=0.9\linewidth]{../Figures/toy_solution.pdf}
+            \includegraphics[width=0.9\linewidth]{toy_solution.pdf}
         \end{subfigure}
     \end{figure}
     \pause
@@ -328,7 +369,7 @@
         \draw [thick, -latex](0,0) -- (0,-1);
     \end{tikzpicture}
     \begin{figure}
-        \includegraphics[width=0.8\textwidth]{../Figures/toy_arrangement-1.png}
+        \includegraphics[width=0.8\textwidth]{toy_arrangement-1.png}
     \end{figure}
 
     \note<1->{\begin{itemize}
@@ -372,6 +413,12 @@
         \item{33 identified phrases (nodes) with 70 overlaps (edges)}
         \item{Nodes are weighted by the phrase entropy, how musically interesting the distribution of notes is}
     \end{itemize}}
+\end{frame}
+
+\begin{frame}{Parameter variation}
+    \begin{itemize}
+        \item Vary Lagrange parameters until constraints are satisfied
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Solutions}
@@ -422,12 +469,12 @@
 
 \begin{frame}{Conclusions}
     \begin{itemize}[<+(1)->]
-        \item Successful in creating a valid single-part reduction
-        \item Advantage over classical algorithms \cite{huang_towards_2012}
-        \item Removes skill barrier for music arrangement
+        \item Novel application of quantum annealing
+        \item QPU successfully returns low-energy states
+        \item Necessary constraints for a valid arrangement fulfilled
     \end{itemize}
     \begin{figure}
-        \includegraphics[width=.5\linewidth]{../Figures/arrangement-1.png}
+        \includegraphics[width=.5\linewidth]{arrangement-1.png}
     \end{figure}
 
     \note<1->{\begin{itemize}
@@ -446,8 +493,7 @@
         \item Increased problem size
         \item Parametric variation of LBDM
         \item Physical limitations of instruments
-        \item Reduction to more than one part
-        \item Quality comparison of computer arrangements \cite{pearce_towards_2001}
+        \item Qualitative judgement of computer arrangements\footcite{pearce_towards_2001}
     \end{itemize}
 
     \note<1->{\begin{itemize}
