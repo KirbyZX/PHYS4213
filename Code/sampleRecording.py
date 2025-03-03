@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 
 
 def totalEntropy(G: nx.Graph) -> float:
@@ -34,19 +35,3 @@ def recordSample(filepath, sample, reads) -> None:
         })
 
     new_row.to_csv(filepath, index=False, mode="a", header=False)
-
-def plotCSV(filepath: str, xaxis: str, yaxis: str, labels: list) -> None:
-
-    data = pd.read_csv(filepath)
-
-    means = []
-    stddev = []
-
-    for l in labels:
-        means.append(np.mean(data.query(f"`{xaxis}` == {l}")[yaxis]))
-        stddev.append(np.std(data.query(f"`{xaxis}` == {l}")[yaxis]))
-
-    plt.errorbar(labels, means, yerr=stddev, fmt='o')
-    plt.xlabel(xaxis)
-    plt.ylabel(yaxis)
-    plt.show()

@@ -5,7 +5,25 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import networkx as nx
 import re
+import numpy as np
 
+
+def plotCSV(filepath: str, xaxis: str, yaxis: str, labels: list) -> None:
+
+    data = pd.read_csv(filepath)
+
+    means = []
+    stderr = []
+
+    for l in labels:
+        query = data.query(f"`{xaxis}` == {l}")[yaxis]
+        means.append(np.mean(query))
+        stderr.append(np.std(query)/np.sqrt(len(query)))
+
+    plt.errorbar(labels, means, yerr=stderr, fmt='o')
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    plt.show()
 
 def plotArrangement(sample: dict, phrases: list, instruments: dict):
     '''
@@ -45,8 +63,6 @@ def plotSampleGraph(sample: dict, G: nx.Graph) -> None:
 
     nx.draw_networkx_nodes(annotated, pos, node_color=[annotated.nodes[node]["colour"] for node in annotated.nodes()], node_size=[10*(e[1]+.1) for e in annotated.nodes.data("entropy")])
     nx.draw_networkx_edges(annotated, pos, width=[d["weight"]/10 for _, _, d in annotated.edges.data()])
-    plt.show()
-    #plt.savefig(f"../Figures/{identifier}_colouredGraph.pdf", pad_inches=0, bbox_inches="tight")
 
 def annotateSampleGraph(sample: dict, G: nx.Graph) -> nx.Graph:
     '''
@@ -70,7 +86,7 @@ def extractChosen(sample: dict) -> dict:
     processNode = lambda node : re.match(r"(.*_\d+)_(\w+)", node).groups()
     return {processNode(x)[0]:processNode(x)[1] for x in sample if sample[x] == 1}
 
-def plotHistogram(sampleset: pd.DataFrame, filename: str = None) -> None:
+def plotHistogram(sampleset: pd.DataFrame) -> None:
     '''
     Plots the histogram of a sampleset.
     '''
@@ -87,39 +103,39 @@ def plotHistogram(sampleset: pd.DataFrame, filename: str = None) -> None:
     #plt.xscale("symlog", linthresh=20, linscale=0.1)
     #plt.xlim(-30,0)
     #plt.xticks([-30,-20,-10,0])
-    
-    if filename is not None:
-        plt.savefig(f"..\Figures\{filename}.pdf", pad_inches=0, bbox_inches="tight")
 
-def plotBoundaryStrength(stream: stream.Stream, threshold: float) -> None:
+def plotBoundaryStrength(stream: stream.Stream, threshold: float, filepath: str = None) -> None:
     '''
     Plots the boundary strengths of a stream.
     '''
 
-    plotS = graph.plot.Scatter(stream, marker="o")
+    plotS = graph.plot.Scatter(stream, marker="o", markersize=5)
 
     plotS.axisX = graph.axis.OffsetAxis(plotS, 'x')
     plotS.axisY = BoundaryStrengthAxis(plotS, 'y')
     plotS.title = ""
-    plotS.figureSize = (6,4)
 
     plotS.alpha = 1
     plotS.colors = [c.value for c in V]
-    plotS.labelFontSize = 11
-    plotS.tickFontSize = 10
     plotS.doneAction = None
-    plotS.axisX.label = "Measure"
+    plotS.axisX.label = "Bar number"
+    plotS.tickColors = "white"
+    plotS.hideXGrid = True
     plotS.hideYGrid = True
+    plotS.figureSize = (4,3)
 
     plotS.run()
 
-    line = plt.hlines(threshold, 0, stream.quarterLength, linestyles=":", colors="black")
+    line = plt.hlines(threshold, 0, stream.quarterLength, linestyles=":", colors="white")
     plotS.subplot.add_artist(line)
     plotS.subplot.set_xlim(left=0, right=stream.quarterLength)
     plotS.subplot.set_ylim(bottom=0, top=1)
 
     plotS.write()
     plt.show()
+
+    if filepath is not None:
+        plotS.write(filepath)
 
 class BoundaryStrengthAxis(graph.axis.Axis):
     labelDefault = 'Boundary strength'

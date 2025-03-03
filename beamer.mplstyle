@@ -1,0 +1,25 @@
+lines.linewidth : 0.8
+lines.marker : .
+lines.markersize : 4
+scatter.marker : b.
+
+xtick.direction : in
+xtick.top : True
+ytick.direction : in
+ytick.right : True
+
+font.family : serif
+text.usetex : True
+pgf.texsystem : pdflatex
+pgf.rcfonts : False
+
+figure.figsize: 4,3
+
+savefig.pad_inches : 0.0
+savefig.bbox : tight
+savefig.transparent : True
+
+text.color : black
+axes.labelcolor : white
+xtick.color : white
+ytick.color : white

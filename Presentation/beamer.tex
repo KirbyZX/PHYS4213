@@ -15,7 +15,11 @@
 \usepackage{mathtools}
 \usepackage{appendixnumberbeamer}
 \usepackage{lmodern}
+\usepackage[utf8]{inputenc}
 \usepackage{svg}
+
+\usepackage{pgf}
+\def\mathdefault#1{#1}
 
 \usepackage[backend=biber, style=authortitle]{biblatex}
 \usepackage{csquotes}
@@ -71,19 +75,6 @@
     \end{itemize}}
 \end{frame}
 
-\section{Motivations}
-
-\begin{frame}{Motivations}
-    
-    \begin{itemize}
-        \item Small lit review\footcite{cambouropoulos_lbdm_2011}
-        \item Quantum computer music
-        \item My own novel adaption of the method
-        \item THIS IS MY OWN IDEA
-    \end{itemize}
-    
-\end{frame}
-
 \section{Theory} %%%%%%%%%%
 
 \subsection{Adiabatic quantum computing}
@@ -115,17 +106,21 @@
 \subsection{Quantum annealing}
 
 \begin{frame}{Quantum annealing}
-
-    \begin{itemize}[<+(1)->]
-        \item Relaxes the adiabaticity
-        \item Rate of change determined heuristically
-        \item Final state is probabilistic, not deterministic
-    \end{itemize}
-
-    \begin{figure}
-        \includegraphics[width=.6\textwidth]{histogram_pad.pdf}
-        \caption{Own work}
-    \end{figure}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}[<+(1)->]
+                \item Relaxes the adiabaticity
+                \item Rate of change determined heuristically
+                \item Final state is probabilistic, not deterministic
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \resizebox{\textwidth}{!}{\input{../Figures/histogram.pgf}}
+                \caption{Distribution of 2000 solution energies}
+            \end{figure}
+        \end{column}
+    \end{columns}
 
     \note<1->{\begin{itemize}
         \item Evolution time shortened (order of a few $\mu\mathrm{s}$)
@@ -137,13 +132,13 @@
 \begin{frame}{Advantages}
 
     \begin{itemize}[<+(1)->]
-        \item Find the ground state of a complicated Hamiltonian
-        \item Quantum tunneling overcomes local minima
+        \item Find the ground state of complicated Hamiltonians
+        \item Quantum tunneling avoids local minima
     \end{itemize}
 
     \begin{figure}
         {
-            \def\svgwidth{.8\textwidth}
+            \def\svgwidth{.7\textwidth}
             \tiny\selectfont
             \input{../Figures/qa-analogy.pdf_tex}
         }
@@ -183,12 +178,14 @@
     \pause
     \begin{block}{Quadratic Unconstrained Binary Optimisation}
         \vspace{0.1em}
+        Vector $x$ of qubits, matrix $Q$ of weights
         \begin{equation*}
             f(x)=\alert<+(1)>{\sum^N_{i<j}Q_{i,j}x_ix_j} + \alert<+(1)>{\sum^N_iQ_{i,i}x_i}
         \end{equation*}
     \end{block}
     \pause
     \begin{itemize}
+        \item Aim to minimise this function
         \item Difficult to solve analytically
         \item Mapped to $H_p$ using simple change of variable
         \item Encodes problem solution into Hamiltonian's ground state
@@ -224,10 +221,9 @@
         \end{column}
         \begin{column}{0.4\textwidth}
             \begin{figure}
-                \centering
-                    \includegraphics[width=\textwidth]{excerpt-1.png}
-                    \caption{REPLACE WITH HAYDN}
-                \end{figure}
+                \includegraphics[width=\textwidth, page=1]{haydn.pdf}
+                \caption{Quartet No. 1 in Bb major by Joseph Haydn}
+            \end{figure}
         \end{column}
     \end{columns}
 
@@ -242,13 +238,27 @@
     \end{itemize}}
 \end{frame}
 
-\section{Methods} %%%%%%%%%%
+\section{Motivations}
 
-\begin{frame}{Problem formulation}
+\begin{frame}{Motivations}
+    
+    \begin{itemize}[<+(1)->]
+        \item Classical methods of automatic arrangement\footcite{huang_towards_2012,nakamura_statistical_2018,li_automatic_2019}
+        \item Field of quantum computer music is very new\footcite{miranda_quantum_2022}
+        \item Quantum annealing used to generate music\footcite{freedline_algorhythms_2021,arya_music_2022,}
+        \item Novel adaption of this method to a new problem
+        \item \emph{This has never been done before!}
+    \end{itemize}
+    
+\end{frame}
+
+\section{Method} %%%%%%%%%%
+
+\begin{frame}{Method}
     \begin{enumerate}[<+(1)->]
         \item Split score into musical phrases
         \item Arrange phrases into a graph
-        \item Formulate graph optimisation problem
+        \item Formulate optimisation problem
         \item Solve problem using QPU
         \item Construct arrangement from solution
     \end{enumerate}
@@ -290,22 +300,31 @@
 \end{frame}
 
 \begin{frame}{2.\ Create graph}
+
     \begin{itemize}
         \item Vertices (nodes) connected by edges
         \item Models pairwise relations between objects
     \end{itemize}
+
     \begin{figure}
-        \includegraphics[width=0.8\textwidth]{../Figures/toy-1.png}
+        \includegraphics[width=0.7\textwidth]{../Figures/toy-1.png}
     \end{figure}
-    \pause
-    \begin{figure}
-        \includegraphics[width=0.5\textwidth]{../Figures/toy_graph.pdf}
-    \end{figure}
+
+    \begin{itemize}
+        \item Nodes | phrases
+        \item Edges | overlap between phrases
+    \end{itemize}
 
     \note<1->{\begin{itemize}
         \item{Construct problem graph}
         \item{Each phrase becomes a node, edges between nodes if phrases overlap}
     \end{itemize}}
+\end{frame}
+
+\begin{frame}{2.\ Create graph}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../Figures/toy-1.png}
+    \scalebox{.8}{\input{../Figures/toy_graph.pgf}}
 \end{frame}
 
 \begin{frame}{3.\ Create optimisation problem}
@@ -315,7 +334,7 @@
     \end{exampleblock}
 
     \begin{align*}
-        f(x) = &A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2 + B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i} \\-&C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i} -D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}
+        f(x) = +&\alert<+(1)>{A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2} &+ &\alert<+(1)>{B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}} \\ -&\alert<+(1)>{C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}} &-&\alert<+(1)>{D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}}
     \end{align*}
 
     \note<1->{\begin{itemize}
@@ -326,41 +345,40 @@
 \end{frame}
 
 \begin{frame}{3.\ Create optimisation problem}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \begin{figure}
-                \includegraphics<1->[width=0.9\textwidth]{../Figures/toy_graph.pdf}
-            \end{figure}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{figure}
-                \includegraphics<3->[width=0.9\textwidth]{../Figures/toy_solution.pdf}
-            \end{figure}
-        \end{column}
-    \end{columns}
+    \input{../Figures/toy_graph.pgf}
+\end{frame}
+
+\begin{frame}{3.\ Create optimisation problem}
+    \input{../Figures/toy_solution.pgf}
 \end{frame}
 
 \begin{frame}{4.\ Solve problem}
 
-    \begin{itemize}
-        \item Problem embedded onto D-Wave quantum hardware
-        \item True quantum annealer optimises QUBO formulation
-        \item Returns a sampleset of results
-    \end{itemize}
-
-    \begin{figure}
-        \includegraphics[width=.5\textwidth]{pegasus.pdf}
-        \caption{D-Wave Advantage QPU topology. Own work.}
-    \end{figure}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{itemize}
+                \item Problem embedded onto D-Wave quantum hardware
+                \item Quantum annealer optimises QUBO formulation
+                \item Returns a sampleset of results
+            \end{itemize}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{pegasus.pdf}
+                \caption{D-Wave Advantage QPU topology. Own work.}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    
 \end{frame}
 
 \begin{frame}{5.\ Construct arrangement}
     \begin{figure}
-        \begin{subfigure}{0.6\linewidth}
-            \includegraphics[width=0.9\linewidth]{toy-1.png}
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{toy-1.png}
         \end{subfigure}\hfill
-        \begin{subfigure}{0.4\linewidth}
-            \includegraphics[width=0.9\linewidth]{toy_solution.pdf}
+        \begin{subfigure}{0.5\textwidth}
+            \resizebox{\textwidth}{!}{\input{../Figures/toy_solution.pgf}}
         \end{subfigure}
     \end{figure}
     \pause
@@ -379,89 +397,74 @@
 
 \section{Results} %%%%%%%%%%
 
-\begin{frame}{Excerpt}
-    \begin{figure}
-        \includegraphics[width=0.5\textwidth]{../Figures/excerpt-1.png}
-        \caption{String Quartet No.\ 10 by Ludwig van Beethoven}
-    \end{figure}
+\begin{frame}{Score}
 
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{itemize}
+                \item Smaller ensemble chosen for problem size
+                \item Well-defined musical structure
+                \item Reduction to three instruments
+            \end{itemize}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth, page=1]{haydn.pdf}
+                \caption{Quartet No. 1 in Bb major by Joseph Haydn}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    
     \note<1->{\begin{itemize}
-        \item{Excerpt of String Quartet No. 10 in E-flat major, Op. 74, by Ludwig van Beethoven}
-        \item{Chosen due to its relatively simple structure and smaller instrumentation, keeping the problem graph small}
+        \item Quartet No. 1 in Bb major by Joseph Haydn
+        \item Smaller instrumentation and length (about 3 min), keeping the problem graph small and manageable
+        \item Musical style has well-defined structure and phrases
     \end{itemize}}
 \end{frame}
 
 \begin{frame}{Phrase detection}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth]{../Figures/boundaryStrength_pad.pdf}
+        \includegraphics[width=.8\textwidth]{boundaries.pdf}
         \caption{Boundary strengths for the Violin I part}
     \end{figure}
 
     \note<1->{\begin{itemize}
         \item{Example of the LBDM finding suitable boundaries for phrases}
-        \item{Threshold value of $0.4$ chosen, finds five phrases}
+        \item{Threshold value of $0.4$ chosen manually}
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{Problem graph}
+\begin{frame}{QUBO parameter variation}
     \begin{figure}
-        \includegraphics[width=.6\textwidth]{../Figures/problemGraph_pad.pdf}
-        \caption{Problem graph with 33 nodes and 70 edges}
+        \resizebox{.7\textwidth}{!}{\input{../Figures/mult.pgf}}
+        \caption{Variation of with edge weight Lagrange parameter, in multiples of the maximum node weight.}
     \end{figure}
 
     \note<1->{\begin{itemize}
-        \item{33 identified phrases (nodes) with 70 overlaps (edges)}
-        \item{Nodes are weighted by the phrase entropy, how musically interesting the distribution of notes is}
+        \item Each QUBO problem submitted five times with different edge constraint Lagrange parameter
+        \item Checking against fulfillment of the desired constraint
     \end{itemize}}
 \end{frame}
 
-\begin{frame}{Parameter variation}
-    \begin{itemize}
-        \item Vary Lagrange parameters until constraints are satisfied
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Solutions}
+\begin{frame}{Optimisation}
     \begin{figure}
-        \includegraphics[width=0.8\textwidth]{../Figures/histogram_pad.pdf}
-        \caption{Returned solutions for 1000 reads}
+        \resizebox{.8\textwidth}{!}{\input{../Figures/reads.pgf}}
     \end{figure}
 
     \note<1->{\begin{itemize}
-        \item{Histogram of the returned solutions, only energies below zero shown}
-        \item{Distribution of solutions due to the stochastic nature of annealing}
-        \item{Lowest energy solution most musically interesting due to construction of weighted MIS QUBO}
-        \item{(Lowest energy solution $-26.8$ with a degeneracy of 34)}
+        \item Exponential decay fitted
+        \item Sometimes the annealer gets lucky (see 2000 reads)
     \end{itemize}}
 \end{frame}
 
 \begin{frame}{Example solution}
     \begin{figure}
-        \includegraphics[width=.6\textwidth]{../Figures/solutionGraph_pad.pdf}
-        \caption{Solution graph returning a subset of 11 nodes}
+        \includegraphics[width=\textwidth]{sample-graph.pdf}
     \end{figure}
 
     \note<1->{\begin{itemize}
-        \item{Selected nodes from one of the lowest energy solutions}
+        \item Nodes grouped by instrument
         \item{Note in the cliques only one node could be selected}
-    \end{itemize}}
-\end{frame}
-
-\begin{frame}{Final arrangement}
-    \begin{figure}
-        \begin{subfigure}{0.5\linewidth}
-            \includegraphics[width=.95\linewidth]{../Figures/selected-1.png}
-            \caption{Selected phrases}
-        \end{subfigure}\hfill
-        \begin{subfigure}{0.5\linewidth}
-            \includegraphics[width=.95\linewidth]{../Figures/arrangement-1.png}
-            \caption{Final arrangement}
-        \end{subfigure}
-    \end{figure}
-
-    \note<1->{\begin{itemize}
-        \item{Selected phrases from solution graph highlighted}
-        \item{Phrases concatenated to create the final arrangement}
     \end{itemize}}
 \end{frame}
 
@@ -473,9 +476,6 @@
         \item QPU successfully returns low-energy states
         \item Necessary constraints for a valid arrangement fulfilled
     \end{itemize}
-    \begin{figure}
-        \includegraphics[width=.5\linewidth]{arrangement-1.png}
-    \end{figure}
 
     \note<1->{\begin{itemize}
         \item{Valid reduction gained from implemented method}
@@ -532,30 +532,16 @@
             S=\frac{1}{3}\left( S'_\mathrm{pitch} + 2 S'_\mathrm{IOI} \right)
         \end{equation*}
     \end{block}
-    \hfill\cite{cambouropoulos_lbdm_2011}
+    \hfill\footcite{cambouropoulos_lbdm_2011}
 
     \note{\begin{itemize}
-        \item{Boundaries always taken at beginning/end of piece}
-        \item{Weightings derived by trial and error}
-    \end{itemize}}
-\end{frame}
-
-\begin{frame}{MIS}
-
-    \begin{equation*}
-        f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i W_ix_i
-    \end{equation*}
-    \hfill\cite{lucas_ising_2014}
-
-    $A/B>=2\max(W)$ to weight the constraint term more heavily than any objective term
-
-    \note{\begin{itemize}
-        \item{Weighted MIS QUBO}
-        \item{Lagrange paramters $A$/$B$ determine the balance between constraint and objective}
+        \item Boundaries always taken at beginning/end of piece
+        \item Weightings derived by trial and error
     \end{itemize}}
 \end{frame}
 
 \begin{frame}{Phrase entropy}
+    $x_i$ | parameter $x$ (pitch, IOI) of note $i$
     \begin{block}{Shannon entropy}
         \begin{equation*}
             H(X)\coloneq-\sum_i P(x_i)\log_2 P(x_i)
@@ -566,11 +552,11 @@
             P(x_i)=\frac{n_i}{N}
         \end{equation*}
     \end{block}
-    \hfill\cite{li_automatic_2019}
+    \hfill\footcite{li_automatic_2019}
 
     \note{\begin{itemize}
-        \item{Shannon entropy units in bits due to $\log_2$}
-        \item{Distribution calculated for pitch and duration}
+        \item Shannon entropy units in bits due to $\log_2$
+        \item Distribution calculated for pitch and duration
     \end{itemize}}
 \end{frame}
 
