@@ -120,6 +120,7 @@ def plotBoundaryStrength(stream: stream.Stream, threshold: float, filepath: str 
     plotS.doneAction = None
     plotS.axisX.label = "Bar number"
     plotS.tickColors = "white"
+    #plotS.axisX.ticks= [(m,m) for m in len(stream.getElementsByClass(stream.Measure)) if m % 4 == 0]
     plotS.hideXGrid = True
     plotS.hideYGrid = True
     plotS.figureSize = (4,3)
