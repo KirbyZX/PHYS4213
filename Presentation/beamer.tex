@@ -1,4 +1,4 @@
-\documentclass[handout]{beamer}
+\documentclass{beamer}
 \setbeameroption{show notes on second screen=right}
 %show notes on second screen=right
 %show only notes
@@ -46,14 +46,14 @@
 \usecolortheme{}
 %\usebackgroundtemplate{\tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{../Figures/manuscript.jpg}};}
 
-\setbeamerfont{caption}{size=\tiny}         % Caption size
+\setbeamerfont{caption}{size=\scriptsize}         % Caption size
 \setbeamerfont{footnote}{size=\tiny}
 \captionsetup[figure]{labelformat=empty}    % Remove figure labels
 \captionsetup[subfigure]{labelformat=empty}
 \usefonttheme[onlymath]{serif}
 
 %\logo{\includegraphics[height=2cm]{}}
-\title{Quantum Annealing for Music Arrangement}
+\title{Quantum Annealing \\for Music Arrangement}
 \author{Lucas Kirby}
 \institute{Department of Physics, Durham University}
 \date{4 March 2025}
@@ -119,7 +119,7 @@
         \begin{column}{0.5\textwidth}
             \begin{figure}
                 \resizebox{\textwidth}{!}{\input{../Figures/histogram.pgf}}
-                \caption{Distribution of 2000 solution energies for a given problem}
+                \caption{Distribution of 2000 solution energies}
             \end{figure}
         \end{column}
     \end{columns}
@@ -143,7 +143,7 @@
 
     \begin{figure}
         {
-            \def\svgwidth{.7\textwidth}
+            \def\svgwidth{.75\textwidth}
             \tiny\selectfont
             \input{../Figures/qa-analogy.pdf_tex}
         }
@@ -161,16 +161,19 @@
 \end{frame}
 
 \begin{frame}{Ising model}
+    Lattice of variables with two discrete values
     \pause
     \begin{exampleblock}{Initial Hamiltonian}
+        \Large
         \begin{equation*}
             H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
         \end{equation*}
     \end{exampleblock}
     \pause
     \begin{alertblock}{Problem Hamiltonian}
+        \Large
         \begin{equation*}
-            H_p(\sigma^z) = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
+            H_p = \sum^N_{i<j}J_{ij}\sigma^z_i \sigma^z_j + \sum_{i=1}^{N}h_i \sigma^z_i
         \end{equation*}
     \end{alertblock}
     
@@ -188,6 +191,7 @@
     \begin{block}{Quadratic Unconstrained Binary Optimisation}
         \vspace{0.1em}
         Vector $x$ of qubits, matrix $Q$ of weights
+        \Large
         \begin{equation*}
             f(x)=\alert<+(1)>{\sum^N_{i<j}Q_{i,j}x_ix_j} + \alert<+(1)>{\sum^N_iQ_{i,i}x_i}
         \end{equation*}
@@ -308,7 +312,7 @@
 \end{frame}
 
 \begin{frame}{1.\ Split score}
-
+    \pause
     \begin{itemize}
         \item Musical phrases chosen as smallest unit of music
         \item Preserve melody and structure when rearranged
@@ -316,6 +320,7 @@
     \pause
     \begin{block}{Local boundary detection model (LBDM)\footcite{cambouropoulos_lbdm_2011}}
         \vspace{0.1em}
+        \Large
         \begin{equation*}
             S_i=x_i\times (r_{i-1, i} + r_{i, i+1})
         \end{equation*}
@@ -337,10 +342,12 @@
 
 \begin{frame}{2.\ Create graph}
 
+    \pause
     \begin{itemize}
         \item Vertices (nodes) connected by edges
         \item Models pairwise relations between objects
     \end{itemize}
+    \pause
     \begin{figure}
         \includegraphics[width=0.75\textwidth]{../Figures/toy-1.png}
     \end{figure}
@@ -359,6 +366,7 @@
 
     \centering
     \includegraphics[width=0.7\textwidth]{../Figures/toy-1.png}
+    \pause
     \scalebox{.7}{\input{../Figures/toy_graph.pgf}}
 
     \note<1->{\begin{itemize}
@@ -368,10 +376,13 @@
 
 \begin{frame}{3.\ Create optimisation problem}
 
+    \pause
     \begin{exampleblock}{Proper vertex colouring}
         \vspace{0.1em}
         Colour each vertex such that no edge connects two vertices of the same colour
     \end{exampleblock}
+    \pause
+    \small
     \begin{equation*}
         x_{v,i} =
         \begin{cases}
@@ -379,6 +390,8 @@
             0 & \text{otherwise}
         \end{cases}
     \end{equation*}
+    \pause
+    \large
     \begin{align*}
         f(x) = +&\alert<+(1)>{A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2} &+ &\alert<+(1)>{B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}} \\ -&\alert<+(1)>{C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}} &-&\alert<+(1)>{D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}}
     \end{align*}
@@ -412,7 +425,7 @@
 
     \begin{columns}
         \begin{column}{.5\textwidth}
-            \begin{itemize}
+            \begin{itemize}[<+(1)->]
                 \item Problem embedded onto D-Wave quantum hardware
                 \item Quantum annealer optimises QUBO formulation
                 \item Returns a sampleset of results
@@ -466,7 +479,7 @@
 
     \begin{columns}
         \begin{column}{.6\textwidth}
-            \begin{itemize}
+            \begin{itemize}[<+(1)->]
                 \item Smaller ensemble chosen for problem size
                 \item Well-defined musical structure
                 \item Reduction to three instruments
@@ -489,21 +502,20 @@
 
 \begin{frame}{Phrase detection}
     \begin{figure}
-        \includegraphics[width=.8\textwidth]{boundaries.pdf}
+        \includegraphics[width=.9\textwidth]{boundaries.pdf}
         \caption{Boundary strengths for the Violin I part}
     \end{figure}
 
     \note<1->{\begin{itemize}
         \item Example of the LBDM finding suitable boundaries for phrases
         \item Threshold value of $0.4$ chosen manually
-        \item FIX x-axis labels
     \end{itemize}}
 \end{frame}
 
 \begin{frame}{QUBO parameter variation}
     \begin{figure}
         \resizebox{.75\textwidth}{!}{\input{../Figures/mult.pgf}}
-        \caption{Variation of the edge weight Lagrange parameter $B$, in multiples of the maximum node weight}
+        \caption{Variation of the edge constraint Lagrange parameter $B$}
     \end{figure}
 
     \note<1->{\begin{itemize}
@@ -526,20 +538,6 @@
         \item In general, more reads is more likely to find lower-energy solutions
         \item Sometimes the annealer gets lucky (see 2000 reads)
         \item Each number of reads repeated five times, exponential decay fitted
-    \end{itemize}}
-\end{frame}
-
-\begin{frame}{Example solution}
-
-    \begin{figure}
-        \includegraphics[width=\textwidth]{sample-graph.pdf}
-        \caption{A returned low-energy solution, node size represents weight}
-    \end{figure}
-
-    \note<1->{\begin{itemize}
-        \item Example of a returned solution with low energy
-        \item Nodes grouped by instrument
-        \item Constraints fulfilled, no horizontal lines, each node one colour
     \end{itemize}}
 \end{frame}
 
@@ -585,6 +583,10 @@
 
 \begin{frame}
     \titlepage
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+    \printbibliography[heading=none]
 \end{frame}
 
 \begin{frame}{LBDM}
@@ -634,8 +636,13 @@
     \end{itemize}}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{References}
-    \printbibliography[heading=none]
+\begin{frame}{Solution graph}
+    \includegraphics[width=\textwidth]{sample-graph.pdf}
+\end{frame}
+
+\begin{frame}{Solution score}
+    \centering
+    \includegraphics[width=.5\textwidth]{solution-score.png}
 \end{frame}
 
 \end{document}

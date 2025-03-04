@@ -109,21 +109,21 @@ def plotBoundaryStrength(stream: stream.Stream, threshold: float, filepath: str 
     Plots the boundary strengths of a stream.
     '''
 
-    plotS = graph.plot.Scatter(stream, marker="o", markersize=5)
+    plotS = graph.plot.Scatter(stream, marker="o", markersize=4)
 
     plotS.axisX = graph.axis.OffsetAxis(plotS, 'x')
     plotS.axisY = BoundaryStrengthAxis(plotS, 'y')
     plotS.title = ""
 
     plotS.alpha = 1
-    plotS.colors = [c.value for c in V]
     plotS.doneAction = None
+    plotS.colors = [V.TURQUOISE.value]
     plotS.axisX.label = "Bar number"
     plotS.tickColors = "white"
     #plotS.axisX.ticks= [(m,m) for m in len(stream.getElementsByClass(stream.Measure)) if m % 4 == 0]
     plotS.hideXGrid = True
     plotS.hideYGrid = True
-    plotS.figureSize = (4,3)
+    plotS.figureSize = (6,3)
 
     plotS.run()
 
