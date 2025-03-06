@@ -1,5 +1,16 @@
 {
-    "red": "Flute",
-    "green": "Oboe",
-    "blue": "Bassoon"
+    "Flute": {
+        "role": "melody",
+        "colour": "red"
+    },
+
+    "Oboe": {
+        "role": "harmony",
+        "colour": "green"
+    },
+        
+    "Bassoon": {
+        "role": "bass",
+        "colour": "blue"
+    }
 }

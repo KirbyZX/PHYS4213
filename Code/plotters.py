@@ -29,16 +29,16 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict):
     '''
     Create an arrangement score from a sample
     '''
-
+    allPhrases = [phrase for part in phrases for phrase in part]
     parts = {}
-    for col, inst in instruments.items():
+    for i in instruments:
         part = stream.Part()
-        part.append(getattr(instrument, inst)())
-        parts[col] = part
+        part.append(getattr(instrument, i)())
+        parts[i] = part
 
-    chosen = extractChosen(sample)
+    chosen = extractChosen(sample) # phrase.id : assignment
 
-    for phrase in [phrase for part in phrases for phrase in part]:
+    for phrase in allPhrases:
         if phrase.id in chosen:
             parts[chosen[phrase.id]].mergeElements(phrase.notes.stream()) # Focus on JUST NOTES for now 
 
@@ -46,7 +46,7 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict):
     arrangement.show("midi")
     arrangement.show()
 
-def plotSampleGraph(sample: dict, G: nx.Graph) -> None:
+def plotSampleGraph(sample: dict, G: nx.Graph, instruments: dict) -> None:
     '''
     Plots a sample as a graph.
     '''
@@ -59,9 +59,12 @@ def plotSampleGraph(sample: dict, G: nx.Graph) -> None:
     annotated = annotateSampleGraph(sample, G)
 
     plt.figure(1, figsize=(12,6))
-    pos = nx.multipartite_layout(annotated, "colour", "horizontal", 2)
+    pos = nx.multipartite_layout(annotated, "assignment", "horizontal", 2)
 
-    nx.draw_networkx_nodes(annotated, pos, node_color=[annotated.nodes[node]["colour"] for node in annotated.nodes()], node_size=[10*(e[1]+.1) for e in annotated.nodes.data("entropy")])
+    colours = [instruments[a]["colour"] if a != "None" else "black" for (_, a) in annotated.nodes(data="assignment")]
+    entropies = [e for (_, e) in annotated.nodes(data="entropy")]
+
+    nx.draw_networkx_nodes(annotated, pos, node_color=colours, node_size=[10*(e+.1) for e in entropies])
     nx.draw_networkx_edges(annotated, pos, width=[d["weight"]/10 for _, _, d in annotated.edges.data()])
 
 def annotateSampleGraph(sample: dict, G: nx.Graph) -> nx.Graph:
@@ -72,18 +75,18 @@ def annotateSampleGraph(sample: dict, G: nx.Graph) -> nx.Graph:
     chosen = extractChosen(sample)
     for node in G.nodes():
         if node in chosen:
-            G.nodes[node]["colour"] = chosen[node]
+            G.nodes[node]["assignment"] = chosen[node]
         else:
-            G.nodes[node]["colour"] = "black"
+            G.nodes[node]["assignment"] = "None"
 
     return G
 
 def extractChosen(sample: dict) -> dict:
     '''
-    Extract the chosen phrases from a sample in the form "phrase": "colour".
+    Extract the chosen phrases from a sample in the form "phrase": "assignment".
     '''
 
-    processNode = lambda node : re.match(r"(.*_\d+)_(\w+)", node).groups()
+    processNode = lambda node : re.match(r"(.*_\d+)_([\w\s]+)", node).groups()
     return {processNode(x)[0]:processNode(x)[1] for x in sample if sample[x] == 1}
 
 def plotHistogram(sampleset: pd.DataFrame) -> None:
