@@ -10,7 +10,7 @@ def totalEntropy(G: nx.Graph) -> float:
     Finds the total entropy of chosen nodes.
     '''
 
-    return sum([d["entropy"] for _, d in G.nodes.data() if d["colour"] != "black"])
+    return sum([d["entropy"] for _, d in G.nodes.data() if d["assignment"] != "None"])
 
 def findOverlaps(G: nx.Graph) -> int:
     '''
@@ -19,7 +19,7 @@ def findOverlaps(G: nx.Graph) -> int:
 
     overlaps = 0
     for (n1, n2) in G.edges:
-        if G.nodes[n1]["colour"] == G.nodes[n2]["colour"] and G.nodes[n1]["colour"] != "black":
+        if G.nodes[n1]["assignment"] == G.nodes[n2]["assignment"] and G.nodes[n1]["assignment"] != "None":
             overlaps += 1
     return overlaps
 

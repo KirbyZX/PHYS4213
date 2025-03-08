@@ -70,3 +70,14 @@ Solve as a maximum independent set (MIS) problem.
 - Create graph edges from overlap
 - Solve
 - Rearrange node solutions back together
+
+$N_p * (N_i+1)$ logical variables in the BQM
+
+`scoreWriter.py`
+`boundaryDetection.py`
+`graphConstructor.py`
+`qubo.py`
+`embedding.py`
+
+Maximum connectivity of each node is 15 in Pegasus architecture
+However, in the Haydn example we require worst-case connectivity of up to 16
