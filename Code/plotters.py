@@ -8,22 +8,22 @@ import re
 import numpy as np
 
 
-def plotCSV(filepath: str, xaxis: str, yaxis: str, labels: list) -> None:
+def plotCSV(filepath: str, xaxis: str, yaxis: str, label: str = "") -> None:
 
     data = pd.read_csv(filepath)
+    range = data[xaxis].unique()
 
     means = []
     stderr = []
 
-    for l in labels:
-        query = data.query(f"`{xaxis}` == {l}")[yaxis]
+    for r in range:
+        query = data.query(f"`{xaxis}` == {r}")[yaxis]
         means.append(np.mean(query))
         stderr.append(np.std(query)/np.sqrt(len(query)))
 
-    plt.errorbar(labels, means, yerr=stderr, fmt='o')
+    plt.errorbar(range, means, yerr=stderr, fmt='o', label=label)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
-    plt.show()
 
 def plotArrangement(sample: dict, phrases: list, instruments: dict):
     '''

@@ -19,6 +19,7 @@
 \usepackage{subcaption}
 
 \usepackage{graphics,graphicx,epsfig,ulem}  % Graphics package
+\graphicspath{{../Figures/}}
 \usepackage{amsmath} 						% Maths package
 
 \usepackage{siunitx} % SI units, alignment in tables
@@ -231,6 +232,26 @@ The total entropy of a phrase is then the sum of the pitch and rhythm entropies.
 Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref{eq:weightedMIS}, the Lagrange parameters chosen, and sent to the D-Wave QPU to be solved. The lowest energy solutions returned are sets of nodes that are not connected by edges, whilst maximising their total weighting. The qubits are then matched back to their corresponding phrases, which are reconstructed into a new score, the final reduction.
 
 \section{Results}
+
+How sparse is the problem graph? nodes + edges/nodes^2
+
+\subsection{Lagrange parameter analysis}
+
+Analytically, we can derive an equality that the Lagrange parameters must satisfy in order for the minimum of the function to fulfil the imposed constraints.
+\begin{equation}
+    A>2\max(W)+E
+\end{equation}
+where $\max(W)$ is the largest entry of the weight matrix.
+
+\begin{figure}
+    \includegraphics{node-constraint.png}
+    \caption{Varying the node constraint Lagrange multiplier to ensure that each node is coloured at most once. Each QUBO was submitted three times for 1000 reads, with the mean and standard error calculated.}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{edge-constraint.png}
+    \caption{Varying the edge constraint Lagrange multiplier to ensure that no nodes of the same colour are connected.}
+\end{figure}
 
 \begin{figure}[h]
     \centering
