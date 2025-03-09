@@ -81,3 +81,19 @@ $N_p * (N_i+1)$ logical variables in the BQM
 
 Maximum connectivity of each node is 15 in Pegasus architecture
 However, in the Haydn example we require worst-case connectivity of up to 16
+
+$$
+f(x)=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+A\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}-C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(S_v-S_{\text{th},i})x_{v,i}
+$$
+where $\theta$ is the Heaviside step function.
+
+Set $C=D=1$ implies
+$$
+A>2\max(W)+E
+$$
+
+$A=B=E=\max(W)$ edge constraint broken, node constraint broken
+
+Vary A to remove duplicates
+
+Vary B to remove overlaps
