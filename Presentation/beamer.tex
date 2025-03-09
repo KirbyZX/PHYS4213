@@ -7,7 +7,7 @@
 
 \usepackage{esint}
 \usepackage{graphicx}
-\graphicspath{{../Figures/}}
+\graphicspath{{./Figures/}}
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -44,8 +44,6 @@
 % Has [snowy] variant
 
 \usecolortheme{}
-%\usebackgroundtemplate{\tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{../Figures/manuscript.jpg}};}
-
 \setbeamerfont{caption}{size=\scriptsize}         % Caption size
 \setbeamerfont{footnote}{size=\tiny}
 \captionsetup[figure]{labelformat=empty}    % Remove figure labels
@@ -118,7 +116,7 @@
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
-                \resizebox{\textwidth}{!}{\input{../Figures/histogram.pgf}}
+                \resizebox{\textwidth}{!}{\input{./Figures/histogram.pgf}}
                 \caption{Distribution of 2000 solution energies}
             \end{figure}
         \end{column}
@@ -145,7 +143,7 @@
         {
             \def\svgwidth{.75\textwidth}
             \tiny\selectfont
-            \input{../Figures/qa-analogy.pdf_tex}
+            \input{./Figures/qa-analogy.pdf_tex}
         }
         \caption{By Brianlechthaler - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=112382195}
     \end{figure}
@@ -349,7 +347,7 @@
     \end{itemize}
     \pause
     \begin{figure}
-        \includegraphics[width=0.75\textwidth]{../Figures/toy-1.png}
+        \includegraphics[width=0.75\textwidth]{./Figures/toy-1.png}
     \end{figure}
     \begin{itemize}
         \item Nodes | phrases
@@ -365,9 +363,9 @@
 \begin{frame}{2.\ Create graph}
 
     \centering
-    \includegraphics[width=0.7\textwidth]{../Figures/toy-1.png}
+    \includegraphics[width=0.7\textwidth]{./Figures/toy-1.png}
     \pause
-    \scalebox{.7}{\input{../Figures/toy_graph.pgf}}
+    \scalebox{.7}{\input{./Figures/toy_graph.pgf}}
 
     \note<1->{\begin{itemize}
         \item Score on top becomes graph on bottom
@@ -409,11 +407,11 @@
 \end{frame}
 
 \begin{frame}{3.\ Create optimisation problem}
-    \input{../Figures/toy_graph.pgf}
+    \input{./Figures/toy_graph.pgf}
 \end{frame}
 
 \begin{frame}{3.\ Create optimisation problem}
-    \input{../Figures/toy_solution.pgf}
+    \input{./Figures/toy_solution.pgf}
 
     \note<1->{\begin{itemize}
         \item $n=1$
@@ -455,7 +453,7 @@
             \includegraphics[width=\textwidth]{toy-1.png}
         \end{subfigure}\hfill
         \begin{subfigure}{0.5\textwidth}
-            \resizebox{\textwidth}{!}{\input{../Figures/toy_solution.pgf}}
+            \resizebox{\textwidth}{!}{\input{./Figures/toy_solution.pgf}}
         \end{subfigure}
     \end{figure}
     \pause
@@ -514,7 +512,7 @@
 
 \begin{frame}{QUBO parameter variation}
     \begin{figure}
-        \resizebox{.75\textwidth}{!}{\input{../Figures/mult.pgf}}
+        \resizebox{.75\textwidth}{!}{\input{./Figures/mult.pgf}}
         \caption{Variation of the edge constraint Lagrange parameter $B$}
     \end{figure}
 
@@ -529,7 +527,7 @@
 \begin{frame}{Optimisation}
 
     \begin{figure}
-        \resizebox{.75\textwidth}{!}{\input{../Figures/reads.pgf}}
+        \resizebox{.75\textwidth}{!}{\input{./Figures/reads.pgf}}
         \caption{Variation of the number of QPU reads, with the lowest-energy solution found}
     \end{figure}
 
