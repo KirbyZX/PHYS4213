@@ -1,4 +1,4 @@
-Total reads,QPU time,Chain strength,Chain break fraction,Lowest energy,Total entropy,Overlaps,Duplicates
+Total reads,Time,Chain strength,Chain break fraction,Lowest energy,Total entropy,Overlaps,Duplicates
 100,41967.16,31.67529278103625,0.0,-494.3013044273657,140.06989439658958,1,1
 200,68165.16,31.67529278103625,0.0,-478.24055618230676,141.6609922475349,1,0
 300,94363.16,31.67529278103625,0.0,-475.5505934712197,135.9157487760096,0,0
