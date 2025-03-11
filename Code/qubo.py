@@ -21,7 +21,8 @@ def createBQM(G: nx.Graph, phrases: list, instruments: list, nodeConstraintMult:
     for phrase in allPhrases:
 
         # Each vertex coloured at most once
-        bqm.add_linear_inequality_constraint([(f"{phrase.id}_{i}", 1) for i in instruments], ub=1, lagrange_multiplier=nodeConstraintMult*maxEntropy, penalization_method="slack", label=f"{phrase.id}")
+        if len(instruments) > 1:
+            bqm.add_linear_inequality_constraint([(f"{phrase.id}_{i}", 1) for i in instruments], ub=1, lagrange_multiplier=nodeConstraintMult*maxEntropy, penalization_method="slack", label=f"{phrase.id}")
         # Maximise vertex weighting
         bqm.add_linear_from([(f"{phrase.id}_{i}", -phrase.entropy) for i in instruments])
         
