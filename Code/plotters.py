@@ -1,4 +1,4 @@
-from music21 import stream, graph, instrument, clef, analysis
+from music21 import stream, graph, instrument, clef, analysis, midi
 from colours import Viridis as V
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -25,9 +25,9 @@ def plotCSV(filepath: str, xaxis: str, yaxis: str, label: str = "") -> None:
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
 
-def plotArrangement(sample: dict, phrases: list, instruments: dict) -> None:
+def plotArrangement(sample: dict, phrases: list, instruments: dict, saveMidi: str = None) -> stream.Score:
     '''
-    Create an arrangement score from a sample.
+    Create an arrangement score from a sample
     '''
 
     allPhrases = [phrase for part in phrases for phrase in part]
@@ -44,6 +44,7 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict) -> None:
     for phrase in allPhrases:
         if phrase.id in chosen:
             
+            # Focus on JUST NOTES for now
             inst = getattr(instrument, chosen[phrase.id])()
             lowestNote = inst.lowestNote
 
@@ -55,11 +56,18 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict) -> None:
             while pitchMin.ps < lowestNote.ps or pitchMin.octave - lowestNote.octave > 1:
                 shiftOctave(phrase, 1 if pitchMin.ps < lowestNote.ps else -1)
 
-            parts[chosen[phrase.id]].mergeElements(phrase.notes.stream()) # Focus on JUST NOTES for now
+            parts[chosen[phrase.id]].mergeElements(phrase.notes.stream()) 
 
     arrangement = stream.Score(parts.values())
-    arrangement.show("midi")
     arrangement.show()
+
+    if saveMidi:
+        mf = midi.translate.streamToMidiFile(arrangement)
+        mf.open(saveMidi, 'wb')
+        mf.write()
+        mf.close()
+
+    return arrangement
 
 def shiftOctave(s: stream.Stream, o: int):
     '''
