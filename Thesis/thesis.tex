@@ -49,16 +49,16 @@
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\headheight}{14pt}
 \lhead{Lucas Kirby}
-\rhead{Automatic Music Arrangement via Quantum Annealing}
+\rhead{Quantum annealing for music arrangement}
 
 \def\bibsection{\section*{References}}
  
 \begin{document}
 
-\title{Automatic Music Arrangement via Quantum Annealing}
-\author{Lucas Kirby} % Author
+\title{Quantum annealing for music arrangement}
+\author{Lucas Kirby}
 \affiliation{Master of Physics (MPhys)\\Supervisors: Dr Robert Potvliege \& Dr Omer Rathore\\Department of Physics, Durham University}
-\date{Submitted: \today{}}
+\date{Submitted: 23 April 2025}
 
 \begin{abstract}              
 
@@ -153,9 +153,19 @@ It has been shown that the arrangement of music can be formulated as a combinato
 
 This paper focuses on the reduction of polyphonic (multi-part) music to a single monophonic part, where only one note can be played at a time. A reduction of this form would be relevant for arranging a string quartet for solo violin, for example, whilst still retaining all the important elements from across the instrument parts. This problem can be solved using a reduction of the SAT problem known as the maximum independent set (MIS) problem \cite{lucas_ising_2014}. Consider a set of musical phrases, each represented by a node $x_i$ in a graph $G$, with nodes connected by an edge if the phrases overlap. The aim is to find the largest subset of nodes such that no nodes within the subset are connected by an edge—the phrases corresponding to these nodes form the final arrangement. A formulation of this sort ensures that the reduction remains strictly monophonic, as no two chosen phrases play at the same time.
 
-The MIS QUBO takes the form
+Denote $x_{v,i}$ to be a binary variable such that
 \begin{equation}
-    f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i x_i\,,
+    x_{v,i} =
+    \begin{cases}
+        1 & \text{if vertex $v$ is colour $i$} \\
+        0 & \text{otherwise}
+    \end{cases}
+    \,,
+\end{equation}
+
+Proper vertex colouring constraints
+\begin{equation}
+    f(x)=A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2+A\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}
     \label{eq:MIS}
 \end{equation}
 where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes. $A$ and $B$ are known as Lagrange parameters, and can be chosen to balance the two terms accordingly. In this case, the condition $A>B$ must be satisfied, such that any penalty introduced by a node will outweigh its energy reduction.
@@ -175,12 +185,13 @@ where we take $x_i=1$ as the inclusion of that node in the solution set. The fir
     \label{fig:toy}
 \end{figure}
 
-To increase the quality of the final arrangement, this formulation can further be expanded to include weights on the nodes, which can be used to represent the ``musicality'' of the phrases. The MIS QUBO then becomes
-\begin{equation}
-    f(x)=A\sum_{ij\in E}x_ix_j-B\sum_i W_ix_i\,,
+Final QUBO formulation:
+\begin{align}
+    f(x)=&A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}\\-&C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(S_v-S_{\text{th},i})x_{v,i}
     \label{eq:weightedMIS}
-\end{equation}
-where $W$ is a vector of real weights. This way, there is bias towards nodes that are considered more musical, and fewer nodes may be chosen as long as it increases the overall perceived quality of the arrangement. 
+\end{align}
+
+$N_p * (n+1)$ logical variables in the BQM
 
 % Physical implication of results
 % Does code work? Comparison to literature, tests (IMPORTANT)
@@ -233,9 +244,32 @@ Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref
 
 \section{Results}
 
-How sparse is the problem graph? nodes + edges/nodes^2
+The method was tested on an excerpt of (Haydn), taken from a MusicXML file in the public domain. This piece is ?? bars long and consists of four monophonic parts. It was chosen for...
+
+Fig.\ ?? shows the extraction of phrases from the Violin I part by the LBDM.
+
+\begin{itemize}
+    \item Phrase extraction graph
+    \item 
+\end{itemize}
+
+The resulting graph constructed from these phrases consists of ?? vertices and ?? edges. The QUBO formulation according to Eq.\ ?? was then calculated from this graph, to be submitted to the quantum annealer.
+
+The annealer used in this study was the D-Wave Advantage 4.1 blah blah, which has connectivity of blah blah allows creation and submission of problems via a Python SDK (software development kit).
+
+A returned sampleset of solutions might look something like Fig.\ [HISTOGRAM]. In most cases it's the lowest energy solutions (leftmost bins) that we care about.
+
+How sparse is the problem graph? $(nodes + edges)/nodes^2$
 
 \subsection{Lagrange parameter analysis}
+
+Lagrange parameters were tuned to fulfil the required constraints for a valid arrangement. Node constraint => duplicates (phrases duplicated across parts), edge constraints => overlaps (phrases that overlap played at the same time).
+
+\begin{itemize}
+    \item Lagrange parameter variations
+    \item 2D surface plot?
+    \item Compare to analytic derivation (reference for double value?)
+\end{itemize}
 
 Analytically, we can derive an equality that the Lagrange parameters must satisfy in order for the minimum of the function to fulfil the imposed constraints.
 \begin{equation}
@@ -244,89 +278,48 @@ Analytically, we can derive an equality that the Lagrange parameters must satisf
 where $\max(W)$ is the largest entry of the weight matrix.
 
 \begin{figure}
-    \includegraphics{node-constraint.png}
+    \includegraphics[width=0.5\textwidth]{node-constraint.png}
     \caption{Varying the node constraint Lagrange multiplier to ensure that each node is coloured at most once. Each QUBO was submitted three times for 1000 reads, with the mean and standard error calculated.}
 \end{figure}
 
 \begin{figure}
-    \includegraphics{edge-constraint.png}
+    \includegraphics[width=0.5\textwidth]{edge-constraint.png}
     \caption{Varying the edge constraint Lagrange multiplier to ensure that no nodes of the same colour are connected.}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=0.95\linewidth]{../Figures/excerpt_trim-1.png}
-        \caption{Original excerpt.}
-        \label{fig:excerpt}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=0.95\linewidth]{../Figures/selected_trim-1.png}
-        \caption{Selected phrases from solving the MIS problem.}
-        \label{fig:selected}
-    \end{subfigure}
-    \par\bigskip
-    \begin{subfigure}[t]{0.5\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{../Figures/arrangement_trim-1.png}
-        \caption{Final arrangement.}
-        \label{fig:arrangement}
-    \end{subfigure}
-    \caption{The beginning of String Quartet No.\ 15 in A minor, Op.\ 132, by Ludwig van Beethoven, reduced to a single part.}
-    \label{fig:results}
-\end{figure}
+\subsection{Solver configuration}
 
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=0.9\linewidth]{../Figures/problemGraph.pdf}
-        \caption{The problem graph of Fig.\ \ref{fig:excerpt}. The nodes are the identified musical phrases, with edges connecting them if they overlap. The entropy of each phrase is represented by the colour of the node.}
-        \label{fig:problem-graph}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.5\linewidth}
-        \includegraphics[width=0.9\linewidth]{../Figures/solutionGraph.pdf}
-        \caption{The solution graph, with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a feasible arrangement which can be seen in Fig.\ \ref{fig:arrangement}.}
-        \label{fig:solution-graph}
-    \end{subfigure}
-    \caption{Graph representations of the original score and final arrangement.}
-    \label{fig:graphs}
-\end{figure}
+The configuration of solver used was also tuned: two parameters, chain strength and anneal time per sample.
 
-The method was tested on an excerpt of String Quartet No.\ 10 in E-flat major, Op.\ 74, by Ludwig van Beethoven, nicknamed the ``Harp'' quartet. This was chosen due to its relatively simple structure and smaller instrumentation, keeping the problem graph relatively small. Fig.\ \ref{fig:excerpt} shows the first 13 measures of the original score, taken from a MusicXML file in the public domain.
+Fit quadratic curve to chain strength plot to find minimum value of energy.
 
-\begin{table}[h]
-    \caption{Summary of the boundary strengths and entropy for the identified phrases of the Violin I part, seen in Fig.\ \ref{fig:boundary-strengths}. The starts of phrases are given by their beat offset from the beginning of the piece.}
-    \label{tab:boundaries}
-    \setlength{\tabcolsep}{12pt}
-    \begin{tabular}{
-        S[round-mode = places, round-precision = 0]
-        S
-        S}
-        \toprule
-        \textbf{Start of phrase} & \textbf{Boundary strength} & \textbf{Entropy} \\
-        \midrule
-        0 & 0 & 0 \\
-        2.000000 & 0.511722 & 3.169925 \\
-        8.000000 & 0.698769 & 4.000000 \\
-        16.000000 & 0.610942 & 4.757191 \\
-        36.000000 & 0.401487 & 3.807936 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+\begin{itemize}
+    \item Chain strength analysis and explanation
+    \item Anneal time analysis
+\end{itemize}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\linewidth]{../Figures/boundaryStrength.pdf}
-    \caption{Boundary strengths for each note of the violin part, calculated using Eq.\ \ref{eq:boundary-strength}. The dashed line shows the threshold value used ($0.4$), which identifies five total phrases. Note that the beginning and end of the piece are always considered boundaries.}
-    \label{fig:boundary-strengths}
-\end{figure}
+\subsection{Comparison to classical algorithms}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\linewidth]{../Figures/histogram.pdf}
-    \caption{A histogram of the solutions returned by the QPU over 1000 total reads. Solutions with energies above zero are omitted.}
-    \label{fig:histogram}
-\end{figure}
+Having tuned the Lagrange parameters and sampler configuration to give the lowest energy possible, we can compare the returned solutions to classical optimisation algorithms solving the same problem. D-Wave provides a selection of classical samplers that can return solutions to QUBO problems, two of which are used in this study. The steepest descent method blah blah. Simulated annealing, on the other hand, works very similarly to quantum annealing, but instead uses a "temperature" value to escape local minima. This method gives a more direct comparison.
+
+Show energy against reads
+Show total entropy against reads
+
+
+\begin{itemize}
+    \item Compare to classical for different problem sizes
+\end{itemize}
+
+\subsection{Scaling}
+
+Scale two ways:
+
+\begin{enumerate}
+    \item Score length
+    \item Number of instruments
+\end{enumerate}
+
+Compare lowest energy found for 
 
 Phrases identified using the LBDM are shown in Fig.\ \ref{fig:problem-graph}, alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ \ref{tab:boundaries}. Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligible number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
 
