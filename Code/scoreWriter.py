@@ -1,4 +1,4 @@
-from music21 import corpus, metadata
+from music21 import corpus, converter, metadata
 import sys
 
 
@@ -7,9 +7,9 @@ if __name__ == "__main__":
     identifier = sys.argv[1]
     
     # https://www.music21.org/music21docs/about/referenceCorpus.html#referencecorpus
-    score = corpus.parse("haydn/opus1no1/movement1.mxl")
+    score = converter.parse("../beethoven.mxl")
     score.insert(0, metadata.Metadata())
-    score.metadata.movementName = "Quartet No. 1 in B♭ major"
-    score.metadata.composer = "Joseph Haydn"
+    score.metadata.movementName = "Symphony No. 5 in C minor"
+    score.metadata.composer = "Ludwig van Beethoven"
     score.write(fmt="musicxml", fp=f"../Pickles/{identifier}/{identifier}_score")
     score.show()

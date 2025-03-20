@@ -25,7 +25,7 @@ def plotCSV(filepath: str, xaxis: str, yaxis: str, label: str = "") -> None:
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
 
-def plotArrangement(sample: dict, phrases: list, instruments: dict, saveMidi: str = None) -> stream.Score:
+def plotArrangement(sample: dict, phrases: list, instruments: dict, midiPath: str = None) -> stream.Score:
     '''
     Create an arrangement score from a sample
     '''
@@ -61,13 +61,19 @@ def plotArrangement(sample: dict, phrases: list, instruments: dict, saveMidi: st
     arrangement = stream.Score(parts.values())
     arrangement.show()
 
-    if saveMidi:
-        mf = midi.translate.streamToMidiFile(arrangement)
-        mf.open(saveMidi, 'wb')
-        mf.write()
-        mf.close()
+    if midiPath: saveToMidi(arrangement, midiPath)
 
     return arrangement
+
+def saveToMidi(s: stream.Stream, filepath: str) -> None:
+    '''
+    Export a stream to a MIDI file.
+    '''
+
+    mf = midi.translate.streamToMidiFile(s)
+    mf.open(filepath, 'wb')
+    mf.write()
+    mf.close()
 
 def shiftOctave(s: stream.Stream, o: int):
     '''
