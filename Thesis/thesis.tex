@@ -6,16 +6,15 @@
 \usepackage[style=base, font=small, labelfont=bf]{caption}
 \usepackage{subcaption}
 
-\usepackage[backend=biber]{biblatex} %Imports biblatex package
+\usepackage[backend=biber, sorting=none]{biblatex} %Imports biblatex package
 \addbibresource{thesis.bib}
 
 %\renewcommand{\baselinestretch}{1.15}     % Defines the line spacing
 %should be setspace package???s
 
-\usepackage{graphics,graphicx,epsfig,ulem}  % Graphics package
+\usepackage{graphics,graphicx}  % Graphics package
 \usepackage{svg}
 \graphicspath{{../Figures/}}
-
 
 \usepackage{amsmath} 						% Maths package
 
@@ -25,40 +24,57 @@
 %\usepackage{lipsum}
 
 %\usepackage{multirow} % Multi-row cells in tables
-\usepackage{booktabs} % Nice table separators
+%\usepackage{booktabs} % Nice table separators
 
-%\usepackage{hyperref} % For hyper-references
+\usepackage[hidelinks]{hyperref} % For hyper-references
+
+\renewcommand{\listfigurename}{List of figures}
+\renewcommand{\listtablename}{List of tables}
 
 %\usepackage{float}
 
 % Could make titlepage?
-\title{Quantum annealing for music arrangement}
-\author{Lucas Kirby\\Department of Physics, University of Durham \and Supervised by\\Dr Robert Potvliege \& Dr Omer Rathore}
-\date{23 April 2025}
+\title{\LARGE Quantum annealing for music arrangement}
+\author{\Large Lucas Kirby\\\normalsize Department of Physics, University of Durham \and Supervised by\\\normalsize Dr Robert Potvliege \& Dr Omer Rathore}
+\date{\normalsize 23 April 2025}
 
 \begin{document}
 
-\maketitle
-
-\vfill
-
-\addcontentsline{toc}{section}{Abstract}
-\begin{abstract}              
-
-Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music. This method is tested on an excerpt of Beethoven's String Quartet No. 10 in E-flat major; in this case, the optimisation process is successful, and selects compatible phrases that produce a suitable arrangement. \cite{lucas_ising_2014}
-
-\end{abstract}
-
-\vfill
-
+\begin{titlepage}
 \begin{center}
-    \includesvg{durham-university.svg}
-\end{center}
+            
+    \Huge
+    \textbf{Quantum annealing\\for music arrangement}
 
-\thispagestyle{empty}
-\clearpage
+    \large
+    \textbf{Lucas Kirby}
+        
+    \vfill
+
+    \addcontentsline{toc}{section}{Abstract}
+    \begin{abstract}              
+
+    Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music. This method is tested on an excerpt of Beethoven's String Quartet No. 10 in E-flat major; in this case, the optimisation process is successful, and selects compatible phrases that produce a suitable arrangement. \cite{lucas_ising_2014}
+
+    \end{abstract}
+
+    \vfill
+
+    \includesvg{durham-university.svg}
+
+    \normalsize
+    Department of Physics\\
+    Durham University\\
+    23 April 2025
+            
+\end{center}
+\end{titlepage}
+
+%\thispagestyle{empty}
 
 \tableofcontents
+\listoffigures
+\listoftables
 
 \thispagestyle{empty}
 \clearpage
@@ -68,6 +84,7 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 \begin{figure}
     \tiny
     \includesvg{toy_graph.svg}
+    \caption[Toy graph]{This is a toy graph showing blah blah blah}
 \end{figure}
 
 Music is often seen as a very human endeavour. For centuries, only skilled musicians could compose and perform such sequences of sound that would be considered art \cite{dwave_manufactured_2011}. Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
