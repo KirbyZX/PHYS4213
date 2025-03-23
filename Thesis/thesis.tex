@@ -3,11 +3,8 @@
 \usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{times}
 
-\usepackage[style=base, font=small, labelfont=bf]{caption}
+\usepackage[font=small, labelfont=bf]{caption}
 \usepackage{subcaption}
-
-\usepackage[backend=biber, sorting=none]{biblatex} %Imports biblatex package
-\addbibresource{thesis.bib}
 
 %\renewcommand{\baselinestretch}{1.15}     % Defines the line spacing
 %should be setspace package???s
@@ -17,6 +14,12 @@
 \graphicspath{{../Figures/}}
 
 \usepackage{amsmath} 						% Maths package
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{2212}{$-$} % Minus sign
+
+% Bibliography
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{thesis.bib}
 
 %\usepackage{siunitx} % SI units, alignment in tables
 %\sisetup{round-mode=figures, round-precision=3}
@@ -82,8 +85,8 @@
 \section{Introduction}
 
 \begin{figure}
-    \tiny
-    \includesvg{toy_graph.svg}
+    \small
+    \includesvg[width=.5\textwidth]{chain-strength.svg}
     \caption[Toy graph]{This is a toy graph showing blah blah blah}
 \end{figure}
 
