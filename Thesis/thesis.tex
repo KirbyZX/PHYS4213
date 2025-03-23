@@ -23,7 +23,6 @@
 %\sisetup{round-mode=figures, round-precision=3}
 
 %\usepackage{lipsum}
-%\usepackage[british]{babel} % British date system
 
 %\usepackage{multirow} % Multi-row cells in tables
 \usepackage{booktabs} % Nice table separators
@@ -41,12 +40,9 @@
 
 \maketitle
 
-\begin{center}
-    \includesvg{durham-university.svg}
-\end{center}
-
 \vfill
 
+\addcontentsline{toc}{section}{Abstract}
 \begin{abstract}              
 
 Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music. This method is tested on an excerpt of Beethoven's String Quartet No. 10 in E-flat major; in this case, the optimisation process is successful, and selects compatible phrases that produce a suitable arrangement. \cite{lucas_ising_2014}
@@ -55,15 +51,24 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 
 \vfill
 
+\begin{center}
+    \includesvg{durham-university.svg}
+\end{center}
+
+\thispagestyle{empty}
 \clearpage
 
 \tableofcontents
 
 \thispagestyle{empty}
-
 \clearpage
 
-\section{Introduction} 
+\section{Introduction}
+
+\begin{figure}
+    \tiny
+    \includesvg{toy_graph.svg}
+\end{figure}
 
 Music is often seen as a very human endeavour. For centuries, only skilled musicians could compose and perform such sequences of sound that would be considered art \cite{dwave_manufactured_2011}. Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
 Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging whilst still remaining faithful to the source material—a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
@@ -81,9 +86,7 @@ This paper will focus on a subset of music arrangement known as \textit{reductio
 
 In this study, the arrangement of a musical score is formulated as an NP-hard graph theory problem, by splitting the score into phrases with associated connections and weightings. This is then solved via a quantum annealer to produce a valid reduction according to imposed constraints. The final arrangement is visualised and evaluated, with suggestions for future work.
 
-\clearpage
-
-\section{Theory}
+\section{Quantum annealing}
 
 Annealing, in metallurgical terms, is the process of heating and cooling a material to alter its physical properties . The cooling stage is typically slow, allowing particles to arrange themselves into regular lattice structures, making the material softer and less brittle. In the context of quantum computing, quantum annealing is the process of slowly changing a quantum system from one Hamiltonian to another. Much like its metallurgical counterpart, this computational technique allows the system to settle into a more useful final state.
 
@@ -136,7 +139,24 @@ However, the topology of these graphs often doesn't allow an exact one-to-one ma
 
 The qubits and their couplers define what can be seen as an energy landscape. Different combinations of qubit spins will have different energies, with the lowest energy state being the solution to the problem. A solver (or ``sampler'') attempts to characterise the shape of the energy landscape using a random range of input, and returns a number of samples with the lowest energy states. Note that the ``true'' ground state cannot be guaranteed; it could be part of the returned sample set, or may not even be found at all. It is the parameters of the annealing process that can reduce local minima and increase the likelihood of finding the ground state.
 
-The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture. 
+The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture.
+
+Quantum annealing has already been applied to a widge array of optimisation problems, ranging from financial portfolios \cite{phillipson_portfolio_2021}, protein folding \cite{perdomo-ortiz_protein_2012}, and traffic flow \cite{inoue_traffic_2021}. This study explores a creative novel application of this technique, music arrangement.
+
+Put a bit about NP-hard problems here.
+
+\section{Music arrangement}
+
+Music arrangement refers to the art of rewriting a musical score in a new setting, style, or structure, whilst still maintaining the essence of the original. A classical example of this is Mussorgsky's \emph{Pictures at an Exhibition}, which is well known for its orchestral arrangement by Ravel but was originally a piano solo. A more contemporary example would be ???'s rendition of \emph{The Star-Spangled Banner} at the ??? Super Bowl, which caused much controversy due to its laid-back style during a time of conflict in Cuba? The rearrangement of a piece can have a great effect on how the listener interprets it, and doing this effectively is still a pertinent issue many musicians face.
+
+Traditionally, it's a time-consuming blah blah blah. However, in this study we aim to formulate music arrangement as an optimisation problem, which can be solved like any other via quantum annealing. It has been shown that music arrangement can be reduced to an NP-hard problem \cite{moses_computational_2016}, by considering the special case of music \emph{reduction}. Reduction is a form of arrangement whereby the number of instrument parts only gets smaller, and we define here subject to the following constraints:
+
+\begin{enumerate}
+    \item \emph{Uncreative} | All music in the arrangement must come from the original
+    \item \emph{Monophonic} | Each part in the arrangement can only contain music from a single part in the original at any time
+\end{enumerate}
+
+Holistically, reduction aims to fit as much original music into the parts of the arrangement, whilst still being playable. Notably, these constraints forgo the need to compose new music, a very subjective endeavour that is not handled well by optimisation.
 
 \section{Problem formulation}
 
@@ -342,12 +362,6 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 \printbibliography[heading=bibintoc]
 
 \clearpage
-
-\section*{Scientific Summary for a General Audience} % 200 words
-
-The arrangement of music by hand is usually a difficult and time-consuming process, requiring a deep understanding of musical theory and structure. This study aims to automate this process via quantum computing, a technique that relies on the use of qubits, which can exist in a superposition of states. A music score can be split up into a sequence of phrases by looking at how much adjacent notes differ from each other, and turned into a graph representation with nodes and edges, where each node is a phrase, and edges between nodes mean they overlap. This graph can then be sent to a quantum computer in order to select nodes according to a set of rules that determine the properties of the arrangement. Once the nodes have been selected, the corresponding phrases can be reconstructed to create the final score. Here, an excerpt of Beethoven's String Quartet No.\ 10 is reduced to a single part, suitable for a solo instrument.
-
-\clearpage
 \appendix
 \section{Test appendix}
 
@@ -386,5 +400,12 @@ Maximise the weighting of included edges:
 \end{equation*}
 
 It can be seen that for $n=1$ this reduces to the MIS problem. For a score with $p$ parts, it will be impossible to colour the graph exactly with $n<p$; the parameter $A$ should be small enough to allow for some vertices to remain uncoloured. The lowest energy solutions will return coloured independent subsets of $G$ that each represents a monophonic part of the final arrangement.
+
+\clearpage
+
+\section*{Scientific summary for a general audience} % 200 words
+\addcontentsline{toc}{section}{Scientific summary for a general audience}
+
+The arrangement of music by hand is usually a difficult and time-consuming process, requiring a deep understanding of musical theory and structure. This study aims to automate this process via quantum computing, a technique that relies on the use of qubits, which can exist in a superposition of states. A music score can be split up into a sequence of phrases by looking at how much adjacent notes differ from each other, and turned into a graph representation with nodes and edges, where each node is a phrase, and edges between nodes mean they overlap. This graph can then be sent to a quantum computer in order to select nodes according to a set of rules that determine the properties of the arrangement. Once the nodes have been selected, the corresponding phrases can be reconstructed to create the final score. Here, an excerpt of Beethoven's String Quartet No.\ 10 is reduced to a single part, suitable for a solo instrument.
 
 \end{document}
