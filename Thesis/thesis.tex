@@ -4,7 +4,7 @@
 \usepackage{times}
 
 \usepackage[font=small, labelfont=bf]{caption}
-\usepackage{subcaption}
+\usepackage[subrefformat=parens]{subcaption}
 
 %\renewcommand{\baselinestretch}{1.15}     % Defines the line spacing
 %should be setspace package???s
@@ -12,6 +12,7 @@
 \usepackage{graphics,graphicx}  % Graphics package
 \usepackage{svg}
 \graphicspath{{../Figures/}}
+\usepackage{mwe}
 
 \usepackage{amsmath} 						% Maths package
 \usepackage[utf8]{inputenc}
@@ -30,6 +31,10 @@
 %\usepackage{booktabs} % Nice table separators
 
 \usepackage[hidelinks]{hyperref} % For hyper-references
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+
+%\crefname{figure}{Figure}{Figures}
+%\crefname{equation}{Equation}{Equations}
 
 \renewcommand{\listfigurename}{List of figures}
 \renewcommand{\listtablename}{List of tables}
@@ -204,17 +209,28 @@ Proper vertex colouring constraints
 where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes. $A$ and $B$ are known as Lagrange parameters, and can be chosen to balance the two terms accordingly. In this case, the condition $A>B$ must be satisfied, such that any penalty introduced by a node will outweigh its energy reduction.
 
 \begin{figure}
-    \begin{subfigure}[t]{0.5\linewidth}
-        \includegraphics[width=0.95\linewidth]{../Figures/toy_trim-1.png}
-        \caption{An example score of three parts, with each phrase coloured.}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-a}
+        \caption{}
         \label{fig:simple-excerpt}
     \end{subfigure}\hfill
-    \begin{subfigure}[t]{0.5\linewidth}
-        \includegraphics[width=0.95\linewidth]{../Figures/toy_graph.pdf}
-        \caption{A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases.}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
         \label{fig:simple-graph}
     \end{subfigure}
-    \caption{A toy example demonstrating the construction of the problem graph. It is trivial to see that the maximal independent set contains two nodes.}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
+        \label{fig:example-a}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-a}
+        \caption{}
+        \label{fig:example-b}
+    \end{subfigure}
+
+    \caption{A toy example demonstrating the construction of the problem graph. It is trivial to see that the maximal independent set contains two nodes. \subref{fig:simple-excerpt} An example score of three parts, with each phrase coloured. \subref{fig:simple-graph} A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases.}
     \label{fig:toy}
 \end{figure}
 
@@ -224,7 +240,7 @@ Final QUBO formulation:
     \label{eq:weightedMIS}
 \end{align}
 
-$N_p * (n+1)$ logical variables in the BQM
+$N_p * (n+1)$ logical variables in the BQM \cref{fig:toy,eq:weightedMIS,fig:simple-graph}
 
 % Physical implication of results
 % Does code work? Comparison to literature, tests (IMPORTANT)
