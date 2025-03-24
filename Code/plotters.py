@@ -144,39 +144,19 @@ def plotHistogram(sampleset: pd.DataFrame) -> None:
     #plt.xlim(-30,0)
     #plt.xticks([-30,-20,-10,0])
 
-def plotBoundaryStrength(stream: stream.Stream, threshold: float, filepath: str = None) -> None:
+def plotBoundaryStrength(df: pd.DataFrame, threshold: float) -> None:
     '''
     Plots the boundary strengths of a stream.
     '''
 
-    plotS = graph.plot.Scatter(stream, marker="o", markersize=4)
+    plt.scatter(df["Offset"], df["Strength"], s=1)
+    plt.hlines(threshold, 0, df["Offset"].max(), linestyles="dashed")
 
-    plotS.axisX = graph.axis.OffsetAxis(plotS, 'x')
-    plotS.axisY = BoundaryStrengthAxis(plotS, 'y')
-    plotS.title = ""
+    plt.xlim(0, df["Offset"].max())
+    plt.ylim(0,1)
+    plt.xlabel("Offset")
+    plt.ylabel("Boundary strength")
 
-    plotS.alpha = 1
-    plotS.doneAction = None
-    plotS.colors = [V.TURQUOISE.value]
-    plotS.axisX.label = "Bar number"
-    plotS.tickColors = "white"
-    #plotS.axisX.ticks= [(m,m) for m in len(stream.getElementsByClass(stream.Measure)) if m % 4 == 0]
-    plotS.hideXGrid = True
-    plotS.hideYGrid = True
-    plotS.figureSize = (6,3)
-
-    plotS.run()
-
-    line = plt.hlines(threshold, 0, stream.quarterLength, linestyles=":", colors="white")
-    plotS.subplot.add_artist(line)
-    plotS.subplot.set_xlim(left=0, right=stream.quarterLength)
-    plotS.subplot.set_ylim(bottom=0, top=1)
-
-    plotS.write()
-    plt.show()
-
-    if filepath is not None:
-        plotS.write(filepath)
 
 class BoundaryStrengthAxis(graph.axis.Axis):
     labelDefault = 'Boundary strength'

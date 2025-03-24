@@ -1,23 +1,27 @@
 import numpy as np
+import pandas as pd
 import sys
 import pickle
-from music21 import stream, note, converter
+from music21 import stream, converter
 from entropy import streamEntropy
 
 
-def extractPhrases(score: stream.Stream, threshold: float, weightings: tuple[float]) -> list[list[stream.Stream]]:
+def extractPhrases(score: stream.Stream, weights: tuple[float]) -> list[list[stream.Stream]]:
     '''
-    Identifies phrases in a score using the LBDM.
+    Extracts phrases from a score using the LBDM.
     '''
+
     phraseLists = []
+
     for part in score.parts:
         print(f"Creating phrases for {part.id} part...")
-        boundaries = identifyBoundaries(part, threshold, weightings)
+
+        df, _ = calculateStrengths(part, weights)
         flat = part.flatten()
         phrases = []
         n = 1
         start = 0
-        for b in boundaries:
+        for b in df.query("IsBoundary")["Offset"]:
 
             phrase = flat.getElementsByOffset(start, b, includeEndBoundary=False).stream()
             start = b
@@ -33,72 +37,70 @@ def extractPhrases(score: stream.Stream, threshold: float, weightings: tuple[flo
 
     return phraseLists
 
-def identifyBoundaries(stream: stream.Stream, threshold: float, weightings: tuple[float], annotate: bool = False) -> list[int]:
+def calculateStrengths(stream: stream.Stream, weights: tuple[float]) -> tuple[pd.DataFrame, float]:
     '''
-    Calculates the boundary strengths and returns notes above the threshold.
+    Returns a table of calculate boundary strengths.
     '''
 
-    noteStream = stream.recurse().getElementsByClass("Note").stream()
-    pitchStrengths = np.empty(len(noteStream))
-    offsetStrengths = np.empty(len(noteStream))
+    df = pd.DataFrame()
+    noteStream = stream.flatten().notes
 
-    for i,n in enumerate(noteStream):
-        if i == 0 or i == len(noteStream) - 1:
-            pitchStrengths[i] = 0
-            offsetStrengths[i] = 0
-            continue
+    for n in noteStream:
 
-        pitchStrengths[i] = n.pitch.ps * (pitchDegree(noteStream[i-1], n) + pitchDegree(n, noteStream[i+1]))
-        offsetStrengths[i] = n.getOffsetInHierarchy(noteStream) * (offsetDegree(noteStream[i-1], n, noteStream) + offsetDegree(n, noteStream[i+1], noteStream))
+        offset = n.offset
+        # If chord use the top note
+        if hasattr(n, "notes"):
+            n = n.notes[-1]
+
+        pitch = n.pitch.ps
+        
+        new_row = pd.DataFrame({
+            "Pitch": [pitch],
+            "Offset": [offset]
+            })
+
+        df = pd.concat([df, new_row])
+
+    degreeOfChange = lambda x1, x2 : abs(x1 - x2) / (x1 + x2)
+    strength = lambda x1, x2, x3 : x2 * (degreeOfChange(x1, x2) + degreeOfChange(x2, x3))
+    normalise = lambda data : (data - np.min(data)) / (np.max(data) - np.min(data))
+
+    df["Pitch strength"] = normalise(np.array(
+        [0] +
+        [strength(df["Pitch"].iloc[i-1], df["Pitch"].iloc[i], df["Pitch"].iloc[i+1]) for i in range(1, len(df["Pitch"])-1)] +
+        [0]))
     
-    pitchStrengths = normalise(pitchStrengths)
-    offsetStrengths = normalise(offsetStrengths)
-    
-    boundaries = []
+    df["Offset strength"] = normalise(np.array(
+        [0] +
+        [strength(df["Offset"].iloc[i-1], df["Offset"].iloc[i], df["Offset"].iloc[i+1]) for i in range(1, len(df["Offset"])-1)] +
+        [0]))
 
-    for i,n in enumerate(noteStream):
-        total = weightings[0] * pitchStrengths[i] + weightings[1] * offsetStrengths[i]
-        n.boundaryStrength = total
+    df.eval("Strength = @weights[0]*`Pitch strength` + @weights[1]*`Offset strength`", inplace=True)
 
-        if total >= threshold:
-            boundaries.append(n.getOffsetInHierarchy(stream))
-            
-            if annotate:
-                n.addLyric(round(total, 3))
+    threshold = df["Strength"].max() / 4
+    df.eval("IsBoundary = Strength >= @threshold", inplace=True)
 
-    boundaries.append(stream.duration.quarterLength)
+    return df, threshold
 
-    return boundaries
 
 def hasOverlap(s1: stream.Stream, s2: stream.Stream) -> bool:
     '''
     Returns `True` if two streams have overlapping notes.
     '''
 
+    start = lambda s : s.flatten().notes.stream().first().offset
+    end = lambda s : s.flatten().notes.stream().last().offset + s.flatten().notes.stream().last().duration.quarterLength
+
     return start(s1) < end(s2) and start(s2) < end(s1)
-
-def start(s: stream.Stream) -> float:
-    return s.flatten().notes.stream().first().offset
-
-def end(s: stream.Stream) -> float:
-    return s.flatten().notes.stream().last().offset + s.flatten().notes.stream().last().duration.quarterLength
-
-def normalise(data: np.array) -> np.array:
-    return (data - np.min(data)) / (np.max(data) - np.min(data))
-
-def pitchDegree(n1: note.Note, n2: note.Note) -> float:
-    return abs(n1.pitch.ps - n2.pitch.ps) / (n1.pitch.ps + n2.pitch.ps)
-
-def offsetDegree(n1: note.Note, n2: note.Note, stream: stream.Stream) -> float:
-    return abs(n1.getOffsetInHierarchy(stream) - n2.getOffsetInHierarchy(stream)) / (n1.getOffsetInHierarchy(stream) + n2.getOffsetInHierarchy(stream))
 
 
 if __name__ == "__main__":
 
     identifier = sys.argv[1]
+
     path = f"../Pickles/{identifier}/{identifier}_"
 
     score = converter.parse(path + "score.musicxml")
 
-    phrases = extractPhrases(score, 0.3, (0.33, 0.66))
+    phrases = extractPhrases(score, (0.33, 0.66))
     pickle.dump(phrases, open(path + "phrases.pkl", "wb"))
