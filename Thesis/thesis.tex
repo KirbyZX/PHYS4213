@@ -42,43 +42,31 @@
 %\usepackage{float}
 
 % Could make titlepage?
-\title{\LARGE Quantum annealing for music arrangement}
-\author{\Large Lucas Kirby\\\normalsize Department of Physics, University of Durham \and Supervised by\\\normalsize Dr Robert Potvliege \& Dr Omer Rathore}
+\title{\Huge \bfseries Quantum annealing\\for music arrangement}
+\author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\small Supervised by\\Prof Robert Potvliege \& Dr Omer Rathore}
 \date{\normalsize 23 April 2025}
 
 \begin{document}
 
-\begin{titlepage}
+\maketitle
+
+\vfill
+
+\addcontentsline{toc}{section}{Abstract}
+\begin{abstract}              
+
+Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music. This method is tested on an excerpt of Beethoven's String Quartet No. 10 in E-flat major; in this case, the optimisation process is successful, and selects compatible phrases that produce a suitable arrangement.
+
+\end{abstract}
+
+\vfill
+
 \begin{center}
-            
-    \Huge
-    \textbf{Quantum annealing\\for music arrangement}
-
-    \large
-    \textbf{Lucas Kirby}
-        
-    \vfill
-
-    \addcontentsline{toc}{section}{Abstract}
-    \begin{abstract}              
-
-    Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music. This method is tested on an excerpt of Beethoven's String Quartet No. 10 in E-flat major; in this case, the optimisation process is successful, and selects compatible phrases that produce a suitable arrangement. \cite{lucas_ising_2014}
-
-    \end{abstract}
-
-    \vfill
-
     \includesvg{durham-university.svg}
-
-    \normalsize
-    Department of Physics\\
-    Durham University\\
-    23 April 2025
-            
 \end{center}
-\end{titlepage}
 
-%\thispagestyle{empty}
+\thispagestyle{empty}
+\clearpage
 
 \tableofcontents
 \listoffigures
