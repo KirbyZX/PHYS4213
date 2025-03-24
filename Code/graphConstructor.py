@@ -1,40 +1,43 @@
-import pickle
+import pandas as pd
 import networkx as nx
 import itertools as iter
 import sys
 from multiprocessing import Pool
-from boundaryDetection import hasOverlap
 
 
-def createGraph(phraseLists: list, cores: int, chunksize: int) -> nx.Graph:
+def createGraph(phrases: pd.DataFrame, cores: int, chunksize: int) -> nx.Graph:
 
     G = nx.Graph()
     edges = []
 
-    iterator = iter.chain.from_iterable([iter.product(i,j) for (i,j) in iter.combinations(phraseLists, 2)])
+    iterator = iter.combinations(phrases.index, 2)
     with Pool(cores) as pool:
-        for result in pool.imap_unordered(findEdge, iterator, chunksize=chunksize):
+        for result in pool.starmap(findEdge, iter.product(iterator, [phrases]), chunksize=chunksize):
             if result is not None:
                 edges.append(result)
 
-    G.add_nodes_from([(phrase.id, {"entropy": phrase.entropy}) for part in phraseLists for phrase in part])
+    G.add_nodes_from([(phrases.loc[i, "ID"], {"entropy": phrases.loc[i, "Entropy"]}) for i in phrases.index])
     G.add_weighted_edges_from(edges)
     print("\nGraph created!")
 
     return G
 
-def findEdge(phraseTuple):
+def findEdge(phraseTuple: tuple, phrases: pd.DataFrame):
+
     p1, p2 = phraseTuple
-    print(f"Checking overlap between {p1.id} and {p2.id}", end='\r', flush=True)
+    print(f"Checking overlap between {p1} and {p2}", end='\r', flush=True)
+
+    hasOverlap = lambda p1, p2 : phrases.loc[p1, "Start"] < phrases.loc[p2, "End"] and phrases.loc[p2, "Start"] < phrases.loc[p1, "End"]
+    
     if hasOverlap(p1, p2):
-        return (p1.id, p2.id, abs(p1.entropy - p2.entropy))
+        return (phrases.loc[p1, "ID"], phrases.loc[p2, "ID"], abs(phrases.loc[p1, "Entropy"] - phrases.loc[p2, "Entropy"]))
 
 
 if __name__ == '__main__':
 
     identifier = sys.argv[1]
     path = f"../Pickles/{identifier}/{identifier}_"
-    phrases = pickle.load(open(path + "phrases.pkl", "rb"))
+    phrases = pd.read_csv(path + "phrases.csv", index_col=[0,1])
 
     G = createGraph(phrases, 4, 100)
     print("Graph created!")

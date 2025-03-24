@@ -21,7 +21,11 @@ def noteDistribution(stream: stream.Stream) -> tuple[dict, dict]:
     pitchCount = {}
     durationCount = {} # TODO: Change to IOI
 
-    for n in stream.recurse().getElementsByClass("Note"):
+    for n in stream.recurse().notes:
+
+        # If chord use the top note
+        if hasattr(n, "notes"):
+            n = n.notes[-1]
 
         if n.name not in pitchCount:
             pitchCount[n.name] = 1

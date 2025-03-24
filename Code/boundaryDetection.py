@@ -6,36 +6,38 @@ from music21 import stream, converter
 from entropy import streamEntropy
 
 
-def extractPhrases(score: stream.Stream, weights: tuple[float]) -> list[list[stream.Stream]]:
+def extractPhrases(score: stream.Score, weights: tuple[float]) -> pd.DataFrame:
     '''
     Extracts phrases from a score using the LBDM.
     '''
-
-    phraseLists = []
+    
+    phrases = pd.DataFrame()
 
     for part in score.parts:
         print(f"Creating phrases for {part.id} part...")
 
         df, _ = calculateStrengths(part, weights)
         flat = part.flatten()
-        phrases = []
-        n = 1
-        start = 0
-        for b in df.query("IsBoundary")["Offset"]:
 
-            phrase = flat.getElementsByOffset(start, b, includeEndBoundary=False).stream()
-            start = b
-            
-            phrase.id = f"{part.id}_{n}"
-            n += 1
+        boundaries = df.query("IsBoundary")["Offset"]
 
-            phrase.entropy = streamEntropy(phrase)
-            phrases.append(phrase)
+        ids = [f"{part.id}_{n+1}" for n in range(len(boundaries))]
+        starts = list(boundaries)
+        ends = starts[1:] + [part.duration.quarterLength]
+        entropies = [streamEntropy(flat.getElementsByOffset(s, e, includeEndBoundary=False).stream()) for s,e in zip(starts, ends)]
+
+        index = pd.MultiIndex.from_product([[part.id], range(1, len(boundaries) + 1)], names=["Instrument","No"])
+        partPhrases = pd.DataFrame({
+            "ID": ids,
+            "Start": starts,
+            "End": ends,
+            "Entropy": entropies
+        }, index=index)
         
-        phraseLists.append(phrases)
+        phrases = pd.concat([phrases, partPhrases])
         print(f"{len(phrases)} phrases created!")
 
-    return phraseLists
+    return phrases
 
 def calculateStrengths(stream: stream.Stream, weights: tuple[float]) -> tuple[pd.DataFrame, float]:
     '''
@@ -81,17 +83,6 @@ def calculateStrengths(stream: stream.Stream, weights: tuple[float]) -> tuple[pd
     df.eval("IsBoundary = Strength >= @threshold", inplace=True)
 
     return df, threshold
-
-
-def hasOverlap(s1: stream.Stream, s2: stream.Stream) -> bool:
-    '''
-    Returns `True` if two streams have overlapping notes.
-    '''
-
-    start = lambda s : s.flatten().notes.stream().first().offset
-    end = lambda s : s.flatten().notes.stream().last().offset + s.flatten().notes.stream().last().duration.quarterLength
-
-    return start(s1) < end(s2) and start(s2) < end(s1)
 
 
 if __name__ == "__main__":
