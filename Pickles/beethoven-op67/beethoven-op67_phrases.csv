@@ -1,243 +1,304 @@
 Instrument,No,ID,Start,End,Entropy
-Flute,1,Flute_1,40.0,46.0,2.448788890811972
+Flute,1,Flute_1,40.0,46.0,2.7419011889093374
 Flute,2,Flute_2,46.0,76.0,-0.0
 Flute,3,Flute_3,76.0,110.0,2.660152376640496
 Flute,4,Flute_4,110.0,114.0,-0.0
 Flute,5,Flute_5,114.0,140.0,-0.0
 Flute,6,Flute_6,140.0,147.0,2.2359263506290326
 Flute,7,Flute_7,147.0,180.0,-0.0
-Flute,8,Flute_8,180.0,226.0,3.7303634810581863
+Flute,8,Flute_8,180.0,226.0,3.731365505463524
 Flute,9,Flute_9,226.0,226.5,-0.0
-Flute,10,Flute_10,226.5,242.0,2.5434034028763257
-Flute,11,Flute_11,242.0,304.5,-0.0
-Flute,12,Flute_12,304.5,372.0,3.8498125133387635
-Flute,13,Flute_13,372.0,387.0,-0.0
-Flute,14,Flute_14,387.0,502.0,3.8773894518488223
-Flute,15,Flute_15,502.0,518.0,-0.0
-Flute,16,Flute_16,518.0,522.0,-0.0
-Flute,17,Flute_17,522.0,532.0,-0.0
-Flute,18,Flute_18,532.0,534.0,-0.0
-Flute,19,Flute_19,534.0,576.0,-0.0
-Flute,20,Flute_20,576.0,614.0,3.165695618788019
-Flute,21,Flute_21,614.0,632.0,-0.0
-Flute,22,Flute_22,632.0,671.0,2.435909241665556
-Flute,23,Flute_23,671.0,686.0,-0.0
-Flute,24,Flute_24,686.0,742.0,3.439276206901373
-Flute,25,Flute_25,742.0,742.5,-0.0
-Flute,26,Flute_26,742.5,924.0,4.245063001418755
-Flute,27,Flute_27,924.0,929.0,0.9182958340544896
-Flute,28,Flute_28,929.0,936.0,-0.0
-Flute,29,Flute_29,936.0,940.0,1.0
-Flute,30,Flute_30,940.0,972.0,2.851801513840077
-Flute,31,Flute_31,972.0,990.5,-0.0
-Flute,32,Flute_32,990.5,1014.0,2.8316244252764453
-Oboe,1,Oboe_1,114.0,166.0,-0.0
-Oboe,2,Oboe_2,166.0,242.0,3.8888479934167917
-Oboe,3,Oboe_3,242.0,304.5,-0.0
-Oboe,4,Oboe_4,304.5,372.0,3.3352352068868445
-Oboe,5,Oboe_5,372.0,385.0,-0.0
-Oboe,6,Oboe_6,385.0,432.0,3.4593858176554653
-Oboe,7,Oboe_7,432.0,502.0,2.9344682946643266
-Oboe,8,Oboe_8,502.0,532.0,2.8046708534694957
-Oboe,9,Oboe_9,532.0,534.0,-0.0
-Oboe,10,Oboe_10,534.0,558.0,3.6444377780099297
-Oboe,11,Oboe_11,558.0,562.0,-0.0
-Oboe,12,Oboe_12,562.0,616.0,3.3860525689605074
-Oboe,13,Oboe_13,616.0,634.0,-0.0
-Oboe,14,Oboe_14,634.0,656.0,0.9852281360342516
-Oboe,15,Oboe_15,656.0,704.0,-0.0
-Oboe,16,Oboe_16,704.0,736.0,2.466362535501762
-Oboe,17,Oboe_17,736.0,776.0,2.4089526811523463
-Oboe,18,Oboe_18,776.0,776.0,0.0
-Oboe,19,Oboe_19,776.0,800.0,2.8453598488889957
-Oboe,20,Oboe_20,800.0,804.0,1.183345557164655
-Oboe,21,Oboe_21,804.0,812.0,-0.0
-Oboe,22,Oboe_22,812.0,1016.0,3.9169373377905203
-Clarinet,1,Clarinet_1,8.0,34.5,-0.0
-Clarinet,2,Clarinet_2,34.5,40.0,2.892878689342031
-Clarinet,3,Clarinet_3,40.0,46.0,2.448788890811972
-Clarinet,4,Clarinet_4,46.0,62.5,-0.0
-Clarinet,5,Clarinet_5,62.5,64.0,-0.0
-Clarinet,6,Clarinet_6,64.0,74.0,-0.0
-Clarinet,7,Clarinet_7,74.0,101.0,2.8092000326978117
-Clarinet,8,Clarinet_8,101.0,102.0,-0.0
-Clarinet,9,Clarinet_9,102.0,114.0,0.7219280948873623
-Clarinet,10,Clarinet_10,114.0,132.0,-0.0
-Clarinet,11,Clarinet_11,132.0,139.0,2.2359263506290326
-Clarinet,12,Clarinet_12,139.0,164.0,-0.0
-Clarinet,13,Clarinet_13,164.0,200.0,2.1641477244088865
-Clarinet,14,Clarinet_14,200.0,200.5,-0.0
-Clarinet,15,Clarinet_15,200.5,211.0,3.0134044311430257
-Clarinet,16,Clarinet_16,211.0,213.0,-0.0
-Clarinet,17,Clarinet_17,213.0,215.0,-0.0
-Clarinet,18,Clarinet_18,215.0,217.0,-0.0
-Clarinet,19,Clarinet_19,217.0,226.0,2.3864466996218376
-Clarinet,20,Clarinet_20,226.0,226.5,-0.0
-Clarinet,21,Clarinet_21,226.5,242.0,2.8982858007819834
-Clarinet,22,Clarinet_22,242.0,276.0,3.2634068690671425
-Clarinet,23,Clarinet_23,276.0,276.0,0.0
-Clarinet,24,Clarinet_24,276.0,278.0,1.0
-Clarinet,25,Clarinet_25,278.0,280.0,1.0
-Clarinet,26,Clarinet_26,280.0,280.0,0.0
-Clarinet,27,Clarinet_27,280.0,282.0,1.0
-Clarinet,28,Clarinet_28,282.0,282.0,0.0
-Clarinet,29,Clarinet_29,282.0,290.0,1.0
-Clarinet,30,Clarinet_30,290.0,322.0,4.020588226694798
-Clarinet,31,Clarinet_31,322.0,326.0,2.892878689342031
-Clarinet,32,Clarinet_32,326.0,328.5,-0.0
-Clarinet,33,Clarinet_33,328.5,356.0,2.9748067842293935
-Clarinet,34,Clarinet_34,356.0,367.0,-0.0
-Clarinet,35,Clarinet_35,367.0,372.0,1.6225562489182657
-Clarinet,36,Clarinet_36,372.0,388.0,1.6825003405631098
-Clarinet,37,Clarinet_37,388.0,390.0,0.8112781244591328
-Clarinet,38,Clarinet_38,390.0,400.0,0.9182958340544896
-Clarinet,39,Clarinet_39,400.0,406.0,-0.0
-Clarinet,40,Clarinet_40,406.0,476.0,3.016472729085061
-Clarinet,41,Clarinet_41,476.0,480.5,-0.0
-Clarinet,42,Clarinet_42,480.5,502.0,2.1459787727280437
-Clarinet,43,Clarinet_43,502.0,510.0,-0.0
-Clarinet,44,Clarinet_44,510.0,532.0,0.9182958340544896
-Clarinet,45,Clarinet_45,532.0,534.0,-0.0
-Clarinet,46,Clarinet_46,534.0,560.0,-0.0
-Clarinet,47,Clarinet_47,560.0,564.0,-0.0
-Clarinet,48,Clarinet_48,564.0,574.0,-0.0
-Clarinet,49,Clarinet_49,574.0,601.0,2.8092000326978117
-Clarinet,50,Clarinet_50,601.0,602.0,-0.0
-Clarinet,51,Clarinet_51,602.0,614.0,0.7219280948873623
-Clarinet,52,Clarinet_52,614.0,660.0,-0.0
-Clarinet,53,Clarinet_53,660.0,671.0,1.8423709931771088
-Clarinet,54,Clarinet_54,671.0,682.0,-0.0
-Clarinet,55,Clarinet_55,682.0,736.0,3.473501885866286
-Clarinet,56,Clarinet_56,736.0,742.0,1.89540555844018
-Clarinet,57,Clarinet_57,742.0,742.5,-0.0
-Clarinet,58,Clarinet_58,742.5,744.0,-0.0
-Clarinet,59,Clarinet_59,744.0,782.0,2.898580155873889
-Clarinet,60,Clarinet_60,782.0,802.0,2.9147025488751708
-Clarinet,61,Clarinet_61,802.0,810.0,-0.0
-Clarinet,62,Clarinet_62,810.0,812.0,-0.0
-Clarinet,63,Clarinet_63,812.0,812.0,0.0
-Clarinet,64,Clarinet_64,812.0,813.0,2.0
-Clarinet,65,Clarinet_65,813.0,820.0,2.0
-Clarinet,66,Clarinet_66,820.0,820.0,0.0
-Clarinet,67,Clarinet_67,820.0,821.0,2.0
-Clarinet,68,Clarinet_68,821.0,904.0,3.385676029924581
-Clarinet,69,Clarinet_69,904.0,924.0,2.217021885879718
-Clarinet,70,Clarinet_70,924.0,927.0,1.0
-Clarinet,71,Clarinet_71,927.0,929.0,-0.0
-Clarinet,72,Clarinet_72,929.0,936.0,-0.0
-Clarinet,73,Clarinet_73,936.0,941.0,0.9182958340544896
-Clarinet,74,Clarinet_74,941.0,943.0,-0.0
-Clarinet,75,Clarinet_75,943.0,972.0,3.451977922242038
-Clarinet,76,Clarinet_76,972.0,977.0,-0.0
-Clarinet,77,Clarinet_77,977.0,978.0,-0.0
-Clarinet,78,Clarinet_78,978.0,979.0,-0.0
-Clarinet,79,Clarinet_79,979.0,986.0,2.311278124459133
-Clarinet,80,Clarinet_80,986.0,987.0,-0.0
-Clarinet,81,Clarinet_81,987.0,1014.0,2.5883560212126517
-Bassoon,1,Bassoon_1,34.0,46.0,3.245556695768532
-Bassoon,2,Bassoon_2,46.0,70.0,-0.0
-Bassoon,3,Bassoon_3,70.0,114.0,3.990924835481949
-Bassoon,4,Bassoon_4,114.0,132.0,-0.0
-Bassoon,5,Bassoon_5,132.0,202.0,3.855298243861669
-Bassoon,6,Bassoon_6,202.0,238.0,3.1670324670155345
-Bassoon,7,Bassoon_7,238.0,242.0,1.183345557164655
-Bassoon,8,Bassoon_8,242.0,250.0,-0.0
-Bassoon,9,Bassoon_9,250.0,282.0,1.584962500721156
-Bassoon,10,Bassoon_10,282.0,290.0,-0.0
-Bassoon,11,Bassoon_11,290.0,314.0,3.219847656318339
-Bassoon,12,Bassoon_12,314.0,316.5,2.5032583347756456
-Bassoon,13,Bassoon_13,316.5,317.0,-0.0
-Bassoon,14,Bassoon_14,317.0,317.5,1.0
-Bassoon,15,Bassoon_15,317.5,317.5,0.0
-Bassoon,16,Bassoon_16,317.5,318.0,1.0
-Bassoon,17,Bassoon_17,318.0,321.0,2.892878689342031
-Bassoon,18,Bassoon_18,321.0,321.5,-0.0
-Bassoon,19,Bassoon_19,321.5,322.0,1.0
-Bassoon,20,Bassoon_20,322.0,324.5,1.8365916681089791
-Bassoon,21,Bassoon_21,324.5,325.0,-0.0
-Bassoon,22,Bassoon_22,325.0,325.5,1.0
-Bassoon,23,Bassoon_23,325.5,325.5,0.0
-Bassoon,24,Bassoon_24,325.5,326.0,1.0
-Bassoon,25,Bassoon_25,326.0,329.0,2.892878689342031
-Bassoon,26,Bassoon_26,329.0,329.5,-0.0
-Bassoon,27,Bassoon_27,329.5,330.0,1.0
-Bassoon,28,Bassoon_28,330.0,330.0,0.0
-Bassoon,29,Bassoon_29,330.0,372.0,3.8790894296406364
-Bassoon,30,Bassoon_30,372.0,534.0,4.363675118980748
-Bassoon,31,Bassoon_31,534.0,558.0,-0.0
-Bassoon,32,Bassoon_32,558.0,648.0,4.02192783076794
-Bassoon,33,Bassoon_33,648.0,882.0,4.607843478919125
-Bassoon,34,Bassoon_34,882.0,886.0,-0.0
-Bassoon,35,Bassoon_35,886.0,929.0,2.9366266210742915
-Bassoon,36,Bassoon_36,929.0,975.0,3.7000007850149075
-Bassoon,37,Bassoon_37,975.0,1014.0,3.080058399276171
-Horn,1,Horn_1,38.0,62.5,3.084962500721156
-Horn,2,Horn_2,62.5,84.0,2.377443751081734
-Horn,3,Horn_3,84.0,118.0,3.268900881034979
-Horn,4,Horn_4,118.0,120.0,-0.0
-Horn,5,Horn_5,120.0,146.0,0.39124356362925566
-Horn,6,Horn_6,146.0,164.0,-0.0
-Horn,7,Horn_7,164.0,196.0,2.1877328006930323
-Horn,8,Horn_8,196.0,200.0,1.0
-Horn,9,Horn_9,200.0,217.0,2.0173899391256844
-Horn,10,Horn_10,217.0,218.0,-0.0
-Horn,11,Horn_11,218.0,223.5,2.040488414307512
-Horn,12,Horn_12,223.5,228.5,-0.0
-Horn,13,Horn_13,228.5,242.0,2.5712122601251455
-Horn,14,Horn_14,242.0,248.5,-0.0
-Horn,15,Horn_15,248.5,254.0,1.9419011889093372
-Horn,16,Horn_16,254.0,285.0,-0.0
-Horn,17,Horn_17,285.0,350.0,2.8485283264613566
-Horn,18,Horn_18,350.0,381.0,-0.0
-Horn,19,Horn_19,381.0,416.0,2.7152940991096255
-Horn,20,Horn_20,416.0,466.0,-0.0
-Horn,21,Horn_21,466.0,502.0,3.0117179651648875
-Horn,22,Horn_22,502.0,568.0,-0.0
-Horn,23,Horn_23,568.0,624.0,3.3318358603033027
-Horn,24,Horn_24,624.0,632.0,-0.0
-Horn,25,Horn_25,632.0,662.0,-0.0
-Horn,26,Horn_26,662.0,705.0,-0.0
-Horn,27,Horn_27,705.0,808.0,3.101524743702465
-Horn,28,Horn_28,808.0,820.0,-0.0
-Horn,29,Horn_29,820.0,831.0,2.310443057719024
-Horn,30,Horn_30,831.0,894.0,2.902982369460052
-Horn,31,Horn_31,894.0,914.0,-0.0
-Horn,32,Horn_32,914.0,1000.5,2.5886165617856527
-Horn,33,Horn_33,1000.5,1024.0,0.976020648236615
-Trumpet,1,Trumpet_1,40.0,84.0,-0.0
-Trumpet,2,Trumpet_2,84.0,110.0,2.0121206508166773
-Trumpet,3,Trumpet_3,110.0,186.0,-0.0
-Trumpet,4,Trumpet_4,186.0,188.0,-0.0
-Trumpet,5,Trumpet_5,188.0,194.0,-0.0
-Trumpet,6,Trumpet_6,194.0,196.0,-0.0
-Trumpet,7,Trumpet_7,196.0,207.0,2.364011629520427
-Trumpet,8,Trumpet_8,207.0,211.0,-0.0
-Trumpet,9,Trumpet_9,211.0,213.0,-0.0
-Trumpet,10,Trumpet_10,213.0,314.0,-0.0
-Trumpet,11,Trumpet_11,314.0,356.0,3.0282418159134146
-Trumpet,12,Trumpet_12,356.0,363.0,-0.0
-Trumpet,13,Trumpet_13,363.0,364.0,-0.0
-Trumpet,14,Trumpet_14,364.0,371.0,-0.0
-Trumpet,15,Trumpet_15,371.0,388.0,1.4547933471489585
-Trumpet,16,Trumpet_16,388.0,400.0,0.5916727785823275
-Trumpet,17,Trumpet_17,400.0,454.5,-0.0
-Trumpet,18,Trumpet_18,454.5,462.0,1.0
-Trumpet,19,Trumpet_19,462.0,494.5,-0.0
-Trumpet,20,Trumpet_20,494.5,502.0,0.8112781244591328
-Trumpet,21,Trumpet_21,502.0,532.0,-0.0
-Trumpet,22,Trumpet_22,532.0,534.0,-0.0
-Trumpet,23,Trumpet_23,534.0,566.0,-0.0
-Trumpet,24,Trumpet_24,566.0,614.0,1.9278890341036985
-Trumpet,25,Trumpet_25,614.0,702.0,-0.0
-Trumpet,26,Trumpet_26,702.0,716.0,1.9492035054291628
-Trumpet,27,Trumpet_27,716.0,742.0,3.2112283804191684
-Trumpet,28,Trumpet_28,742.0,806.0,1.9434815086570558
-Trumpet,29,Trumpet_29,806.0,814.0,-0.0
-Trumpet,30,Trumpet_30,814.0,839.0,-0.0
-Trumpet,31,Trumpet_31,839.0,946.0,1.7980479747528317
-Trumpet,32,Trumpet_32,946.0,958.0,1.6225562489182657
-Trumpet,33,Trumpet_33,958.0,1010.0,2.1976047893848487
-Trumpet,34,Trumpet_34,1010.0,1014.0,0.9182958340544896
+Flute,10,Flute_10,226.5,236.5,2.3498495686324086
+Flute,11,Flute_11,236.5,242.0,1.576900914616579
+Flute,12,Flute_12,242.0,304.5,-0.0
+Flute,13,Flute_13,304.5,372.0,3.913293752585984
+Flute,14,Flute_14,372.0,387.0,-0.0
+Flute,15,Flute_15,387.0,502.0,3.7548432642645677
+Flute,16,Flute_16,502.0,518.0,-0.0
+Flute,17,Flute_17,518.0,522.0,-0.0
+Flute,18,Flute_18,522.0,532.0,-0.0
+Flute,19,Flute_19,532.0,534.0,-0.0
+Flute,20,Flute_20,534.0,572.0,-0.0
+Flute,21,Flute_21,572.0,610.0,3.165695618788019
+Flute,22,Flute_22,610.0,628.0,-0.0
+Flute,23,Flute_23,628.0,667.0,2.435909241665556
+Flute,24,Flute_24,667.0,682.0,-0.0
+Flute,25,Flute_25,682.0,738.0,3.2056287963902763
+Flute,26,Flute_26,738.0,738.5,-0.0
+Flute,27,Flute_27,738.5,744.0,1.5726236638951638
+Flute,28,Flute_28,744.0,920.0,4.2456372323878675
+Flute,29,Flute_29,920.0,925.0,0.9182958340544896
+Flute,30,Flute_30,925.0,932.0,-0.0
+Flute,31,Flute_31,932.0,933.0,-0.0
+Flute,32,Flute_32,933.0,936.0,-0.0
+Flute,33,Flute_33,936.0,942.0,0.8112781244591328
+Flute,34,Flute_34,942.0,968.0,1.6754352879954642
+Flute,35,Flute_35,968.0,986.5,-0.0
+Flute,36,Flute_36,986.5,1009.0,2.8316244252764453
+Oboe,1,Oboe_1,64.0,114.0,2.7991896383420767
+Oboe,2,Oboe_2,114.0,166.0,-0.0
+Oboe,3,Oboe_3,166.0,196.0,3.016875695766564
+Oboe,4,Oboe_4,196.0,198.0,-0.0
+Oboe,5,Oboe_5,198.0,220.0,2.676537856152929
+Oboe,6,Oboe_6,220.0,220.5,-0.0
+Oboe,7,Oboe_7,220.5,222.0,-0.0
+Oboe,8,Oboe_8,222.0,226.0,2.0928786893420313
+Oboe,9,Oboe_9,226.0,226.5,-0.0
+Oboe,10,Oboe_10,226.5,228.0,-0.0
+Oboe,11,Oboe_11,228.0,228.5,-0.0
+Oboe,12,Oboe_12,228.5,230.0,-0.0
+Oboe,13,Oboe_13,230.0,234.0,2.0928786893420313
+Oboe,14,Oboe_14,234.0,236.5,-0.0
+Oboe,15,Oboe_15,236.5,242.0,2.040488414307512
+Oboe,16,Oboe_16,242.0,304.5,-0.0
+Oboe,17,Oboe_17,304.5,356.0,3.3596332382426657
+Oboe,18,Oboe_18,356.0,369.0,-0.0
+Oboe,19,Oboe_19,369.0,372.0,1.692878689342031
+Oboe,20,Oboe_20,372.0,385.0,-0.0
+Oboe,21,Oboe_21,385.0,386.0,-0.0
+Oboe,22,Oboe_22,386.0,388.5,-0.0
+Oboe,23,Oboe_23,388.5,389.5,-0.0
+Oboe,24,Oboe_24,389.5,390.0,-0.0
+Oboe,25,Oboe_25,390.0,416.0,1.8423709931771088
+Oboe,26,Oboe_26,416.0,432.0,-0.0
+Oboe,27,Oboe_27,432.0,502.0,3.256899116192381
+Oboe,28,Oboe_28,502.0,506.0,-0.0
+Oboe,29,Oboe_29,506.0,532.0,2.6111745233965205
+Oboe,30,Oboe_30,532.0,534.0,-0.0
+Oboe,31,Oboe_31,534.0,556.0,3.6444377780099297
+Oboe,32,Oboe_32,556.0,560.0,-0.0
+Oboe,33,Oboe_33,560.0,564.0,-0.0
+Oboe,34,Oboe_34,564.0,568.0,-0.0
+Oboe,35,Oboe_35,568.0,614.0,2.992327060754886
+Oboe,36,Oboe_36,614.0,632.0,-0.0
+Oboe,37,Oboe_37,632.0,654.0,0.9852281360342516
+Oboe,38,Oboe_38,654.0,702.0,-0.0
+Oboe,39,Oboe_39,702.0,706.0,1.8365916681089791
+Oboe,40,Oboe_40,706.0,734.0,2.289740935350526
+Oboe,41,Oboe_41,734.0,734.5,-0.0
+Oboe,42,Oboe_42,734.5,736.0,-0.0
+Oboe,43,Oboe_43,736.0,736.5,-0.0
+Oboe,44,Oboe_44,736.5,738.0,-0.0
+Oboe,45,Oboe_45,738.0,742.0,2.0928786893420313
+Oboe,46,Oboe_46,742.0,742.5,-0.0
+Oboe,47,Oboe_47,742.5,744.0,-0.0
+Oboe,48,Oboe_48,744.0,744.5,-0.0
+Oboe,49,Oboe_49,744.5,746.0,-0.0
+Oboe,50,Oboe_50,746.0,748.0,0.8112781244591328
+Oboe,51,Oboe_51,748.0,748.5,-0.0
+Oboe,52,Oboe_52,748.5,774.0,3.078578839845595
+Oboe,53,Oboe_53,774.0,798.0,2.7530037141613994
+Oboe,54,Oboe_54,798.0,800.5,-0.0
+Oboe,55,Oboe_55,800.5,802.0,-0.0
+Oboe,56,Oboe_56,802.0,810.0,-0.0
+Oboe,57,Oboe_57,810.0,898.0,3.6198448390009883
+Oboe,58,Oboe_58,898.0,904.0,-0.0
+Oboe,59,Oboe_59,904.0,916.0,0.9182958340544896
+Oboe,60,Oboe_60,916.0,937.0,2.1180782093497093
+Oboe,61,Oboe_61,937.0,958.0,2.691518939403281
+Oboe,62,Oboe_62,958.0,1013.0,3.1517877618403816
+B♭ Clarinet,1,B♭ Clarinet_1,8.0,34.5,-0.0
+B♭ Clarinet,2,B♭ Clarinet_2,34.5,35.0,-0.0
+B♭ Clarinet,3,B♭ Clarinet_3,35.0,40.0,2.5
+B♭ Clarinet,4,B♭ Clarinet_4,40.0,46.0,2.7419011889093374
+B♭ Clarinet,5,B♭ Clarinet_5,46.0,62.5,-0.0
+B♭ Clarinet,6,B♭ Clarinet_6,62.5,64.0,-0.0
+B♭ Clarinet,7,B♭ Clarinet_7,64.0,74.0,-0.0
+B♭ Clarinet,8,B♭ Clarinet_8,74.0,101.0,2.8092000326978117
+B♭ Clarinet,9,B♭ Clarinet_9,101.0,102.0,-0.0
+B♭ Clarinet,10,B♭ Clarinet_10,102.0,110.0,-0.0
+B♭ Clarinet,11,B♭ Clarinet_11,110.0,114.0,-0.0
+B♭ Clarinet,12,B♭ Clarinet_12,114.0,132.0,-0.0
+B♭ Clarinet,13,B♭ Clarinet_13,132.0,136.0,1.5
+B♭ Clarinet,14,B♭ Clarinet_14,136.0,139.0,0.9182958340544896
+B♭ Clarinet,15,B♭ Clarinet_15,139.0,164.0,-0.0
+B♭ Clarinet,16,B♭ Clarinet_16,164.0,200.0,2.1641477244088865
+B♭ Clarinet,17,B♭ Clarinet_17,200.0,200.5,-0.0
+B♭ Clarinet,18,B♭ Clarinet_18,200.5,209.0,2.6575418763247165
+B♭ Clarinet,19,B♭ Clarinet_19,209.0,211.0,-0.0
+B♭ Clarinet,20,B♭ Clarinet_20,211.0,213.0,-0.0
+B♭ Clarinet,21,B♭ Clarinet_21,213.0,215.0,-0.0
+B♭ Clarinet,22,B♭ Clarinet_22,215.0,217.0,-0.0
+B♭ Clarinet,23,B♭ Clarinet_23,217.0,220.0,2.0928786893420313
+B♭ Clarinet,24,B♭ Clarinet_24,220.0,226.0,1.89540555844018
+B♭ Clarinet,25,B♭ Clarinet_25,226.0,226.5,-0.0
+B♭ Clarinet,26,B♭ Clarinet_26,226.5,228.0,-0.0
+B♭ Clarinet,27,B♭ Clarinet_27,228.0,242.0,2.9965712788532066
+B♭ Clarinet,28,B♭ Clarinet_28,242.0,248.5,-0.0
+B♭ Clarinet,29,B♭ Clarinet_29,248.5,254.0,1.9419011889093372
+B♭ Clarinet,30,B♭ Clarinet_30,254.0,258.5,-0.0
+B♭ Clarinet,31,B♭ Clarinet_31,258.5,282.0,1.9140851994057342
+B♭ Clarinet,32,B♭ Clarinet_32,282.0,290.0,-0.0
+B♭ Clarinet,33,B♭ Clarinet_33,290.0,318.0,3.609709275369677
+B♭ Clarinet,34,B♭ Clarinet_34,318.0,320.5,-0.0
+B♭ Clarinet,35,B♭ Clarinet_35,320.5,326.0,2.541884843497074
+B♭ Clarinet,36,B♭ Clarinet_36,326.0,328.5,-0.0
+B♭ Clarinet,37,B♭ Clarinet_37,328.5,356.0,2.9748067842293935
+B♭ Clarinet,38,B♭ Clarinet_38,356.0,367.0,-0.0
+B♭ Clarinet,39,B♭ Clarinet_39,367.0,372.0,1.692878689342031
+B♭ Clarinet,40,B♭ Clarinet_40,372.0,388.0,1.8365916681089791
+B♭ Clarinet,41,B♭ Clarinet_41,388.0,388.5,-0.0
+B♭ Clarinet,42,B♭ Clarinet_42,388.5,390.0,-0.0
+B♭ Clarinet,43,B♭ Clarinet_43,390.0,392.0,-0.0
+B♭ Clarinet,44,B♭ Clarinet_44,392.0,398.0,-0.0
+B♭ Clarinet,45,B♭ Clarinet_45,398.0,400.0,-0.0
+B♭ Clarinet,46,B♭ Clarinet_46,400.0,406.0,-0.0
+B♭ Clarinet,47,B♭ Clarinet_47,406.0,414.0,1.0
+B♭ Clarinet,48,B♭ Clarinet_48,414.0,420.0,1.0
+B♭ Clarinet,49,B♭ Clarinet_49,420.0,464.0,2.842994481724944
+B♭ Clarinet,50,B♭ Clarinet_50,464.0,476.0,-0.0
+B♭ Clarinet,51,B♭ Clarinet_51,476.0,480.5,-0.0
+B♭ Clarinet,52,B♭ Clarinet_52,480.5,502.0,2.1459787727280437
+B♭ Clarinet,53,B♭ Clarinet_53,502.0,510.0,-0.0
+B♭ Clarinet,54,B♭ Clarinet_54,510.0,532.0,0.9182958340544896
+B♭ Clarinet,55,B♭ Clarinet_55,532.0,534.0,-0.0
+B♭ Clarinet,56,B♭ Clarinet_56,534.0,556.0,-0.0
+B♭ Clarinet,57,B♭ Clarinet_57,556.0,560.0,-0.0
+B♭ Clarinet,58,B♭ Clarinet_58,560.0,570.0,-0.0
+B♭ Clarinet,59,B♭ Clarinet_59,570.0,597.0,2.8092000326978117
+B♭ Clarinet,60,B♭ Clarinet_60,597.0,598.0,-0.0
+B♭ Clarinet,61,B♭ Clarinet_61,598.0,610.0,0.7219280948873623
+B♭ Clarinet,62,B♭ Clarinet_62,610.0,656.0,-0.0
+B♭ Clarinet,63,B♭ Clarinet_63,656.0,664.0,1.5
+B♭ Clarinet,64,B♭ Clarinet_64,664.0,667.0,0.9182958340544896
+B♭ Clarinet,65,B♭ Clarinet_65,667.0,678.0,-0.0
+B♭ Clarinet,66,B♭ Clarinet_66,678.0,708.0,1.8737238509435332
+B♭ Clarinet,67,B♭ Clarinet_67,708.0,732.0,2.948192411043098
+B♭ Clarinet,68,B♭ Clarinet_68,732.0,738.0,1.89540555844018
+B♭ Clarinet,69,B♭ Clarinet_69,738.0,738.5,-0.0
+B♭ Clarinet,70,B♭ Clarinet_70,738.5,740.0,-0.0
+B♭ Clarinet,71,B♭ Clarinet_71,740.0,744.0,1.4056390622295665
+B♭ Clarinet,72,B♭ Clarinet_72,744.0,778.0,3.4119628106617146
+B♭ Clarinet,73,B♭ Clarinet_73,778.0,780.5,-0.0
+B♭ Clarinet,74,B♭ Clarinet_74,780.5,782.0,-0.0
+B♭ Clarinet,75,B♭ Clarinet_75,782.0,798.0,1.8729647673308782
+B♭ Clarinet,76,B♭ Clarinet_76,798.0,806.0,-0.0
+B♭ Clarinet,77,B♭ Clarinet_77,806.0,817.0,1.692878689342031
+B♭ Clarinet,78,B♭ Clarinet_78,817.0,822.0,-0.0
+B♭ Clarinet,79,B♭ Clarinet_79,822.0,887.0,3.293782748438937
+B♭ Clarinet,80,B♭ Clarinet_80,887.0,892.0,-0.0
+B♭ Clarinet,81,B♭ Clarinet_81,892.0,895.0,1.584962500721156
+B♭ Clarinet,82,B♭ Clarinet_82,895.0,900.0,-0.0
+B♭ Clarinet,83,B♭ Clarinet_83,900.0,919.0,2.2877837199410704
+B♭ Clarinet,84,B♭ Clarinet_84,919.0,920.0,-0.0
+B♭ Clarinet,85,B♭ Clarinet_85,920.0,923.0,1.0
+B♭ Clarinet,86,B♭ Clarinet_86,923.0,925.0,-0.0
+B♭ Clarinet,87,B♭ Clarinet_87,925.0,932.0,-0.0
+B♭ Clarinet,88,B♭ Clarinet_88,932.0,937.0,0.9182958340544896
+B♭ Clarinet,89,B♭ Clarinet_89,937.0,939.0,-0.0
+B♭ Clarinet,90,B♭ Clarinet_90,939.0,941.0,-0.0
+B♭ Clarinet,91,B♭ Clarinet_91,941.0,942.0,-0.0
+B♭ Clarinet,92,B♭ Clarinet_92,942.0,962.0,3.578515947946701
+B♭ Clarinet,93,B♭ Clarinet_93,962.0,968.0,2.341901188909337
+B♭ Clarinet,94,B♭ Clarinet_94,968.0,973.0,-0.0
+B♭ Clarinet,95,B♭ Clarinet_95,973.0,974.0,-0.0
+B♭ Clarinet,96,B♭ Clarinet_96,974.0,975.0,-0.0
+B♭ Clarinet,97,B♭ Clarinet_97,975.0,982.0,2.311278124459133
+B♭ Clarinet,98,B♭ Clarinet_98,982.0,983.0,-0.0
+B♭ Clarinet,99,B♭ Clarinet_99,983.0,1009.0,2.5445081288034492
+Bassoon,1,Bassoon_1,34.0,36.0,-0.0
+Bassoon,2,Bassoon_2,36.0,46.0,3.113313414925646
+Bassoon,3,Bassoon_3,46.0,70.0,-0.0
+Bassoon,4,Bassoon_4,70.0,84.0,3.113313414925646
+Bassoon,5,Bassoon_5,84.0,114.0,2.662245940958111
+Bassoon,6,Bassoon_6,114.0,132.0,-0.0
+Bassoon,7,Bassoon_7,132.0,200.0,3.8718973007790956
+Bassoon,8,Bassoon_8,200.0,202.0,-0.0
+Bassoon,9,Bassoon_9,202.0,228.0,3.615505175947641
+Bassoon,10,Bassoon_10,228.0,238.5,2.3498495686324086
+Bassoon,11,Bassoon_11,238.5,240.0,-0.0
+Bassoon,12,Bassoon_12,240.0,244.0,1.6225562489182657
+Bassoon,13,Bassoon_13,244.0,252.0,-0.0
+Bassoon,14,Bassoon_14,252.0,374.0,4.661266560556901
+Bassoon,15,Bassoon_15,374.0,536.0,4.368986861749276
+Bassoon,16,Bassoon_16,536.0,556.0,-0.0
+Bassoon,17,Bassoon_17,556.0,582.0,4.137914477612991
+Bassoon,18,Bassoon_18,582.0,646.5,3.2627338429119757
+Bassoon,19,Bassoon_19,646.5,714.5,3.552350547215844
+Bassoon,20,Bassoon_20,714.5,785.0,3.9493633213260857
+Bassoon,21,Bassoon_21,785.0,881.0,4.564973571682692
+Bassoon,22,Bassoon_22,881.0,883.0,-0.0
+Bassoon,23,Bassoon_23,883.0,885.0,-0.0
+Bassoon,24,Bassoon_24,885.0,928.0,2.9366266210742915
+Bassoon,25,Bassoon_25,928.0,971.0,3.835521494966653
+Bassoon,26,Bassoon_26,971.0,975.0,-0.0
+Bassoon,27,Bassoon_27,975.0,1013.0,3.080058399276171
+Horn in E♭,1,Horn in E♭_1,38.0,46.0,3.2516291673878226
+Horn in E♭,2,Horn in E♭_2,46.0,62.5,-0.0
+Horn in E♭,3,Horn in E♭_3,62.5,68.0,2.0928786893420313
+Horn in E♭,4,Horn in E♭_4,68.0,84.0,-0.0
+Horn in E♭,5,Horn in E♭_5,84.0,114.0,2.0676003050551777
+Horn in E♭,6,Horn in E♭_6,114.0,118.0,1.6225562489182657
+Horn in E♭,7,Horn in E♭_7,118.0,120.0,-0.0
+Horn in E♭,8,Horn in E♭_8,120.0,146.0,0.39124356362925566
+Horn in E♭,9,Horn in E♭_9,146.0,164.0,-0.0
+Horn in E♭,10,Horn in E♭_10,164.0,196.0,2.1877328006930323
+Horn in E♭,11,Horn in E♭_11,196.0,200.0,1.0
+Horn in E♭,12,Horn in E♭_12,200.0,217.0,2.0173899391256844
+Horn in E♭,13,Horn in E♭_13,217.0,218.0,-0.0
+Horn in E♭,14,Horn in E♭_14,218.0,223.5,2.040488414307512
+Horn in E♭,15,Horn in E♭_15,223.5,228.5,-0.0
+Horn in E♭,16,Horn in E♭_16,228.5,242.0,2.5712122601251455
+Horn in E♭,17,Horn in E♭_17,242.0,248.5,-0.0
+Horn in E♭,18,Horn in E♭_18,248.5,254.0,1.9419011889093372
+Horn in E♭,19,Horn in E♭_19,254.0,285.0,-0.0
+Horn in E♭,20,Horn in E♭_20,285.0,298.0,2.5032289436203636
+Horn in E♭,21,Horn in E♭_21,298.0,314.5,-0.0
+Horn in E♭,22,Horn in E♭_22,314.5,350.0,2.1978818964931257
+Horn in E♭,23,Horn in E♭_23,350.0,381.0,-0.0
+Horn in E♭,24,Horn in E♭_24,381.0,416.0,2.7152940991096255
+Horn in E♭,25,Horn in E♭_25,416.0,466.0,-0.0
+Horn in E♭,26,Horn in E♭_26,466.0,496.0,2.743917095929001
+Horn in E♭,27,Horn in E♭_27,496.0,502.0,1.692878689342031
+Horn in E♭,28,Horn in E♭_28,502.0,556.0,-0.0
+Horn in E♭,29,Horn in E♭_29,556.0,582.0,3.355388542207534
+Horn in E♭,30,Horn in E♭_30,582.0,612.0,2.0676003050551777
+Horn in E♭,31,Horn in E♭_31,612.0,620.0,-0.0
+Horn in E♭,32,Horn in E♭_32,620.0,650.0,-0.0
+Horn in E♭,33,Horn in E♭_33,650.0,693.0,-0.0
+Horn in E♭,34,Horn in E♭_34,693.0,784.0,2.5964409043123293
+Horn in E♭,35,Horn in E♭_35,784.0,796.0,1.9492035054291628
+Horn in E♭,36,Horn in E♭_36,796.0,808.0,-0.0
+Horn in E♭,37,Horn in E♭_37,808.0,819.0,1.692878689342031
+Horn in E♭,38,Horn in E♭_38,819.0,832.0,-0.0
+Horn in E♭,39,Horn in E♭_39,832.0,882.0,2.87411060179885
+Horn in E♭,40,Horn in E♭_40,882.0,902.0,-0.0
+Horn in E♭,41,Horn in E♭_41,902.0,925.0,2.2022500219139696
+Horn in E♭,42,Horn in E♭_42,925.0,956.0,1.1216407621868583
+Horn in E♭,43,Horn in E♭_43,956.0,964.0,2.1091703386755984
+Horn in E♭,44,Horn in E♭_44,964.0,970.0,1.692878689342031
+Horn in E♭,45,Horn in E♭_45,970.0,988.5,-0.0
+Horn in E♭,46,Horn in E♭_46,988.5,1011.0,0.976020648236615
+C Trumpet,1,C Trumpet_1,40.0,84.0,-0.0
+C Trumpet,2,C Trumpet_2,84.0,110.0,2.0121206508166773
+C Trumpet,3,C Trumpet_3,110.0,186.0,-0.0
+C Trumpet,4,C Trumpet_4,186.0,188.0,-0.0
+C Trumpet,5,C Trumpet_5,188.0,194.0,-0.0
+C Trumpet,6,C Trumpet_6,194.0,207.0,2.4928786893420307
+C Trumpet,7,C Trumpet_7,207.0,211.0,-0.0
+C Trumpet,8,C Trumpet_8,211.0,213.0,-0.0
+C Trumpet,9,C Trumpet_9,213.0,314.0,-0.0
+C Trumpet,10,C Trumpet_10,314.0,356.0,3.0290147769566547
+C Trumpet,11,C Trumpet_11,356.0,363.0,-0.0
+C Trumpet,12,C Trumpet_12,363.0,364.0,-0.0
+C Trumpet,13,C Trumpet_13,364.0,371.0,-0.0
+C Trumpet,14,C Trumpet_14,371.0,388.0,1.692878689342031
+C Trumpet,15,C Trumpet_15,388.0,400.0,0.8112781244591328
+C Trumpet,16,C Trumpet_16,400.0,454.5,-0.0
+C Trumpet,17,C Trumpet_17,454.5,462.0,1.0
+C Trumpet,18,C Trumpet_18,462.0,494.5,-0.0
+C Trumpet,19,C Trumpet_19,494.5,502.0,0.8112781244591328
+C Trumpet,20,C Trumpet_20,502.0,532.0,-0.0
+C Trumpet,21,C Trumpet_21,532.0,534.0,-0.0
+C Trumpet,22,C Trumpet_22,534.0,562.0,-0.0
+C Trumpet,23,C Trumpet_23,562.0,610.0,1.9278890341036985
+C Trumpet,24,C Trumpet_24,610.0,698.0,-0.0
+C Trumpet,25,C Trumpet_25,698.0,802.0,3.0728510339770994
+C Trumpet,26,C Trumpet_26,802.0,810.0,-0.0
+C Trumpet,27,C Trumpet_27,810.0,835.0,-0.0
+C Trumpet,28,C Trumpet_28,835.0,942.0,1.7980479747528317
+C Trumpet,29,C Trumpet_29,942.0,1006.0,2.1588967524622023
+C Trumpet,30,C Trumpet_30,1006.0,1009.0,1.0
 Timpani,1,Timpani_1,40.0,84.0,-0.0
 Timpani,2,Timpani_2,84.0,94.0,1.0
 Timpani,3,Timpani_3,94.0,110.0,1.970456272068503
@@ -250,45 +311,45 @@ Timpani,9,Timpani_9,388.0,494.5,-0.0
 Timpani,10,Timpani_10,494.5,502.0,0.8112781244591328
 Timpani,11,Timpani_11,502.0,532.0,-0.0
 Timpani,12,Timpani_12,532.0,534.0,-0.0
-Timpani,13,Timpani_13,534.0,566.0,-0.0
-Timpani,14,Timpani_14,566.0,594.0,0.9182958340544896
-Timpani,15,Timpani_15,594.0,614.0,2.0435644431995965
-Timpani,16,Timpani_16,614.0,638.0,0.8112781244591328
-Timpani,17,Timpani_17,638.0,654.0,1.6225562489182657
-Timpani,18,Timpani_18,654.0,702.0,-0.0
-Timpani,19,Timpani_19,702.0,706.0,0.9182958340544896
-Timpani,20,Timpani_20,706.0,708.0,-0.0
-Timpani,21,Timpani_21,708.0,725.0,1.7552805663468425
-Timpani,22,Timpani_22,725.0,734.0,0.9709505944546686
-Timpani,23,Timpani_23,734.0,742.0,1.6225562489182657
-Timpani,24,Timpani_24,742.0,750.0,1.6225562489182657
-Timpani,25,Timpani_25,750.0,754.0,1.6225562489182657
-Timpani,26,Timpani_26,754.0,806.0,1.431490575468259
-Timpani,27,Timpani_27,806.0,814.0,-0.0
-Timpani,28,Timpani_28,814.0,839.0,-0.0
-Timpani,29,Timpani_29,839.0,946.0,2.0337358016684264
-Timpani,30,Timpani_30,946.0,958.0,1.6225562489182657
-Timpani,31,Timpani_31,958.0,992.0,1.5313592421438649
-Timpani,32,Timpani_32,992.0,996.0,1.6225562489182657
-Timpani,33,Timpani_33,996.0,1000.0,1.6225562489182657
-Timpani,34,Timpani_34,1000.0,1001.0,-0.0
-Timpani,35,Timpani_35,1001.0,1002.0,-0.0
-Timpani,36,Timpani_36,1002.0,1003.0,-0.0
-Timpani,37,Timpani_37,1003.0,1004.0,-0.0
-Timpani,38,Timpani_38,1004.0,1005.0,-0.0
-Timpani,39,Timpani_39,1005.0,1006.0,-0.0
-Timpani,40,Timpani_40,1006.0,1007.0,-0.0
-Timpani,41,Timpani_41,1007.0,1008.0,-0.0
-Timpani,42,Timpani_42,1008.0,1010.0,-0.0
-Timpani,43,Timpani_43,1010.0,1014.0,1.0
+Timpani,13,Timpani_13,534.0,562.0,-0.0
+Timpani,14,Timpani_14,562.0,590.0,0.9182958340544896
+Timpani,15,Timpani_15,590.0,610.0,2.0435644431995965
+Timpani,16,Timpani_16,610.0,634.0,0.8112781244591328
+Timpani,17,Timpani_17,634.0,650.0,1.6225562489182657
+Timpani,18,Timpani_18,650.0,698.0,-0.0
+Timpani,19,Timpani_19,698.0,702.0,0.9182958340544896
+Timpani,20,Timpani_20,702.0,704.0,-0.0
+Timpani,21,Timpani_21,704.0,721.0,1.7552805663468425
+Timpani,22,Timpani_22,721.0,730.0,0.9709505944546686
+Timpani,23,Timpani_23,730.0,738.0,1.6225562489182657
+Timpani,24,Timpani_24,738.0,746.0,1.6225562489182657
+Timpani,25,Timpani_25,746.0,750.0,1.6225562489182657
+Timpani,26,Timpani_26,750.0,802.0,1.831893690704411
+Timpani,27,Timpani_27,802.0,810.0,-0.0
+Timpani,28,Timpani_28,810.0,835.0,-0.0
+Timpani,29,Timpani_29,835.0,942.0,1.3690013002210972
+Timpani,30,Timpani_30,942.0,954.0,1.6225562489182657
+Timpani,31,Timpani_31,954.0,988.0,1.5313592421438649
+Timpani,32,Timpani_32,988.0,992.0,1.6225562489182657
+Timpani,33,Timpani_33,992.0,996.0,1.6225562489182657
+Timpani,34,Timpani_34,996.0,997.0,-0.0
+Timpani,35,Timpani_35,997.0,998.0,-0.0
+Timpani,36,Timpani_36,998.0,999.0,-0.0
+Timpani,37,Timpani_37,999.0,1000.0,-0.0
+Timpani,38,Timpani_38,1000.0,1001.0,-0.0
+Timpani,39,Timpani_39,1001.0,1002.0,-0.0
+Timpani,40,Timpani_40,1002.0,1003.0,-0.0
+Timpani,41,Timpani_41,1003.0,1004.0,-0.0
+Timpani,42,Timpani_42,1004.0,1006.0,-0.0
+Timpani,43,Timpani_43,1006.0,1009.0,1.0
 Violins I,1,Violins I_1,4.5,8.0,1.6225562489182657
 Violins I,2,Violins I_2,8.0,14.5,-0.0
 Violins I,3,Violins I_3,14.5,18.0,1.6225562489182657
 Violins I,4,Violins I_4,18.0,22.5,-0.0
 Violins I,5,Violins I_5,22.5,38.0,2.8572927138814554
 Violins I,6,Violins I_6,38.0,40.0,-0.0
-Violins I,7,Violins I_7,40.0,40.0,0.0
-Violins I,8,Violins I_8,40.0,46.0,3.2516291673878226
+Violins I,7,Violins I_7,40.0,42.5,-0.0
+Violins I,8,Violins I_8,42.5,46.0,1.6225562489182657
 Violins I,9,Violins I_9,46.0,52.0,1.9419011889093372
 Violins I,10,Violins I_10,52.0,54.0,-0.0
 Violins I,11,Violins I_11,54.0,60.0,2.377443751081734
@@ -327,210 +388,242 @@ Violins I,43,Violins I_43,322.5,324.0,1.584962500721156
 Violins I,44,Violins I_44,324.0,326.5,-0.0
 Violins I,45,Violins I_45,326.5,328.0,1.584962500721156
 Violins I,46,Violins I_46,328.0,330.5,-0.0
-Violins I,47,Violins I_47,330.5,358.0,3.1641299981503446
-Violins I,48,Violins I_48,358.0,358.0,0.0
-Violins I,49,Violins I_49,358.0,360.0,1.0
-Violins I,50,Violins I_50,360.0,360.0,0.0
-Violins I,51,Violins I_51,360.0,362.0,1.0
-Violins I,52,Violins I_52,362.0,362.0,0.0
-Violins I,53,Violins I_53,362.0,364.0,1.0
-Violins I,54,Violins I_54,364.0,366.0,-0.0
-Violins I,55,Violins I_55,366.0,374.0,3.213873464350643
-Violins I,56,Violins I_56,374.0,374.0,0.0
-Violins I,57,Violins I_57,374.0,376.0,1.0
-Violins I,58,Violins I_58,376.0,376.0,0.0
-Violins I,59,Violins I_59,376.0,378.0,1.0
-Violins I,60,Violins I_60,378.0,378.0,0.0
-Violins I,61,Violins I_61,378.0,380.0,1.0
-Violins I,62,Violins I_62,380.0,382.0,-0.0
-Violins I,63,Violins I_63,382.0,388.0,2.7575669869723507
-Violins I,64,Violins I_64,388.0,394.0,-0.0
-Violins I,65,Violins I_65,394.0,396.0,-0.0
-Violins I,66,Violins I_66,396.0,402.0,-0.0
-Violins I,67,Violins I_67,402.0,404.0,-0.0
-Violins I,68,Violins I_68,404.0,410.0,-0.0
-Violins I,69,Violins I_69,410.0,412.0,-0.0
-Violins I,70,Violins I_70,412.0,418.0,-0.0
-Violins I,71,Violins I_71,418.0,422.0,-0.0
-Violins I,72,Violins I_72,422.0,426.0,-0.0
-Violins I,73,Violins I_73,426.0,430.0,-0.0
-Violins I,74,Violins I_74,430.0,434.0,-0.0
-Violins I,75,Violins I_75,434.0,438.0,-0.0
-Violins I,76,Violins I_76,438.0,442.0,-0.0
-Violins I,77,Violins I_77,442.0,446.0,-0.0
-Violins I,78,Violins I_78,446.0,450.0,-0.0
-Violins I,79,Violins I_79,450.0,454.0,-0.0
-Violins I,80,Violins I_80,454.0,458.0,1.4438561897747246
-Violins I,81,Violins I_81,458.0,460.0,-0.0
-Violins I,82,Violins I_82,460.0,462.0,-0.0
-Violins I,83,Violins I_83,462.0,466.0,-0.0
-Violins I,84,Violins I_84,466.0,470.0,-0.0
-Violins I,85,Violins I_85,470.0,474.0,-0.0
-Violins I,86,Violins I_86,474.0,478.0,-0.0
-Violins I,87,Violins I_87,478.0,480.5,-0.0
-Violins I,88,Violins I_88,480.5,496.0,1.7256461443492186
-Violins I,89,Violins I_89,496.0,502.0,2.341901188909337
-Violins I,90,Violins I_90,502.0,506.5,-0.0
-Violins I,91,Violins I_91,506.5,510.0,1.4488156357251847
-Violins I,92,Violins I_92,510.0,514.5,-0.0
-Violins I,93,Violins I_93,514.5,532.0,3.0411871851293
-Violins I,94,Violins I_94,532.0,534.0,-0.0
-Violins I,95,Violins I_95,534.0,544.5,-0.0
-Violins I,96,Violins I_96,544.5,548.0,-0.0
-Violins I,97,Violins I_97,548.0,552.0,-0.0
-Violins I,98,Violins I_98,552.0,554.0,-0.0
-Violins I,99,Violins I_99,554.0,562.5,2.5882542125205936
-Violins I,100,Violins I_100,562.5,594.0,3.1208932027909264
-Violins I,101,Violins I_101,594.0,594.5,-0.0
-Violins I,102,Violins I_102,594.5,602.0,2.256564762130954
-Violins I,103,Violins I_103,602.0,602.5,-0.0
-Violins I,104,Violins I_104,602.5,610.0,1.7055872616982601
-Violins I,105,Violins I_105,610.0,614.0,-0.0
-Violins I,106,Violins I_106,614.0,624.0,-0.0
-Violins I,107,Violins I_107,624.0,631.0,2.2359263506290326
-Violins I,108,Violins I_108,631.0,640.0,-0.0
-Violins I,109,Violins I_109,640.0,647.0,2.2359263506290326
-Violins I,110,Violins I_110,647.0,656.0,-0.0
-Violins I,111,Violins I_111,656.0,659.0,1.584962500721156
-Violins I,112,Violins I_112,659.0,664.0,-0.0
-Violins I,113,Violins I_113,664.0,667.0,1.584962500721156
-Violins I,114,Violins I_114,667.0,672.0,-0.0
-Violins I,115,Violins I_115,672.0,716.0,3.9132659320862664
-Violins I,116,Violins I_116,716.0,716.5,-0.0
-Violins I,117,Violins I_117,716.5,732.5,2.9056390622295662
-Violins I,118,Violins I_118,732.5,736.0,1.6225562489182657
-Violins I,119,Violins I_119,736.0,738.0,-0.0
-Violins I,120,Violins I_120,738.0,744.0,2.377443751081734
-Violins I,121,Violins I_121,744.0,746.0,-0.0
-Violins I,122,Violins I_122,746.0,782.0,2.8269098965792976
-Violins I,123,Violins I_123,782.0,788.5,-0.0
-Violins I,124,Violins I_124,788.5,798.0,0.6665783579949205
-Violins I,125,Violins I_125,798.0,808.0,-0.0
-Violins I,126,Violins I_126,808.0,813.5,2.5949066182439395
-Violins I,127,Violins I_127,813.5,816.0,-0.0
-Violins I,128,Violins I_128,816.0,884.0,3.8372950285260603
-Violins I,129,Violins I_129,884.0,885.0,-0.0
-Violins I,130,Violins I_130,885.0,886.0,-0.0
-Violins I,131,Violins I_131,886.0,892.0,-0.0
-Violins I,132,Violins I_132,892.0,895.0,1.584962500721156
-Violins I,133,Violins I_133,895.0,900.0,-0.0
-Violins I,134,Violins I_134,900.0,903.0,1.584962500721156
-Violins I,135,Violins I_135,903.0,908.0,-0.0
-Violins I,136,Violins I_136,908.0,911.0,1.584962500721156
-Violins I,137,Violins I_137,911.0,920.0,-0.0
-Violins I,138,Violins I_138,920.0,921.0,-0.0
-Violins I,139,Violins I_139,921.0,924.0,-0.0
-Violins I,140,Violins I_140,924.0,928.0,0.9182958340544896
-Violins I,141,Violins I_141,928.0,935.0,2.584962500721156
-Violins I,142,Violins I_142,935.0,938.0,-0.0
-Violins I,143,Violins I_143,938.0,939.0,-0.0
-Violins I,144,Violins I_144,939.0,940.0,-0.0
-Violins I,145,Violins I_145,940.0,944.0,0.9182958340544896
-Violins I,146,Violins I_146,944.0,946.0,-0.0
-Violins I,147,Violins I_147,946.0,950.0,1.4438561897747246
-Violins I,148,Violins I_148,950.0,952.0,-0.0
-Violins I,149,Violins I_149,952.0,954.0,-0.0
-Violins I,150,Violins I_150,954.0,966.0,0.9642202839697771
-Violins I,151,Violins I_151,966.0,972.0,2.341901188909337
-Violins I,152,Violins I_152,972.0,976.5,-0.0
-Violins I,153,Violins I_153,976.5,982.0,2.3548425676587295
-Violins I,154,Violins I_154,982.0,1008.0,2.938815113984498
-Violins I,155,Violins I_155,1008.0,1010.0,-0.0
-Violins I,156,Violins I_156,1010.0,1014.0,1.0
-Violins II,1,Violins II_1,46.0,50.5,-0.0
-Violins II,2,Violins II_2,50.5,114.0,3.67215206038181
-Violins II,3,Violins II_3,114.0,124.0,-0.0
-Violins II,4,Violins II_4,124.0,162.0,1.6068322783181097
-Violins II,5,Violins II_5,162.0,186.0,2.158159040911508
-Violins II,6,Violins II_6,186.0,216.5,3.0294654431257566
-Violins II,7,Violins II_7,216.5,217.5,-0.0
-Violins II,8,Violins II_8,217.5,218.0,-0.0
-Violins II,9,Violins II_9,218.0,242.0,2.6772160837677177
-Violins II,10,Violins II_10,242.0,250.5,-0.0
-Violins II,11,Violins II_11,250.5,254.0,1.6225562489182657
-Violins II,12,Violins II_12,254.0,256.5,-0.0
-Violins II,13,Violins II_13,256.5,282.0,2.74528608589772
-Violins II,14,Violins II_14,282.0,290.5,-0.0
-Violins II,15,Violins II_15,290.5,308.0,4.097774879027318
-Violins II,16,Violins II_16,308.0,310.5,-0.0
-Violins II,17,Violins II_17,310.5,358.0,3.402021241291891
-Violins II,18,Violins II_18,358.0,360.0,1.0
-Violins II,19,Violins II_19,360.0,360.0,0.0
-Violins II,20,Violins II_20,360.0,362.0,1.0
-Violins II,21,Violins II_21,362.0,362.0,0.0
-Violins II,22,Violins II_22,362.0,364.0,1.0
-Violins II,23,Violins II_23,364.0,374.0,3.3062143367256223
-Violins II,24,Violins II_24,374.0,376.0,1.0
-Violins II,25,Violins II_25,376.0,376.0,0.0
-Violins II,26,Violins II_26,376.0,378.0,1.0
-Violins II,27,Violins II_27,378.0,378.0,0.0
-Violins II,28,Violins II_28,378.0,380.0,1.0
-Violins II,29,Violins II_29,380.0,388.0,2.7987949406953985
-Violins II,30,Violins II_30,388.0,394.0,-0.0
-Violins II,31,Violins II_31,394.0,396.0,-0.0
-Violins II,32,Violins II_32,396.0,402.0,-0.0
-Violins II,33,Violins II_33,402.0,404.0,-0.0
-Violins II,34,Violins II_34,404.0,410.0,-0.0
-Violins II,35,Violins II_35,410.0,412.0,-0.0
-Violins II,36,Violins II_36,412.0,418.0,-0.0
-Violins II,37,Violins II_37,418.0,422.0,-0.0
-Violins II,38,Violins II_38,422.0,426.0,-0.0
-Violins II,39,Violins II_39,426.0,430.0,-0.0
-Violins II,40,Violins II_40,430.0,434.0,-0.0
-Violins II,41,Violins II_41,434.0,438.0,-0.0
-Violins II,42,Violins II_42,438.0,442.0,-0.0
-Violins II,43,Violins II_43,442.0,446.0,-0.0
-Violins II,44,Violins II_44,446.0,450.0,-0.0
-Violins II,45,Violins II_45,450.0,454.0,-0.0
-Violins II,46,Violins II_46,454.0,462.0,2.8275991292113605
-Violins II,47,Violins II_47,462.0,466.0,-0.0
-Violins II,48,Violins II_48,466.0,470.0,-0.0
-Violins II,49,Violins II_49,470.0,474.0,-0.0
-Violins II,50,Violins II_50,474.0,478.0,-0.0
-Violins II,51,Violins II_51,478.0,480.5,-0.0
-Violins II,52,Violins II_52,480.5,502.0,2.254149189322595
-Violins II,53,Violins II_53,502.0,518.0,2.825011210824177
-Violins II,54,Violins II_54,518.0,532.0,3.299118716857312
-Violins II,55,Violins II_55,532.0,534.0,-0.0
-Violins II,56,Violins II_56,534.0,548.5,-0.0
-Violins II,57,Violins II_57,548.5,602.0,3.254775871364346
-Violins II,58,Violins II_58,602.0,610.0,1.764097655573916
-Violins II,59,Violins II_59,610.0,614.0,-0.0
-Violins II,60,Violins II_60,614.0,624.0,-0.0
-Violins II,61,Violins II_61,624.0,630.0,0.9182958340544896
-Violins II,62,Violins II_62,630.0,640.0,-0.0
-Violins II,63,Violins II_63,640.0,646.0,0.9182958340544896
-Violins II,64,Violins II_64,646.0,656.0,-0.0
-Violins II,65,Violins II_65,656.0,702.0,2.88811057116276
-Violins II,66,Violins II_66,702.0,732.5,3.0221829536848914
-Violins II,67,Violins II_67,732.5,734.0,-0.0
-Violins II,68,Violins II_68,734.0,782.0,3.6889652403813393
-Violins II,69,Violins II_69,782.0,788.5,-0.0
-Violins II,70,Violins II_70,788.5,798.0,0.6665783579949205
-Violins II,71,Violins II_71,798.0,808.0,-0.0
-Violins II,72,Violins II_72,808.0,885.0,3.7819627248574985
-Violins II,73,Violins II_73,885.0,886.0,-0.0
-Violins II,74,Violins II_74,886.0,892.0,-0.0
-Violins II,75,Violins II_75,892.0,895.0,1.584962500721156
-Violins II,76,Violins II_76,895.0,900.0,-0.0
-Violins II,77,Violins II_77,900.0,903.0,1.584962500721156
-Violins II,78,Violins II_78,903.0,908.0,-0.0
-Violins II,79,Violins II_79,908.0,911.0,1.584962500721156
-Violins II,80,Violins II_80,911.0,920.0,-0.0
-Violins II,81,Violins II_81,920.0,921.0,-0.0
-Violins II,82,Violins II_82,921.0,924.0,-0.0
-Violins II,83,Violins II_83,924.0,928.0,1.584962500721156
-Violins II,84,Violins II_84,928.0,930.0,-0.0
-Violins II,85,Violins II_85,930.0,931.0,-0.0
-Violins II,86,Violins II_86,931.0,932.0,-0.0
-Violins II,87,Violins II_87,932.0,933.0,-0.0
-Violins II,88,Violins II_88,933.0,934.0,-0.0
-Violins II,89,Violins II_89,934.0,935.0,-0.0
-Violins II,90,Violins II_90,935.0,940.0,0.9182958340544896
-Violins II,91,Violins II_91,940.0,944.0,1.584962500721156
-Violins II,92,Violins II_92,944.0,972.0,2.0238493260597004
-Violins II,93,Violins II_93,972.0,1010.0,3.5707154684902194
-Violins II,94,Violins II_94,1010.0,1014.0,1.0
+Violins I,47,Violins I_47,330.5,336.0,2.7935644431995965
+Violins I,48,Violins I_48,336.0,338.0,-0.0
+Violins I,49,Violins I_49,338.0,344.0,2.0928786893420313
+Violins I,50,Violins I_50,344.0,346.0,-0.0
+Violins I,51,Violins I_51,346.0,358.0,1.8445095756715775
+Violins I,52,Violins I_52,358.0,360.0,-0.0
+Violins I,53,Violins I_53,360.0,362.0,-0.0
+Violins I,54,Violins I_54,362.0,364.0,-0.0
+Violins I,55,Violins I_55,364.0,366.0,-0.0
+Violins I,56,Violins I_56,366.0,374.0,3.213873464350643
+Violins I,57,Violins I_57,374.0,376.0,-0.0
+Violins I,58,Violins I_58,376.0,378.0,-0.0
+Violins I,59,Violins I_59,378.0,380.0,-0.0
+Violins I,60,Violins I_60,380.0,382.0,-0.0
+Violins I,61,Violins I_61,382.0,388.0,2.7575669869723507
+Violins I,62,Violins I_62,388.0,394.0,-0.0
+Violins I,63,Violins I_63,394.0,396.0,-0.0
+Violins I,64,Violins I_64,396.0,402.0,-0.0
+Violins I,65,Violins I_65,402.0,404.0,-0.0
+Violins I,66,Violins I_66,404.0,410.0,-0.0
+Violins I,67,Violins I_67,410.0,412.0,-0.0
+Violins I,68,Violins I_68,412.0,418.0,-0.0
+Violins I,69,Violins I_69,418.0,422.0,-0.0
+Violins I,70,Violins I_70,422.0,426.0,-0.0
+Violins I,71,Violins I_71,426.0,430.0,-0.0
+Violins I,72,Violins I_72,430.0,434.0,-0.0
+Violins I,73,Violins I_73,434.0,438.0,-0.0
+Violins I,74,Violins I_74,438.0,442.0,-0.0
+Violins I,75,Violins I_75,442.0,446.0,-0.0
+Violins I,76,Violins I_76,446.0,450.0,-0.0
+Violins I,77,Violins I_77,450.0,454.0,-0.0
+Violins I,78,Violins I_78,454.0,458.0,1.4438561897747246
+Violins I,79,Violins I_79,458.0,460.0,-0.0
+Violins I,80,Violins I_80,460.0,462.0,-0.0
+Violins I,81,Violins I_81,462.0,466.0,-0.0
+Violins I,82,Violins I_82,466.0,470.0,-0.0
+Violins I,83,Violins I_83,470.0,474.0,-0.0
+Violins I,84,Violins I_84,474.0,478.0,-0.0
+Violins I,85,Violins I_85,478.0,480.5,-0.0
+Violins I,86,Violins I_86,480.5,496.0,1.7256461443492186
+Violins I,87,Violins I_87,496.0,502.0,2.341901188909337
+Violins I,88,Violins I_88,502.0,506.5,-0.0
+Violins I,89,Violins I_89,506.5,510.0,1.4488156357251847
+Violins I,90,Violins I_90,510.0,514.5,-0.0
+Violins I,91,Violins I_91,514.5,532.0,3.0411871851293
+Violins I,92,Violins I_92,532.0,534.0,-0.0
+Violins I,93,Violins I_93,534.0,544.5,-0.0
+Violins I,94,Violins I_94,544.5,548.0,1.6225562489182657
+Violins I,95,Violins I_95,548.0,550.0,-0.0
+Violins I,96,Violins I_96,550.0,558.5,2.5882542125205936
+Violins I,97,Violins I_97,558.5,590.0,3.1208932027909264
+Violins I,98,Violins I_98,590.0,590.5,-0.0
+Violins I,99,Violins I_99,590.5,598.0,2.256564762130954
+Violins I,100,Violins I_100,598.0,598.5,-0.0
+Violins I,101,Violins I_101,598.5,606.0,1.7055872616982601
+Violins I,102,Violins I_102,606.0,610.0,-0.0
+Violins I,103,Violins I_103,610.0,620.0,-0.0
+Violins I,104,Violins I_104,620.0,627.0,2.2359263506290326
+Violins I,105,Violins I_105,627.0,636.0,-0.0
+Violins I,106,Violins I_106,636.0,643.0,2.2359263506290326
+Violins I,107,Violins I_107,643.0,652.0,-0.0
+Violins I,108,Violins I_108,652.0,655.0,1.584962500721156
+Violins I,109,Violins I_109,655.0,660.0,-0.0
+Violins I,110,Violins I_110,660.0,663.0,1.584962500721156
+Violins I,111,Violins I_111,663.0,668.0,-0.0
+Violins I,112,Violins I_112,668.0,712.0,3.9132659320862664
+Violins I,113,Violins I_113,712.0,712.5,-0.0
+Violins I,114,Violins I_114,712.5,728.5,2.9056390622295662
+Violins I,115,Violins I_115,728.5,732.0,1.6225562489182657
+Violins I,116,Violins I_116,732.0,734.0,-0.0
+Violins I,117,Violins I_117,734.0,740.0,2.377443751081734
+Violins I,118,Violins I_118,740.0,742.0,-0.0
+Violins I,119,Violins I_119,742.0,756.0,2.7594120976125587
+Violins I,120,Violins I_120,756.0,758.0,-0.0
+Violins I,121,Violins I_121,758.0,760.0,-0.0
+Violins I,122,Violins I_122,760.0,762.0,-0.0
+Violins I,123,Violins I_123,762.0,764.0,-0.0
+Violins I,124,Violins I_124,764.0,766.0,-0.0
+Violins I,125,Violins I_125,766.0,768.0,-0.0
+Violins I,126,Violins I_126,768.0,770.0,-0.0
+Violins I,127,Violins I_127,770.0,772.0,-0.0
+Violins I,128,Violins I_128,772.0,774.0,-0.0
+Violins I,129,Violins I_129,774.0,776.0,-0.0
+Violins I,130,Violins I_130,776.0,778.0,-0.0
+Violins I,131,Violins I_131,778.0,784.5,-0.0
+Violins I,132,Violins I_132,784.5,788.0,0.8112781244591328
+Violins I,133,Violins I_133,788.0,790.0,-0.0
+Violins I,134,Violins I_134,790.0,792.0,-0.0
+Violins I,135,Violins I_135,792.0,794.0,-0.0
+Violins I,136,Violins I_136,794.0,804.0,-0.0
+Violins I,137,Violins I_137,804.0,809.5,2.5949066182439395
+Violins I,138,Violins I_138,809.5,812.0,-0.0
+Violins I,139,Violins I_139,812.0,880.0,3.8372950285260603
+Violins I,140,Violins I_140,880.0,881.0,-0.0
+Violins I,141,Violins I_141,881.0,882.0,-0.0
+Violins I,142,Violins I_142,882.0,888.0,-0.0
+Violins I,143,Violins I_143,888.0,891.0,1.584962500721156
+Violins I,144,Violins I_144,891.0,896.0,-0.0
+Violins I,145,Violins I_145,896.0,899.0,1.584962500721156
+Violins I,146,Violins I_146,899.0,904.0,-0.0
+Violins I,147,Violins I_147,904.0,907.0,1.584962500721156
+Violins I,148,Violins I_148,907.0,916.0,-0.0
+Violins I,149,Violins I_149,916.0,917.0,-0.0
+Violins I,150,Violins I_150,917.0,920.0,-0.0
+Violins I,151,Violins I_151,920.0,924.0,0.9182958340544896
+Violins I,152,Violins I_152,924.0,931.0,2.584962500721156
+Violins I,153,Violins I_153,931.0,934.0,-0.0
+Violins I,154,Violins I_154,934.0,935.0,-0.0
+Violins I,155,Violins I_155,935.0,936.0,-0.0
+Violins I,156,Violins I_156,936.0,940.0,0.9182958340544896
+Violins I,157,Violins I_157,940.0,942.0,-0.0
+Violins I,158,Violins I_158,942.0,946.0,1.4438561897747246
+Violins I,159,Violins I_159,946.0,948.0,-0.0
+Violins I,160,Violins I_160,948.0,950.0,-0.0
+Violins I,161,Violins I_161,950.0,952.0,-0.0
+Violins I,162,Violins I_162,952.0,954.0,-0.0
+Violins I,163,Violins I_163,954.0,958.0,1.4438561897747246
+Violins I,164,Violins I_164,958.0,960.0,-0.0
+Violins I,165,Violins I_165,960.0,962.0,-0.0
+Violins I,166,Violins I_166,962.0,968.0,2.341901188909337
+Violins I,167,Violins I_167,968.0,972.5,-0.0
+Violins I,168,Violins I_168,972.5,978.0,2.3548425676587295
+Violins I,169,Violins I_169,978.0,1004.0,2.938815113984498
+Violins I,170,Violins I_170,1004.0,1006.0,-0.0
+Violins I,171,Violins I_171,1006.0,1009.0,1.0
+Violins II,1,Violins II_1,8.0,24.0,2.521962362034448
+Violins II,2,Violins II_2,24.0,36.0,2.5187197268689987
+Violins II,3,Violins II_3,36.0,40.0,1.0
+Violins II,4,Violins II_4,40.0,46.0,2.7419011889093374
+Violins II,5,Violins II_5,46.0,50.5,-0.0
+Violins II,6,Violins II_6,50.5,78.0,3.7479702050403683
+Violins II,7,Violins II_7,78.0,114.0,3.5644120901993968
+Violins II,8,Violins II_8,114.0,124.0,-0.0
+Violins II,9,Violins II_9,124.0,162.0,1.6068322783181097
+Violins II,10,Violins II_10,162.0,185.0,1.983528587002261
+Violins II,11,Violins II_11,185.0,186.0,-0.0
+Violins II,12,Violins II_12,186.0,204.5,3.036577538490195
+Violins II,13,Violins II_13,204.5,216.5,2.792481250360578
+Violins II,14,Violins II_14,216.5,217.5,-0.0
+Violins II,15,Violins II_15,217.5,218.0,-0.0
+Violins II,16,Violins II_16,218.0,242.0,2.6772160837677177
+Violins II,17,Violins II_17,242.0,250.5,-0.0
+Violins II,18,Violins II_18,250.5,254.0,1.6225562489182657
+Violins II,19,Violins II_19,254.0,256.5,-0.0
+Violins II,20,Violins II_20,256.5,282.0,2.74528608589772
+Violins II,21,Violins II_21,282.0,290.5,-0.0
+Violins II,22,Violins II_22,290.5,308.0,4.097774879027318
+Violins II,23,Violins II_23,308.0,310.5,-0.0
+Violins II,24,Violins II_24,310.5,328.0,3.3213464668336843
+Violins II,25,Violins II_25,328.0,330.5,-0.0
+Violins II,26,Violins II_26,330.5,338.0,2.832112684358123
+Violins II,27,Violins II_27,338.0,360.0,3.063983606387077
+Violins II,28,Violins II_28,360.0,362.0,-0.0
+Violins II,29,Violins II_29,362.0,376.0,3.5958053793658937
+Violins II,30,Violins II_30,376.0,378.0,-0.0
+Violins II,31,Violins II_31,378.0,388.0,2.7548875021634687
+Violins II,32,Violins II_32,388.0,394.0,-0.0
+Violins II,33,Violins II_33,394.0,396.0,-0.0
+Violins II,34,Violins II_34,396.0,402.0,-0.0
+Violins II,35,Violins II_35,402.0,404.0,-0.0
+Violins II,36,Violins II_36,404.0,410.0,-0.0
+Violins II,37,Violins II_37,410.0,412.0,-0.0
+Violins II,38,Violins II_38,412.0,418.0,-0.0
+Violins II,39,Violins II_39,418.0,422.0,-0.0
+Violins II,40,Violins II_40,422.0,426.0,-0.0
+Violins II,41,Violins II_41,426.0,430.0,-0.0
+Violins II,42,Violins II_42,430.0,434.0,-0.0
+Violins II,43,Violins II_43,434.0,438.0,-0.0
+Violins II,44,Violins II_44,438.0,442.0,-0.0
+Violins II,45,Violins II_45,442.0,446.0,-0.0
+Violins II,46,Violins II_46,446.0,450.0,-0.0
+Violins II,47,Violins II_47,450.0,454.0,-0.0
+Violins II,48,Violins II_48,454.0,462.0,2.8275991292113605
+Violins II,49,Violins II_49,462.0,466.0,-0.0
+Violins II,50,Violins II_50,466.0,470.0,-0.0
+Violins II,51,Violins II_51,470.0,474.0,-0.0
+Violins II,52,Violins II_52,474.0,478.0,-0.0
+Violins II,53,Violins II_53,478.0,480.5,-0.0
+Violins II,54,Violins II_54,480.5,502.0,2.254149189322595
+Violins II,55,Violins II_55,502.0,510.0,2.4591479170272446
+Violins II,56,Violins II_56,510.0,518.0,2.918295834054489
+Violins II,57,Violins II_57,518.0,532.0,3.299118716857312
+Violins II,58,Violins II_58,532.0,534.0,-0.0
+Violins II,59,Violins II_59,534.0,546.5,-0.0
+Violins II,60,Violins II_60,546.5,574.0,3.164435036507778
+Violins II,61,Violins II_61,574.0,598.0,3.1409059622458346
+Violins II,62,Violins II_62,598.0,598.5,-0.0
+Violins II,63,Violins II_63,598.5,606.0,1.7055872616982601
+Violins II,64,Violins II_64,606.0,610.0,-0.0
+Violins II,65,Violins II_65,610.0,620.0,-0.0
+Violins II,66,Violins II_66,620.0,626.0,0.9182958340544896
+Violins II,67,Violins II_67,626.0,636.0,-0.0
+Violins II,68,Violins II_68,636.0,642.0,0.9182958340544896
+Violins II,69,Violins II_69,642.0,652.0,-0.0
+Violins II,70,Violins II_70,652.0,658.0,0.9182958340544896
+Violins II,71,Violins II_71,658.0,698.0,2.6687008977184243
+Violins II,72,Violins II_72,698.0,716.5,3.011437745188038
+Violins II,73,Violins II_73,716.5,728.5,2.792481250360578
+Violins II,74,Violins II_74,728.5,729.5,-0.0
+Violins II,75,Violins II_75,729.5,730.0,-0.0
+Violins II,76,Violins II_76,730.0,768.0,3.6274378267823115
+Violins II,77,Violins II_77,768.0,770.0,-0.0
+Violins II,78,Violins II_78,770.0,778.0,-0.0
+Violins II,79,Violins II_79,778.0,784.5,-0.0
+Violins II,80,Violins II_80,784.5,794.0,0.9852281360342516
+Violins II,81,Violins II_81,794.0,804.0,-0.0
+Violins II,82,Violins II_82,804.0,809.5,2.5949066182439395
+Violins II,83,Violins II_83,809.5,880.0,3.8257074243677973
+Violins II,84,Violins II_84,880.0,881.0,-0.0
+Violins II,85,Violins II_85,881.0,882.0,-0.0
+Violins II,86,Violins II_86,882.0,888.0,-0.0
+Violins II,87,Violins II_87,888.0,891.0,1.584962500721156
+Violins II,88,Violins II_88,891.0,896.0,-0.0
+Violins II,89,Violins II_89,896.0,899.0,1.584962500721156
+Violins II,90,Violins II_90,899.0,904.0,-0.0
+Violins II,91,Violins II_91,904.0,907.0,1.584962500721156
+Violins II,92,Violins II_92,907.0,916.0,-0.0
+Violins II,93,Violins II_93,916.0,917.0,-0.0
+Violins II,94,Violins II_94,917.0,920.0,-0.0
+Violins II,95,Violins II_95,920.0,924.0,1.584962500721156
+Violins II,96,Violins II_96,924.0,926.0,-0.0
+Violins II,97,Violins II_97,926.0,927.0,-0.0
+Violins II,98,Violins II_98,927.0,928.0,-0.0
+Violins II,99,Violins II_99,928.0,929.0,-0.0
+Violins II,100,Violins II_100,929.0,930.0,-0.0
+Violins II,101,Violins II_101,930.0,931.0,-0.0
+Violins II,102,Violins II_102,931.0,935.0,1.0
+Violins II,103,Violins II_103,935.0,936.0,-0.0
+Violins II,104,Violins II_104,936.0,940.0,1.584962500721156
+Violins II,105,Violins II_105,940.0,942.0,-0.0
+Violins II,106,Violins II_106,942.0,952.0,1.5435644431995965
+Violins II,107,Violins II_107,952.0,954.0,-0.0
+Violins II,108,Violins II_108,954.0,962.0,1.576900914616579
+Violins II,109,Violins II_109,962.0,968.0,2.341901188909337
+Violins II,110,Violins II_110,968.0,1006.0,3.5707154684902194
+Violins II,111,Violins II_111,1006.0,1009.0,1.0
 Violas,1,Violas_1,8.0,12.5,-0.0
 Violas,2,Violas_2,12.5,24.0,2.2664124386929902
 Violas,3,Violas_3,24.0,36.0,3.062138821366182
@@ -544,315 +637,336 @@ Violas,10,Violas_10,75.5,77.5,0.8112781244591328
 Violas,11,Violas_11,77.5,78.0,-0.0
 Violas,12,Violas_12,78.0,83.5,2.1626441180472606
 Violas,13,Violas_13,83.5,86.0,1.3709505944546687
-Violas,14,Violas_14,86.0,114.0,2.320918684836166
-Violas,15,Violas_15,114.0,124.0,-0.0
-Violas,16,Violas_16,124.0,126.0,-0.0
-Violas,17,Violas_17,126.0,134.0,1.5
-Violas,18,Violas_18,134.0,142.0,1.5
-Violas,19,Violas_19,142.0,152.0,1.9219280948873623
-Violas,20,Violas_20,152.0,154.0,-0.0
-Violas,21,Violas_21,154.0,156.0,-0.0
-Violas,22,Violas_22,156.0,160.0,1.0
-Violas,23,Violas_23,160.0,162.0,-0.0
-Violas,24,Violas_24,162.0,166.5,-0.0
-Violas,25,Violas_25,166.5,188.0,3.033393924089408
-Violas,26,Violas_26,188.0,189.0,-0.0
-Violas,27,Violas_27,189.0,192.0,1.0
-Violas,28,Violas_28,192.0,200.0,2.0
-Violas,29,Violas_29,200.0,216.0,2.6496051582167444
-Violas,30,Violas_30,216.0,216.5,-0.0
-Violas,31,Violas_31,216.5,242.0,2.4055006462876762
-Violas,32,Violas_32,242.0,250.5,-0.0
-Violas,33,Violas_33,250.5,254.0,1.6225562489182657
-Violas,34,Violas_34,254.0,258.0,-0.0
-Violas,35,Violas_35,258.0,320.0,3.9794501687152497
-Violas,36,Violas_36,320.0,320.5,-0.0
-Violas,37,Violas_37,320.5,328.0,2.6389205950315935
-Violas,38,Violas_38,328.0,334.0,2.5220552088742005
-Violas,39,Violas_39,334.0,334.5,-0.0
-Violas,40,Violas_40,334.5,338.0,0.5435644431995964
-Violas,41,Violas_41,338.0,340.5,-0.0
-Violas,42,Violas_42,340.5,342.5,-0.0
-Violas,43,Violas_43,342.5,354.0,2.243856189774725
-Violas,44,Violas_44,354.0,356.0,1.8365916681089791
-Violas,45,Violas_45,356.0,363.0,-0.0
-Violas,46,Violas_46,363.0,372.0,1.974937501201927
-Violas,47,Violas_47,372.0,379.0,-0.0
-Violas,48,Violas_48,379.0,388.0,1.974937501201927
-Violas,49,Violas_49,388.0,394.0,-0.0
-Violas,50,Violas_50,394.0,396.0,-0.0
-Violas,51,Violas_51,396.0,402.0,-0.0
-Violas,52,Violas_52,402.0,404.0,-0.0
-Violas,53,Violas_53,404.0,410.0,-0.0
-Violas,54,Violas_54,410.0,412.0,-0.0
-Violas,55,Violas_55,412.0,418.0,-0.0
-Violas,56,Violas_56,418.0,422.0,-0.0
-Violas,57,Violas_57,422.0,426.0,-0.0
-Violas,58,Violas_58,426.0,430.0,-0.0
-Violas,59,Violas_59,430.0,434.0,-0.0
-Violas,60,Violas_60,434.0,438.0,-0.0
-Violas,61,Violas_61,438.0,442.0,-0.0
-Violas,62,Violas_62,442.0,446.0,-0.0
-Violas,63,Violas_63,446.0,450.0,-0.0
-Violas,64,Violas_64,450.0,454.0,-0.0
-Violas,65,Violas_65,454.0,454.5,-0.0
-Violas,66,Violas_66,454.5,462.0,1.0
-Violas,67,Violas_67,462.0,466.0,-0.0
-Violas,68,Violas_68,466.0,470.0,-0.0
-Violas,69,Violas_69,470.0,474.0,-0.0
-Violas,70,Violas_70,474.0,478.0,-0.0
-Violas,71,Violas_71,478.0,502.0,2.436669171968269
-Violas,72,Violas_72,502.0,506.0,-0.0
-Violas,73,Violas_73,506.0,510.0,-0.0
-Violas,74,Violas_74,510.0,514.0,-0.0
-Violas,75,Violas_75,514.0,518.0,-0.0
-Violas,76,Violas_76,518.0,522.0,-0.0
-Violas,77,Violas_77,522.0,524.0,-0.0
-Violas,78,Violas_78,524.0,526.5,-0.0
-Violas,79,Violas_79,526.5,532.0,3.0435644431995965
-Violas,80,Violas_80,532.0,534.0,-0.0
-Violas,81,Violas_81,534.0,552.5,-0.0
-Violas,82,Violas_82,552.5,560.0,2.143390808817256
-Violas,83,Violas_83,560.0,575.5,3.134118744786324
-Violas,84,Violas_84,575.5,577.5,0.8112781244591328
-Violas,85,Violas_85,577.5,578.0,-0.0
-Violas,86,Violas_86,578.0,583.5,2.1626441180472606
-Violas,87,Violas_87,583.5,586.0,1.3709505944546687
-Violas,88,Violas_88,586.0,602.0,1.6212416273098902
-Violas,89,Violas_89,602.0,602.5,-0.0
-Violas,90,Violas_90,602.5,610.0,1.7055872616982601
-Violas,91,Violas_91,610.0,614.0,-0.0
-Violas,92,Violas_92,614.0,624.0,-0.0
-Violas,93,Violas_93,624.0,626.0,-0.0
-Violas,94,Violas_94,626.0,630.0,1.0
-Violas,95,Violas_95,630.0,640.0,-0.0
-Violas,96,Violas_96,640.0,642.0,-0.0
-Violas,97,Violas_97,642.0,646.0,1.0
-Violas,98,Violas_98,646.0,656.0,-0.0
-Violas,99,Violas_99,656.0,660.0,1.0
-Violas,100,Violas_100,660.0,662.0,-0.0
-Violas,101,Violas_101,662.0,664.0,-0.0
-Violas,102,Violas_102,664.0,668.0,1.0
-Violas,103,Violas_103,668.0,670.0,-0.0
-Violas,104,Violas_104,670.0,674.5,-0.0
-Violas,105,Violas_105,674.5,680.0,1.576900914616579
-Violas,106,Violas_106,680.0,684.0,-0.0
-Violas,107,Violas_107,684.0,701.0,1.8751310486364092
-Violas,108,Violas_108,701.0,702.0,-0.0
-Violas,109,Violas_109,702.0,704.0,-0.0
-Violas,110,Violas_110,704.0,705.0,-0.0
-Violas,111,Violas_111,705.0,731.5,2.5925455977068617
-Violas,112,Violas_112,731.5,732.0,-0.0
-Violas,113,Violas_113,732.0,748.0,2.134062990315168
-Violas,114,Violas_114,748.0,748.5,-0.0
-Violas,115,Violas_115,748.5,754.0,0.5916727785823275
-Violas,116,Violas_116,754.0,756.5,-0.0
-Violas,117,Violas_117,756.5,758.0,-0.0
-Violas,118,Violas_118,758.0,774.5,2.901005268803857
-Violas,119,Violas_119,774.5,782.0,0.6500224216483541
-Violas,120,Violas_120,782.0,788.5,-0.0
-Violas,121,Violas_121,788.5,790.5,-0.0
-Violas,122,Violas_122,790.5,798.0,0.6500224216483541
-Violas,123,Violas_123,798.0,804.5,-0.0
-Violas,124,Violas_124,804.5,808.0,1.6225562489182657
-Violas,125,Violas_125,808.0,816.0,2.82759912921136
-Violas,126,Violas_126,816.0,838.0,3.8113846928836734
-Violas,127,Violas_127,838.0,839.0,-0.0
-Violas,128,Violas_128,839.0,850.0,2.481714572986073
-Violas,129,Violas_129,850.0,851.0,-0.0
-Violas,130,Violas_130,851.0,884.0,3.1682609980734213
-Violas,131,Violas_131,884.0,885.0,-0.0
-Violas,132,Violas_132,885.0,886.0,-0.0
-Violas,133,Violas_133,886.0,892.0,-0.0
-Violas,134,Violas_134,892.0,895.0,1.584962500721156
-Violas,135,Violas_135,895.0,900.0,-0.0
-Violas,136,Violas_136,900.0,903.0,1.584962500721156
-Violas,137,Violas_137,903.0,908.0,-0.0
-Violas,138,Violas_138,908.0,911.0,1.584962500721156
-Violas,139,Violas_139,911.0,920.0,-0.0
-Violas,140,Violas_140,920.0,924.0,1.0
-Violas,141,Violas_141,924.0,925.0,-0.0
-Violas,142,Violas_142,925.0,926.0,-0.0
-Violas,143,Violas_143,926.0,928.0,-0.0
-Violas,144,Violas_144,928.0,930.0,-0.0
-Violas,145,Violas_145,930.0,935.0,2.321928094887362
-Violas,146,Violas_146,935.0,938.0,-0.0
-Violas,147,Violas_147,938.0,939.0,-0.0
-Violas,148,Violas_148,939.0,940.0,-0.0
-Violas,149,Violas_149,940.0,941.0,-0.0
-Violas,150,Violas_150,941.0,942.0,-0.0
-Violas,151,Violas_151,942.0,944.0,-0.0
-Violas,152,Violas_152,944.0,946.0,-0.0
-Violas,153,Violas_153,946.0,972.0,1.8801937825441377
-Violas,154,Violas_154,972.0,990.5,-0.0
-Violas,155,Violas_155,990.5,992.0,-0.0
-Violas,156,Violas_156,992.0,996.0,1.6225562489182657
-Violas,157,Violas_157,996.0,1000.0,1.6225562489182657
-Violas,158,Violas_158,1000.0,1001.0,-0.0
-Violas,159,Violas_159,1001.0,1002.0,-0.0
-Violas,160,Violas_160,1002.0,1003.0,-0.0
-Violas,161,Violas_161,1003.0,1004.0,-0.0
-Violas,162,Violas_162,1004.0,1005.0,-0.0
-Violas,163,Violas_163,1005.0,1006.0,-0.0
-Violas,164,Violas_164,1006.0,1007.0,-0.0
-Violas,165,Violas_165,1007.0,1008.0,-0.0
-Violas,166,Violas_166,1008.0,1010.0,-0.0
-Violas,167,Violas_167,1010.0,1014.0,1.0
+Violas,14,Violas_14,86.0,110.0,2.5042743003540893
+Violas,15,Violas_15,110.0,114.0,-0.0
+Violas,16,Violas_16,114.0,124.0,-0.0
+Violas,17,Violas_17,124.0,126.0,-0.0
+Violas,18,Violas_18,126.0,134.0,1.5
+Violas,19,Violas_19,134.0,142.0,1.5
+Violas,20,Violas_20,142.0,152.0,1.9219280948873623
+Violas,21,Violas_21,152.0,154.0,-0.0
+Violas,22,Violas_22,154.0,156.0,-0.0
+Violas,23,Violas_23,156.0,160.0,1.0
+Violas,24,Violas_24,160.0,162.0,-0.0
+Violas,25,Violas_25,162.0,166.5,-0.0
+Violas,26,Violas_26,166.5,188.0,3.033393924089408
+Violas,27,Violas_27,188.0,189.0,-0.0
+Violas,28,Violas_28,189.0,192.0,1.0
+Violas,29,Violas_29,192.0,200.0,2.0
+Violas,30,Violas_30,200.0,216.0,2.6496051582167444
+Violas,31,Violas_31,216.0,216.5,-0.0
+Violas,32,Violas_32,216.5,242.0,2.4055006462876762
+Violas,33,Violas_33,242.0,250.5,-0.0
+Violas,34,Violas_34,250.5,254.0,1.6225562489182657
+Violas,35,Violas_35,254.0,258.0,-0.0
+Violas,36,Violas_36,258.0,320.0,3.9794501687152497
+Violas,37,Violas_37,320.0,320.5,-0.0
+Violas,38,Violas_38,320.5,328.0,2.6389205950315935
+Violas,39,Violas_39,328.0,334.0,2.5220552088742005
+Violas,40,Violas_40,334.0,334.5,-0.0
+Violas,41,Violas_41,334.5,338.0,0.8112781244591328
+Violas,42,Violas_42,338.0,340.5,-0.0
+Violas,43,Violas_43,340.5,342.5,-0.0
+Violas,44,Violas_44,342.5,354.0,2.5907141032348844
+Violas,45,Violas_45,354.0,356.0,1.8365916681089791
+Violas,46,Violas_46,356.0,363.0,-0.0
+Violas,47,Violas_47,363.0,372.0,1.974937501201927
+Violas,48,Violas_48,372.0,379.0,-0.0
+Violas,49,Violas_49,379.0,388.0,1.974937501201927
+Violas,50,Violas_50,388.0,394.0,-0.0
+Violas,51,Violas_51,394.0,396.0,-0.0
+Violas,52,Violas_52,396.0,402.0,-0.0
+Violas,53,Violas_53,402.0,404.0,-0.0
+Violas,54,Violas_54,404.0,410.0,-0.0
+Violas,55,Violas_55,410.0,412.0,-0.0
+Violas,56,Violas_56,412.0,418.0,-0.0
+Violas,57,Violas_57,418.0,422.0,-0.0
+Violas,58,Violas_58,422.0,426.0,-0.0
+Violas,59,Violas_59,426.0,430.0,-0.0
+Violas,60,Violas_60,430.0,434.0,-0.0
+Violas,61,Violas_61,434.0,438.0,-0.0
+Violas,62,Violas_62,438.0,442.0,-0.0
+Violas,63,Violas_63,442.0,446.0,-0.0
+Violas,64,Violas_64,446.0,450.0,-0.0
+Violas,65,Violas_65,450.0,454.0,-0.0
+Violas,66,Violas_66,454.0,454.5,-0.0
+Violas,67,Violas_67,454.5,462.0,1.0
+Violas,68,Violas_68,462.0,466.0,-0.0
+Violas,69,Violas_69,466.0,470.0,-0.0
+Violas,70,Violas_70,470.0,474.0,-0.0
+Violas,71,Violas_71,474.0,478.0,-0.0
+Violas,72,Violas_72,478.0,502.0,2.436669171968269
+Violas,73,Violas_73,502.0,506.0,-0.0
+Violas,74,Violas_74,506.0,510.0,-0.0
+Violas,75,Violas_75,510.0,514.0,-0.0
+Violas,76,Violas_76,514.0,518.0,-0.0
+Violas,77,Violas_77,518.0,522.0,-0.0
+Violas,78,Violas_78,522.0,524.0,-0.0
+Violas,79,Violas_79,524.0,526.5,-0.0
+Violas,80,Violas_80,526.5,532.0,3.0435644431995965
+Violas,81,Violas_81,532.0,534.0,-0.0
+Violas,82,Violas_82,534.0,548.5,-0.0
+Violas,83,Violas_83,548.5,556.0,2.143390808817256
+Violas,84,Violas_84,556.0,571.5,3.1872859308799457
+Violas,85,Violas_85,571.5,573.5,0.8112781244591328
+Violas,86,Violas_86,573.5,574.0,-0.0
+Violas,87,Violas_87,574.0,579.5,2.1626441180472606
+Violas,88,Violas_88,579.5,582.0,1.3709505944546687
+Violas,89,Violas_89,582.0,598.0,1.9255140947048828
+Violas,90,Violas_90,598.0,598.5,-0.0
+Violas,91,Violas_91,598.5,606.0,1.7055872616982601
+Violas,92,Violas_92,606.0,610.0,-0.0
+Violas,93,Violas_93,610.0,620.0,-0.0
+Violas,94,Violas_94,620.0,622.0,-0.0
+Violas,95,Violas_95,622.0,626.0,1.0
+Violas,96,Violas_96,626.0,636.0,-0.0
+Violas,97,Violas_97,636.0,638.0,-0.0
+Violas,98,Violas_98,638.0,642.0,1.0
+Violas,99,Violas_99,642.0,652.0,-0.0
+Violas,100,Violas_100,652.0,656.0,1.0
+Violas,101,Violas_101,656.0,658.0,-0.0
+Violas,102,Violas_102,658.0,660.0,-0.0
+Violas,103,Violas_103,660.0,664.0,1.0
+Violas,104,Violas_104,664.0,666.0,-0.0
+Violas,105,Violas_105,666.0,670.5,-0.0
+Violas,106,Violas_106,670.5,676.0,1.576900914616579
+Violas,107,Violas_107,676.0,680.0,-0.0
+Violas,108,Violas_108,680.0,697.0,1.8751310486364092
+Violas,109,Violas_109,697.0,698.0,-0.0
+Violas,110,Violas_110,698.0,700.0,-0.0
+Violas,111,Violas_111,700.0,701.0,-0.0
+Violas,112,Violas_112,701.0,727.5,2.5925455977068617
+Violas,113,Violas_113,727.5,728.0,-0.0
+Violas,114,Violas_114,728.0,744.0,2.134062990315168
+Violas,115,Violas_115,744.0,744.5,-0.0
+Violas,116,Violas_116,744.5,750.0,0.5916727785823275
+Violas,117,Violas_117,750.0,752.5,-0.0
+Violas,118,Violas_118,752.5,754.0,-0.0
+Violas,119,Violas_119,754.0,760.0,0.9182958340544896
+Violas,120,Violas_120,760.0,762.0,-0.0
+Violas,121,Violas_121,762.0,764.0,-0.0
+Violas,122,Violas_122,764.0,770.0,0.9182958340544896
+Violas,123,Violas_123,770.0,770.5,-0.0
+Violas,124,Violas_124,770.5,778.0,1.0
+Violas,125,Violas_125,778.0,784.5,-0.0
+Violas,126,Violas_126,784.5,786.5,-0.0
+Violas,127,Violas_127,786.5,794.0,1.0
+Violas,128,Violas_128,794.0,800.5,-0.0
+Violas,129,Violas_129,800.5,804.0,1.6225562489182657
+Violas,130,Violas_130,804.0,812.0,2.82759912921136
+Violas,131,Violas_131,812.0,834.0,3.8113846928836734
+Violas,132,Violas_132,834.0,835.0,-0.0
+Violas,133,Violas_133,835.0,846.0,2.481714572986073
+Violas,134,Violas_134,846.0,847.0,-0.0
+Violas,135,Violas_135,847.0,880.0,3.1682609980734213
+Violas,136,Violas_136,880.0,881.0,-0.0
+Violas,137,Violas_137,881.0,882.0,-0.0
+Violas,138,Violas_138,882.0,888.0,-0.0
+Violas,139,Violas_139,888.0,891.0,1.584962500721156
+Violas,140,Violas_140,891.0,896.0,-0.0
+Violas,141,Violas_141,896.0,899.0,1.584962500721156
+Violas,142,Violas_142,899.0,904.0,-0.0
+Violas,143,Violas_143,904.0,907.0,1.584962500721156
+Violas,144,Violas_144,907.0,916.0,-0.0
+Violas,145,Violas_145,916.0,920.0,1.0
+Violas,146,Violas_146,920.0,921.0,-0.0
+Violas,147,Violas_147,921.0,922.0,-0.0
+Violas,148,Violas_148,922.0,924.0,-0.0
+Violas,149,Violas_149,924.0,926.0,-0.0
+Violas,150,Violas_150,926.0,931.0,2.321928094887362
+Violas,151,Violas_151,931.0,934.0,-0.0
+Violas,152,Violas_152,934.0,935.0,-0.0
+Violas,153,Violas_153,935.0,936.0,-0.0
+Violas,154,Violas_154,936.0,937.0,-0.0
+Violas,155,Violas_155,937.0,938.0,-0.0
+Violas,156,Violas_156,938.0,940.0,-0.0
+Violas,157,Violas_157,940.0,942.0,-0.0
+Violas,158,Violas_158,942.0,960.0,1.4215541688301352
+Violas,159,Violas_159,960.0,962.0,-0.0
+Violas,160,Violas_160,962.0,968.0,2.341901188909337
+Violas,161,Violas_161,968.0,986.5,-0.0
+Violas,162,Violas_162,986.5,988.0,-0.0
+Violas,163,Violas_163,988.0,992.0,1.6225562489182657
+Violas,164,Violas_164,992.0,996.0,1.6225562489182657
+Violas,165,Violas_165,996.0,997.0,-0.0
+Violas,166,Violas_166,997.0,998.0,-0.0
+Violas,167,Violas_167,998.0,999.0,-0.0
+Violas,168,Violas_168,999.0,1000.0,-0.0
+Violas,169,Violas_169,1000.0,1001.0,-0.0
+Violas,170,Violas_170,1001.0,1002.0,-0.0
+Violas,171,Violas_171,1002.0,1003.0,-0.0
+Violas,172,Violas_172,1003.0,1004.0,-0.0
+Violas,173,Violas_173,1004.0,1006.0,-0.0
+Violas,174,Violas_174,1006.0,1009.0,1.0
 Violoncellos,1,Violoncellos_1,8.0,12.0,-0.0
 Violoncellos,2,Violoncellos_2,12.0,36.0,1.807591336395836
 Violoncellos,3,Violoncellos_3,36.0,38.0,-0.0
-Violoncellos,4,Violoncellos_4,38.0,46.0,2.7107770844150676
-Violoncellos,5,Violoncellos_5,46.0,54.5,-0.0
-Violoncellos,6,Violoncellos_6,54.5,56.0,-0.0
-Violoncellos,7,Violoncellos_7,56.0,62.5,-0.0
-Violoncellos,8,Violoncellos_8,62.5,114.0,1.9457096417412743
-Violoncellos,9,Violoncellos_9,114.0,128.5,-0.0
-Violoncellos,10,Violoncellos_10,128.5,130.0,-0.0
-Violoncellos,11,Violoncellos_11,130.0,136.5,-0.0
-Violoncellos,12,Violoncellos_12,136.5,138.0,-0.0
-Violoncellos,13,Violoncellos_13,138.0,144.5,-0.0
-Violoncellos,14,Violoncellos_14,144.5,146.0,-0.0
-Violoncellos,15,Violoncellos_15,146.0,152.5,-0.0
-Violoncellos,16,Violoncellos_16,152.5,154.0,-0.0
-Violoncellos,17,Violoncellos_17,154.0,160.5,-0.0
-Violoncellos,18,Violoncellos_18,160.5,162.0,-0.0
-Violoncellos,19,Violoncellos_19,162.0,164.0,-0.0
-Violoncellos,20,Violoncellos_20,164.0,188.0,2.158159040911508
-Violoncellos,21,Violoncellos_21,188.0,189.0,-0.0
-Violoncellos,22,Violoncellos_22,189.0,198.0,2.321928094887362
-Violoncellos,23,Violoncellos_23,198.0,200.0,-0.0
-Violoncellos,24,Violoncellos_24,200.0,214.0,2.71929452566698
-Violoncellos,25,Violoncellos_25,214.0,215.0,-0.0
-Violoncellos,26,Violoncellos_26,215.0,216.0,-0.0
-Violoncellos,27,Violoncellos_27,216.0,217.0,-0.0
-Violoncellos,28,Violoncellos_28,217.0,234.0,2.269697227301693
-Violoncellos,29,Violoncellos_29,234.0,238.0,1.6225562489182657
-Violoncellos,30,Violoncellos_30,238.0,242.0,1.6225562489182657
-Violoncellos,31,Violoncellos_31,242.0,250.5,-0.0
-Violoncellos,32,Violoncellos_32,250.5,254.0,1.6225562489182657
-Violoncellos,33,Violoncellos_33,254.0,258.0,-0.0
-Violoncellos,34,Violoncellos_34,258.0,320.0,3.9794501687152497
-Violoncellos,35,Violoncellos_35,320.0,320.5,-0.0
-Violoncellos,36,Violoncellos_36,320.5,328.0,2.6389205950315935
-Violoncellos,37,Violoncellos_37,328.0,328.5,-0.0
-Violoncellos,38,Violoncellos_38,328.5,356.0,3.511849461449091
-Violoncellos,39,Violoncellos_39,356.0,363.0,-0.0
-Violoncellos,40,Violoncellos_40,363.0,372.0,1.974937501201927
-Violoncellos,41,Violoncellos_41,372.0,379.0,-0.0
-Violoncellos,42,Violoncellos_42,379.0,388.0,1.974937501201927
-Violoncellos,43,Violoncellos_43,388.0,394.0,-0.0
-Violoncellos,44,Violoncellos_44,394.0,396.0,-0.0
-Violoncellos,45,Violoncellos_45,396.0,402.0,-0.0
-Violoncellos,46,Violoncellos_46,402.0,404.0,-0.0
-Violoncellos,47,Violoncellos_47,404.0,410.0,-0.0
-Violoncellos,48,Violoncellos_48,410.0,412.0,-0.0
-Violoncellos,49,Violoncellos_49,412.0,418.0,-0.0
-Violoncellos,50,Violoncellos_50,418.0,422.0,-0.0
-Violoncellos,51,Violoncellos_51,422.0,426.0,-0.0
-Violoncellos,52,Violoncellos_52,426.0,430.0,-0.0
-Violoncellos,53,Violoncellos_53,430.0,434.0,-0.0
-Violoncellos,54,Violoncellos_54,434.0,438.0,-0.0
-Violoncellos,55,Violoncellos_55,438.0,442.0,-0.0
-Violoncellos,56,Violoncellos_56,442.0,446.0,-0.0
-Violoncellos,57,Violoncellos_57,446.0,450.0,-0.0
-Violoncellos,58,Violoncellos_58,450.0,454.0,-0.0
-Violoncellos,59,Violoncellos_59,454.0,462.0,3.113313414925646
-Violoncellos,60,Violoncellos_60,462.0,466.0,-0.0
-Violoncellos,61,Violoncellos_61,466.0,470.0,-0.0
-Violoncellos,62,Violoncellos_62,470.0,474.0,-0.0
-Violoncellos,63,Violoncellos_63,474.0,478.0,-0.0
-Violoncellos,64,Violoncellos_64,478.0,502.0,2.274355435171976
-Violoncellos,65,Violoncellos_65,502.0,506.0,-0.0
-Violoncellos,66,Violoncellos_66,506.0,510.0,-0.0
-Violoncellos,67,Violoncellos_67,510.0,514.0,-0.0
-Violoncellos,68,Violoncellos_68,514.0,518.0,-0.0
-Violoncellos,69,Violoncellos_69,518.0,522.0,-0.0
-Violoncellos,70,Violoncellos_70,522.0,526.0,1.0
-Violoncellos,71,Violoncellos_71,526.0,528.0,-0.0
-Violoncellos,72,Violoncellos_72,528.0,530.0,-0.0
-Violoncellos,73,Violoncellos_73,530.0,532.0,-0.0
-Violoncellos,74,Violoncellos_74,532.0,534.0,-0.0
-Violoncellos,75,Violoncellos_75,534.0,554.5,-0.0
-Violoncellos,76,Violoncellos_76,554.5,556.0,-0.0
-Violoncellos,77,Violoncellos_77,556.0,562.5,2.1416195253341384
-Violoncellos,78,Violoncellos_78,562.5,602.0,2.1044636204283362
-Violoncellos,79,Violoncellos_79,602.0,602.5,-0.0
-Violoncellos,80,Violoncellos_80,602.5,610.0,1.7055872616982601
-Violoncellos,81,Violoncellos_81,610.0,614.0,-0.0
-Violoncellos,82,Violoncellos_82,614.0,628.5,-0.0
-Violoncellos,83,Violoncellos_83,628.5,630.0,-0.0
-Violoncellos,84,Violoncellos_84,630.0,644.5,-0.0
-Violoncellos,85,Violoncellos_85,644.5,646.0,-0.0
-Violoncellos,86,Violoncellos_86,646.0,660.5,-0.0
-Violoncellos,87,Violoncellos_87,660.5,662.0,-0.0
-Violoncellos,88,Violoncellos_88,662.0,668.5,-0.0
-Violoncellos,89,Violoncellos_89,668.5,670.0,-0.0
-Violoncellos,90,Violoncellos_90,670.0,672.0,-0.0
-Violoncellos,91,Violoncellos_91,672.0,714.0,2.778505989714978
-Violoncellos,92,Violoncellos_92,714.0,716.0,-0.0
-Violoncellos,93,Violoncellos_93,716.0,718.0,-0.0
-Violoncellos,94,Violoncellos_94,718.0,730.0,2.688721875540867
-Violoncellos,95,Violoncellos_95,730.0,731.0,-0.0
-Violoncellos,96,Violoncellos_96,731.0,732.0,-0.0
-Violoncellos,97,Violoncellos_97,732.0,733.0,-0.0
-Violoncellos,98,Violoncellos_98,733.0,750.0,2.269697227301693
-Violoncellos,99,Violoncellos_99,750.0,754.0,1.6225562489182657
-Violoncellos,100,Violoncellos_100,754.0,766.0,2.626881577131006
-Violoncellos,101,Violoncellos_101,766.0,773.5,1.9396905160775968
-Violoncellos,102,Violoncellos_102,773.5,774.0,-0.0
-Violoncellos,103,Violoncellos_103,774.0,774.5,-0.0
-Violoncellos,104,Violoncellos_104,774.5,782.0,0.6500224216483541
-Violoncellos,105,Violoncellos_105,782.0,788.5,-0.0
-Violoncellos,106,Violoncellos_106,788.5,790.5,-0.0
-Violoncellos,107,Violoncellos_107,790.5,798.0,0.6500224216483541
-Violoncellos,108,Violoncellos_108,798.0,804.5,-0.0
-Violoncellos,109,Violoncellos_109,804.5,808.0,1.6225562489182657
-Violoncellos,110,Violoncellos_110,808.0,816.0,2.82759912921136
-Violoncellos,111,Violoncellos_111,816.0,860.0,4.06074409840356
-Violoncellos,112,Violoncellos_112,860.0,862.0,-0.0
-Violoncellos,113,Violoncellos_113,862.0,872.0,1.3709505944546687
-Violoncellos,114,Violoncellos_114,872.0,874.0,-0.0
-Violoncellos,115,Violoncellos_115,874.0,876.0,-0.0
-Violoncellos,116,Violoncellos_116,876.0,878.0,-0.0
-Violoncellos,117,Violoncellos_117,878.0,880.0,-0.0
-Violoncellos,118,Violoncellos_118,880.0,882.0,-0.0
-Violoncellos,119,Violoncellos_119,882.0,884.0,-0.0
-Violoncellos,120,Violoncellos_120,884.0,886.0,-0.0
-Violoncellos,121,Violoncellos_121,886.0,892.0,-0.0
-Violoncellos,122,Violoncellos_122,892.0,895.0,1.584962500721156
-Violoncellos,123,Violoncellos_123,895.0,900.0,-0.0
-Violoncellos,124,Violoncellos_124,900.0,903.0,1.584962500721156
-Violoncellos,125,Violoncellos_125,903.0,908.0,-0.0
-Violoncellos,126,Violoncellos_126,908.0,911.0,1.584962500721156
-Violoncellos,127,Violoncellos_127,911.0,920.0,-0.0
-Violoncellos,128,Violoncellos_128,920.0,921.0,-0.0
-Violoncellos,129,Violoncellos_129,921.0,924.0,-0.0
-Violoncellos,130,Violoncellos_130,924.0,925.0,-0.0
-Violoncellos,131,Violoncellos_131,925.0,926.0,-0.0
-Violoncellos,132,Violoncellos_132,926.0,928.0,-0.0
-Violoncellos,133,Violoncellos_133,928.0,930.0,-0.0
-Violoncellos,134,Violoncellos_134,930.0,935.0,2.321928094887362
-Violoncellos,135,Violoncellos_135,935.0,938.0,-0.0
-Violoncellos,136,Violoncellos_136,938.0,940.0,1.0
-Violoncellos,137,Violoncellos_137,940.0,941.0,-0.0
-Violoncellos,138,Violoncellos_138,941.0,942.0,-0.0
-Violoncellos,139,Violoncellos_139,942.0,944.0,-0.0
-Violoncellos,140,Violoncellos_140,944.0,946.0,-0.0
-Violoncellos,141,Violoncellos_141,946.0,956.5,-0.0
-Violoncellos,142,Violoncellos_142,956.5,972.0,1.8538235426612042
-Violoncellos,143,Violoncellos_143,972.0,976.0,-0.0
-Violoncellos,144,Violoncellos_144,976.0,992.0,0.9456603046006402
-Violoncellos,145,Violoncellos_145,992.0,996.0,1.6225562489182657
-Violoncellos,146,Violoncellos_146,996.0,1002.0,1.9182958340544896
-Violoncellos,147,Violoncellos_147,1002.0,1004.0,1.0
-Violoncellos,148,Violoncellos_148,1004.0,1005.0,-0.0
-Violoncellos,149,Violoncellos_149,1005.0,1006.0,-0.0
-Violoncellos,150,Violoncellos_150,1006.0,1008.0,1.0
-Violoncellos,151,Violoncellos_151,1008.0,1010.0,-0.0
-Violoncellos,152,Violoncellos_152,1010.0,1014.0,1.0
+Violoncellos,4,Violoncellos_4,38.0,40.0,-0.0
+Violoncellos,5,Violoncellos_5,40.0,46.0,2.7419011889093374
+Violoncellos,6,Violoncellos_6,46.0,54.5,-0.0
+Violoncellos,7,Violoncellos_7,54.5,56.0,-0.0
+Violoncellos,8,Violoncellos_8,56.0,62.5,-0.0
+Violoncellos,9,Violoncellos_9,62.5,110.0,2.2886996673089826
+Violoncellos,10,Violoncellos_10,110.0,114.0,-0.0
+Violoncellos,11,Violoncellos_11,114.0,128.5,-0.0
+Violoncellos,12,Violoncellos_12,128.5,130.0,-0.0
+Violoncellos,13,Violoncellos_13,130.0,136.5,-0.0
+Violoncellos,14,Violoncellos_14,136.5,138.0,-0.0
+Violoncellos,15,Violoncellos_15,138.0,144.5,-0.0
+Violoncellos,16,Violoncellos_16,144.5,146.0,-0.0
+Violoncellos,17,Violoncellos_17,146.0,152.5,-0.0
+Violoncellos,18,Violoncellos_18,152.5,154.0,-0.0
+Violoncellos,19,Violoncellos_19,154.0,160.5,-0.0
+Violoncellos,20,Violoncellos_20,160.5,162.0,-0.0
+Violoncellos,21,Violoncellos_21,162.0,164.0,-0.0
+Violoncellos,22,Violoncellos_22,164.0,188.0,2.158159040911508
+Violoncellos,23,Violoncellos_23,188.0,189.0,-0.0
+Violoncellos,24,Violoncellos_24,189.0,192.0,1.0
+Violoncellos,25,Violoncellos_25,192.0,198.0,1.584962500721156
+Violoncellos,26,Violoncellos_26,198.0,200.0,-0.0
+Violoncellos,27,Violoncellos_27,200.0,202.0,-0.0
+Violoncellos,28,Violoncellos_28,202.0,214.0,2.688721875540867
+Violoncellos,29,Violoncellos_29,214.0,215.0,-0.0
+Violoncellos,30,Violoncellos_30,215.0,216.0,-0.0
+Violoncellos,31,Violoncellos_31,216.0,217.0,-0.0
+Violoncellos,32,Violoncellos_32,217.0,234.0,2.269697227301693
+Violoncellos,33,Violoncellos_33,234.0,238.0,1.6225562489182657
+Violoncellos,34,Violoncellos_34,238.0,242.0,1.6225562489182657
+Violoncellos,35,Violoncellos_35,242.0,250.5,-0.0
+Violoncellos,36,Violoncellos_36,250.5,254.0,1.6225562489182657
+Violoncellos,37,Violoncellos_37,254.0,258.0,-0.0
+Violoncellos,38,Violoncellos_38,258.0,320.5,3.9578398321671644
+Violoncellos,39,Violoncellos_39,320.5,328.0,2.6389205950315935
+Violoncellos,40,Violoncellos_40,328.0,328.5,-0.0
+Violoncellos,41,Violoncellos_41,328.5,356.0,4.0983861164133835
+Violoncellos,42,Violoncellos_42,356.0,363.0,-0.0
+Violoncellos,43,Violoncellos_43,363.0,372.0,1.974937501201927
+Violoncellos,44,Violoncellos_44,372.0,379.0,-0.0
+Violoncellos,45,Violoncellos_45,379.0,388.0,1.974937501201927
+Violoncellos,46,Violoncellos_46,388.0,394.0,-0.0
+Violoncellos,47,Violoncellos_47,394.0,396.0,-0.0
+Violoncellos,48,Violoncellos_48,396.0,402.0,-0.0
+Violoncellos,49,Violoncellos_49,402.0,404.0,-0.0
+Violoncellos,50,Violoncellos_50,404.0,410.0,-0.0
+Violoncellos,51,Violoncellos_51,410.0,412.0,-0.0
+Violoncellos,52,Violoncellos_52,412.0,418.0,-0.0
+Violoncellos,53,Violoncellos_53,418.0,422.0,-0.0
+Violoncellos,54,Violoncellos_54,422.0,426.0,-0.0
+Violoncellos,55,Violoncellos_55,426.0,430.0,-0.0
+Violoncellos,56,Violoncellos_56,430.0,434.0,-0.0
+Violoncellos,57,Violoncellos_57,434.0,438.0,-0.0
+Violoncellos,58,Violoncellos_58,438.0,442.0,-0.0
+Violoncellos,59,Violoncellos_59,442.0,446.0,-0.0
+Violoncellos,60,Violoncellos_60,446.0,450.0,-0.0
+Violoncellos,61,Violoncellos_61,450.0,454.0,-0.0
+Violoncellos,62,Violoncellos_62,454.0,458.0,2.0928786893420313
+Violoncellos,63,Violoncellos_63,458.0,462.0,1.0
+Violoncellos,64,Violoncellos_64,462.0,466.0,-0.0
+Violoncellos,65,Violoncellos_65,466.0,470.0,-0.0
+Violoncellos,66,Violoncellos_66,470.0,474.0,-0.0
+Violoncellos,67,Violoncellos_67,474.0,478.0,-0.0
+Violoncellos,68,Violoncellos_68,478.0,502.0,2.274355435171976
+Violoncellos,69,Violoncellos_69,502.0,506.0,-0.0
+Violoncellos,70,Violoncellos_70,506.0,510.0,-0.0
+Violoncellos,71,Violoncellos_71,510.0,514.0,-0.0
+Violoncellos,72,Violoncellos_72,514.0,518.0,-0.0
+Violoncellos,73,Violoncellos_73,518.0,522.0,-0.0
+Violoncellos,74,Violoncellos_74,522.0,526.0,1.0
+Violoncellos,75,Violoncellos_75,526.0,528.0,-0.0
+Violoncellos,76,Violoncellos_76,528.0,530.0,-0.0
+Violoncellos,77,Violoncellos_77,530.0,532.0,-0.0
+Violoncellos,78,Violoncellos_78,532.0,534.0,-0.0
+Violoncellos,79,Violoncellos_79,534.0,550.5,-0.0
+Violoncellos,80,Violoncellos_80,550.5,558.5,2.23345859334435
+Violoncellos,81,Violoncellos_81,558.5,588.0,2.1559539814736004
+Violoncellos,82,Violoncellos_82,588.0,590.0,-0.0
+Violoncellos,83,Violoncellos_83,590.0,598.5,1.90886800584993
+Violoncellos,84,Violoncellos_84,598.5,606.0,1.7055872616982601
+Violoncellos,85,Violoncellos_85,606.0,610.0,-0.0
+Violoncellos,86,Violoncellos_86,610.0,624.5,-0.0
+Violoncellos,87,Violoncellos_87,624.5,626.0,-0.0
+Violoncellos,88,Violoncellos_88,626.0,640.5,-0.0
+Violoncellos,89,Violoncellos_89,640.5,642.0,-0.0
+Violoncellos,90,Violoncellos_90,642.0,656.5,-0.0
+Violoncellos,91,Violoncellos_91,656.5,658.0,-0.0
+Violoncellos,92,Violoncellos_92,658.0,664.5,-0.0
+Violoncellos,93,Violoncellos_93,664.5,666.0,-0.0
+Violoncellos,94,Violoncellos_94,666.0,668.0,-0.0
+Violoncellos,95,Violoncellos_95,668.0,704.0,2.625572584047927
+Violoncellos,96,Violoncellos_96,704.0,710.0,1.584962500721156
+Violoncellos,97,Violoncellos_97,710.0,712.0,-0.0
+Violoncellos,98,Violoncellos_98,712.0,714.0,-0.0
+Violoncellos,99,Violoncellos_99,714.0,726.0,2.688721875540867
+Violoncellos,100,Violoncellos_100,726.0,727.0,-0.0
+Violoncellos,101,Violoncellos_101,727.0,728.0,-0.0
+Violoncellos,102,Violoncellos_102,728.0,729.0,-0.0
+Violoncellos,103,Violoncellos_103,729.0,746.0,2.269697227301693
+Violoncellos,104,Violoncellos_104,746.0,750.0,1.6225562489182657
+Violoncellos,105,Violoncellos_105,750.0,756.0,2.341901188909337
+Violoncellos,106,Violoncellos_106,756.0,758.0,-0.0
+Violoncellos,107,Violoncellos_107,758.0,760.0,-0.0
+Violoncellos,108,Violoncellos_108,760.0,762.0,-0.0
+Violoncellos,109,Violoncellos_109,762.0,768.0,0.9182958340544896
+Violoncellos,110,Violoncellos_110,768.0,770.0,-0.0
+Violoncellos,111,Violoncellos_111,770.0,770.5,-0.0
+Violoncellos,112,Violoncellos_112,770.5,778.0,1.0
+Violoncellos,113,Violoncellos_113,778.0,784.5,-0.0
+Violoncellos,114,Violoncellos_114,784.5,786.5,-0.0
+Violoncellos,115,Violoncellos_115,786.5,794.0,1.0
+Violoncellos,116,Violoncellos_116,794.0,800.5,-0.0
+Violoncellos,117,Violoncellos_117,800.5,804.0,1.6225562489182657
+Violoncellos,118,Violoncellos_118,804.0,812.0,2.82759912921136
+Violoncellos,119,Violoncellos_119,812.0,852.0,3.940363888392427
+Violoncellos,120,Violoncellos_120,852.0,854.0,-0.0
+Violoncellos,121,Violoncellos_121,854.0,856.0,-0.0
+Violoncellos,122,Violoncellos_122,856.0,858.0,-0.0
+Violoncellos,123,Violoncellos_123,858.0,862.0,-0.0
+Violoncellos,124,Violoncellos_124,862.0,866.0,1.0
+Violoncellos,125,Violoncellos_125,866.0,868.0,-0.0
+Violoncellos,126,Violoncellos_126,868.0,870.0,-0.0
+Violoncellos,127,Violoncellos_127,870.0,872.0,-0.0
+Violoncellos,128,Violoncellos_128,872.0,874.0,-0.0
+Violoncellos,129,Violoncellos_129,874.0,876.0,-0.0
+Violoncellos,130,Violoncellos_130,876.0,878.0,-0.0
+Violoncellos,131,Violoncellos_131,878.0,880.0,-0.0
+Violoncellos,132,Violoncellos_132,880.0,882.0,-0.0
+Violoncellos,133,Violoncellos_133,882.0,888.0,-0.0
+Violoncellos,134,Violoncellos_134,888.0,891.0,1.584962500721156
+Violoncellos,135,Violoncellos_135,891.0,896.0,-0.0
+Violoncellos,136,Violoncellos_136,896.0,899.0,1.584962500721156
+Violoncellos,137,Violoncellos_137,899.0,904.0,-0.0
+Violoncellos,138,Violoncellos_138,904.0,907.0,1.584962500721156
+Violoncellos,139,Violoncellos_139,907.0,916.0,-0.0
+Violoncellos,140,Violoncellos_140,916.0,917.0,-0.0
+Violoncellos,141,Violoncellos_141,917.0,920.0,-0.0
+Violoncellos,142,Violoncellos_142,920.0,921.0,-0.0
+Violoncellos,143,Violoncellos_143,921.0,922.0,-0.0
+Violoncellos,144,Violoncellos_144,922.0,924.0,-0.0
+Violoncellos,145,Violoncellos_145,924.0,926.0,-0.0
+Violoncellos,146,Violoncellos_146,926.0,931.0,2.321928094887362
+Violoncellos,147,Violoncellos_147,931.0,934.0,-0.0
+Violoncellos,148,Violoncellos_148,934.0,936.0,1.0
+Violoncellos,149,Violoncellos_149,936.0,937.0,-0.0
+Violoncellos,150,Violoncellos_150,937.0,938.0,-0.0
+Violoncellos,151,Violoncellos_151,938.0,940.0,-0.0
+Violoncellos,152,Violoncellos_152,940.0,942.0,-0.0
+Violoncellos,153,Violoncellos_153,942.0,952.5,-0.0
+Violoncellos,154,Violoncellos_154,952.5,960.0,1.267462841284266
+Violoncellos,155,Violoncellos_155,960.0,962.0,-0.0
+Violoncellos,156,Violoncellos_156,962.0,968.0,2.341901188909337
+Violoncellos,157,Violoncellos_157,968.0,972.0,-0.0
+Violoncellos,158,Violoncellos_158,972.0,988.0,0.9456603046006402
+Violoncellos,159,Violoncellos_159,988.0,992.0,1.6225562489182657
+Violoncellos,160,Violoncellos_160,992.0,998.0,1.9182958340544896
+Violoncellos,161,Violoncellos_161,998.0,1000.0,1.0
+Violoncellos,162,Violoncellos_162,1000.0,1001.0,-0.0
+Violoncellos,163,Violoncellos_163,1001.0,1002.0,-0.0
+Violoncellos,164,Violoncellos_164,1002.0,1004.0,1.0
+Violoncellos,165,Violoncellos_165,1004.0,1006.0,-0.0
+Violoncellos,166,Violoncellos_166,1006.0,1009.0,1.0
 Contrabasses,1,Contrabasses_1,8.0,34.5,-0.0
 Contrabasses,2,Contrabasses_2,34.5,56.0,3.46905984287894
-Contrabasses,3,Contrabasses_3,56.0,114.0,1.9575178807836882
+Contrabasses,3,Contrabasses_3,56.0,114.0,2.2862072657451913
 Contrabasses,4,Contrabasses_4,114.0,128.5,-0.0
 Contrabasses,5,Contrabasses_5,128.5,130.0,-0.0
 Contrabasses,6,Contrabasses_6,130.0,138.0,1.6225562489182657
@@ -865,72 +979,87 @@ Contrabasses,12,Contrabasses_12,200.0,214.0,2.71929452566698
 Contrabasses,13,Contrabasses_13,214.0,215.0,-0.0
 Contrabasses,14,Contrabasses_14,215.0,216.0,-0.0
 Contrabasses,15,Contrabasses_15,216.0,217.0,-0.0
-Contrabasses,16,Contrabasses_16,217.0,242.0,2.312661794722518
-Contrabasses,17,Contrabasses_17,242.0,254.0,2.7419011889093374
-Contrabasses,18,Contrabasses_18,254.0,289.0,-0.0
-Contrabasses,19,Contrabasses_19,289.0,294.0,0.9182958340544896
-Contrabasses,20,Contrabasses_20,294.0,298.0,1.0
-Contrabasses,21,Contrabasses_21,298.0,302.0,-0.0
-Contrabasses,22,Contrabasses_22,302.0,304.0,-0.0
-Contrabasses,23,Contrabasses_23,304.0,306.0,-0.0
-Contrabasses,24,Contrabasses_24,306.0,310.0,1.0
-Contrabasses,25,Contrabasses_25,310.0,312.0,-0.0
-Contrabasses,26,Contrabasses_26,312.0,356.0,3.9414197139639406
-Contrabasses,27,Contrabasses_27,356.0,363.0,-0.0
-Contrabasses,28,Contrabasses_28,363.0,372.0,1.974937501201927
-Contrabasses,29,Contrabasses_29,372.0,379.0,-0.0
-Contrabasses,30,Contrabasses_30,379.0,388.0,1.974937501201927
-Contrabasses,31,Contrabasses_31,388.0,394.0,-0.0
-Contrabasses,32,Contrabasses_32,394.0,418.0,1.9182958340544893
-Contrabasses,33,Contrabasses_33,418.0,426.0,1.0
-Contrabasses,34,Contrabasses_34,426.0,430.0,-0.0
-Contrabasses,35,Contrabasses_35,430.0,530.0,4.18005305458013
-Contrabasses,36,Contrabasses_36,530.0,534.0,1.0
-Contrabasses,37,Contrabasses_37,534.0,554.5,-0.0
-Contrabasses,38,Contrabasses_38,554.5,562.5,2.23345859334435
-Contrabasses,39,Contrabasses_39,562.5,602.5,2.0812500447765654
-Contrabasses,40,Contrabasses_40,602.5,614.0,2.10138772219093
-Contrabasses,41,Contrabasses_41,614.0,628.5,-0.0
-Contrabasses,42,Contrabasses_42,628.5,630.0,-0.0
-Contrabasses,43,Contrabasses_43,630.0,644.5,-0.0
-Contrabasses,44,Contrabasses_44,644.5,646.0,-0.0
-Contrabasses,45,Contrabasses_45,646.0,660.5,-0.0
-Contrabasses,46,Contrabasses_46,660.5,662.0,-0.0
-Contrabasses,47,Contrabasses_47,662.0,714.0,2.999220713671437
-Contrabasses,48,Contrabasses_48,714.0,716.0,-0.0
-Contrabasses,49,Contrabasses_49,716.0,730.0,2.71929452566698
-Contrabasses,50,Contrabasses_50,730.0,731.0,-0.0
-Contrabasses,51,Contrabasses_51,731.0,732.0,-0.0
-Contrabasses,52,Contrabasses_52,732.0,733.0,-0.0
-Contrabasses,53,Contrabasses_53,733.0,773.5,3.358554084101104
-Contrabasses,54,Contrabasses_54,773.5,774.0,-0.0
-Contrabasses,55,Contrabasses_55,774.0,774.5,-0.0
-Contrabasses,56,Contrabasses_56,774.5,782.0,0.6500224216483541
-Contrabasses,57,Contrabasses_57,782.0,788.5,-0.0
-Contrabasses,58,Contrabasses_58,788.5,790.5,-0.0
-Contrabasses,59,Contrabasses_59,790.5,798.0,0.6500224216483541
-Contrabasses,60,Contrabasses_60,798.0,806.0,-0.0
-Contrabasses,61,Contrabasses_61,806.0,814.0,-0.0
-Contrabasses,62,Contrabasses_62,814.0,830.0,-0.0
-Contrabasses,63,Contrabasses_63,830.0,882.0,3.921765562452246
-Contrabasses,64,Contrabasses_64,882.0,884.0,-0.0
-Contrabasses,65,Contrabasses_65,884.0,886.0,-0.0
-Contrabasses,66,Contrabasses_66,886.0,895.0,2.0
-Contrabasses,67,Contrabasses_67,895.0,900.0,-0.0
-Contrabasses,68,Contrabasses_68,900.0,911.0,1.5566567074628228
-Contrabasses,69,Contrabasses_69,911.0,920.0,-0.0
-Contrabasses,70,Contrabasses_70,920.0,924.0,1.0
-Contrabasses,71,Contrabasses_71,924.0,926.0,1.0
-Contrabasses,72,Contrabasses_72,926.0,928.0,-0.0
-Contrabasses,73,Contrabasses_73,928.0,930.0,-0.0
-Contrabasses,74,Contrabasses_74,930.0,938.0,2.2516291673878226
-Contrabasses,75,Contrabasses_75,938.0,942.0,1.0
-Contrabasses,76,Contrabasses_76,942.0,944.0,-0.0
-Contrabasses,77,Contrabasses_77,944.0,946.0,-0.0
-Contrabasses,78,Contrabasses_78,946.0,956.5,-0.0
-Contrabasses,79,Contrabasses_79,956.5,972.0,1.8538235426612042
-Contrabasses,80,Contrabasses_80,972.0,990.5,-0.0
-Contrabasses,81,Contrabasses_81,990.5,1005.0,1.884737640823055
-Contrabasses,82,Contrabasses_82,1005.0,1008.0,0.9182958340544896
-Contrabasses,83,Contrabasses_83,1008.0,1010.0,-0.0
-Contrabasses,84,Contrabasses_84,1010.0,1014.0,1.0
+Contrabasses,16,Contrabasses_16,217.0,234.0,2.269697227301693
+Contrabasses,17,Contrabasses_17,234.0,238.0,1.6225562489182657
+Contrabasses,18,Contrabasses_18,238.0,242.0,1.6225562489182657
+Contrabasses,19,Contrabasses_19,242.0,254.0,2.7419011889093374
+Contrabasses,20,Contrabasses_20,254.0,289.0,-0.0
+Contrabasses,21,Contrabasses_21,289.0,290.0,-0.0
+Contrabasses,22,Contrabasses_22,290.0,292.0,-0.0
+Contrabasses,23,Contrabasses_23,292.0,294.0,-0.0
+Contrabasses,24,Contrabasses_24,294.0,296.0,-0.0
+Contrabasses,25,Contrabasses_25,296.0,298.0,-0.0
+Contrabasses,26,Contrabasses_26,298.0,302.0,-0.0
+Contrabasses,27,Contrabasses_27,302.0,304.0,-0.0
+Contrabasses,28,Contrabasses_28,304.0,306.0,-0.0
+Contrabasses,29,Contrabasses_29,306.0,308.0,-0.0
+Contrabasses,30,Contrabasses_30,308.0,310.0,-0.0
+Contrabasses,31,Contrabasses_31,310.0,312.0,-0.0
+Contrabasses,32,Contrabasses_32,312.0,356.0,4.379372996627296
+Contrabasses,33,Contrabasses_33,356.0,363.0,-0.0
+Contrabasses,34,Contrabasses_34,363.0,372.0,1.974937501201927
+Contrabasses,35,Contrabasses_35,372.0,379.0,-0.0
+Contrabasses,36,Contrabasses_36,379.0,388.0,1.974937501201927
+Contrabasses,37,Contrabasses_37,388.0,394.0,-0.0
+Contrabasses,38,Contrabasses_38,394.0,418.0,1.9182958340544893
+Contrabasses,39,Contrabasses_39,418.0,426.0,1.0
+Contrabasses,40,Contrabasses_40,426.0,430.0,-0.0
+Contrabasses,41,Contrabasses_41,430.0,528.0,4.130896344386189
+Contrabasses,42,Contrabasses_42,528.0,530.0,-0.0
+Contrabasses,43,Contrabasses_43,530.0,534.0,1.0
+Contrabasses,44,Contrabasses_44,534.0,550.5,-0.0
+Contrabasses,45,Contrabasses_45,550.5,558.5,2.23345859334435
+Contrabasses,46,Contrabasses_46,558.5,598.0,2.4210052688038575
+Contrabasses,47,Contrabasses_47,598.0,598.5,-0.0
+Contrabasses,48,Contrabasses_48,598.5,610.0,2.10138772219093
+Contrabasses,49,Contrabasses_49,610.0,624.5,-0.0
+Contrabasses,50,Contrabasses_50,624.5,626.0,-0.0
+Contrabasses,51,Contrabasses_51,626.0,640.5,-0.0
+Contrabasses,52,Contrabasses_52,640.5,642.0,-0.0
+Contrabasses,53,Contrabasses_53,642.0,656.5,-0.0
+Contrabasses,54,Contrabasses_54,656.5,658.0,-0.0
+Contrabasses,55,Contrabasses_55,658.0,710.0,2.999220713671437
+Contrabasses,56,Contrabasses_56,710.0,712.0,-0.0
+Contrabasses,57,Contrabasses_57,712.0,726.0,2.71929452566698
+Contrabasses,58,Contrabasses_58,726.0,727.0,-0.0
+Contrabasses,59,Contrabasses_59,727.0,728.0,-0.0
+Contrabasses,60,Contrabasses_60,728.0,729.0,-0.0
+Contrabasses,61,Contrabasses_61,729.0,746.0,2.269697227301693
+Contrabasses,62,Contrabasses_62,746.0,750.0,1.6225562489182657
+Contrabasses,63,Contrabasses_63,750.0,768.0,3.4719407862842644
+Contrabasses,64,Contrabasses_64,768.0,770.0,-0.0
+Contrabasses,65,Contrabasses_65,770.0,770.5,-0.0
+Contrabasses,66,Contrabasses_66,770.5,778.0,1.0
+Contrabasses,67,Contrabasses_67,778.0,784.5,-0.0
+Contrabasses,68,Contrabasses_68,784.5,786.5,-0.0
+Contrabasses,69,Contrabasses_69,786.5,794.0,1.0
+Contrabasses,70,Contrabasses_70,794.0,802.0,-0.0
+Contrabasses,71,Contrabasses_71,802.0,810.0,-0.0
+Contrabasses,72,Contrabasses_72,810.0,826.0,-0.0
+Contrabasses,73,Contrabasses_73,826.0,878.0,3.921765562452246
+Contrabasses,74,Contrabasses_74,878.0,880.0,-0.0
+Contrabasses,75,Contrabasses_75,880.0,882.0,-0.0
+Contrabasses,76,Contrabasses_76,882.0,891.0,2.0
+Contrabasses,77,Contrabasses_77,891.0,896.0,-0.0
+Contrabasses,78,Contrabasses_78,896.0,907.0,1.5566567074628228
+Contrabasses,79,Contrabasses_79,907.0,916.0,-0.0
+Contrabasses,80,Contrabasses_80,916.0,917.0,-0.0
+Contrabasses,81,Contrabasses_81,917.0,920.0,-0.0
+Contrabasses,82,Contrabasses_82,920.0,922.0,1.0
+Contrabasses,83,Contrabasses_83,922.0,924.0,-0.0
+Contrabasses,84,Contrabasses_84,924.0,926.0,-0.0
+Contrabasses,85,Contrabasses_85,926.0,931.0,2.321928094887362
+Contrabasses,86,Contrabasses_86,931.0,934.0,-0.0
+Contrabasses,87,Contrabasses_87,934.0,938.0,1.0
+Contrabasses,88,Contrabasses_88,938.0,940.0,-0.0
+Contrabasses,89,Contrabasses_89,940.0,942.0,-0.0
+Contrabasses,90,Contrabasses_90,942.0,952.5,-0.0
+Contrabasses,91,Contrabasses_91,952.5,968.0,2.6062389286533896
+Contrabasses,92,Contrabasses_92,968.0,986.5,-0.0
+Contrabasses,93,Contrabasses_93,986.5,988.0,-0.0
+Contrabasses,94,Contrabasses_94,988.0,992.0,1.6225562489182657
+Contrabasses,95,Contrabasses_95,992.0,1000.0,1.90886800584993
+Contrabasses,96,Contrabasses_96,1000.0,1001.0,-0.0
+Contrabasses,97,Contrabasses_97,1001.0,1004.0,0.9182958340544896
+Contrabasses,98,Contrabasses_98,1004.0,1006.0,-0.0
+Contrabasses,99,Contrabasses_99,1006.0,1009.0,1.0
