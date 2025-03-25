@@ -3,7 +3,7 @@ import pandas as pd
 from plots import extractChosen
 
 
-def plotArrangement(sample: dict, score: stream.Score, phrases: pd.DataFrame, instruments: dict, midiPath: str = None) -> stream.Score:
+def composeArrangement(sample: dict, score: stream.Score, phrases: pd.DataFrame, instruments: dict, midiPath: str = None) -> stream.Score:
     '''
     Create an arrangement score from a sample.
     '''
@@ -11,15 +11,20 @@ def plotArrangement(sample: dict, score: stream.Score, phrases: pd.DataFrame, in
     scoreParts = {p.id: p.flatten() for p in score.parts}
     arrParts = {i: stream.Part() for i in instruments}
 
+    ks = score.parts[0].flatten().keySignature
+    ts = score.parts[0].flatten().timeSignature
+
     for i in arrParts:
         arrParts[i].append(getattr(instrument, i)())
-        arrParts[i].append(getattr(clef, instruments[i]["clef"])())
+        arrParts[i].clef = getattr(clef, instruments[i]["clef"])()
+        arrParts[i].keySignature = ks
+        arrParts[i].timeSignature = ts
 
     chosen = extractChosen(sample) # Index : Assignment
 
     for index in chosen:
         
-        flat = scoreParts[index[0]] # Original part
+        flat = scoreParts[index[0]].notesAndRests # Original part (NOTES ONLY)
         phrase = flat.getElementsByOffset(phrases.loc[index, "Start"], phrases.loc[index, "End"], includeEndBoundary=False).stream()
 
         # Get lowest note of assigned instrument
@@ -35,10 +40,9 @@ def plotArrangement(sample: dict, score: stream.Score, phrases: pd.DataFrame, in
             shiftOctave(phrase, 1 if pitchMin.ps < lowestNote.ps else -1)
 
         # Merge with new part
-        arrParts[chosen[index]].mergeElements(phrase) 
+        arrParts[chosen[index]].mergeElements(phrase)
 
     arrangement = stream.Score(arrParts.values())
-    arrangement.show()
 
     if midiPath: saveToMidi(arrangement, midiPath)
 
