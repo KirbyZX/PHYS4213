@@ -1,38 +1,41 @@
 import networkx as nx
 import itertools as iter
+import pandas as pd
 from dimod import BinaryQuadraticModel
 import sys
 import pickle
 import json
 
 
-def createBQM(G: nx.Graph, phrases: list, instruments: list, nodeConstraintMult: float = 1, edgeConstraintMult: float = 1, roleMult: float = 1) -> BinaryQuadraticModel:
+def createBQM(G: nx.Graph, phrases: pd.DataFrame, instruments: list, nodeConstraintMult: float = 1, edgeConstraintMult: float = 1, roleMult: float = 1) -> BinaryQuadraticModel:
     '''
     Creates a binary quadratic model for the graph colouring problem.
     '''
 
     bqm = BinaryQuadraticModel(vartype="BINARY")
-    allPhrases = [phrase for part in phrases for phrase in part]
 
-    maxEntropy = max([phrase.entropy for phrase in allPhrases])
+    maxEntropy = phrases["Entropy"].max()
     melodyThreshold = maxEntropy * 2/3
     harmonyThreshold = maxEntropy * 1/3
 
-    for phrase in allPhrases:
+    for ind in phrases.index:
+
+        id = phrases.loc[ind, "ID"]
+        entropy = phrases.loc[ind, "Entropy"]
 
         # Each vertex coloured at most once
         if len(instruments) > 1:
-            bqm.add_linear_inequality_constraint([(f"{phrase.id}_{i}", 1) for i in instruments], ub=1, lagrange_multiplier=nodeConstraintMult*maxEntropy, penalization_method="slack", label=f"{phrase.id}")
+            bqm.add_linear_inequality_constraint([(f"{id}_{i}", 1) for i in instruments], ub=1, lagrange_multiplier=nodeConstraintMult*maxEntropy, penalization_method="slack", label=f"{id}")
         # Maximise vertex weighting
-        bqm.add_linear_from([(f"{phrase.id}_{i}", -phrase.entropy) for i in instruments])
+        bqm.add_linear_from([(f"{id}_{i}", -entropy) for i in instruments])
         
         # instruments.json in the form "instrument" : "melody"
-        if phrase.entropy >= melodyThreshold:
-            bqm.add_linear_from([(f"{phrase.id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "melody"])
-        elif phrase.entropy >= harmonyThreshold:
-            bqm.add_linear_from([(f"{phrase.id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "harmony"])
+        if entropy >= melodyThreshold:
+            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "melody"])
+        elif phrases.loc[ind, "Entropy"] >= harmonyThreshold:
+            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "harmony"])
         else:
-            bqm.add_linear_from([(f"{phrase.id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "bass"])
+            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "bass"])
 
     for u, v, d in G.edges.data():
         # Adjacent vertices have different colours
@@ -46,14 +49,15 @@ def createBQM(G: nx.Graph, phrases: list, instruments: list, nodeConstraintMult:
 if __name__ == "__main__":
     
     identifier = sys.argv[1]
-    path = f"../Pickles/{identifier}/{identifier}_"
+    num = sys.argv[2]
+    path = f"../Pickles/{identifier}/"
 
-    G = nx.read_graphml(path + "graph.graphml")
-    phrases = pickle.load(open(path + "phrases.pkl", "rb"))
-    instruments = json.load(open(path + "instruments.json"))
+    G = nx.read_graphml(path + f"{identifier}_graph.graphml")
+    phrases = pd.read_csv(path + f"{identifier}_phrases.csv", index_col=[0,1])
+    instruments = json.load(open(path + f"{num}/{identifier}_{num}_instruments.json"))
 
     bqm = createBQM(G, phrases, instruments)
     print("BQM created!")
 
-    with open(path + "bqm.json", "w") as f: 
+    with open(path + f"{num}/{identifier}_{num}_bqm.json", "w") as f: 
         json.dump(bqm.to_serializable(), f)

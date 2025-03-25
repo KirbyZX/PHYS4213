@@ -14,11 +14,13 @@ def findEmbedding(bqm: BinaryQuadraticModel) -> None:
 if __name__ == "__main__":
 
     identifier = sys.argv[1]
-    path = f"../Pickles/{identifier}/{identifier}_"
-    bqm = BinaryQuadraticModel.from_serializable(json.load(open(path + "bqm.json")))
+    num = sys.argv[2]
+    numpath = f"../Pickles/{identifier}/{num}/{identifier}_{num}_"
+
+    bqm = BinaryQuadraticModel.from_serializable(json.load(open(numpath + "bqm.json")))
     
     embedding = findEmbedding(bqm)
     print("Embedding found!")
 
-    with open(path + "embedding.json", "w") as f: 
+    with open(numpath + "embedding.json", "w") as f: 
         json.dump(embedding, f)
