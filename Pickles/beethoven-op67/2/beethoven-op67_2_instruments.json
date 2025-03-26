@@ -1,0 +1,13 @@
+{
+    "Flute": {
+        "role": "melody",
+        "colour": "red",
+        "clef": "TrebleClef"
+    },
+
+    "Cello": {
+        "role": "bass",
+        "colour": "blue",
+        "clef": "BassClef"
+    }
+}
