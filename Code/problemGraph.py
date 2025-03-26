@@ -18,7 +18,7 @@ def createGraph(phrases: pd.DataFrame, cores: int, chunksize: int) -> nx.Graph:
 
     G.add_nodes_from([(phrases.loc[i, "ID"], {"entropy": phrases.loc[i, "Entropy"]}) for i in phrases.index])
     G.add_weighted_edges_from(edges)
-    print("\nGraph created!")
+    print(f"\nGraph with {G.number_of_nodes()} nodes and {G.number_of_edges()} edges created!")
 
     return G
 

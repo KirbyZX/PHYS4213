@@ -1,8 +1,11 @@
 import json
+import pandas as pd
+import networkx as nx
 import sys
 from minorminer import find_embedding
 from dwave.system import DWaveSampler
 from dimod import BinaryQuadraticModel, to_networkx_graph
+from qubo import createBQM
 
 
 def findEmbedding(bqm: BinaryQuadraticModel) -> None:
@@ -13,14 +16,24 @@ def findEmbedding(bqm: BinaryQuadraticModel) -> None:
 
 if __name__ == "__main__":
 
-    identifier = sys.argv[1]
-    num = sys.argv[2]
-    numpath = f"../Pickles/{identifier}/{num}/{identifier}_{num}_"
+    IDENTIFIER = sys.argv[1]
+    NUM = sys.argv[2]
 
-    bqm = BinaryQuadraticModel.from_serializable(json.load(open(numpath + "bqm.json")))
+    picklePath = f"../Pickles/{IDENTIFIER}/{IDENTIFIER}_"
+    numPath = f"../Pickles/{IDENTIFIER}/{NUM}/{IDENTIFIER}_{NUM}_"
+
+    G = nx.read_graphml(picklePath + "graph.graphml")
+    phrases = pd.read_csv(picklePath + "phrases.csv", index_col=[0,1])
+    instruments = json.load(open(numPath + "instruments.json"))
+
+    bqm = createBQM(G, phrases, instruments)
+    maxDegree = bqm.degrees(array=True).max()
+    qubits = bqm.num_variables
     
+    print(f"Attempting to embed {qubits} qubits with maximum degree {maxDegree}...")
     embedding = findEmbedding(bqm)
-    print("Embedding found!")
+    physicalQubits = sum(len(embedding[i]) for i in embedding) 
+    print(f"Embedding found using {physicalQubits} qubits!")
 
-    with open(numpath + "embedding.json", "w") as f: 
+    with open(numPath + "embedding.json", "w") as f: 
         json.dump(embedding, f)

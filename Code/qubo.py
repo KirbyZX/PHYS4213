@@ -3,7 +3,6 @@ import itertools as iter
 import pandas as pd
 from dimod import BinaryQuadraticModel
 import sys
-import pickle
 import json
 
 

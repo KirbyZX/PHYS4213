@@ -5,7 +5,7 @@ from music21 import stream, converter
 from entropy import streamEntropy
 
 
-def extractPhrases(score: stream.Score, weights: tuple[float]) -> pd.DataFrame:
+def extractPhrases(score: stream.Score, threshold: float, weights: tuple[float]) -> pd.DataFrame:
     '''
     Extracts phrases from a score using the LBDM.
     '''
@@ -15,7 +15,7 @@ def extractPhrases(score: stream.Score, weights: tuple[float]) -> pd.DataFrame:
     for part in score.parts:
         print(f"Creating phrases for {part.id} part...")
 
-        df, _ = calculateStrengths(part, weights)
+        df, _ = calculateStrengths(part, threshold, weights)
         flat = part.flatten()
         lastNote = flat.notes.stream().last()
 
@@ -37,9 +37,11 @@ def extractPhrases(score: stream.Score, weights: tuple[float]) -> pd.DataFrame:
         print(f"{len(partPhrases)} phrases created!")
         phrases = pd.concat([phrases, partPhrases])
 
+    print(f"{len(phrases)} total phrases created!")
+
     return phrases
 
-def calculateStrengths(stream: stream.Stream, weights: tuple[float]) -> tuple[pd.DataFrame, float]:
+def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[float]) -> tuple[pd.DataFrame, float]:
     '''
     Returns a table of calculated boundary strengths.
     '''
@@ -79,7 +81,6 @@ def calculateStrengths(stream: stream.Stream, weights: tuple[float]) -> tuple[pd
 
     df.eval("Strength = @weights[0]*`Pitch strength` + @weights[1]*`Offset strength`", inplace=True)
 
-    threshold = df["Strength"].max() / 4
     df.eval("IsBoundary = Strength >= @threshold", inplace=True)
 
     return df, threshold
@@ -91,7 +92,7 @@ if __name__ == "__main__":
 
     path = f"../Pickles/{identifier}/{identifier}_"
 
-    score = converter.parse(path + "processed.musicxml")
+    score = converter.parse(path + "score.musicxml")
 
-    phrases = extractPhrases(score, (0.33, 0.66))
+    phrases = extractPhrases(score, .25, (0.33, 0.66))
     phrases.to_csv(path + "phrases.csv")

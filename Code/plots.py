@@ -2,8 +2,9 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
 import networkx as nx
-import re
 import numpy as np
+
+from samples import extractChosen
 
 
 def plotCSV(filepath: str, xaxis: str, yaxis: str, label: str = "") -> None:
@@ -43,15 +44,6 @@ def plotSampleGraph(sample: dict, G: nx.Graph, instruments: dict) -> None:
 
     nx.draw_networkx_nodes(G, pos, node_color=colours, node_size=entropies/entropies.max() + .1)
     nx.draw_networkx_edges(G, pos, width=edgeWeights/(10*edgeWeights.max()))
-
-def extractChosen(sample: dict) -> dict:
-    '''
-    Extract the indices chosen phrases from a sample in the form `{("Instrument", "Phrase number"): "Assignment"}`.
-    '''
-
-    processNode = lambda node : re.match(r"(.+)_(\d+)_(.+)", node).groups()
-    # ("Instrument", Phrase number): "Assignment"
-    return {(processNode(x)[0], int(processNode(x)[1])): processNode(x)[2] for x in sample if sample[x] == 1}
 
 def plotHistogram(sampleset: pd.DataFrame) -> None:
     '''
