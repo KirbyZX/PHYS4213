@@ -89,10 +89,11 @@ def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[f
 if __name__ == "__main__":
 
     identifier = sys.argv[1]
+    threshold = float(sys.argv[2])
 
     path = f"../Pickles/{identifier}/{identifier}_"
 
     score = converter.parse(path + "score.musicxml")
 
-    phrases = extractPhrases(score, .25, (0.33, 0.66))
+    phrases = extractPhrases(score, threshold, (0.33, 0.66))
     phrases.to_csv(path + "phrases.csv")
