@@ -14,7 +14,7 @@
 \graphicspath{{../Figures/}}
 \usepackage{mwe}
 
-% Maths package
+% Maths formatting and environments
 \usepackage{amsmath}
 \usepackage[utf8]{inputenc}
 \DeclareUnicodeCharacter{2212}{$-$} % Minus sign
@@ -23,8 +23,8 @@
 \usepackage[backend=biber, sorting=none, style=draft]{biblatex}
 \addbibresource{thesis.bib}
 
-%\usepackage[round-mode=figures,round-precision=3,round-pad=false]{siunitx} % SI units, alignment in tables
-%\sisetup{round-mode=figures, round-precision=3}
+% Number formatting
+\usepackage[round-mode=figures,round-precision=3,round-pad=false]{siunitx}
 
 %\usepackage{lipsum}
 
@@ -43,7 +43,7 @@
 %\usepackage{float}
 
 \title{\Huge \bfseries Quantum annealing\\for music arrangement}
-\author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\small Supervised by\\Prof Robert Potvliege \& Dr Omer Rathore}
+\author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\normalsize Supervised by\\\normalsize Prof Robert Potvliege \& Dr Omer Rathore}
 \date{\normalsize 23 April 2025}
 
 \begin{document}
@@ -127,7 +127,9 @@ where we have replaced the spins with Pauli matrices. This is the \textit{Ising 
 \end{equation}
 which is an equal superposition of all possible states in the eigenbasis of $H_p$ .
 
-Talk briefly about NP-hard problems....belongs to a class of computationally complex problems called NP (non-polynomial). A full discussion of computational complexity is beyond the scope of this study, but in brief NP problems are difficult to solve via classical algorithms as the time to solution scales exponentially with problem size. A common example is the travelling salesman problem; a salesman must visit a set of cities exactly onces and return home, whilst minimising the distance travelled. As the number of cities grows, the number of possible routes the salesman could take grows exponentially, with a classical algorithm having to consider many more possible options. It is these sorts of optimisation problems that quantum annealers excel at solving.
+Talk briefly about NP-hard problems....belongs to a class of computationally complex problems called NP (nondeterministic polynomial) [COLLATE AND CHECK NOTES]. A full discussion of computational complexity is beyond the scope of this study, but in brief NP problems are difficult to solve via classical algorithms as the time to solution scales exponentially with problem size. A common example is the travelling salesman problem; a salesman must visit a set of cities exactly onces and return home, whilst minimising the distance travelled. As the number of cities grows, the number of possible routes the salesman could take grows exponentially, with a classical algorithm having to consider many more possible options. It is these sorts of optimisation problems that quantum annealers excel at solving.
+
+Large solution space with many local minima
 
 The mapping of a logical problem to an Ising model is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
 \begin{equation}
@@ -140,6 +142,13 @@ This form can easily for transformed to an Ising model using
     s_i = 2x_i - 1 \,.
     \label{eq:qubo-ising}
 \end{equation}
+
+!!!minor embedding , introduces a computational "overhead"
+qubit biases implemented via electromagnetic fields
+often the connectivity of each qubit is not sufficient to describe the problem, introduction of chains
+strong interactions between chain qubits to ensure they all have the same value (chain strength)
+if chain strength not large enough then chains can break, can be solved by different methods e.g. majority vote
+done by CPU not QPU
 
 Once a QUBO has been expressed, it can be sent to a quantum processing unit (QPU) to be solved. The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms ($x_i$) as qubit nodes and quadratic terms ($x_ix_j$) as couplers between them. An embedded system can then be prepared in its initial ground state, and allowed to evolve adiabatically to its final state to obtain the solution.
 
@@ -159,6 +168,14 @@ The full embedding process is often handled entirely by the QPU, done ``on the f
 Quantum annealing has already been applied to a widge array of optimisation problems, ranging from financial portfolios \cite{phillipson_portfolio_2021}, protein folding \cite{perdomo-ortiz_protein_2012}, and traffic flow \cite{inoue_traffic_2021}. This study explores a creative novel application of this technique, music arrangement.
 
 Put a bit about NP-hard problems here.
+
+!!!Spectral gaps | gaps between energy levels as they evolve in time
+Care about the minimum energy gaps
+Smaller energy gaps need longer time evolution due to uncertainty principle $\Delta E \Delta t$.
+There are $2^N$ energy levels for $N$ qubits! Ideally want a sparse matrix
+Large matrices can almost be considered random, will return gaussian distribution (see literature for random matrices?)
+
+!!!Nick Chansellor paper, why quantum annealing?
 
 \section{Music arrangement}
 
@@ -322,6 +339,7 @@ Many companies provide both personal and commercial access to gate-based quantum
 \subsection{Limitations}
 
 QPU chip graph size -> affects length of scores/granularity of phrases/number of arrangement instruments
+!!!is possible to partition graphs to reduce problem sizes (include citation) but is future work
 
 Maximum problem time limit -> affects maximum time per anneal which could affect quality of results
 
@@ -383,7 +401,21 @@ Phrases identified using the LBDM are shown in Fig.\  , alongside their calculat
 
 The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh any possible benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sample set of solutions was returned, which can be seen in Fig.\  . Many solutions had degenerate energies—the lowest energy was -26.821803 with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\  , with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\  .
 
+!!!comparing time to solution
+For QA only looking at annealing time, not QPU access time (which includes sampling, readout, programming time) as this is a limitation of the technology rather than the method
+
 \section{Conclusions}
+
+!!!what is the main limiting factor?
+Computers aren't big enough yet, but how big would they need to be? Look into new Zephyr topology
+
+!!!future work
+reverse annealing
+change in anneal schedule, pause/quench
+graph partitioning
+a priori lagrange parameters (Nelder-Mead)
+unbalanced penalisation vs slack penalisation (would reduce number of variables)
+
 
 In the case of Beethoven's String Quartet No.\ 10, this method can be said to be successful in reducing the score to a single monophonic part. A sufficient number of phrases are identified to allow the key melodic lines to be picked out from each part, and the weighted MIS formulation results in a final arrangement that is not musically uninteresting. Here, only one solution was picked arbitrarily; if desired, each of the degenerate lowest energy solutions could be examined individually to isolate the one that is considered most ``musical'', safe in the knowledge that all of them are valid.
 
@@ -408,6 +440,9 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 
 \clearpage
 \appendix
+
+\section{Examples}
+
 \section{Test appendix}
 
 Start with an undirected graph $G=(V,E)$ and a set of $n$ colours, which represent the parts for which we are arranging, with each being an independent set. Denote $x_{v,i}$ to be a binary variable such that
