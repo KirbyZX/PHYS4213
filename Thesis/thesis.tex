@@ -9,20 +9,21 @@
 %\renewcommand{\baselinestretch}{1.15}     % Defines the line spacing
 %should be setspace package???s
 
-\usepackage{graphics,graphicx}  % Graphics package
+\usepackage{graphics,graphicx}
 \usepackage{svg}
 \graphicspath{{../Figures/}}
 \usepackage{mwe}
 
-\usepackage{amsmath} 						% Maths package
+% Maths package
+\usepackage{amsmath}
 \usepackage[utf8]{inputenc}
 \DeclareUnicodeCharacter{2212}{$-$} % Minus sign
 
 % Bibliography
-\usepackage[backend=biber, sorting=none]{biblatex}
+\usepackage[backend=biber, sorting=none, style=draft]{biblatex}
 \addbibresource{thesis.bib}
 
-%\usepackage{siunitx} % SI units, alignment in tables
+%\usepackage[round-mode=figures,round-precision=3,round-pad=false]{siunitx} % SI units, alignment in tables
 %\sisetup{round-mode=figures, round-precision=3}
 
 %\usepackage{lipsum}
@@ -41,7 +42,6 @@
 
 %\usepackage{float}
 
-% Could make titlepage?
 \title{\Huge \bfseries Quantum annealing\\for music arrangement}
 \author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\small Supervised by\\Prof Robert Potvliege \& Dr Omer Rathore}
 \date{\normalsize 23 April 2025}
@@ -126,6 +126,8 @@ where we have replaced the spins with Pauli matrices. This is the \textit{Ising 
     H_0 = -h_0\sum_{i=1}^{N}\sigma_i^x
 \end{equation}
 which is an equal superposition of all possible states in the eigenbasis of $H_p$ .
+
+Talk briefly about NP-hard problems....belongs to a class of computationally complex problems called NP (non-polynomial). A full discussion of computational complexity is beyond the scope of this study, but in brief NP problems are difficult to solve via classical algorithms as the time to solution scales exponentially with problem size. A common example is the travelling salesman problem; a salesman must visit a set of cities exactly onces and return home, whilst minimising the distance travelled. As the number of cities grows, the number of possible routes the salesman could take grows exponentially, with a classical algorithm having to consider many more possible options. It is these sorts of optimisation problems that quantum annealers excel at solving.
 
 The mapping of a logical problem to an Ising model is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
 \begin{equation}
@@ -277,7 +279,53 @@ where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is 
 Rhythm entropy is calculated in a similar way, but considering the duration of the note instead. This is also calculated using Eq.\ \ref{eq:pitch-prob}, but instead considering $x_i$ as possible duration values.
 The total entropy of a phrase is then the sum of the pitch and rhythm entropies.
 
-Once the graph is formed, the weighted MIS QUBO can be constructed via Eq.\ \ref{eq:weightedMIS}, the Lagrange parameters chosen, and sent to the D-Wave QPU to be solved. The lowest energy solutions returned are sets of nodes that are not connected by edges, whilst maximising their total weighting. The qubits are then matched back to their corresponding phrases, which are reconstructed into a new score, the final reduction.
+\subsection{Lagrange parameter analysis}
+
+To ensure that the low energy solutions of our QUBO formulation do indeed fulfil the constraints necessary for a valid arrangement as outline before, the Lagrange parameters must be tuned. It is possible for this to be done \textit{a priori} [CITE], however, this study will focus on an empirical approach.
+
+The formulation given by \cref{eq:QUBO} contains two penalty terms, labelled with parameters $A$ and $B$. The first penalises nodes being coloured more than once, which would introduce phrases being duplicated across parts in the final arrangement; this is referred to as the node constraint. The second penalises adjacent nodes of the same colour, preventing phrases that overlap being played by the same part; this is referred to as the edge constraint. The three objective terms are labelled with parameters $C$, $D$, and $E$, which lower the energy. In a worst-case scenario, a node included in the solution would lower the energy maximally whilst breaking a constraint. To ensure that this results in an overall increase in energy, and is therefore less likely, a quick algebraic analysis reveals that
+\begin{equation}
+    A + B > C\max(W) + D\max(W) + E
+\end{equation}
+where $\max(W)$ denotes the largest entry of the weight matrix. To allow a similar analysis across problems with different weights, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the inequality
+\begin{equation}
+    A_m + B_m > 2 + E_m \,.
+\end{equation}
+
+\subsection{Solver configuration}
+
+The configuration of solver used was also tuned: two parameters, chain strength and anneal time per sample.
+
+Fit quadratic curve to chain strength plot to find minimum value of energy.
+
+\begin{itemize}
+    \item Chain strength analysis and explanation
+    \item Anneal time analysis
+\end{itemize}
+
+Increase anneal time prevents excitation to higher energy states due to smaller spectral gaps.
+
+In the following results we set $E_m=1$ as bias towards part types is preferred but not essential. The values of $A_m$ and $B_m$ can then be found by performing parametric variation and measuring the number of broken constraints (duplicates and overlaps) in the lowest energy solutions. Parameter values should be just large enough to fulfil constraints, whilst not being too large as to overwhelm the other terms in the QUBO equation [CITE].
+
+\begin{itemize}
+    \item Lagrange parameter variations
+    \item 2D surface plot?
+    \item Compare to analytic derivation (reference for double value?)
+\end{itemize}
+
+\subsection{Quantum hardware}
+
+Once the graph is formed, the weighted MIS QUBO can be constructed via \cref{eq:QUBO}, the Lagrange parameters chosen, and sent to the D-Wave QPU to be solved. The lowest energy solutions returned are sets of nodes that are not connected by edges, whilst maximising their total weighting. The qubits are then matched back to their corresponding phrases, which are reconstructed into a new score, the final reduction.
+
+Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer \cite{dwave_manufactured_2011}, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of.
+
+\subsection{Limitations}
+
+QPU chip graph size -> affects length of scores/granularity of phrases/number of arrangement instruments
+
+Maximum problem time limit -> affects maximum time per anneal which could affect quality of results
+
+Removing chords and voices from scores -> loss of information
 
 \section{Results}
 
@@ -298,22 +346,6 @@ A returned sampleset of solutions might look something like Fig.\ [HISTOGRAM]. I
 
 How sparse is the problem graph? $(nodes + edges)/nodes^2$
 
-\subsection{Lagrange parameter analysis}
-
-Lagrange parameters were tuned to fulfil the required constraints for a valid arrangement. Node constraint => duplicates (phrases duplicated across parts), edge constraints => overlaps (phrases that overlap played at the same time).
-
-\begin{itemize}
-    \item Lagrange parameter variations
-    \item 2D surface plot?
-    \item Compare to analytic derivation (reference for double value?)
-\end{itemize}
-
-Analytically, we can derive an equality that the Lagrange parameters must satisfy in order for the minimum of the function to fulfil the imposed constraints.
-\begin{equation}
-    A>2\max(W)+E
-\end{equation}
-where $\max(W)$ is the largest entry of the weight matrix.
-
 \begin{figure}
     \includegraphics[width=0.5\textwidth]{node-constraint.png}
     \caption{Varying the node constraint Lagrange multiplier to ensure that each node is coloured at most once. Each QUBO was submitted three times for 1000 reads, with the mean and standard error calculated.}
@@ -323,17 +355,6 @@ where $\max(W)$ is the largest entry of the weight matrix.
     \includegraphics[width=0.5\textwidth]{edge-constraint.png}
     \caption{Varying the edge constraint Lagrange multiplier to ensure that no nodes of the same colour are connected.}
 \end{figure}
-
-\subsection{Solver configuration}
-
-The configuration of solver used was also tuned: two parameters, chain strength and anneal time per sample.
-
-Fit quadratic curve to chain strength plot to find minimum value of energy.
-
-\begin{itemize}
-    \item Chain strength analysis and explanation
-    \item Anneal time analysis
-\end{itemize}
 
 \subsection{Comparison to classical algorithms}
 
