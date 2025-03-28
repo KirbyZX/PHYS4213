@@ -16,6 +16,10 @@
 
 % Maths formatting and environments
 \usepackage{amsmath}
+%\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}
+
 \usepackage[utf8]{inputenc}
 \DeclareUnicodeCharacter{2212}{$-$} % Minus sign
 
@@ -83,7 +87,7 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
     \caption[Toy graph]{This is a toy graph showing blah blah blah}
 \end{figure}
 
-Music is often seen as a very human endeavour. For centuries, only skilled musicians could compose and perform such sequences of sound that would be considered art \cite{dwave_manufactured_2011}. Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
+Music is often seen as a very human endeavour. For centuries, only skilled musicians could compose and perform such sequences of sound that would be considered art. Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
 Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging whilst still remaining faithful to the source material—a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
 
 One of the earliest examples of this can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century. The roll of dice would determine the order of pre-composed musical phrases, allowing for the creation of new music without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
@@ -101,29 +105,39 @@ In this study, the arrangement of a musical score is formulated as an NP-hard gr
 
 \section{Quantum annealing}
 
-Annealing, in metallurgical terms, is the process of heating and cooling a material to alter its physical properties . The cooling stage is typically slow, allowing particles to arrange themselves into regular lattice structures, making the material softer and less brittle. In the context of quantum computing, quantum annealing is the process of slowly changing a quantum system from one Hamiltonian to another. Much like its metallurgical counterpart, this computational technique allows the system to settle into a more useful final state.
+Before we consider quantum annealing, we must first discuss adiabatic quantum computing (AQC), of which it is a branch. AQC is a computing technique that works under the adiabatic theorem.
 
-The typical time evolution of a quantum annealer looks like
+\begin{theorem}[Adiabatic theorem]
+    A physical system remains in its instantaneous eigenstate if a given perturbation is acting on it slowly enough and if there is a gap between the eigenvalue and the rest of the Hamiltonian's spectrum. \cite{born_beweis_1928}
+\end{theorem}
+
+During a truly adiabatic process, there is no transfer of energy into or out of a system (??), so that system must remain in its energy eigenstate. This theorem can also be seen as a consequence of the energy-time uncertainty relation, which can be expressed as
 \begin{equation}
-    H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p \,,
+    T\Delta E \ge \frac{\hbar}{2}
+    \label{eq:energy-time}
+\end{equation}
+where here we define $\Delta E$ as the uncertainty in energy eigenstate and $T$ the time interval over which the system is evolved. As $T\to\infty$ we allow $\Delta E\to0$, meaning the exact energy eigenstate of the system can be known. A typical evolution of such a Hamiltonian can be expressed as
+\begin{equation}
+    H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p
     \label{eq:time-evolution}
 \end{equation}
-where $H_0$ is the initial ground state that is allowed to evolve to a second state $H_p$ across time $T$. If this is done adiabatically (in a closed system), with a sufficiently large $T$, the system will remain in the ground state of $H(t)$, and therefore end in the ground state of $H_p$ at time $T$. This is the principle of quantum annealing.
+where we are evolving from an initial Hamiltonian $H_0$ to a final Hamiltonian $H_p$.
+This technique is useful as it allows particular eigenstates (usually the ground state) of a very complicated Hamiltonian ($H_p$) to be found simply by evolving from a Hamiltonian whose eigenstate is easy to prepare ($H_0$). Importantly, this process is universal and deterministic---if the system starts in the ground state of $H_0$, then it is guaranteed to be in the ground state of $H_p$ after evolution.
 
-The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If $H_p$ is prepared such that its ground state encodes the solution to the optimisation problem, then as long as $H_0$ and $H_p$ do not commute, the solution will be given at the end of the annealing process.
+However, since a truly adiabatic process takes infinitely many steps and therefore an infinite amount of time, this is not possible in practice. Instead, the adiabaticity condition of AQC can be relaxed to allow a shortening of the evolution time---this is quantum annealing\footnote{In metallurgical terms, annealing is the process of heating and cooling a material to alter its physical properties. Much like its metallurgical counterpart, quantum annealing allows a system to settle into a more useful final state.}. Over these shortened timescales ($T\sim\unit{\us}$), the eigenstate after evolution is no longer guaranteed but stochastic, and the final energy is heuristic. The advantage of this method is that a particular evolution can be run many times, sampling the probability distribution of final states until an acceptable outcome is found.
 
-In order to encode a problem, $H_p$ Hamiltonians take the form of an Ising spin glass, a random arrangement of magnetic dipole moments that can be in one of two states, typically spin-up ($+1$) or spin-down ($-1$). A spin glass with a vector $s$ of $N$ spins takes the form
+The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If $H_p$ is prepared such that its ground state encodes the solution to the optimisation problem, then the solution will be given at the end of the annealing process. In order to encode a problem, $H_p$ Hamiltonians take the form of an Ising spin glass, a random arrangement of magnetic dipole moments that can be in one of two states, typically spin-up ($+1$) or spin-down ($-1$). A spin glass with a vector $s$ of $N$ spins takes the form
 \begin{equation}
-    H(s) = -\sum_{i<j}J_{ij}s_i s_j - \sum_{i=1}^{N}h_i s_i
+    H(s) = \sum_{i<j}^{N}J_{ij}s_i s_j + \sum_{i=1}^{N}h_i s_i
     \label{eq:ising}
 \end{equation}
 where $J_{ij}$ are the coupling strengths, and $h_i$ are the field strengths. The quantum equivalent can be expressed as
 \begin{equation}
     H_p = H(\sigma^z)
 \end{equation}
-where we have replaced the spins with Pauli matrices. This is the \textit{Ising model}; the discrete variables are now \textit{qubits}—binary variables like their classical counterparts, but existing in a superposition of the two states until measurement. The corresponding ground state is prepared with the Hamiltonian 
+where we have replaced the spins with Pauli matrices. This is the Ising model; the discrete variables are now \emph{qubits}---binary variables like their classical counterparts, but existing in a superposition of the two states until measurement. The corresponding ground state is prepared with the Hamiltonian
 \begin{equation}
-    H_0 = -h_0\sum_{i=1}^{N}\sigma_i^x
+    H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
 \end{equation}
 which is an equal superposition of all possible states in the eigenbasis of $H_p$ .
 
@@ -142,6 +156,8 @@ This form can easily for transformed to an Ising model using
     s_i = 2x_i - 1 \,.
     \label{eq:qubo-ising}
 \end{equation}
+
+\subsection{Quantum hardware}
 
 !!!minor embedding , introduces a computational "overhead"
 qubit biases implemented via electromagnetic fields
@@ -165,7 +181,7 @@ The qubits and their couplers define what can be seen as an energy landscape. Di
 
 The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture.
 
-Quantum annealing has already been applied to a widge array of optimisation problems, ranging from financial portfolios \cite{phillipson_portfolio_2021}, protein folding \cite{perdomo-ortiz_protein_2012}, and traffic flow \cite{inoue_traffic_2021}. This study explores a creative novel application of this technique, music arrangement.
+Quantum annealing has already been applied to a widge array of optimisation problems, ranging from financial portfolios, protein folding, and traffic flow. This study explores a creative novel application of this technique, music arrangement.
 
 Put a bit about NP-hard problems here.
 
@@ -178,14 +194,15 @@ Large matrices can almost be considered random, will return gaussian distributio
 !!!Nick Chansellor paper, why quantum annealing?
 
 \section{Music arrangement}
+\label{sec:arrangement}
 
 Music arrangement refers to the art of rewriting a musical score in a new setting, style, or structure, whilst still maintaining the essence of the original. A classical example of this is Mussorgsky's \emph{Pictures at an Exhibition}, which is well known for its orchestral arrangement by Ravel but was originally a piano solo. A more contemporary example would be ???'s rendition of \emph{The Star-Spangled Banner} at the ??? Super Bowl, which caused much controversy due to its laid-back style during a time of conflict in Cuba? The rearrangement of a piece can have a great effect on how the listener interprets it, and doing this effectively is still a pertinent issue many musicians face.
 
 Traditionally, it's a time-consuming blah blah blah. However, in this study we aim to formulate music arrangement as an optimisation problem, which can be solved like any other via quantum annealing. It has been shown that music arrangement can be reduced to an NP-hard problem \cite{moses_computational_2016}, by considering the special case of music \emph{reduction}. Reduction is a form of arrangement whereby the number of instrument parts only gets smaller, and we define here subject to the following constraints:
-
 \begin{enumerate}
-    \item \emph{Uncreative} | All music in the arrangement must come from the original
-    \item \emph{Monophonic} | Each part in the arrangement can only contain music from a single part in the original at any time
+    \item \emph{Uncreative} | All music in the arrangement must come from the original, in the same order.
+    \item \emph{Non-degenerate} | 
+    \item \emph{Monophonic} | Each part in the arrangement can only contain music from a single part in the original at any time.
 \end{enumerate}
 
 Holistically, reduction aims to fit as much original music into the parts of the arrangement, whilst still being playable. Notably, these constraints forgo the need to compose new music, a very subjective endeavour that is not handled well by optimisation.
@@ -194,7 +211,7 @@ Holistically, reduction aims to fit as much original music into the parts of the
 
 Previous approaches to the automatic arrangement of music have relied on classical methods such as neural networks  or recursive classical algorithms  in order to produce arrangements that are musically sound. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, a new approach to the automatic arrangement of music is proposed by applying quantum annealing.
 
-It has been shown that the arrangement of music can be formulated as a combinatorial optimisation problem: given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a Boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the Boolean expression is satisfied, corresponding to the phrases included in the final arrangement . Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant or confusing if split up.
+It has been shown that the arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}: given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a Boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the Boolean expression is satisfied, corresponding to the phrases included in the final arrangement . Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant or confusing if split up.
 
 This paper focuses on the reduction of polyphonic (multi-part) music to a single monophonic part, where only one note can be played at a time. A reduction of this form would be relevant for arranging a string quartet for solo violin, for example, whilst still retaining all the important elements from across the instrument parts. This problem can be solved using a reduction of the SAT problem known as the maximum independent set (MIS) problem . Consider a set of musical phrases, each represented by a node $x_i$ in a graph $G$, with nodes connected by an edge if the phrases overlap. The aim is to find the largest subset of nodes such that no nodes within the subset are connected by an edge—the phrases corresponding to these nodes form the final arrangement. A formulation of this sort ensures that the reduction remains strictly monophonic, as no two chosen phrases play at the same time.
 
@@ -254,12 +271,9 @@ $N_p * (n+1)$ logical variables in the BQM \cref{fig:toy,eq:weightedMIS,fig:simp
 
 \section{Methods}
 
-D-Wave Systems operates the first and only quantum annealer for commercial access, introduced in 2011 . All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others (see Fig.\  ).
-Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create QUBOs for the QPU to solve.
+The beginning of any arrangement process is an original musical score. Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.\footnote{An overview of the code resources used in this study can be found in \cref{app:code}.} Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
 
-Music can be represented by many digital formats, each with their own benefits—this study primarily uses MusicXML . This format focuses on the representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into measures (bars), parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PNG, PDF) and audio (MIDI) formats. The Python module \verb|music21| provides extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.
-
-The reduction process begins by interpreting a MusicXML file of the original score. Embedded metadata within the score allows it to be broken down into its constituent parts, measures, and notes, as well as containing information about the instrumentation and structure. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score).
+Once a suitable score has been found, it must undergo preprocessing to ensure the produced arrangement fulfils the constraints outlined in \cref{sec:arrangement}. In particular, all phrases must be strictly monophonic. Some instruments (e.g.\ strings) are capable of playing multiple notes at a time, whereas others (e.g.\ woodwind) physically cannot; without knowing how phrases will be assigned, all music must therefore be reduced to monophony to ensure universal playability. Embedded metadata within the score allows it to be broken down into its constituent parts, bars, and notes, as well as containing information about the instrumentation and structure. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score). With this information, we remove all but a single note from chords and multi-part voicings within the score before moving onto the next stage.
 
 To construct the problem graph, each individual part needs to be split into a sequence of musical phrases. The approach taken here is the local boundary detection model (LBDM) due to its easy implementation and good performance . The boundaries segmenting a part into phrases are identified using the degree of change between successive notes; larger differences between notes would show an increased likelihood of a boundary, exploiting the fact that the starts and ends of phrases are usually characterised by larger pitch or time intervals. Boundary strengths are calculated over two parameters, pitch and inter-onset interval (IOI), which is the difference between the starts of two notes. This is chosen over note duration as it is often more noticeable to the listener. The strength at note $i$ with parameter $x_i$ is given by
 \begin{equation}
@@ -295,6 +309,13 @@ Pitch entropy is calculated by considering the distribution of pitches in a phra
 where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more ``interesting'' in the final arrangement.
 Rhythm entropy is calculated in a similar way, but considering the duration of the note instead. This is also calculated using Eq.\ \ref{eq:pitch-prob}, but instead considering $x_i$ as possible duration values.
 The total entropy of a phrase is then the sum of the pitch and rhythm entropies.
+
+...ready to submit the problem to the quantum hardware.
+
+\subsection{D-Wave Systems}
+
+D-Wave Systems operates the first and only quantum annealer for commercial access, introduced in 2011 . All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others (see Fig.\  ).
+Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create QUBOs for the QPU to solve.
 
 \subsection{Lagrange parameter analysis}
 
@@ -334,7 +355,7 @@ In the following results we set $E_m=1$ as bias towards part types is preferred 
 
 Once the graph is formed, the weighted MIS QUBO can be constructed via \cref{eq:QUBO}, the Lagrange parameters chosen, and sent to the D-Wave QPU to be solved. The lowest energy solutions returned are sets of nodes that are not connected by edges, whilst maximising their total weighting. The qubits are then matched back to their corresponding phrases, which are reconstructed into a new score, the final reduction.
 
-Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer \cite{dwave_manufactured_2011}, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of.
+Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of.
 
 \subsection{Limitations}
 
@@ -440,6 +461,9 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 
 \clearpage
 \appendix
+
+\section{Code overview}
+\label{app:code}
 
 \section{Examples}
 
