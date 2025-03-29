@@ -103,6 +103,8 @@ This paper will focus on a subset of music arrangement known as \textit{reductio
 
 In this study, the arrangement of a musical score is formulated as an NP-hard graph theory problem, by splitting the score into phrases with associated connections and weightings. This is then solved via a quantum annealer to produce a valid reduction according to imposed constraints. The final arrangement is visualised and evaluated, with suggestions for future work.
 
+QNLP?
+
 \section{Quantum annealing}
 
 Before we consider quantum annealing, we must first discuss adiabatic quantum computing (AQC), of which it is a branch. AQC is a computing technique that works under the adiabatic theorem.
@@ -232,6 +234,8 @@ Proper vertex colouring constraints
 \end{equation}
 where we take $x_i=1$ as the inclusion of that node in the solution set. The first term (penalty term) implements the independence constraint by increasing the energy by $A$ for each edge included, whilst the second term (objective term) is the quantity we are trying the minimise, the (negative) total number of nodes. $A$ and $B$ are known as Lagrange parameters, and can be chosen to balance the two terms accordingly. In this case, the condition $A>B$ must be satisfied, such that any penalty introduced by a node will outweigh its energy reduction.
 
+Reduces to maximum independent set problem when $n=1$.
+
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \includegraphics[width=\linewidth]{example-image-a}
@@ -258,6 +262,10 @@ where we take $x_i=1$ as the inclusion of that node in the solution set. The fir
     \label{fig:toy}
 \end{figure}
 
+Assuming we can calculate a quantity that provides a fairly objective judgement of the ``musicality'' of a phrase, we can aim to maximise this quantity to ensure the final arrangement is as interesting as possible.
+
+Extra term to introduce bias towards instrument roles based on entropy thresholds. Perform a rudimentary analysis of arrangement elements into three categories: lead, rhythm, and foundation \cite{owsinski_mixing_2017}. Edge weighting enforces distinction between roles playing at the same time. based on their associated entropy.
+
 Final QUBO formulation:
 \begin{align}
     f(x)=&A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}\\-&C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(S_v-S_{\text{th},i})x_{v,i}
@@ -265,6 +273,8 @@ Final QUBO formulation:
 \end{align}
 
 $N_p * (n+1)$ logical variables in the BQM \cref{fig:toy,eq:weightedMIS,fig:simple-graph}
+
+This is our final QUBO formulation.
 
 % Physical implication of results
 % Does code work? Comparison to literature, tests (IMPORTANT)
@@ -294,7 +304,9 @@ Finally, to find the total boundary strength, the strengths of each parameter ar
 
 Once a list of boundaries is identified, the phrases are extracted by taking all the elements between subsequent boundaries. Each phrase is labelled according to the part it belongs to and its index within that part, allowing the phrases to be easily referenced and reconstructed into a new score once the optimisation is complete. To arrange the phrases into a graph, each phrase is checked against every other phrase for an overlap in time. Phrases are then represented by nodes, with edges connecting phrases that overlap.
 
-The weight of each node is taken here to be the entropy of the phrase. Entropy can be seen as how much  information a variable contains; in this context, a phrase with a higher entropy would indicate a higher level of complexity, increasing the likelihood of it being more ``musical''. Maximisation of phrase entropy would then result in the creation richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
+The weight of each node is taken here to be the entropy of the phrase \cite{li_entropy_2019}. A similar idea of phrase `utility' has been used before \cite{huang_towards_2012} in order to assess playability rules.
+
+Entropy can be seen as how much  information a variable contains; in this context, a phrase with a higher entropy would indicate a higher level of complexity, increasing the likelihood of it being more ``musical''. Maximisation of phrase entropy would then result in the creation richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
 \begin{equation}
     H(X):=-\sum_i P(x_i)\log_2 P(x_i)
     \label{eq:entropy}
