@@ -14,10 +14,10 @@
 \graphicspath{{../Figures/}}
 \usepackage{mwe}
 
-% Maths formatting and environments
+% Maths formatting
 \usepackage{amsmath}
-\usepackage{amsthm}
 
+\usepackage{amsthm}
 \newtheorem*{theorem}{Theorem}
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
@@ -77,7 +77,7 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 
 \tableofcontents
 \listoffigures
-\listoftables
+%\listoftables
 
 \thispagestyle{empty}
 \clearpage
@@ -153,7 +153,7 @@ Large solution space with many local minima
 The mapping of a logical problem to an Ising model is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
 \begin{equation}
     f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
-    \label{eq:QUBO}
+    \label{eq:qubo}
 \end{equation}
 where $x$ is a vector of binary variables (taking the values $0$ or $1$), and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. The off-diagonal $Q_{i,j}$ terms are known as quadratic coefficients, and diagonal $Q_{i,i}$ terms as linear coefficients. As its name suggests, a QUBO can only include terms up to the second power, restricting coupling to pairwise interactions.
 This form can easily for transformed to an Ising model using
@@ -190,13 +190,24 @@ Quantum annealing has already been applied to a widge array of optimisation prob
 
 Put a bit about NP-hard problems here.
 
+Increase anneal time prevents excitation to higher energy states due to smaller spectral gaps.
+
 !!!Spectral gaps | gaps between energy levels as they evolve in time
 Care about the minimum energy gaps
 Smaller energy gaps need longer time evolution due to uncertainty principle $\Delta E \Delta t$.
 There are $2^N$ energy levels for $N$ qubits! Ideally want a sparse matrix
 Large matrices can almost be considered random, will return gaussian distribution (see literature for random matrices?)
 
+A quantum annealer (or solver) also has many parameters that can be tuned, influencing exactly how the annealing process is carried out and significantly affecting the quality of solutions [CITE SOLVER WEBSITE]. In this study we optimise two parameters: chain strength, and anneal time per sample. (MOVE TO QA HARDWARE SECTION)
+
+Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of.
+
 !!!Nick Chansellor paper, why quantum annealing?
+
+\subsection{D-Wave Systems}
+
+D-Wave Systems operates the first and only quantum annealer for commercial access, introduced in 2011 . All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others (see Fig.\  ).
+Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create QUBOs for the QPU to solve.
 
 \section{Music arrangement}
 \label{sec:arrangement}
@@ -220,8 +231,11 @@ Traditionally, it's a time-consuming blah blah blah. However, in this study we a
 
 Holistically, reduction aims to fit as much original music into the parts of the arrangement, whilst still being playable. Notably, these constraints forgo the need to compose new music, a very subjective endeavour that is not handled well by optimisation.
 
+The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on European Classical-era (?) small ensemble and orchestral music, written in standard Western notation.
+
 !!!mention somewhere score taxonomy (instruments, parts, polyphony, etc.)
 
+% Theory, anyone could apply these steps. Then talk about practicalities in results (or in code appendix)
 \section{Proposed framework}
 
 Previous approaches to the automatic arrangement of music have relied on classical methods such as neural networks  or recursive classical algorithms in order to produce arrangements that are musically sound. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, a new approach to the automatic arrangement of music is proposed by applying quantum annealing.
@@ -229,9 +243,13 @@ Previous approaches to the automatic arrangement of music have relied on classic
 : given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a Boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the Boolean expression is satisfied, corresponding to the phrases included in the final arrangement . Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant or confusing if split up.
 
 It has been shown that the arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}
-We propose a new framework for the arrangement of music via quantum annealing.
+We propose a new framework for the arrangement of music via quantum annealing, which has not been studied before at time writing. A toy example of the proposed method can be seen in \cref{fig:toy}.
 
-A toy example of the proposed method can be seen in \cref{fig:toy}.
+\subsection{Score preprocessing}
+
+The beginning of any arrangement process is an original musical score. However, before reduction can begin, the score must undergo preprocessing to ensure the produced arrangement will fulfil the conditions outlined in \cref{sec:arrangement}. In particular, \cref{con:monophonic} demands that all phrases must be strictly monophonic. Some instruments (e.g.\ strings) are capable of playing multiple notes at a time, whereas others (e.g.\ woodwind) physically cannot. Additionally, composers will often write several voice parts for orchestral sections, which can be played by individuals within the section simultaneosly. Both the cases of chords and voices break this condition, and so without knowing how phrases will be assigned, all music must therefore be reduced to monophony to ensure universal playability. We remove all but a single note from chords and multi-part voicings within the score before moving onto the next stage.
+
+% Embedded metadata within the score allows it to be broken down into its constituent parts, bars, and notes, as well as containing information about the instrumentation and structure. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score). 
 
 \subsection{Phrase identification}
 
@@ -281,7 +299,7 @@ If we define $x_{v,i}$ to be a binary variable such that
 for a set of $n$ colours then the QUBO model for proper vertex colouring can be expressed as
 \begin{equation}
     f(x)=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}
-    \label{eq:MIS}
+    \label{eq:colouring}
 \end{equation}
 where $A,B$ are the Lagrange parameters, and we have introduced the slack variables $s_v\in\{0,1\}$ (CHECK NOTATION).\footnote{This reduces to the maximum independent set problem when $n=1$.} The first term implements the single-colour constraint (or vertex constraint) by increasing the energy by $A$ each time a vertex is coloured more than once. The nature of a reduction implies that not all phrases will be played, so the inclusion of the slack variables (specifically when $s_x=0$) allows a vertex not to be coloured at all. Similarly, the second term implements the colour-adjacency constraint (or edge constraint) by increasing the energy by $B$ for each pair of identically-coloured vertices connected by an edge. When this function is minimised (strictly zero, in this case), all the conditions are met for a valid arrangement. The $x_{v,i}$ can then be read off from the solution and cross-referenced with their corresponding phrases to give the final score, an example of which can be seen in \cref{fig:toy-arrangement}.
 
@@ -307,113 +325,90 @@ where $A,B$ are the Lagrange parameters, and we have introduced the slack variab
         \label{fig:toy-arrangement}
     \end{subfigure}
 
-    \caption[A toy example demonstrating the proposed framework]{A toy example demonstrating the construction of the problem graph. It is trivial to see that the maximal independent set contains two nodes. \subref{fig:toy-phrases} An example score of three parts, with each phrase coloured. \subref{fig:toy-graph} A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases.}
+    \caption[A toy example demonstrating the proposed framework.]{A toy example demonstrating the proposed framework. \subref{fig:toy-phrases} An example score of three parts, with phrases identified by the LBDM coloured. \subref{fig:toy-graph} A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases. \subref{fig:toy-solution} One possible solution of proper vertex colouring, with $n=2$. \subref{fig:toy-arrangement} The score representation of the final arrangement.}
     \label{fig:toy}
 \end{figure}
 
 \subsection{Musical entropy}
 
-A valid arrangement of phrases does not good music make. To ensure the produced arrangement is as musically interesting as possible, each vertex of the graph can be weighted to introduce a bias according to its phrase's `musicality'. The idea of a musical `utility' has been used before with classical algorithms \cite{huang_towards_2012} and to assess playability rules [PIANO REDUCTION CITATION]. Here we quantify this by calculating \emph{musical entropy} \cite{li_entropy_2019}.
+A valid arrangement of phrases does not good music make. To ensure the produced arrangement is as musically interesting as possible, each vertex of the graph can be weighted to introduce a bias according to its phrase's `musicality'. The idea of a musical `utility' has been used before with classical algorithms \cite{huang_towards_2012} and to assess playability rules [PIANO REDUCTION CITATION]. Here we quantify this by calculating the \emph{musical entropy} of a phrase \cite{li_entropy_2019}.
 
-Entropy can be seen as how much information a variable contains; in this context, a phrase with a higher entropy would indicate a higher level of complexity, increasing the likelihood of it being more `musical'. Maximisation of phrase entropy would then result in the creation of richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
+Entropy can be seen as how much information a variable contains; in this context, a phrase with a higher entropy would indicate a higher level of variation and complexity, increasing the likelihood of it being more `musical'. Maximisation of phrase entropy would then result in the creation of richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
 \begin{equation}
     H(X):=-\sum_i P(x_i)\log_2 P(x_i)
     \label{eq:entropy}
 \end{equation}
-where each $x_i$ is a possible value of $X$ and ${\sum_i P(x_i)=1}$. In this context, the random variable is a musical note, considering its possible values both in terms of pitch and rhythm.
+where each $x_i$ is a possible value of $X$ and ${\sum_i P(x_i)=1}$. In this context, the random variable is a musical note, considering its possible values in terms of both pitch and duration.
 
 Pitch entropy is calculated by considering the distribution of pitches in a phrase. The probabilities of each pitch $x_i$ can be found by
 \begin{equation}
     P(x_i)=\frac{n_i}{N}
-    \label{eq:pitch-prob}
+    \label{eq:prob-dist}
 \end{equation}
-where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more ``interesting'' in the final arrangement.
-Rhythm entropy is calculated in a similar way, but considering the duration of the note instead. This is also calculated using Eq.\ \ref{eq:pitch-prob}, but instead considering $x_i$ as possible duration values.
+where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more `interesting' and so should have a higher bias to be included in the final arrangement.
+Rhythm entropy is calculated in a similar manner, but considering the duration of the note instead. This is also calculated using \cref{eq:prob-dist}, but instead considering $x_i$ as possible duration values.
 The total entropy of a phrase is then the sum of the pitch and rhythm entropies.
 
+We can modify \cref{eq:qubo} to include vertex weights by adding an objective term that looks like
+\begin{equation}
+    f_C(x)=-C\sum_{v\in V}\sum_{i=1}^n W_v x_{v,i}
+\end{equation}
+where $W$ is a vector holding the weights for each vertex, and $C$ is the associated Lagrange parameter. Objective terms are negative to ensure than the minimisation of this function results in the maximisation of the objective (the sum of the total weights).
 
-Extra term to introduce bias towards instrument roles based on entropy thresholds. Perform a rudimentary analysis of arrangement elements into three categories: lead, rhythm, and foundation \cite{owsinski_mixing_2017}. Edge weighting enforces distinction between roles playing at the same time. based on their associated entropy.
+Weights can also be added to edges, to bias the selection of pairs of vertexes. Here we assign edge weights as the absolute difference between the weights of the vertices it connects, adding a tendency to colour connected vertices that have very different weights. Musically, this means simultaneous phrases are more likely to be picked if their musical entropies differ; complex, strongly varying, high-entropy phrases may sound noisy and confusing if played together, so this choice allows each high-entropy phrase to be accompanied by a simpler, low-entropy one. The associated objective term modification to \cref{eq:qubo} looks like
+\begin{equation}
+    f_D(x)=-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum{i<j}^n x_{u,i}x_{v,j}
+\end{equation}
+where $W$ is now a matrix holding the weights for each edge, and $D$ is the Lagrange parameter.
 
-Final QUBO formulation:
+Finally, we introduce a bias towards the assignment of vertices to specific colours, based on the instrument the colour represents. It has been shown that instrument parts within a score can be categorised into distinct `arrangement elements', or roles, which reflect their musical function within the piece \cite{owsinski_mixing_2017}. Here we consider only three: lead, often including melodic/countermelodic lines; rhythm, providing harmony; and foundation, the fundamental bass line. Rudimentarily, we can classify phrases into these three categories by their entropy. Melodic lines often vary more, have higher entropy, and therefore should be classed as lead, whereas lower-entropy phrases should tend towards rhythm or bass. By defining threshold entropy values for each category, phrases can be given a bias towards instruments that have been assigned that category. For example, a flute part assigned a lead in the arrangement should contain more high-entropy phrases than a cello part assigned as foundation. The corresponding objective term takes the form
+\begin{equation}
+    f_E(x) = -E\sum_{v\in V}\sum_{i=1}^n \theta(W_v - W_{\text{th},i})x_{v,i}
+\end{equation}
+where $W_{\text{th},i}$ is the threshold value for the category of instrument $i$, $\theta$ is the Heaviside step function, and $E$ is the Lagrange parameter.
+
+Together, the final QUBO model is
 \begin{align}
-    f(x)=&A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}\\-&C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(S_v-S_{\text{th},i})x_{v,i}
-    \label{eq:weightedMIS}
+    f(x)&=f_{A,B}+f_C+f_D+f_E \notag\\
+    &=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i} \notag\\
+    &-C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{i<j}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(W_v-W_{\text{th},i})x_{v,i}
+    \label{eq:problem-qubo}
 \end{align}
-
-$N_p * (n+1)$ logical variables in the BQM
-
-This is our final QUBO formulation.
-
-% Physical implication of results
-% Does code work? Comparison to literature, tests (IMPORTANT)
-
-\section{Methods}
-
-The beginning of any arrangement process is an original musical score. Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.\footnote{An overview of the code resources used in this study can be found in \cref{app:code}.} Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
-
-Once a suitable score has been found, it must undergo preprocessing to ensure the produced arrangement fulfils the constraints outlined in \cref{sec:arrangement}. In particular, all phrases must be strictly monophonic. Some instruments (e.g.\ strings) are capable of playing multiple notes at a time, whereas others (e.g.\ woodwind) physically cannot; without knowing how phrases will be assigned, all music must therefore be reduced to monophony to ensure universal playability. Embedded metadata within the score allows it to be broken down into its constituent parts, bars, and notes, as well as containing information about the instrumentation and structure. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score). With this information, we remove all but a single note from chords and multi-part voicings within the score before moving onto the next stage.
-
-To construct the problem graph, each individual part needs to be split into a sequence of musical phrases. 
-
-
-
-...ready to submit the problem to the quantum hardware.
-
-\subsection{D-Wave Systems}
-
-D-Wave Systems operates the first and only quantum annealer for commercial access, introduced in 2011 . All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others (see Fig.\  ).
-Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create QUBOs for the QPU to solve.
+which requires $N(n+1)$ variables, where $N$ is the total number of phrases.
 
 \subsection{Lagrange parameter analysis}
 
-To ensure that the low energy solutions of our QUBO formulation do indeed fulfil the constraints necessary for a valid arrangement as outline before, the Lagrange parameters must be tuned. It is possible for this to be done \textit{a priori} [CITE], however, this study will focus on an empirical approach.
+To ensure that the minimisation of \cref{eq:problem-qubo} does indeed fulfil the constraints necessary for a valid arrangement as outlined before, the Lagrange parameters must be tuned. It is possible for this to be done \textit{a priori} [CITE], however, with five parameters, a full parametric analysis would be complicated, so this study focuses on an empirical approach.
 
-The formulation given by \cref{eq:QUBO} contains two penalty terms, labelled with parameters $A$ and $B$. The first penalises nodes being coloured more than once, which would introduce phrases being duplicated across parts in the final arrangement; this is referred to as the node constraint. The second penalises adjacent nodes of the same colour, preventing phrases that overlap being played by the same part; this is referred to as the edge constraint. The three objective terms are labelled with parameters $C$, $D$, and $E$, which lower the energy. In a worst-case scenario, a node included in the solution would lower the energy maximally whilst breaking a constraint. To ensure that this results in an overall increase in energy, and is therefore less likely, a quick algebraic analysis reveals that
+Nonetheless, a quick algebraic calculation can help reduce the problem. The model given by \cref{eq:problem-qubo} contains two constraints, each which aims to fulfil a different condition. The vertex constraint (labelled with $A$) upholds \cref{con:non-degenerate}, the breaking of which would introduce phrases being duplicated across parts in the final arrangement. The edge constraint (labelled with $B$) upholds \cref{con:monophonic}, preventing phrases that overlap being played by the same part. The number of duplicates and overlaps needs to be strictly zero in order for a solution to be valid therefore these Lagranage parameters need to be large enough to facilitate this.
+
+In a worst-case scenario, a vertex included in the solution would lower the energy maximally whilst breaking a constraint. To ensure that this results in an overall increase in energy, and is therefore less likely, we can derive the inequality
 \begin{equation}
     A + B > C\max(W) + D\max(W) + E
 \end{equation}
-where $\max(W)$ denotes the largest entry of the weight matrix. To allow a similar analysis across problems with different weights, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the inequality
+where $\max(W)$ denotes the largest entry of the weight matrix. To allow a similar analysis across problems with different weights, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the expression
 \begin{equation}
     A_m + B_m > 2 + E_m \,.
 \end{equation}
 
-\subsection{Solver configuration}
+In this study we set $E_m=1$ as bias towards part types is preferred but not essential. The values of $A_m$ and $B_m$ can then be found by performing parametric variation and measuring the number of broken constraints (duplicates and overlaps) in the lowest energy solutions. Parameter values should be just large enough to fulfil constraints, whilst not being too large as to overwhelm the other terms in the QUBO equation [CITE] and affect the quality of solutions.
 
-The configuration of solver used was also tuned: two parameters, chain strength and anneal time per sample.
+\subsection{Solution interpretation}
 
-Fit quadratic curve to chain strength plot to find minimum value of energy.
+Once the problem has been submitted to a quantum annealer and a sample set returned, we can finally construct the arrangement. Of the distribution of samples, the lowest-energy valid (i.e.\ no duplicates or overlaps) sample is picked to be the solution. The binary variables assigning vertices to colours can b read off and interpreted as phrases and instruments, respectively, allowing the music of the original score to be transformed into the final arrangement.
+
+This is the point where music post-processing can be applied. In this study, phrases are shifted up or down octaves depending on the pitch range of the target instrument, to ensure playability whilst minimally affecting the essence of the original.
 
 \begin{itemize}
     \item Chain strength analysis and explanation
     \item Anneal time analysis
 \end{itemize}
 
-Increase anneal time prevents excitation to higher energy states due to smaller spectral gaps.
-
-In the following results we set $E_m=1$ as bias towards part types is preferred but not essential. The values of $A_m$ and $B_m$ can then be found by performing parametric variation and measuring the number of broken constraints (duplicates and overlaps) in the lowest energy solutions. Parameter values should be just large enough to fulfil constraints, whilst not being too large as to overwhelm the other terms in the QUBO equation [CITE].
-
-\begin{itemize}
-    \item Lagrange parameter variations
-    \item 2D surface plot?
-    \item Compare to analytic derivation (reference for double value?)
-\end{itemize}
-
-\subsection{Quantum hardware}
-
-Once the graph is formed, the weighted MIS QUBO can be constructed via \cref{eq:QUBO}, the Lagrange parameters chosen, and sent to the D-Wave QPU to be solved. The lowest energy solutions returned are sets of nodes that are not connected by edges, whilst maximising their total weighting. The qubits are then matched back to their corresponding phrases, which are reconstructed into a new score, the final reduction.
-
-Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of.
-
-\subsection{Limitations}
-
-QPU chip graph size -> affects length of scores/granularity of phrases/number of arrangement instruments
-!!!is possible to partition graphs to reduce problem sizes (include citation) but is future work
-
-Maximum problem time limit -> affects maximum time per anneal which could affect quality of results
-
-Removing chords and voices from scores -> loss of information
 
 \section{Results}
+
+Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.\footnote{An overview of the code resources used in this study can be found in \cref{app:code}.} Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
+
 
 The method was tested on an excerpt of (Haydn), taken from a MusicXML file in the public domain. This piece is ?? bars long and consists of four monophonic parts. It was chosen for...
 
@@ -425,6 +420,13 @@ Fig.\ ?? shows the extraction of phrases from the Violin I part by the LBDM.
 \end{itemize}
 
 The resulting graph constructed from these phrases consists of ?? vertices and ?? edges. The QUBO formulation according to Eq.\ ?? was then calculated from this graph, to be submitted to the quantum annealer.
+
+\begin{itemize}
+    \item Lagrange parameter variations
+    \item 2D surface plot?
+    \item Compare to analytic derivation (reference for double value?)
+\end{itemize}
+
 
 The annealer used in this study was the D-Wave Advantage 4.1 blah blah, which has connectivity of blah blah allows creation and submission of problems via a Python SDK (software development kit).
 
@@ -467,12 +469,23 @@ Compare lowest energy found for
 
 Phrases identified using the LBDM are shown in Fig.\  , alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ . Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligible number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
 
-The QUBO was calculated using Eq.\ \ref{eq:weightedMIS}, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh any possible benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sample set of solutions was returned, which can be seen in Fig.\  . Many solutions had degenerate energies—the lowest energy was -26.821803 with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\  , with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\  .
+The QUBO was calculated using, with Lagrange parameters $A=11.5$ and $B=1$. The value of $A$ was chosen to be twice the maximum node weight (phrase entropy) such that the penalty of choosing a node that introduces an edge into the solution would likely outweigh any possible benefit of its weighting. After submission of the QUBO to the D-Wave QPU, a sample set of solutions was returned, which can be seen in Fig.\  . Many solutions had degenerate energies—the lowest energy was -26.821803 with a degeneracy of 34 and zero chain breaks. These solutions used slightly different combinations of phrases to make the maximal independent set; this degeneracy is likely due to the high number of cliques, which only allows one node of the subset to be picked, and phrases with zero entropy, which do not change the final energy when interchanged. One of the lowest energy solutions can be seen in Fig.\  , with the nodes selected by the QPU highlighted. In this solution, none of the nodes are connected by edges, providing a valid monophonic arrangement. The musical score of this solution is shown in Fig.\  .
 
 !!!comparing time to solution
 For QA only looking at annealing time, not QPU access time (which includes sampling, readout, programming time) as this is a limitation of the technology rather than the method
 
 \section{Conclusions}
+
+% Limitations
+
+Although the technology has been improving for several years, at time of writing quantum annealers are still in the development stage. D-Wave's latest chip, the Advantage 4.1, boasts a topology of over \num{5000} vertices
+
+QPU chip graph size -> affects length of scores/granularity of phrases/number of arrangement instruments
+!!!is possible to partition graphs to reduce problem sizes (include citation) but is future work
+
+Maximum problem time limit -> affects maximum time per anneal which could affect quality of results
+
+Removing chords and voices from scores -> loss of information
 
 !!!what is the main limiting factor?
 Computers aren't big enough yet, but how big would they need to be? Look into new Zephyr topology
