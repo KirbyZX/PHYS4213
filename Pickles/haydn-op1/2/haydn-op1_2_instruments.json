@@ -1,12 +1,12 @@
 {
     "Flute": {
-        "role": "melody",
+        "role": "lead",
         "colour": "red",
         "clef": "TrebleClef"
     },
 
     "Oboe": {
-        "role": "harmony",
+        "role": "rhythm",
         "colour": "green",
         "clef": "TrebleClef"
     }

@@ -14,8 +14,8 @@ def createBQM(G: nx.Graph, phrases: pd.DataFrame, instruments: list, nodeConstra
     bqm = BinaryQuadraticModel(vartype="BINARY")
 
     maxEntropy = phrases["Entropy"].max()
-    melodyThreshold = maxEntropy * 2/3
-    harmonyThreshold = maxEntropy * 1/3
+    leadThreshold = maxEntropy * 2/3
+    rhythmThreshold = maxEntropy * 1/3
 
     for ind in phrases.index:
 
@@ -29,12 +29,12 @@ def createBQM(G: nx.Graph, phrases: pd.DataFrame, instruments: list, nodeConstra
         bqm.add_linear_from([(f"{id}_{i}", -entropy) for i in instruments])
         
         # instruments.json in the form "instrument" : "melody"
-        if entropy >= melodyThreshold:
-            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "melody"])
-        elif phrases.loc[ind, "Entropy"] >= harmonyThreshold:
-            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "harmony"])
+        if entropy >= leadThreshold:
+            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "lead"])
+        elif phrases.loc[ind, "Entropy"] >= rhythmThreshold:
+            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "rhythm"])
         else:
-            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "bass"])
+            bqm.add_linear_from([(f"{id}_{i}", -roleMult * maxEntropy) for i in instruments if instruments[i]["role"] == "foundation"])
 
     for u, v, d in G.edges.data():
         # Adjacent vertices have different colours
