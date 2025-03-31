@@ -1,13 +1,13 @@
 {
-    "Flute": {
+    "Violin I": {
         "role": "lead",
         "colour": "red",
         "clef": "TrebleClef"
     },
 
-    "Cello": {
-        "role": "foundation",
+    "Violin II": {
+        "role": "rhythm",
         "colour": "blue",
-        "clef": "BassClef"
+        "clef": "TrebleClef"
     }
 }

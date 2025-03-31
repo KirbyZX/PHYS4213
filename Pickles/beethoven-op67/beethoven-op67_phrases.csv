@@ -1,194 +1,128 @@
 Instrument,No,ID,Start,End,Entropy
-Flute,1,Flute_1,40.0,46.0,2.7419011889093374
-Flute,2,Flute_2,46.0,76.0,-0.0
-Flute,3,Flute_3,76.0,110.0,2.660152376640496
-Flute,4,Flute_4,110.0,114.0,-0.0
-Flute,5,Flute_5,114.0,140.0,-0.0
-Flute,6,Flute_6,140.0,147.0,2.2359263506290326
-Flute,7,Flute_7,147.0,180.0,-0.0
-Flute,8,Flute_8,180.0,226.0,3.731365505463524
-Flute,9,Flute_9,226.0,226.5,-0.0
-Flute,10,Flute_10,226.5,243.0,2.7305582363670284
-Oboe,1,Oboe_1,114.0,166.0,-0.0
-Oboe,2,Oboe_2,166.0,196.0,3.016875695766564
-Oboe,3,Oboe_3,196.0,198.0,-0.0
-Oboe,4,Oboe_4,198.0,220.0,2.676537856152929
-Oboe,5,Oboe_5,220.0,226.0,1.89540555844018
-Oboe,6,Oboe_6,226.0,226.5,-0.0
-Oboe,7,Oboe_7,226.5,228.0,-0.0
-Oboe,8,Oboe_8,228.0,234.0,1.89540555844018
-Oboe,9,Oboe_9,234.0,236.5,-0.0
-Oboe,10,Oboe_10,236.5,243.0,2.372556248918266
-B♭ Clarinet,1,B♭ Clarinet_1,8.0,34.5,-0.0
-B♭ Clarinet,2,B♭ Clarinet_2,34.5,40.0,2.892878689342031
-B♭ Clarinet,3,B♭ Clarinet_3,40.0,46.0,2.7419011889093374
-B♭ Clarinet,4,B♭ Clarinet_4,46.0,62.5,-0.0
-B♭ Clarinet,5,B♭ Clarinet_5,62.5,64.0,-0.0
-B♭ Clarinet,6,B♭ Clarinet_6,64.0,74.0,-0.0
-B♭ Clarinet,7,B♭ Clarinet_7,74.0,101.0,2.8092000326978117
-B♭ Clarinet,8,B♭ Clarinet_8,101.0,102.0,-0.0
-B♭ Clarinet,9,B♭ Clarinet_9,102.0,114.0,0.7219280948873623
-B♭ Clarinet,10,B♭ Clarinet_10,114.0,132.0,-0.0
-B♭ Clarinet,11,B♭ Clarinet_11,132.0,139.0,2.2359263506290326
-B♭ Clarinet,12,B♭ Clarinet_12,139.0,164.0,-0.0
-B♭ Clarinet,13,B♭ Clarinet_13,164.0,200.0,2.1641477244088865
-B♭ Clarinet,14,B♭ Clarinet_14,200.0,200.5,-0.0
-B♭ Clarinet,15,B♭ Clarinet_15,200.5,211.0,3.0134044311430257
-B♭ Clarinet,16,B♭ Clarinet_16,211.0,213.0,-0.0
-B♭ Clarinet,17,B♭ Clarinet_17,213.0,215.0,-0.0
-B♭ Clarinet,18,B♭ Clarinet_18,215.0,217.0,-0.0
-B♭ Clarinet,19,B♭ Clarinet_19,217.0,220.0,2.0928786893420313
-B♭ Clarinet,20,B♭ Clarinet_20,220.0,226.0,1.89540555844018
-B♭ Clarinet,21,B♭ Clarinet_21,226.0,226.5,-0.0
-B♭ Clarinet,22,B♭ Clarinet_22,226.5,228.0,-0.0
-B♭ Clarinet,23,B♭ Clarinet_23,228.0,243.0,3.0794585087701463
-Bassoon,1,Bassoon_1,34.0,36.0,-0.0
-Bassoon,2,Bassoon_2,36.0,46.0,3.113313414925646
-Bassoon,3,Bassoon_3,46.0,70.0,-0.0
-Bassoon,4,Bassoon_4,70.0,84.0,3.113313414925646
-Bassoon,5,Bassoon_5,84.0,114.0,2.662245940958111
-Bassoon,6,Bassoon_6,114.0,132.0,-0.0
-Bassoon,7,Bassoon_7,132.0,200.0,3.8718973007790956
-Bassoon,8,Bassoon_8,200.0,202.0,-0.0
-Bassoon,9,Bassoon_9,202.0,228.0,3.615505175947641
-Bassoon,10,Bassoon_10,228.0,238.5,2.3498495686324086
-Bassoon,11,Bassoon_11,238.5,240.0,-0.0
-Bassoon,12,Bassoon_12,240.0,245.0,1.9419011889093372
-Horn in E♭,1,Horn in E♭_1,38.0,40.0,-0.0
-Horn in E♭,2,Horn in E♭_2,40.0,46.0,2.7419011889093374
-Horn in E♭,3,Horn in E♭_3,46.0,62.5,-0.0
-Horn in E♭,4,Horn in E♭_4,62.5,68.0,2.0928786893420313
-Horn in E♭,5,Horn in E♭_5,68.0,84.0,-0.0
-Horn in E♭,6,Horn in E♭_6,84.0,114.0,2.0676003050551777
-Horn in E♭,7,Horn in E♭_7,114.0,118.0,1.6225562489182657
-Horn in E♭,8,Horn in E♭_8,118.0,120.0,-0.0
-Horn in E♭,9,Horn in E♭_9,120.0,122.0,-0.0
-Horn in E♭,10,Horn in E♭_10,122.0,146.0,-0.0
-Horn in E♭,11,Horn in E♭_11,146.0,164.0,-0.0
-Horn in E♭,12,Horn in E♭_12,164.0,188.0,1.2343528952075067
-Horn in E♭,13,Horn in E♭_13,188.0,194.0,0.8112781244591328
-Horn in E♭,14,Horn in E♭_14,194.0,196.0,-0.0
-Horn in E♭,15,Horn in E♭_15,196.0,198.0,-0.0
-Horn in E♭,16,Horn in E♭_16,198.0,200.0,-0.0
-Horn in E♭,17,Horn in E♭_17,200.0,209.0,1.5683182557028437
-Horn in E♭,18,Horn in E♭_18,209.0,211.0,-0.0
-Horn in E♭,19,Horn in E♭_19,211.0,215.0,-0.0
-Horn in E♭,20,Horn in E♭_20,215.0,217.0,-0.0
-Horn in E♭,21,Horn in E♭_21,217.0,218.0,-0.0
-Horn in E♭,22,Horn in E♭_22,218.0,220.5,-0.0
-Horn in E♭,23,Horn in E♭_23,220.5,223.5,1.4591479170272446
-Horn in E♭,24,Horn in E♭_24,223.5,228.5,-0.0
-Horn in E♭,25,Horn in E♭_25,228.5,238.0,2.005410963855888
-Horn in E♭,26,Horn in E♭_26,238.0,243.0,1.9419011889093372
-C Trumpet,1,C Trumpet_1,40.0,84.0,-0.0
-C Trumpet,2,C Trumpet_2,84.0,110.0,2.0121206508166773
-C Trumpet,3,C Trumpet_3,110.0,186.0,-0.0
-C Trumpet,4,C Trumpet_4,186.0,188.0,-0.0
-C Trumpet,5,C Trumpet_5,188.0,194.0,-0.0
-C Trumpet,6,C Trumpet_6,194.0,196.0,-0.0
-C Trumpet,7,C Trumpet_7,196.0,207.0,2.5
-C Trumpet,8,C Trumpet_8,207.0,211.0,-0.0
-C Trumpet,9,C Trumpet_9,211.0,214.0,1.0
-Timpani,1,Timpani_1,40.0,84.0,-0.0
-Timpani,2,Timpani_2,84.0,94.0,1.0
-Timpani,3,Timpani_3,94.0,110.0,1.970456272068503
-Timpani,4,Timpani_4,110.0,194.0,-0.0
-Timpani,5,Timpani_5,194.0,196.0,-0.0
-Timpani,6,Timpani_6,196.0,214.0,1.0
-Violins I,1,Violins I_1,8.0,14.5,-0.0
-Violins I,2,Violins I_2,14.5,18.0,1.6225562489182657
-Violins I,3,Violins I_3,18.0,22.5,-0.0
-Violins I,4,Violins I_4,22.5,38.0,2.8572927138814554
-Violins I,5,Violins I_5,38.0,40.0,-0.0
-Violins I,6,Violins I_6,40.0,94.0,3.5379435277715996
-Violins I,7,Violins I_7,94.0,94.5,-0.0
-Violins I,8,Violins I_8,94.5,102.5,2.2806390622295662
-Violins I,9,Violins I_9,102.5,114.0,2.0147113504463787
-Violins I,10,Violins I_10,114.0,124.0,-0.0
-Violins I,11,Violins I_11,124.0,131.0,2.2359263506290326
-Violins I,12,Violins I_12,131.0,140.0,-0.0
-Violins I,13,Violins I_13,140.0,200.0,4.035656179247361
-Violins I,14,Violins I_14,200.0,200.5,-0.0
-Violins I,15,Violins I_15,200.5,216.5,2.9056390622295662
-Violins I,16,Violins I_16,216.5,243.0,3.365314278916023
-Violins II,1,Violins II_1,8.0,22.0,2.439016673678397
-Violins II,2,Violins II_2,22.0,24.0,-0.0
-Violins II,3,Violins II_3,24.0,36.0,2.5187197268689987
-Violins II,4,Violins II_4,36.0,40.0,1.0
-Violins II,5,Violins II_5,40.0,46.0,2.7419011889093374
-Violins II,6,Violins II_6,46.0,50.5,-0.0
-Violins II,7,Violins II_7,50.5,56.0,1.9419011889093372
-Violins II,8,Violins II_8,56.0,78.0,3.6571089540266986
-Violins II,9,Violins II_9,78.0,102.0,3.1409059622458346
-Violins II,10,Violins II_10,102.0,114.0,2.0622111553892886
-Violins II,11,Violins II_11,114.0,124.0,-0.0
-Violins II,12,Violins II_12,124.0,154.0,0.9709505944546686
-Violins II,13,Violins II_13,154.0,156.0,-0.0
-Violins II,14,Violins II_14,156.0,162.0,0.9182958340544896
-Violins II,15,Violins II_15,162.0,185.0,1.983528587002261
-Violins II,16,Violins II_16,185.0,186.0,-0.0
-Violins II,17,Violins II_17,186.0,200.0,3.0209807595335123
-Violins II,18,Violins II_18,200.0,204.5,0.9910760598382222
-Violins II,19,Violins II_19,204.5,216.0,2.7942385860214762
-Violins II,20,Violins II_20,216.0,216.5,-0.0
-Violins II,21,Violins II_21,216.5,217.5,-0.0
-Violins II,22,Violins II_22,217.5,218.0,-0.0
-Violins II,23,Violins II_23,218.0,232.0,1.8522414936853613
-Violins II,24,Violins II_24,232.0,243.0,2.555208785536726
-Violas,1,Violas_1,8.0,12.5,-0.0
-Violas,2,Violas_2,12.5,24.0,2.2664124386929902
-Violas,3,Violas_3,24.0,38.0,3.307298235272483
-Violas,4,Violas_4,38.0,46.0,2.7107770844150676
-Violas,5,Violas_5,46.0,52.5,-0.0
-Violas,6,Violas_6,52.5,56.0,1.6225562489182657
-Violas,7,Violas_7,56.0,60.5,-0.0
-Violas,8,Violas_8,60.5,77.5,3.163663816760989
-Violas,9,Violas_9,77.5,78.0,-0.0
-Violas,10,Violas_10,78.0,110.0,3.448544060957845
-Violas,11,Violas_11,110.0,114.0,-0.0
-Violas,12,Violas_12,114.0,124.0,-0.0
-Violas,13,Violas_13,124.0,126.0,-0.0
-Violas,14,Violas_14,126.0,134.0,1.5
-Violas,15,Violas_15,134.0,142.0,1.5
-Violas,16,Violas_16,142.0,152.0,1.9219280948873623
-Violas,17,Violas_17,152.0,154.0,-0.0
-Violas,18,Violas_18,154.0,156.0,-0.0
-Violas,19,Violas_19,156.0,160.0,1.0
-Violas,20,Violas_20,160.0,162.0,-0.0
-Violas,21,Violas_21,162.0,166.5,-0.0
-Violas,22,Violas_22,166.5,188.0,3.033393924089408
-Violas,23,Violas_23,188.0,189.0,-0.0
-Violas,24,Violas_24,189.0,200.0,2.584962500721156
-Violas,25,Violas_25,200.0,216.5,2.707119218877028
-Violas,26,Violas_26,216.5,243.0,2.677410942678039
-Violoncellos,1,Violoncellos_1,8.0,12.0,-0.0
-Violoncellos,2,Violoncellos_2,12.0,36.0,1.807591336395836
-Violoncellos,3,Violoncellos_3,36.0,38.0,-0.0
-Violoncellos,4,Violoncellos_4,38.0,46.0,2.7107770844150676
-Violoncellos,5,Violoncellos_5,46.0,54.5,-0.0
-Violoncellos,6,Violoncellos_6,54.5,56.0,-0.0
-Violoncellos,7,Violoncellos_7,56.0,62.5,-0.0
-Violoncellos,8,Violoncellos_8,62.5,114.0,2.288991081049721
-Violoncellos,9,Violoncellos_9,114.0,128.5,-0.0
-Violoncellos,10,Violoncellos_10,128.5,130.0,-0.0
-Violoncellos,11,Violoncellos_11,130.0,136.5,-0.0
-Violoncellos,12,Violoncellos_12,136.5,138.0,-0.0
-Violoncellos,13,Violoncellos_13,138.0,144.5,-0.0
-Violoncellos,14,Violoncellos_14,144.5,146.0,-0.0
-Violoncellos,15,Violoncellos_15,146.0,152.5,-0.0
-Violoncellos,16,Violoncellos_16,152.5,154.0,-0.0
-Violoncellos,17,Violoncellos_17,154.0,160.5,-0.0
-Violoncellos,18,Violoncellos_18,160.5,188.0,2.7865946915611843
-Violoncellos,19,Violoncellos_19,188.0,198.0,2.2516291673878226
-Violoncellos,20,Violoncellos_20,198.0,200.0,-0.0
-Violoncellos,21,Violoncellos_21,200.0,214.0,2.71929452566698
-Violoncellos,22,Violoncellos_22,214.0,215.0,-0.0
-Violoncellos,23,Violoncellos_23,215.0,216.0,-0.0
-Violoncellos,24,Violoncellos_24,216.0,217.0,-0.0
-Violoncellos,25,Violoncellos_25,217.0,243.0,2.379416332526568
-Contrabasses,1,Contrabasses_1,34.5,114.0,3.1337933839372
-Contrabasses,2,Contrabasses_2,114.0,128.5,-0.0
-Contrabasses,3,Contrabasses_3,128.5,198.0,3.788240001939904
-Contrabasses,4,Contrabasses_4,198.0,215.0,2.6565647621309543
-Contrabasses,5,Contrabasses_5,215.0,216.0,-0.0
-Contrabasses,6,Contrabasses_6,216.0,243.0,2.416548335493972
+Flute,1,Flute_1,34.5,35.5,-0.0
+Flute,2,Flute_2,35.5,36.0,-0.0
+Flute,3,Flute_3,36.0,38.0,-0.0
+Flute,4,Flute_4,38.0,40.0,-0.0
+Flute,5,Flute_5,40.0,41.0,-0.0
+Oboe,1,Oboe_1,34.5,35.0,-0.0
+Oboe,2,Oboe_2,35.0,35.5,-0.0
+Oboe,3,Oboe_3,35.5,36.0,-0.0
+Oboe,4,Oboe_4,36.0,38.0,-0.0
+Oboe,5,Oboe_5,38.0,40.0,-0.0
+Oboe,6,Oboe_6,40.0,41.0,-0.0
+B♭ Clarinet,1,B♭ Clarinet_1,0.5,2.0,-0.0
+B♭ Clarinet,2,B♭ Clarinet_2,2.0,8.0,2.341901188909337
+B♭ Clarinet,3,B♭ Clarinet_3,8.0,34.5,-0.0
+B♭ Clarinet,4,B♭ Clarinet_4,34.5,35.0,-0.0
+B♭ Clarinet,5,B♭ Clarinet_5,35.0,38.0,1.8365916681089791
+B♭ Clarinet,6,B♭ Clarinet_6,38.0,40.0,-0.0
+B♭ Clarinet,7,B♭ Clarinet_7,40.0,41.0,-0.0
+Bassoon,1,Bassoon_1,12.0,24.0,0.9182958340544896
+Bassoon,2,Bassoon_2,24.0,34.0,-0.0
+Bassoon,3,Bassoon_3,34.0,36.0,-0.0
+Bassoon,4,Bassoon_4,36.0,38.0,-0.0
+Bassoon,5,Bassoon_5,38.0,40.0,-0.0
+Bassoon,6,Bassoon_6,40.0,41.0,-0.0
+Horn in E♭,1,Horn in E♭_1,34.5,36.0,-0.0
+Horn in E♭,2,Horn in E♭_2,36.0,38.0,-0.0
+Horn in E♭,3,Horn in E♭_3,38.0,40.0,-0.0
+Horn in E♭,4,Horn in E♭_4,40.0,41.0,-0.0
+C Trumpet,1,C Trumpet_1,34.5,35.5,-0.0
+C Trumpet,2,C Trumpet_2,35.5,36.0,-0.0
+C Trumpet,3,C Trumpet_3,36.0,38.0,-0.0
+C Trumpet,4,C Trumpet_4,38.0,40.0,-0.0
+C Trumpet,5,C Trumpet_5,40.0,41.0,-0.0
+Timpani,1,Timpani_1,34.5,35.5,-0.0
+Timpani,2,Timpani_2,35.5,36.0,-0.0
+Timpani,3,Timpani_3,36.0,38.0,-0.0
+Timpani,4,Timpani_4,38.0,40.0,-0.0
+Timpani,5,Timpani_5,40.0,41.0,-0.0
+Violins I,1,Violins I_1,0.5,2.0,-0.0
+Violins I,2,Violins I_2,2.0,4.5,-0.0
+Violins I,3,Violins I_3,4.5,8.0,1.6225562489182657
+Violins I,4,Violins I_4,8.0,14.5,-0.0
+Violins I,5,Violins I_5,14.5,18.0,1.6225562489182657
+Violins I,6,Violins I_6,18.0,22.5,-0.0
+Violins I,7,Violins I_7,22.5,26.0,1.6225562489182657
+Violins I,8,Violins I_8,26.0,28.0,1.5
+Violins I,9,Violins I_9,28.0,30.0,-0.0
+Violins I,10,Violins I_10,30.0,32.0,1.5
+Violins I,11,Violins I_11,32.0,34.0,-0.0
+Violins I,12,Violins I_12,34.0,36.0,1.5
+Violins I,13,Violins I_13,36.0,38.0,-0.0
+Violins I,14,Violins I_14,38.0,40.0,-0.0
+Violins I,15,Violins I_15,40.0,42.0,-0.0
+Violins II,1,Violins II_1,0.5,2.0,-0.0
+Violins II,2,Violins II_2,2.0,4.5,-0.0
+Violins II,3,Violins II_3,4.5,6.0,-0.0
+Violins II,4,Violins II_4,6.0,8.0,-0.0
+Violins II,5,Violins II_5,8.0,10.5,-0.0
+Violins II,6,Violins II_6,10.5,12.0,-0.0
+Violins II,7,Violins II_7,12.0,14.0,-0.0
+Violins II,8,Violins II_8,14.0,16.0,-0.0
+Violins II,9,Violins II_9,16.0,18.0,-0.0
+Violins II,10,Violins II_10,18.0,19.5,0.9182958340544896
+Violins II,11,Violins II_11,19.5,20.0,-0.0
+Violins II,12,Violins II_12,20.0,22.0,-0.0
+Violins II,13,Violins II_13,22.0,24.0,-0.0
+Violins II,14,Violins II_14,24.0,26.0,-0.0
+Violins II,15,Violins II_15,26.0,28.0,-0.0
+Violins II,16,Violins II_16,28.0,30.0,1.5
+Violins II,17,Violins II_17,30.0,32.0,-0.0
+Violins II,18,Violins II_18,32.0,34.0,1.5
+Violins II,19,Violins II_19,34.0,34.5,-0.0
+Violins II,20,Violins II_20,34.5,35.0,-0.0
+Violins II,21,Violins II_21,35.0,35.5,-0.0
+Violins II,22,Violins II_22,35.5,36.0,-0.0
+Violins II,23,Violins II_23,36.0,38.0,-0.0
+Violins II,24,Violins II_24,38.0,40.0,-0.0
+Violins II,25,Violins II_25,40.0,41.0,-0.0
+Violas,1,Violas_1,0.5,2.0,-0.0
+Violas,2,Violas_2,2.0,4.5,-0.0
+Violas,3,Violas_3,4.5,6.0,-0.0
+Violas,4,Violas_4,6.0,8.0,-0.0
+Violas,5,Violas_5,8.0,12.5,-0.0
+Violas,6,Violas_6,12.5,14.0,-0.0
+Violas,7,Violas_7,14.0,16.0,-0.0
+Violas,8,Violas_8,16.0,18.0,-0.0
+Violas,9,Violas_9,18.0,20.5,-0.0
+Violas,10,Violas_10,20.5,22.0,-0.0
+Violas,11,Violas_11,22.0,24.0,-0.0
+Violas,12,Violas_12,24.0,26.0,-0.0
+Violas,13,Violas_13,26.0,28.0,-0.0
+Violas,14,Violas_14,28.0,30.0,0.8112781244591328
+Violas,15,Violas_15,30.0,32.0,-0.0
+Violas,16,Violas_16,32.0,34.0,1.5
+Violas,17,Violas_17,34.0,35.5,-0.0
+Violas,18,Violas_18,35.5,36.0,-0.0
+Violas,19,Violas_19,36.0,38.0,-0.0
+Violas,20,Violas_20,38.0,40.0,-0.0
+Violas,21,Violas_21,40.0,41.0,-0.0
+Violoncellos,1,Violoncellos_1,0.5,2.0,-0.0
+Violoncellos,2,Violoncellos_2,2.0,4.5,-0.0
+Violoncellos,3,Violoncellos_3,4.5,6.0,-0.0
+Violoncellos,4,Violoncellos_4,6.0,8.0,-0.0
+Violoncellos,5,Violoncellos_5,8.0,12.0,-0.0
+Violoncellos,6,Violoncellos_6,12.0,14.0,-0.0
+Violoncellos,7,Violoncellos_7,14.0,16.0,-0.0
+Violoncellos,8,Violoncellos_8,16.0,18.0,-0.0
+Violoncellos,9,Violoncellos_9,18.0,20.0,-0.0
+Violoncellos,10,Violoncellos_10,20.0,22.0,-0.0
+Violoncellos,11,Violoncellos_11,22.0,24.0,-0.0
+Violoncellos,12,Violoncellos_12,24.0,26.0,-0.0
+Violoncellos,13,Violoncellos_13,26.0,28.0,-0.0
+Violoncellos,14,Violoncellos_14,28.0,30.0,-0.0
+Violoncellos,15,Violoncellos_15,30.0,32.0,-0.0
+Violoncellos,16,Violoncellos_16,32.0,34.0,-0.0
+Violoncellos,17,Violoncellos_17,34.0,36.0,-0.0
+Violoncellos,18,Violoncellos_18,36.0,38.0,-0.0
+Violoncellos,19,Violoncellos_19,38.0,40.0,-0.0
+Violoncellos,20,Violoncellos_20,40.0,41.0,-0.0
+Contrabasses,1,Contrabasses_1,0.5,1.5,-0.0
+Contrabasses,2,Contrabasses_2,1.5,2.0,-0.0
+Contrabasses,3,Contrabasses_3,2.0,8.0,2.341901188909337
+Contrabasses,4,Contrabasses_4,8.0,34.5,-0.0
+Contrabasses,5,Contrabasses_5,34.5,36.0,-0.0
+Contrabasses,6,Contrabasses_6,36.0,38.0,-0.0
+Contrabasses,7,Contrabasses_7,38.0,40.0,-0.0
+Contrabasses,8,Contrabasses_8,40.0,41.0,-0.0

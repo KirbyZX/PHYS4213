@@ -1,19 +1,19 @@
 {
     "Flute": {
-        "role": "melody",
+        "role": "lead",
         "colour": "red",
         "clef": "TrebleClef"
     },
 
     "Oboe": {
-        "role": "harmony",
+        "role": "rhythm",
         "colour": "green",
         "clef": "TrebleClef"
     },
-        
-    "Bassoon": {
-        "role": "bass",
-        "colour": "blue",
-        "clef": "BassClef"
+
+    "Clarinet": {
+        "role": "foundation",
+        "colour": "yellow",
+        "clef": "TrebleClef"
     }
 }

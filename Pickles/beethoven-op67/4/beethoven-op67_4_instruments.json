@@ -1,25 +1,25 @@
 {
-    "Flute": {
+    "Violin I": {
         "role": "lead",
         "colour": "red",
         "clef": "TrebleClef"
     },
 
-    "Oboe": {
+    "Violin II": {
+        "role": "lead",
+        "colour": "blue",
+        "clef": "TrebleClef"
+    },
+
+    "Viola": {
         "role": "rhythm",
         "colour": "green",
-        "clef": "TrebleClef"
+        "clef": "AltoClef"
     },
 
-    "Clarinet": {
-        "role": "rhythm",
-        "colour": "yellow",
-        "clef": "TrebleClef"
-    },
-
-    "Bassoon": {
+    "Violoncello": {
         "role": "foundation",
-        "colour": "blue",
+        "colour": "purple",
         "clef": "BassClef"
     }
 }

@@ -5,7 +5,7 @@
   <identification>
     <creator type="composer">Joseph Haydn</creator>
     <encoding>
-      <encoding-date>2025-03-03</encoding-date>
+      <encoding-date>2025-03-31</encoding-date>
       <software>music21 v.9.3.0</software>
       <software>MuseScore 2.1.0</software>
       <supports attribute="new-system" element="print" type="yes" value="yes" />
@@ -14,35 +14,19 @@
   </identification>
   <defaults>
     <scaling>
-      <millimeters>7.05556</millimeters>
+      <millimeters>7</millimeters>
       <tenths>40</tenths>
     </scaling>
-    <page-layout>
-      <page-height>1683.78</page-height>
-      <page-width>1190.55</page-width>
-      <page-margins>
-        <left-margin>56.6929</left-margin>
-        <right-margin>56.6929</right-margin>
-        <top-margin>56.6929</top-margin>
-        <bottom-margin>113.386</bottom-margin>
-      </page-margins>
-    </page-layout>
-    <word-font font-family="FreeSerif" font-size="10" />
-    <lyric-font font-family="FreeSerif" font-size="11" />
   </defaults>
   <part-list>
-    <part-group number="1" type="start">
-      <group-symbol>bracket</group-symbol>
-      <group-barline>yes</group-barline>
-    </part-group>
     <score-part id="P1">
       <part-name>Violin I</part-name>
       <part-abbreviation>Vln. I</part-abbreviation>
-      <score-instrument id="I9874b401ac448772c2eaa8289830227e">
+      <score-instrument id="I0df112611ede2726d49c47d8f23ea6a8">
         <instrument-name>String Ensemble 1</instrument-name>
         <instrument-abbreviation>Str</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I9874b401ac448772c2eaa8289830227e">
+      <midi-instrument id="I0df112611ede2726d49c47d8f23ea6a8">
         <midi-channel>1</midi-channel>
         <midi-program>49</midi-program>
       </midi-instrument>
@@ -50,11 +34,11 @@
     <score-part id="P2">
       <part-name>Violin II</part-name>
       <part-abbreviation>Vln. II</part-abbreviation>
-      <score-instrument id="I16025a1beffb093e883932cc7ac9660d">
+      <score-instrument id="I25db121cb2591d8821e8c96089c5cf95">
         <instrument-name>String Ensemble 1</instrument-name>
         <instrument-abbreviation>Str</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I16025a1beffb093e883932cc7ac9660d">
+      <midi-instrument id="I25db121cb2591d8821e8c96089c5cf95">
         <midi-channel>2</midi-channel>
         <midi-program>49</midi-program>
       </midi-instrument>
@@ -62,11 +46,11 @@
     <score-part id="P3">
       <part-name>Viola</part-name>
       <part-abbreviation>Vla.</part-abbreviation>
-      <score-instrument id="I8cffa55f14157dd5721198a4eab907de">
+      <score-instrument id="I36be090c89c28c1747b10fa7447e2fa7">
         <instrument-name>String Ensemble 1</instrument-name>
         <instrument-abbreviation>Str</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I8cffa55f14157dd5721198a4eab907de">
+      <midi-instrument id="I36be090c89c28c1747b10fa7447e2fa7">
         <midi-channel>3</midi-channel>
         <midi-program>49</midi-program>
       </midi-instrument>
@@ -74,16 +58,15 @@
     <score-part id="P4">
       <part-name>Cello</part-name>
       <part-abbreviation>Vc.</part-abbreviation>
-      <score-instrument id="I08d4e53950487193cf77f888726f2870">
+      <score-instrument id="If0bb1787ee93d4b4bda9cc5a33f082b1">
         <instrument-name>String Ensemble 1</instrument-name>
         <instrument-abbreviation>Str</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I08d4e53950487193cf77f888726f2870">
+      <midi-instrument id="If0bb1787ee93d4b4bda9cc5a33f082b1">
         <midi-channel>4</midi-channel>
         <midi-program>49</midi-program>
       </midi-instrument>
     </score-part>
-    <part-group number="1" type="stop" />
   </part-list>
   <!--=========================== Part 1 ===========================-->
   <part id="P1">
@@ -116,6 +99,11 @@
       <direction placement="above">
         <direction-type>
           <words enclosure="none" font-size="12" font-weight="bold">Presto</words>
+        </direction-type>
+      </direction>
+      <direction placement="above">
+        <direction-type>
+          <words />
         </direction-type>
       </direction>
       <direction placement="above">
@@ -4583,44 +4571,6 @@
         <repeat direction="backward" />
       </barline>
     </measure>
-    <!--========================= Measure 64 =========================-->
-    <measure implicit="no" number="64" width="220.16">
-      <print new-system="yes">
-        <system-layout>
-          <system-margins>
-            <left-margin>78.91</left-margin>
-            <right-margin>603.75</right-margin>
-          </system-margins>
-          <system-distance>150</system-distance>
-        </system-layout>
-      </print>
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-    </measure>
-    <!--========================= Measure 65 =========================-->
-    <measure implicit="no" number="65" width="174.35">
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
-      </barline>
-    </measure>
   </part>
   <!--=========================== Part 2 ===========================-->
   <part id="P2">
@@ -8256,43 +8206,6 @@
         <repeat direction="backward" />
       </barline>
     </measure>
-    <!--========================= Measure 64 =========================-->
-    <measure implicit="no" number="64" width="220.16">
-      <print new-system="yes">
-        <staff-layout number="1">
-          <staff-distance>65</staff-distance>
-        </staff-layout>
-      </print>
-      <attributes>
-        <staff-details print-object="yes" />
-      </attributes>
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-    </measure>
-    <!--========================= Measure 65 =========================-->
-    <measure implicit="no" number="65" width="174.35">
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
-      </barline>
-    </measure>
   </part>
   <!--=========================== Part 3 ===========================-->
   <part id="P3">
@@ -11200,43 +11113,6 @@
         <repeat direction="backward" />
       </barline>
     </measure>
-    <!--========================= Measure 64 =========================-->
-    <measure implicit="no" number="64" width="220.16">
-      <print new-system="yes">
-        <staff-layout number="1">
-          <staff-distance>65</staff-distance>
-        </staff-layout>
-      </print>
-      <attributes>
-        <staff-details print-object="yes" />
-      </attributes>
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-    </measure>
-    <!--========================= Measure 65 =========================-->
-    <measure implicit="no" number="65" width="174.35">
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
-      </barline>
-    </measure>
   </part>
   <!--=========================== Part 4 ===========================-->
   <part id="P4">
@@ -13862,43 +13738,6 @@
       </note>
       <barline location="right">
         <repeat direction="backward" />
-      </barline>
-    </measure>
-    <!--========================= Measure 64 =========================-->
-    <measure implicit="no" number="64" width="220.16">
-      <print new-system="yes">
-        <staff-layout number="1">
-          <staff-distance>65</staff-distance>
-        </staff-layout>
-      </print>
-      <attributes>
-        <staff-details print-object="yes" />
-      </attributes>
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-    </measure>
-    <!--========================= Measure 65 =========================-->
-    <measure implicit="no" number="65" width="174.35">
-      <note>
-        <rest />
-        <duration>20160</duration>
-        <type>half</type>
-      </note>
-      <note>
-        <rest />
-        <duration>5040</duration>
-        <type>eighth</type>
-      </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
       </barline>
     </measure>
   </part>
