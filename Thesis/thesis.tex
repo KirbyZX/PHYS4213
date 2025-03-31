@@ -31,19 +31,17 @@
 \addbibresource{thesis.bib}
 
 % Number formatting
-\usepackage[round-mode=figures,round-precision=3,round-pad=false]{siunitx}
-
-%\usepackage{lipsum}
+\usepackage[round-mode=figures,round-precision=3,round-pad=false,mode=text]{siunitx}
 
 %\usepackage{multirow} % Multi-row cells in tables
 %\usepackage{booktabs} % Nice table separators
 
-\usepackage[hidelinks]{hyperref} % For hyper-references
+% Clever references
+\usepackage[hidelinks]{hyperref}
 \usepackage[nameinlink,capitalise,noabbrev]{cleveref}
-
 \crefname{condition}{Condition}{Conditions}
-%\crefname{equation}{Equation}{Equations}
 
+% Rename environments
 \renewcommand{\listfigurename}{List of figures}
 \renewcommand{\listtablename}{List of tables}
 
@@ -84,12 +82,6 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 
 \section{Introduction}
 
-\begin{figure}
-    \small
-    \includesvg[width=.5\textwidth]{chain-strength.svg}
-    \caption[Toy graph]{This is a toy graph showing blah blah blah}
-\end{figure}
-
 Music is often seen as a very human endeavour. For centuries, only skilled musicians could compose and perform such sequences of sound that would be considered art. Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
 Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging whilst still remaining faithful to the source material—a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
 
@@ -110,7 +102,7 @@ QNLP?
 
 \section{Quantum annealing}
 
-Before we consider quantum annealing, we must first discuss adiabatic quantum computing (AQC), of which it is a branch. AQC is a computing technique that works under the adiabatic theorem.
+Before we consider quantum annealing, we must first discuss adiabatic quantum computing (AQC), from which it draws its main principle. AQC is a computing technique that works under the adiabatic theorem.
 
 \begin{theorem}[Adiabatic theorem]
     A physical system remains in its instantaneous eigenstate if a given perturbation is acting on it slowly enough and if there is a gap between the eigenvalue and the rest of the Hamiltonian's spectrum. \cite{born_beweis_1928}
@@ -118,96 +110,77 @@ Before we consider quantum annealing, we must first discuss adiabatic quantum co
 
 During a truly adiabatic process, there is no transfer of energy into or out of a system (??), so that system must remain in its energy eigenstate. This theorem can also be seen as a consequence of the energy-time uncertainty relation, which can be expressed as
 \begin{equation}
-    T\Delta E \ge \frac{\hbar}{2}
+    \Delta E\,T \ge \frac{\hbar}{2}
     \label{eq:energy-time}
 \end{equation}
-where here we define $\Delta E$ as the uncertainty in energy eigenstate and $T$ the time interval over which the system is evolved. As $T\to\infty$ we allow $\Delta E\to0$, meaning the exact energy eigenstate of the system can be known. A typical evolution of such a Hamiltonian can be expressed as
+where here we define $\Delta E$ as the uncertainty in energy eigenstate and $T$ the time interval over which the system is evolved. As $T\to\infty$ we allow $\Delta E\to0$, meaning the exact energy eigenstate of the system can be known. A typical evolution of the Hamiltonian of the system can be expressed as
 \begin{equation}
     H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p
     \label{eq:time-evolution}
 \end{equation}
 where we are evolving from an initial Hamiltonian $H_0$ to a final Hamiltonian $H_p$.
-This technique is useful as it allows particular eigenstates (usually the ground state) of a very complicated Hamiltonian ($H_p$) to be found simply by evolving from a Hamiltonian whose eigenstate is easy to prepare ($H_0$). Importantly, this process is universal and deterministic---if the system starts in the ground state of $H_0$, then it is guaranteed to be in the ground state of $H_p$ after evolution.
+This technique is useful as it allows particular eigenstates (usually the ground state) of a very complicated Hamiltonian ($H_p$) to be found simply by evolving from a Hamiltonian whose eigenstate is easy to find and prepare ($H_0$). Importantly, this process is universal and deterministic---if the system starts in the ground state of $H_0$, then it is guaranteed to be in the ground state of $H_p$ after evolution.
 
-However, since a truly adiabatic process takes infinitely many steps and therefore an infinite amount of time, this is not possible in practice. Instead, the adiabaticity condition of AQC can be relaxed to allow a shortening of the evolution time---this is quantum annealing\footnote{In metallurgical terms, annealing is the process of heating and cooling a material to alter its physical properties. Much like its metallurgical counterpart, quantum annealing allows a system to settle into a more useful final state.}. Over these shortened timescales ($T\sim\unit{\us}$), the eigenstate after evolution is no longer guaranteed but stochastic, and the final energy is heuristic. The advantage of this method is that a particular evolution can be run many times, sampling the probability distribution of final states until an acceptable outcome is found.
+However, since a truly adiabatic process takes infinitely many steps and therefore an infinite amount of time, this is not possible in practice. Instead, the adiabaticity condition of AQC can be relaxed to allow a shortening of the evolution time---this is quantum annealing\footnote{In metallurgical terms, annealing is the process of heating and cooling a material to alter its physical properties. Much like its metallurgical counterpart, quantum annealing allows a system to settle into a more useful final state.}. Over these shortened timescales ($T\sim\unit{\us}$), the process is now heuristic and the eigenstate after evolution is no longer guaranteed, but follows a probability distribution. The advantage of this method is that a particular evolution can be run many times, sampling the distribution of final states until an acceptable outcome is found.
 
-The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If $H_p$ is prepared such that its ground state encodes the solution to the optimisation problem, then the solution will be given at the end of the annealing process. In order to encode a problem, $H_p$ Hamiltonians take the form of an Ising spin glass, a random arrangement of magnetic dipole moments that can be in one of two states, typically spin-up ($+1$) or spin-down ($-1$). A spin glass with a vector $s$ of $N$ spins takes the form
+The main use of quantum annealing is to solve combinatorial optimisation problems, which are problems that require the minimisation of a function over a discrete set of variables. If $H_p$ is prepared such that its ground state encodes the solution to the optimisation problem, then as long as the initial Hamiltonian is prepared in the ground state, the solution is likely to be given at the end of the annealing process. In the field of computational complexity, these problems belong to a class of complex problems called NP (nondeterministic polynomial-time). A full discussion of computational complexity is beyond the scope of this study, but in brief NP problems are difficult to solve via classical algorithms as the time to solution scales exponentially with problem size (hence nondeterministic). Problems like these have large solution spaces with many local minima, which cannot be solved quickly. A common example is the travelling salesman problem: a salesman must visit a set of cities exactly once and return home, whilst minimising the distance travelled [CHECK THIS]. As the number of cities increases, the number of possible routes the salesman could take grows exponentially, with a classical algorithm having to consider many more possible options. It is these sorts of optimisation problems that quantum annealers excel at solving.
+
+In order to encode a problem, problem Hamiltonians ($H_p$) take the form of an Ising spin glass, a random arrangement of magnetic dipole moments (discrete variables) that can be in one of two states, typically spin-up ($+1$) or spin-down ($-1$) [CHECK THIS]. A spin glass with a vector $s$ of $N$ spins takes the form
 \begin{equation}
     H(s) = \sum_{i<j}^{N}J_{ij}s_i s_j + \sum_{i=1}^{N}h_i s_i
     \label{eq:ising}
 \end{equation}
-where $J_{ij}$ are the coupling strengths, and $h_i$ are the field strengths. The quantum equivalent can be expressed as
+where $J_{ij}$ are the coupling strengths between spins, and $h_i$ are the field strengths of individual spins. The quantum equivalent can be expressed as
 \begin{equation}
     H_p = H(\sigma^z)
 \end{equation}
-where we have replaced the spins with Pauli matrices. This is the Ising model; the discrete variables are now \emph{qubits}---binary variables like their classical counterparts, but existing in a superposition of the two states until measurement. The corresponding ground state is prepared with the Hamiltonian
+where we have replaced the spins with Pauli matrices. This is the Ising model, with the discrete variables now \emph{qubits}---binary variables like their classical counterparts, but existing in a superposition of the two states until measurement. The corresponding ground state is prepared with the Hamiltonian
 \begin{equation}
     H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
 \end{equation}
-which is an equal superposition of all possible states in the eigenbasis of $H_p$ .
+which is an equal superposition of all possible states in the eigenbasis of $H_p$ [CHECK THIS].
 
-Talk briefly about NP-hard problems....belongs to a class of computationally complex problems called NP (nondeterministic polynomial) [COLLATE AND CHECK NOTES]. A full discussion of computational complexity is beyond the scope of this study, but in brief NP problems are difficult to solve via classical algorithms as the time to solution scales exponentially with problem size. A common example is the travelling salesman problem; a salesman must visit a set of cities exactly onces and return home, whilst minimising the distance travelled. As the number of cities grows, the number of possible routes the salesman could take grows exponentially, with a classical algorithm having to consider many more possible options. It is these sorts of optimisation problems that quantum annealers excel at solving.
-
-Large solution space with many local minima
-
-The mapping of a logical problem to an Ising model is called \textit{embedding}. Problems are formulated in an analogous way to a spin glass via a QUBO (quadratic unconstrained binary optimisation). A QUBO takes the form of a function $f(x)$ to be minimised, and is represented by
+Another way of expressing problems is via the QUBO (quadratic unconstrained binary optimisation) model. A QUBO model takes the form of a function $f(x)$ to be minimised, and takes the form
 \begin{equation}
     f(x)=\sum_{i<j}Q_{i,j}x_ix_j + \sum_iQ_{i,i}x_i
     \label{eq:qubo}
 \end{equation}
-where $x$ is a vector of binary variables (taking the values $0$ or $1$), and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. The off-diagonal $Q_{i,j}$ terms are known as quadratic coefficients, and diagonal $Q_{i,i}$ terms as linear coefficients. As its name suggests, a QUBO can only include terms up to the second power, restricting coupling to pairwise interactions.
-This form can easily for transformed to an Ising model using
+where $x\in[0,1]$ is a new vector of binary variables, and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. The off-diagonal $Q_{i,j}$ terms are known as quadratic coefficients, and diagonal $Q_{i,i}$ terms as linear coefficients. These two models are mathematically equivalent, and each can be transformed to the other via a change of variable
 \begin{equation}
     s_i = 2x_i - 1 \,.
     \label{eq:qubo-ising}
 \end{equation}
+Whilst there are merits for each model, this study exclusively uses QUBO models to express optimisation problems.
 
 \subsection{Quantum hardware}
 
-!!!minor embedding , introduces a computational "overhead"
-qubit biases implemented via electromagnetic fields
-often the connectivity of each qubit is not sufficient to describe the problem, introduction of chains
-strong interactions between chain qubits to ensure they all have the same value (chain strength)
-if chain strength not large enough then chains can break, can be solved by different methods e.g. majority vote
-done by CPU not QPU
-
-Once a QUBO has been expressed, it can be sent to a quantum processing unit (QPU) to be solved. The graph architecture of these units allows the mapping of problem QUBOs to physical qubits, with linear terms ($x_i$) as qubit nodes and quadratic terms ($x_ix_j$) as couplers between them. An embedded system can then be prepared in its initial ground state, and allowed to evolve adiabatically to its final state to obtain the solution.
-
-However, the topology of these graphs often doesn't allow an exact one-to-one mapping; it may be the case that the problem requires a qubit to have more couplers than physically allowed by the QPU. The solution to this is the introduction of chains—a chain of physical qubits can act like a single logical variable, enabling the necessary mapping. The chain strength determines how strongly the chain is coupled, enforcing all qubits within the chain to have the same value. Chain strength is an important parameter that can affect the quality of solutions: if it is too weak, a final state may include chain breaks that return an infeasible solution; if it is too strong, it can overpower the other terms in the QUBO.
-
+% Should be near reference
 \begin{figure}[b]
     \centering
     \includegraphics[width=0.5\linewidth]{../Figures/pegasus.pdf}
-    \caption{A graph of 144 qubits in a D-Wave QPU, using their Pegasus topology. Qubits are represented by nodes, and couplers by edges.}
+    \caption[A graph of \num{144} qubits in a D-Wave QPU.]{A graph of \num{144} qubits in a D-Wave QPU, using their Pegasus topology. Qubits are represented by vertices, and couplers by edges.}
     \label{fig:pegasus}
 \end{figure}
 
-The qubits and their couplers define what can be seen as an energy landscape. Different combinations of qubit spins will have different energies, with the lowest energy state being the solution to the problem. A solver (or ``sampler'') attempts to characterise the shape of the energy landscape using a random range of input, and returns a number of samples with the lowest energy states. Note that the ``true'' ground state cannot be guaranteed; it could be part of the returned sample set, or may not even be found at all. It is the parameters of the annealing process that can reduce local minima and increase the likelihood of finding the ground state.
+Once a problem has been expressed with an Ising or QUBO model, it is sent to a quantum processing unit (QPU) to be solved. These units takes the form of a physical Ising spin glass, a lattice of physical qubits connected via couplers. The qubit biases and coupling values are influenced by electromagnetic fields, allowing the mapping of models to physical qubits, with linear terms as qubits and quadratic terms as couplers between them. This mapping process is known as \emph{minor embedding}, and is often handled by a classical computer `on the fly' each time a problem is submitted, introducing a slight computational overhead to running a problem. Fixed embeddings can be specified, but these require \textit{a priori} knowledge of the specific QPU architecture. Once embedded, the system can be prepared in its initial ground state, and allowed to evolve to its final state to obtain the solution.
 
-The full embedding process is often handled entirely by the QPU, done ``on the fly'' each time a problem is submitted. Fixed embeddings can be specified, but these require a priori knowledge of the specific QPU architecture.
+Often, the topology of a QPU doesn't allow an exact one-to-one mapping of a problem to physical qubits. It may be the case that the problem requires a variable to have a higher degree (number of connections) than the number of couplers physically allowed by the QPU. The solution to this is the introduction of chains---connected physical qubits chained together, acting like a single discrete variable, which enables the necessary mapping. The chain strength determines how strongly the chain is coupled, enforcing that all qubits within the chain to have the same value in order for it to remain discrete. Chain strength is an important parameter that can affect the quality of solutions, and can be tuned. If it is too weak, a final state may include chain breaks: chains where the interconnected qubits differ in value. Conflicts like these can be solved via different approaches, a common one being majority vote, which sets the value of the corresponding discrete variable to the modal value of the chain. However, since this operation is done by a classical computer after the annealing process, the switch may result in an undesirable, sub-optimal solution, and so chain breaks are often best avoided. Alternatively, if the chain strength is too strong, it can overpower the other terms in the problem model, resulting in poor optimisation.
+
+QPU annealers (also known as solvers) have many other parameters that can be tuned, influencing exactly how the annealing process is carried out and significantly affecting the quality of solutions [CITE SOLVER WEBSITE]. Aside from chain strength, others that this study considers are anneal time per sample and number of reads. Both these parameters affect the total QPU access time, and so finding a balance between them is key to minimising the time to solution.
+
+As mentioned previously, the time interval for each sample (evolution) is short in order to relax the adiabatic condition. For simple problems this is sufficient to return optimal solutions with a high likelihood, however, as the problem size increases this may no longer be the case. For a problem with $N$ qubits there are $2^N$ energy levels, with the relative size of spectral gaps (differences between energy levels) decreasing with $N$ [ASK ABOUT THIS]. As seen in \cref{eq:energy-time}, smaller spectral gaps ($\Delta E$) require longer anneal times ($T$) to prevent excitation to higher energy states, such that the uncertainty in energy eigenstate is not large enough to eclipse this gap. (minimum energy gap?)
+
+A benefit of shortened anneal times is that the system can be evolved and measured (sampled) many times, increasing the likelihood that a lower-energy solution from the distribution will be found. An evolution sampled many times creates a distribution in solution energy: for a simple QUBO model with a sparse matrix $Q$, this distribution may be biased towards lower energies therefore needing fewer samples; for a complicated matrix with many entries, the sampled distribution tends towards a Gaussian [RANDOM MATRIX LIT], with many more reads necessary to be likely to sample from the tail end.
+
+% D-Wave
+Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of. held at cryogenic temperatures and low-magnetic field environments to prevent unwanted fluctuations.
+
+D-Wave Systems operates the first and only quantum annealer for commercial access, introduced in 2011 . All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, an example of which can be seen in \cref{fig:pegasus}. A full Advantage QPU contains over \num{5000} qubits, each with a maximum degree of \num{15}.
+Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create problem models for the QPU to solve.
 
 Quantum annealing has already been applied to a widge array of optimisation problems, ranging from financial portfolios, protein folding, and traffic flow. This study explores a creative novel application of this technique, music arrangement.
 
-Put a bit about NP-hard problems here.
-
-Increase anneal time prevents excitation to higher energy states due to smaller spectral gaps.
-
-!!!Spectral gaps | gaps between energy levels as they evolve in time
-Care about the minimum energy gaps
-Smaller energy gaps need longer time evolution due to uncertainty principle $\Delta E \Delta t$.
-There are $2^N$ energy levels for $N$ qubits! Ideally want a sparse matrix
-Large matrices can almost be considered random, will return gaussian distribution (see literature for random matrices?)
-
-A quantum annealer (or solver) also has many parameters that can be tuned, influencing exactly how the annealing process is carried out and significantly affecting the quality of solutions [CITE SOLVER WEBSITE]. In this study we optimise two parameters: chain strength, and anneal time per sample. (MOVE TO QA HARDWARE SECTION)
-
-Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of.
-
 !!!Nick Chansellor paper, why quantum annealing?
-
-\subsection{D-Wave Systems}
-
-D-Wave Systems operates the first and only quantum annealer for commercial access, introduced in 2011 . All problems in this paper are run on the D-Wave Advantage quantum system, which uses their Pegasus architecture, with each qubit connected to 15 others (see Fig.\  ).
-Interaction with the D-Wave QPUs is handled through their Leap quantum cloud service, which is used to submit problems to solvers. D-Wave provides an open-source software development package (SDK) of Python tools which allows users to translate problems into binary optimisation and create QUBOs for the QPU to solve.
 
 \section{Music arrangement}
 \label{sec:arrangement}
@@ -409,6 +382,11 @@ This is the point where music post-processing can be applied. In this study, phr
 
 Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.\footnote{An overview of the code resources used in this study can be found in \cref{app:code}.} Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
 
+\begin{figure}
+    \small
+    \includesvg[width=.5\textwidth]{chain-strength.svg}
+    \caption[Toy graph]{This is a toy graph showing blah blah blah}
+\end{figure}
 
 The method was tested on an excerpt of (Haydn), taken from a MusicXML file in the public domain. This piece is ?? bars long and consists of four monophonic parts. It was chosen for...
 
