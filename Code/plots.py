@@ -68,7 +68,7 @@ def plotBoundaryStrength(df: pd.DataFrame, threshold: float) -> None:
     Plots the boundary strengths of a stream.
     '''
 
-    plt.scatter(df["Offset"], df["Strength"], s=1)
+    plt.scatter(df["Offset"], df["Strength"], s=5)
     plt.hlines(threshold, 0, df["Offset"].max(), linestyles="dashed")
 
     plt.xlim(0, df["Offset"].max())

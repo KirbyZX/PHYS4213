@@ -368,7 +368,7 @@ In this study we set $E_m=1$ as bias towards part types is preferred but not ess
 
 \subsection{Solution interpretation}
 
-Once the problem has been submitted to a quantum annealer and a sample set returned, we can finally construct the arrangement. Of the distribution of samples, the lowest-energy valid (i.e.\ no duplicates or overlaps) sample is picked to be the solution. The binary variables assigning vertices to colours can b read off and interpreted as phrases and instruments, respectively, allowing the music of the original score to be transformed into the final arrangement.
+Once the problem has been submitted to a quantum annealer and a sample set returned, we can finally construct the arrangement. Of the distribution of samples, the lowest-energy valid (i.e.\ no duplicates or overlaps) sample is picked to be the solution. The binary variables assigning vertices to colours can be read off and interpreted as phrases and instruments, respectively, allowing the music of the original score to be transformed into the final arrangement.
 
 This is the point where music post-processing can be applied. In this study, phrases are shifted up or down octaves depending on the pitch range of the target instrument, to ensure playability whilst minimally affecting the essence of the original.
 
@@ -379,6 +379,10 @@ This is the point where music post-processing can be applied. In this study, phr
 
 
 \section{Results}
+
+The outlined framework was applied to two scores: Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn, and Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven. These pieces fit into the desired scope as detailed in \cref{sec:arrangement}, whilst being different from each other in instrumentation and structure.
+
+Original scores, and their reduction counterparts, can be found in \cref{app:examples}.
 
 Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.\footnote{An overview of the code resources used in this study can be found in \cref{app:code}.} Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
 
@@ -504,6 +508,7 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 \label{app:code}
 
 \section{Examples}
+\label{app:examples}
 
 \section{Test appendix}
 

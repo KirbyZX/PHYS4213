@@ -16,6 +16,7 @@ def extractPhrases(score: stream.Score, threshold: float, weights: tuple[float])
         print(f"Creating phrases for {part.id} part...")
 
         df, _ = calculateStrengths(part, threshold, weights)
+        print(df)
         flat = part.flatten()
         lastNote = flat.notes.stream().last()
 
@@ -52,10 +53,6 @@ def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[f
     for n in noteStream:
 
         offset = n.offset
-        # If chord use the top note
-        if hasattr(n, "notes"):
-            n = n.notes[-1]
-
         pitch = n.pitch.ps
         
         new_row = pd.DataFrame({
@@ -80,6 +77,9 @@ def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[f
         [0]))
 
     df.eval("Strength = @weights[0]*`Pitch strength` + @weights[1]*`Offset strength`", inplace=True)
+    # Set first and last notes as boundaries
+    df.iat[0, 4] = 1
+    df.iat[len(df)-1, 4] = 1
 
     df.eval("IsBoundary = Strength >= @threshold", inplace=True)
 
