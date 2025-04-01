@@ -6,8 +6,9 @@
 \usepackage[font=small, labelfont=bf]{caption}
 \usepackage[subrefformat=parens]{subcaption}
 
-%\renewcommand{\baselinestretch}{1.15}     % Defines the line spacing
-%should be setspace package???s
+\usepackage[indent=20pt]{parskip}
+\usepackage{setspace}
+%\onehalfspacing
 
 \usepackage{graphics,graphicx}
 \usepackage{svg}
@@ -170,7 +171,11 @@ QPU annealers (also known as solvers) have many other parameters that can be tun
 
 As mentioned previously, the time interval for each sample (evolution) is short in order to relax the adiabatic condition. For simple problems this is sufficient to return optimal solutions with a high likelihood, however, as the problem size increases this may no longer be the case. For a problem with $N$ qubits there are $2^N$ energy levels, with the relative size of spectral gaps (differences between energy levels) decreasing with $N$ [ASK ABOUT THIS]. As seen in \cref{eq:energy-time}, smaller spectral gaps ($\Delta E$) require longer anneal times ($T$) to prevent excitation to higher energy states, such that the uncertainty in energy eigenstate is not large enough to eclipse this gap. (minimum energy gap?)
 
-A benefit of shortened anneal times is that the system can be evolved and measured (sampled) many times, increasing the likelihood that a lower-energy solution from the distribution will be found. An evolution sampled many times creates a distribution in solution energy: for a simple QUBO model with a sparse matrix $Q$, this distribution may be biased towards lower energies therefore needing fewer samples; for a complicated matrix with many entries, the sampled distribution tends towards a Gaussian [RANDOM MATRIX LIT], with many more reads necessary to be likely to sample from the tail end.
+A benefit of shortened anneal times is that the system can be evolved and measured (sampled) many times, increasing the likelihood that a lower-energy solution from the distribution will be found. An evolution sampled many times creates a distribution in solution energy: for a simple QUBO model with a sparse matrix $Q$, this distribution may be biased towards lower energies therefore needing fewer samples; for a complicated matrix with many entries, the sampled distribution tends towards a Gaussian [RANDOM MATRIX LIT], with many more reads necessary to be likely to sample from the tail end. The density of a problem matrix can be found from the problem graph as:
+\begin{equation}
+    \rho=\frac{V+E}{V^2}
+\end{equation}
+where $V$ is the number of vertices and $E$ the number of edges, with $\rho=1$ indicating a fully-connected problem, the worst-case scenario.
 
 % D-Wave
 Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of. held at cryogenic temperatures and low-magnetic field environments to prevent unwanted fluctuations.
@@ -362,6 +367,7 @@ In a worst-case scenario, a vertex included in the solution would lower the ener
 where $\max(W)$ denotes the largest entry of the weight matrix. To allow a similar analysis across problems with different weights, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the expression
 \begin{equation}
     A_m + B_m > 2 + E_m \,.
+    \label{eq:lagrange}
 \end{equation}
 
 In this study we set $E_m=1$ as bias towards part types is preferred but not essential. The values of $A_m$ and $B_m$ can then be found by performing parametric variation and measuring the number of broken constraints (duplicates and overlaps) in the lowest energy solutions. Parameter values should be just large enough to fulfil constraints, whilst not being too large as to overwhelm the other terms in the QUBO equation [CITE] and affect the quality of solutions.
@@ -372,36 +378,103 @@ Once the problem has been submitted to a quantum annealer and a sample set retur
 
 This is the point where music post-processing can be applied. In this study, phrases are shifted up or down octaves depending on the pitch range of the target instrument, to ensure playability whilst minimally affecting the essence of the original.
 
-\begin{itemize}
-    \item Chain strength analysis and explanation
-    \item Anneal time analysis
-\end{itemize}
-
-
 \section{Results}
 
-The outlined framework was applied to two scores: Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn, and Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven. These pieces fit into the desired scope as detailed in \cref{sec:arrangement}, whilst being different from each other in instrumentation and structure.
-
+The outlined framework was applied to two scores: Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn, and Symphony No.\ 5 in C minor, Op.\ 67, I.\ Allegro con brio, by Ludwig van Beethoven. Haydn Op.\ 1 is of the Baroque style, consisting of 63 bars with four instrument parts that play consistently throughout the piece, structured into short, well-defined phrases. This score was chosen as it was expected that the LBDM would be reasonably successful in discretising the piece, and that its short length and smaller instrumentation would result in a manageable number of variables to be embedded in the QPU. Beethoven Op.\ 67 is of the Romantic style and was shortened to the first 21 bars, with 12 instrument parts that are introduced at different times in the piece. This score was chosen for limit-testing purposes, as its larger instrumentation greatly increases the connectivity of the problem. Notably, the piece is also very well-known meaning the constructed arrangements would be more familiar.
 Original scores, and their reduction counterparts, can be found in \cref{app:examples}.
+
+The results of the LBDM can be seen in \cref{fig:phrase-extraction}. Notes with boundary strengths above the chosen threshold were chosen to be boundaries, defining the phrases that would become the vertices of the problem graph. The entropy of each phrase was calculated using \cref{eq:entropy}, to be used as the corresponding vertex weight, and the QUBO model was then calculated using \cref{eq:problem-qubo}, which could then be sent to the QPU to be solved.
+
+Tuning of the Lagrange parameters can be seen in \cref{fig:lagrange}. The parameters used for subsequent models were $A=6$ and $B=6$, which can be seen to fulfil \cref{eq:lagrange} as expected. Each constraint parameter guarantees an increase in energy roughly double the potential energy decrease for a broken constraint, a value which has been shown before (???) [CITE LIT].
+
+An example of the distribution of a returned sample set can be seen in \cref{fig:histogram}. The most optimal solutions lie in the leftmost portion of the distribution, corresponding to the lowest energies. The Gaussian nature of this distribution changed very little throughout parameter configuration process, hinting at the possibility that the problem models were already complicated enough to resemble random matrices. How sparse is the problem graph? $(nodes + edges)/nodes^2$
+
+Optimisation of both chain strength and anneal time per sample can be seen in 
 
 Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit.\footnote{An overview of the code resources used in this study can be found in \cref{app:code}.} Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
 
 \begin{figure}
-    \small
-    \includesvg[width=.5\textwidth]{chain-strength.svg}
-    \caption[Toy graph]{This is a toy graph showing blah blah blah}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-a}
+        \caption{}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
+    \end{subfigure}
+    \caption{Phrase extraction as a result of the LBDM.}
+    \label{fig:phrase-extraction}
 \end{figure}
 
-The method was tested on an excerpt of (Haydn), taken from a MusicXML file in the public domain. This piece is ?? bars long and consists of four monophonic parts. It was chosen for...
+\begin{figure}
+    \includegraphics[width=.5\textwidth]{example-image-a}
+    \caption{Histogram example of a returned sample set.}
+    \label{fig:histogram}
+\end{figure}
 
-Fig.\ ?? shows the extraction of phrases from the Violin I part by the LBDM.
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-a}
+        \caption{}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
+    \end{subfigure}
+    \caption{Tuning Lagrange parameters.}
+    \label{fig:lagrange}
+\end{figure}
 
-\begin{itemize}
-    \item Phrase extraction graph
-    \item 
-\end{itemize}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \includesvg[width=\linewidth]{chain-strength.svg}
+        \caption{}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
+    \end{subfigure}
+    \caption{Chain strength and anneal time per sample.}
+    \label{fig:solver-config}
+\end{figure}
 
-The resulting graph constructed from these phrases consists of ?? vertices and ?? edges. The QUBO formulation according to Eq.\ ?? was then calculated from this graph, to be submitted to the quantum annealer.
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-a}
+        \caption{}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
+    \end{subfigure}
+    \caption{Comparison with classical solvers varying number of reads.}
+    \label{fig:reads}
+\end{figure}
+
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-a}
+        \caption{}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{example-image-b}
+        \caption{}
+    \end{subfigure}
+    \caption{Scaling with number of instruments.}
+    \label{fig:energy-scaling}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=.5\textwidth]{example-image-a}
+    \caption{Increase in variables with number of instruments (one for linear terms one for quadratic terms)}
+    \label{fig:qubit-scaling}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=.5\textwidth]{example-image-a}
+    \caption{Comparing time to solution with number of instruments}
+    \label{fig:times}
+\end{figure}
 
 \begin{itemize}
     \item Lagrange parameter variations
@@ -410,44 +483,16 @@ The resulting graph constructed from these phrases consists of ?? vertices and ?
 \end{itemize}
 
 
-The annealer used in this study was the D-Wave Advantage 4.1 blah blah, which has connectivity of blah blah allows creation and submission of problems via a Python SDK (software development kit).
-
-A returned sampleset of solutions might look something like Fig.\ [HISTOGRAM]. In most cases it's the lowest energy solutions (leftmost bins) that we care about.
-
-How sparse is the problem graph? $(nodes + edges)/nodes^2$
-
-\begin{figure}
-    \includegraphics[width=0.5\textwidth]{node-constraint.png}
-    \caption{Varying the node constraint Lagrange multiplier to ensure that each node is coloured at most once. Each QUBO was submitted three times for 1000 reads, with the mean and standard error calculated.}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=0.5\textwidth]{edge-constraint.png}
-    \caption{Varying the edge constraint Lagrange multiplier to ensure that no nodes of the same colour are connected.}
-\end{figure}
-
-\subsection{Comparison to classical algorithms}
 
 Having tuned the Lagrange parameters and sampler configuration to give the lowest energy possible, we can compare the returned solutions to classical optimisation algorithms solving the same problem. D-Wave provides a selection of classical samplers that can return solutions to QUBO problems, two of which are used in this study. The steepest descent method blah blah. Simulated annealing, on the other hand, works very similarly to quantum annealing, but instead uses a "temperature" value to escape local minima. This method gives a more direct comparison.
 
 Show energy against reads
 Show total entropy against reads
 
-
-\begin{itemize}
-    \item Compare to classical for different problem sizes
-\end{itemize}
-
-\subsection{Scaling}
-
-Scale two ways:
-
 \begin{enumerate}
     \item Score length
     \item Number of instruments
 \end{enumerate}
-
-Compare lowest energy found for 
 
 Phrases identified using the LBDM are shown in Fig.\  , alongside their calculated entropies according to Eq.\ \ref{eq:entropy} and their overlaps, represented by edges. A threshold value of $0.4$ was used, resulting in a total of 33 identified phrases, with 70 total overlaps. The calculated boundary strengths for the Violin 1 part can be seen in Fig.\ \ref{eq:boundary-strength}, with the identified boundaries summarised in Tab.\ . Many of the nodes form cliques of three or four vertices, that is, each node of the subset is connected to every other node. This can be expected, as often musical phrases across instruments will occur simultaneously, especially in small ensemble music such as this. Notably, there are also two disjoint cliques, subsets that are independent from the main graph. These can be seen as distinct musical ideas that are separated by rests from the other phrases (for example, the first two measures of the piece). A non-negligible number of phrases are calculated to have zero entropy—these are phrases identified as only having one note, and thus no variety in pitch or rhythm ($P(x_i)=1$).
 
@@ -509,6 +554,16 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 
 \section{Examples}
 \label{app:examples}
+
+\begin{figure}
+    \includegraphics[width=\textwidth,page=1]{haydn-op1.pdf}
+    \caption{Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn, bars 1--16.}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth,page=1]{beethoven-op67.pdf}
+    \caption{Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven, bars 1--8.}
+\end{figure}
 
 \section{Test appendix}
 
