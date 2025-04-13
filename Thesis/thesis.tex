@@ -76,7 +76,7 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 \clearpage
 
 \tableofcontents
-\listoffigures
+%\listoffigures
 %\listoftables
 
 \thispagestyle{empty}
@@ -85,26 +85,28 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 \section{Introduction}
 
 % Background to quantum computing
-With the age of quantum computing came the possibility to solve complex problems intractable to their classical counterparts. Quantum computers, which leverage quantum mechanical phenomena to perform calculations, store information as qubits (`quantum bits') which can exist in a superposition between binary states.
-The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be faster and more powerful than its classical counterpart [CITE]. Since then, two methods of quantum computing have been developed: gate-based computing and adiabatic quantum computing.
+The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be faster and more powerful than its classical counterpart [CITE].
+Quantum computers, which leverage quantum mechanical phenomena to perform calculations, store information as qubits (``quantum bits'') which can exploit effects such as superposition and entanglement to increase computing power.
+With the age of quantum computing came the possibility to solve complex problems usually intractable to even the most powerful classical computers. 
+Since its inception, two methods of quantum computing have been developed: gate-based computing and adiabatic quantum computing.
 
 % Gate-based
-Gate-based quantum computers use quantum gates to manipulate qubits, analogous to classical logic gates for conventional circuits, where gates can be represented as operators acting on qubit states. This kind of computer is versatile and well-suited to solving general problems, and is being developed by several technology companies to provide [IBM][Google]
-
+Gate-based quantum computers use quantum gates to manipulate qubits, analogous to classical logic gates for conventional circuits, where gates can be represented as operators acting on qubit states. This kind of computer is versatile and well-suited to solving general problems, and is being actively developed by several technology companies as the next step in general computing \cite{google}\cite{ibm}.
 % Quantum annealing
-Adiabatic quantum computers, on the other hand, rely on the application of the adiabatic theorem to slowly evolve a quantum system. This is often used to find the global minimum of a given function which would be almost impossible to find analytically, adiabatic quantum computers have been used to find solutions to a variety of optimisation problems, such as protein folding [CITE], financial portfolios [CITE], and traffic flow [CITE].
+Adiabatic quantum computers, on the other hand, rely on the application of the adiabatic theorem to slowly evolve a quantum system. This is often used to find the global minimum of a given function which would be almost impossible to solve analytically, which often involves brute-force methods. Adiabatic quantum computers have been used to find solutions to a variety of optimisation problems, such as protein folding \cite{perdomo-ortiz_protein_2012}, financial portfolios \cite{phillipson_portfolio_2021}, and traffic flow \cite{inoue_traffic_2021}.
 
-At time of writing, quantum computing is still a nascient field, with quantum computers remaining impractical for real-world applications. In theory, larger and more advanced quantum computers would be able to solve problems in much shorter timeframes than classical computers, an advantage which is dubbed ``quantum supremacy''. A recent study has claimed to demonstrate this advantage using adiabatic quantum computing to analyse the structure of magnetic materials [CITE], although this is a specialised application and far from demonstrating an overall ``supremacy'' over classical methods.
+At time of writing, quantum computing is still a nascient field, with quantum computers remaining impractical for real-world applications. In theory, larger and more advanced quantum computers would be able to solve problems in much shorter timeframes than classical computers, an advantage dubbed ``quantum supremacy''. The achievement of this would trigger an upheaval of many common computer systems, most importantly encryption and simulation [CITE]. A recent study has claimed to demonstrate this advantage using adiabatic quantum computing to analyse the structure of magnetic materials [CITE], although this is a specialised application and far from demonstrating an overall ``supremacy'' over classical methods.
 
 % Computer music
-The combination of computing and music is a relatively new field, with the involvement of quantum computers even more so. Music is often seen as a very human endeavour, where only skilled musicians could compose and perform such sequences of sound that would be considered art. The idea that computers could produce music arose as early as the 19th century, with the conception of the first general-purpose computer, the Analytical Engine\footnote{The computer was never actually built, but laid the foundation for many modern computing concepts.} [CITE], with Ada Lovelace, considered the first computer programmer, noting that `the engine might compose elaborate and scientific pieces of music of any degree
-of complexity or extent'. The first computer composition would not be produced until nearly a century later [CITE], and since then various approaches to computer music have been taken, with quantum computing entering more recently.
+The combination of computing and music is a relatively new field, with the involvement of quantum computers even more so. Music is often seen as a very human endeavour, where only skilled musicians could compose and perform such sequences of sound that would be considered art. The idea that computers could produce music arose as early as the 19th century, with the conception of the first general-purpose computer, the Analytical Engine\footnote{The computer was never actually built, but laid the foundation for many modern computing concepts.} [CITE], with Ada Lovelace, considered the first computer programmer, noting that ``the engine might compose elaborate and scientific pieces of music of any degree
+of complexity or extent''. The first computer composition would not be produced until nearly a century later [CITE], and since then various approaches to computer music have been taken, ranging from fractals [CITE], Markov chains [CITE], and evolutionary models [CITE]. Quantum computing is the latest iteration of computer music, opening up new and unique possibilities.
 
 % Quantum computer music
-Since its emergence into the computer music scene, quantum computers have been used to write melodies [CITE], develop harmonies [CITE], create synthesisers [CITE], produce variations of original scores [CITE], and create intelligent musical systems via quantum natural language processing (QNLP), using a mixture of gate-based and adiabatic methods. However, these efforts have been directed at music \emph{composition}, that is, the generation of entirely new sequences and sounds, rather than music \emph{arrangement}, the adaptation of previously-composed pieces. Indeed, at time of writing, the application of quantum computing to the problem of music arrangement has never been explored before. Quantum computers have the potential to solve complex problems that are intractable for classical computers, and we proposed that music arrangement is one such problem.
+Since its emergence into the computer music scene, quantum computers have been used to write melodies [CITE], develop harmonies [CITE], create synthesisers [CITE], produce variations of original scores [CITE], and create intelligent musical systems via quantum natural language processing (QNLP), using a mixture of gate-based and adiabatic methods. However, these efforts have been directed at music \emph{composition}, that is, the generation of entirely new sequences and sounds, rather than music \emph{arrangement}, the adaptation of previously-composed pieces. Indeed, at time of writing, the application of quantum computing to the problem of music arrangement has never been explored before.
 
 % Study overview
-The structure of this study is as follows: we first introduce the relevant theory for both quantum annealing as a computational tool, and music arrangement as a suitable problem to solve; we then propose a detailed framework for combining the two, and analyse some example results using this framework; finally, we consider conclusions and possible future work.
+In this study, we propose that music arrangement can be formulated as an optimisation problem to be solved using a version of adiabatic quantum computing called quantum annealing.
+The structure of the study is as follows: we first introduce the relevant theory for both quantum annealing as a computational tool, and music arrangement as a suitable problem to solve; we then propose a detailed framework for combining the two, and apply this method to two musical scores; finally, we consider conclusions and possible future work.
 
 \section{Quantum annealing}
 
@@ -114,7 +116,7 @@ Before we consider quantum annealing, we must first discuss adiabatic quantum co
     A physical system remains in its instantaneous eigenstate if a given perturbation is acting on it slowly enough and if there is a gap between the eigenvalue and the rest of the Hamiltonian's spectrum. \cite{born_beweis_1928}
 \end{theorem}
 
-During a truly adiabatic process, there is no transfer of energy into or out of a system (??), so that system must remain in its energy eigenstate. This theorem can also be seen as a consequence of the energy-time uncertainty relation, which can be expressed as
+During a truly adiabatic process, there is a perfect conservation of entropy within the system, so that system must remain in its energy eigenstate. This theorem can also be seen as a consequence of the energy-time uncertainty relation, which can be expressed as
 \begin{equation}
     \Delta E\,T \ge \frac{\hbar}{2}
     \label{eq:energy-time}
@@ -174,13 +176,13 @@ Often, the topology of a QPU doesn't allow an exact one-to-one mapping of a prob
 
 QPU annealers (also known as solvers) have many other parameters that can be tuned, influencing exactly how the annealing process is carried out and significantly affecting the quality of solutions [CITE SOLVER WEBSITE]. Aside from chain strength, others that this study considers are anneal time per sample and number of reads. Both these parameters affect the total QPU access time, and so finding a balance between them is key to minimising the time to solution.
 
-As mentioned previously, the time interval for each sample (evolution) is short in order to relax the adiabatic condition. For simple problems this is sufficient to return optimal solutions with a high likelihood, however, as the problem size increases this may no longer be the case. For a problem with $N$ qubits there are $2^N$ energy levels, with the relative size of spectral gaps (differences between energy levels) decreasing with $N$ [ASK ABOUT THIS]. As seen in \cref{eq:energy-time}, smaller spectral gaps ($\Delta E$) require longer anneal times ($T$) to prevent excitation to higher energy states, such that the uncertainty in energy eigenstate is not large enough to eclipse this gap. (minimum energy gap?)
+As mentioned previously, the time interval for each sample (evolution) is short in order to relax the adiabatic condition. For simple problems this is sufficient to return optimal solutions with a high likelihood, however, as the problem size increases this may no longer be the case. For a problem with $N$ qubits there are $2^N$ energy levels, with the relative size of spectral gaps (differences between energy levels) decreasing with $N$ [ASK ABOUT THIS]. As seen in \cref{eq:energy-time}, smaller spectral gaps ($\Delta E$) require longer anneal times ($T$) to prevent excitation to higher energy states, such that the uncertainty in energy eigenstate is not large enough to eclipse this gap. (minimum energy gap?) The exact time evolution during this interval can also be customised to control results further \cite{khezri_customized_2022}, although this is beyond the scope of this study.
 
-A benefit of shortened anneal times is that the system can be evolved and measured (sampled) many times, increasing the likelihood that a lower-energy solution from the distribution will be found. An evolution sampled many times creates a distribution in solution energy: for a simple QUBO model with a sparse matrix $Q$, this distribution may be biased towards lower energies therefore needing fewer samples; for a complicated matrix with many entries, the sampled distribution tends towards a Gaussian [RANDOM MATRIX LIT], with many more reads necessary to be likely to sample from the tail end. The density of a problem matrix can be found from the problem graph as:
+A benefit of shortened anneal times is that the system can be evolved and measured (sampled) many times, increasing the likelihood that a lower-energy solution from the distribution will be found. An evolution sampled many times creates a distribution in solution energy: for a simple QUBO model with a sparse matrix $Q$, this distribution may be biased towards lower energies therefore needing fewer samples; for a complicated matrix with many entries, the sampled distribution tends towards a Gaussian [RANDOM MATRIX LIT], with many more reads necessary to be likely to sample from the tail end. The density of a problem matrix can be found from a QUBO model of the form of \cref{eq:qubo} as
 \begin{equation}
     \rho=\frac{V+E}{V^2}
 \end{equation}
-where $V$ is the number of vertices and $E$ the number of edges, with $\rho=1$ indicating a fully-connected problem, the worst-case scenario.
+where we have defined a new graph $Q=(V,E)$, with $V$ as the number of linear coefficients and $E$ the number of quadratic coefficients. $\rho=1$ indicates a fully-connected problem, the worst-case scenario.
 
 % D-Wave
 Many companies provide both personal and commercial access to gate-based quantum computers, however, few develop the hardware necessary for quantum annealing. D-Wave Systems was the first to realise a true quantum annealer, and have since developed and released their technology to the wider scientific community. All problems in this study were submitted to D-Wave's Advantage System 4.1 solver, which boasts a topology of over qubits each with a degree of. held at cryogenic temperatures and low-magnetic field environments to prevent unwanted fluctuations.
@@ -195,7 +197,7 @@ Quantum annealing has already been applied to a widge array of optimisation prob
 \section{Music arrangement}
 \label{sec:arrangement}
 
-Some would go one step further and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \textit{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
+The first evidence of humans writing music is theorised to have originated as early as 2000BC [CITE]; since then, it has become a hallmark of the human experience, so much so that the \emph{Voyager I} probe carries over 50 tracks of music from across the world as a message to potential extraterrestrial life [CITE]. Whilst some musicians would compose entirely new music, others would build upon and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \emph{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
 Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging whilst still remaining faithful to the source material—a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
 
 One of the earliest examples of this can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century. The roll of dice would determine the order of pre-composed musical phrases, allowing for the creation of new music without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
@@ -220,18 +222,18 @@ Traditionally, it's a time-consuming blah blah blah. However, in this study we a
 
 Holistically, reduction aims to fit as much original music into the parts of the arrangement, whilst still being playable. Notably, these constraints forgo the need to compose new music, a very subjective endeavour that is not handled well by optimisation.
 
-The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on European Classical-era (?) small ensemble and orchestral music, written in standard Western notation.
+The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on European Classical-era (?) small ensemble and orchestral music, written in standard Western notation. A brief taxonomy of a typical score is as follows: a standard score is split up into parts, which can be played by a single instrument or an instrument section. Each part is further divided into bars (sometimes known as measures) which contain the notes that the instrument plays. If an instrument plays more than one note at a time, it is known as polyphonic (otherwise monophonic).
 
-!!!mention somewhere score taxonomy (instruments, parts, polyphony, etc.)
+...continuation of tradition.
 
 % Theory, anyone could apply these steps. Then talk about practicalities in results (or in code appendix)
 \section{Proposed framework}
 
 Previous approaches to the automatic arrangement of music have relied on classical methods such as neural networks  or recursive classical algorithms in order to produce arrangements that are musically sound. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, a new approach to the automatic arrangement of music is proposed by applying quantum annealing.
 
-: given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a Boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the Boolean expression is satisfied, corresponding to the phrases included in the final arrangement . Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant or confusing if split up.
+It has been shown that the arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}: given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a Boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the Boolean expression is satisfied, corresponding to the phrases included in the final arrangement . Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant or confusing if split up.
 
-It has been shown that the arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}
+
 We propose a new framework for the arrangement of music via quantum annealing, which has not been studied before at time writing. A toy example of the proposed method can be seen in \cref{fig:toy}.
 
 \subsection{Score preprocessing}
@@ -405,7 +407,7 @@ An example of the output of the LBDM can be seen in \cref{fig:phrase-extraction}
     \label{fig:phrase-extraction}
 \end{figure}
 
-The tuning of the Lagrange parameters $A_m$ and $B_m$ can be seen in \cref{fig:lagrange}. These two parameters were varied together as the complexity of the QUBO equation makes it hard to predict how the terms interact. In terms of reducing the number of broken constraints, the edge multiplier ($B_m$) can be seen to have the most importance, although an increase in the vertex multiplier ($A_m$) is still requried to reduce this number to exactly zero in order to produce a valid solution. The parameters used for subsequent models were $A=6$ and $B=6$, which can be seen to fulfil \cref{eq:lagrange} as expected. Each constraint parameter guarantees an increase in energy roughly double the potential energy decrease for a broken constraint, a value which has been shown before (???) [CITE LIT].
+The tuning of the Lagrange parameters $A_m$ and $B_m$ can be seen in \cref{fig:lagrange}. These two parameters were varied together as the complexity of the QUBO equation makes it hard to predict how the terms interact. In terms of reducing the number of broken constraints, the edge multiplier ($B_m$) can be seen to have the most importance, although an increase in the vertex multiplier ($A_m$) is still requried to reduce this number to exactly zero in order to produce a valid solution. The parameters used for subsequent models were $A_m=6$ and $B_m=6$, which can be seen to fulfil \cref{eq:lagrange} as expected. Each constraint parameter gives an increase in energy roughly double the potential energy decrease for a broken constraint, a value which has been shown before (???) [CITE LIT]. This does not guarantee that no constraints are broken in the lowest-energy solutions, however, non-zero broken constraints will be rare. From this point onwards, only the lowest-energy solutions with zero broken constraints are considered.
 
 \begin{figure}
     \centering
@@ -426,7 +428,7 @@ An example of the distribution of a returned sample set can be seen in \cref{fig
 
 Optimisation of both the chain strength and anneal time per sample solver properties can be seen in \cref{fig:solver-configuration}. Whilst usually the aim of increasing the chain strength is to reduce the fraction of broken chains, here this is not too significant as long as the constraints are met. Broken chains increase the likelihood of broken constraints, as they are resolved after the evolution process and may not reflect a minimisation of the QUBO problem, but as long as the fraction is small then the lowest energy solutions can still be valid. As can be seen in \cref{fig:chain-strength}, a chain strength greater than \num{30} reduced the number of broken chains to zero, but the lowest energy of valid solutions was minimised at a lower value of \num{20}. For further problems, a chain strength of \num{25} was chosen as a compromise between energy and chain break fraction minimisation.
 
-Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only be increased to a maximum of \qty{300}{\us} for a single problem submission due to time constraints imposed by the solver. In theory, as $t\to\infty$, the energy of the samples should tend to the ground state energy due to the adiabatic theorem; here the energy seems to decrease exponentially to some asymptotic value. It may be that the solutions found are already close to the true minimisation of the QUBO problem (but unlikely at such short time scales), or that there is some local minimum due to small spectral gaps that requires a longer anneal time to resolve [???]. In the interest of time and the desire to increase the number of reads, an anneal time per sample of \qty{200}{\us} was chosen for future problems.
+Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only be increased to a maximum of \qty{300}{\us} for a single problem submission due to time limits imposed by the solver. In theory, as $t\to\infty$, the energy of the samples should tend to the ground state energy due to the adiabatic theorem; here the energy seems to decrease exponentially to some asymptotic value. It may be that the solutions found are already close to the true minimisation of the QUBO problem (but unlikely at such short time scales), or that there is some local minimum due to small spectral gaps that requires a longer anneal time to resolve [???]. In the interest of time and the desire to increase the number of reads, an anneal time per sample of \qty{200}{\us} was chosen for future problems.
 
 \begin{figure}
     \centering\small
@@ -443,7 +445,7 @@ Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only 
         \label{fig:anneal-time}
     \end{subfigure}
     
-    \caption{Optimisation of the solver configuration. \subref{fig:chain-strength} Variation of the fraction of chains broken and energy with chain strength of the lowest energy samples in a sampleset of 1000 reads, using the default anneal time (\qty{20}{\us}). Each data point was sampled ?? times, with the mean and standard error calculated. \subref{fig:anneal-time} Variation of ?? with anneal time per sample of the lowest energy samples in a sampleset of 1000 reads, using the default chain strength (\num{32}).}
+    \caption[Optimisation of the solver configuration.]{Optimisation of the solver configuration. \subref{fig:chain-strength} Variation of the fraction of chains broken and energy with chain strength of the lowest energy samples in a sampleset of 1000 reads, using the default anneal time (\qty{20}{\us}). Each data point was sampled ?? times, with the mean and standard error calculated. \subref{fig:anneal-time} Variation of ?? with anneal time per sample of the lowest energy samples in a sampleset of 1000 reads, using the default chain strength (\num{32}).}
     \label{fig:solver-configuration}
 \end{figure}
 
@@ -556,8 +558,6 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
     \includegraphics[width=\textwidth,page=1]{beethoven-op67.pdf}
     \caption{Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven, bars 1--8.}
 \end{figure}
-
-\section{Test appendix}
 
 Start with an undirected graph $G=(V,E)$ and a set of $n$ colours, which represent the parts for which we are arranging, with each being an independent set. Denote $x_{v,i}$ to be a binary variable such that
 \begin{equation*}
