@@ -7,7 +7,7 @@ import numpy as np
 from samples import extractChosen
 
 
-def plotCSV(filepath: str, xaxis: str, yaxis: str, label: str = "") -> None:
+def plotCSV(filepath: str, xaxis: str, yaxis: str, colour, marker: str = "o", label: str = "") -> None:
 
     data = pd.read_csv(filepath)
     range = data[xaxis].unique()
@@ -20,7 +20,7 @@ def plotCSV(filepath: str, xaxis: str, yaxis: str, label: str = "") -> None:
         means.append(np.mean(query))
         stderr.append(np.std(query)/np.sqrt(len(query)))
 
-    plt.errorbar(range, means, yerr=stderr, fmt='o', label=label)
+    plt.errorbar(range, means, yerr=stderr, fmt=marker, label=label, c=colour)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
 
@@ -75,3 +75,44 @@ def plotBoundaryStrength(df: pd.DataFrame, threshold: float) -> None:
     plt.ylim(0,1)
     plt.xlabel("Offset")
     plt.ylabel("Boundary strength")
+
+def plotLagrange(df: pd.DataFrame) -> None:
+    '''
+    Plots a parametric plot of the two variable Lagrange parameters.
+    '''
+
+    grouped = (
+        df.groupby(["Node multiplier", "Edge multiplier"])
+        .mean(numeric_only=True)
+        .reset_index()
+    )
+
+    grouped["Broken"] = grouped["Overlaps"] + grouped["Duplicates"]
+
+    x = grouped["Node multiplier"].unique()
+    y = grouped["Edge multiplier"].unique()
+
+    x , y = np.meshgrid(x, y)
+    z = grouped.pivot(index="Edge multiplier", columns="Node multiplier", values="Broken").values
+
+    plt.figure(figsize=(8,8))
+    ax = plt.axes(projection ='3d')
+    ax.plot_surface(x, y, z)
+
+    ax.plot_surface(x, y, z, cmap='viridis')
+    ax.grid(False)
+    ax.xaxis.pane.set_edgecolor('black')
+    ax.yaxis.pane.set_edgecolor('black')
+    ax.zaxis.pane.set_edgecolor('black')
+    ax.xaxis.pane.fill = False
+    ax.yaxis.pane.fill = False
+    ax.zaxis.pane.fill = False
+
+    ax.view_init(elev=15, azim=50)
+
+    ax.set_xlim(1, 9)
+    ax.set_ylim(1, 9)
+    ax.set_zlim(0, z.max())
+    ax.set_xlabel("Vertex multiplier")
+    ax.set_ylabel("Edge multiplier")
+    ax.set_zlabel("Broken constraints")

@@ -15,7 +15,7 @@ def extractPhrases(score: stream.Score, threshold: float, weights: tuple[float])
     for part in score.parts:
         print(f"Creating phrases for {part.id} part...")
 
-        df, _ = calculateStrengths(part, threshold, weights)
+        df = calculateStrengths(part, threshold, weights)
         print(df)
         flat = part.flatten()
         lastNote = flat.notes.stream().last()
@@ -42,7 +42,7 @@ def extractPhrases(score: stream.Score, threshold: float, weights: tuple[float])
 
     return phrases
 
-def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[float]) -> tuple[pd.DataFrame, float]:
+def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[float]) -> pd.DataFrame:
     '''
     Returns a table of calculated boundary strengths.
     '''
@@ -83,7 +83,7 @@ def calculateStrengths(stream: stream.Stream, threshold: float, weights: tuple[f
 
     df.eval("IsBoundary = Strength >= @threshold", inplace=True)
 
-    return df, threshold
+    return df
 
 
 if __name__ == "__main__":

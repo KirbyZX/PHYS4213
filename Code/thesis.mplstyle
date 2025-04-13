@@ -1,7 +1,7 @@
 lines.linewidth : 0.8
 lines.marker : .
-lines.markersize : 4
-scatter.marker : b.
+lines.markersize : 5
+scatter.marker : .
 
 xtick.direction : in
 xtick.top : True
@@ -12,7 +12,7 @@ font.family : serif
 font.size : 12.0
 svg.fonttype : none
 
-figure.figsize: 4,3
+figure.figsize: 6,3
 
 savefig.pad_inches : 0.0
 savefig.bbox : tight
