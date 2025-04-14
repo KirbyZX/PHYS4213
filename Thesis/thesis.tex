@@ -11,6 +11,7 @@
 %\onehalfspacing
 
 \usepackage{graphics,graphicx}
+\usepackage{float}
 \usepackage{svg}
 \graphicspath{{../Figures/}}
 \usepackage{mwe}
@@ -426,21 +427,21 @@ An example of the distribution of a returned sample set can be seen in \cref{fig
     \label{fig:histogram}
 \end{figure}
 
-Optimisation of both the chain strength and anneal time per sample solver properties can be seen in \cref{fig:solver-configuration}. Whilst usually the aim of increasing the chain strength is to reduce the fraction of broken chains, here this is not too significant as long as the constraints are met. Broken chains increase the likelihood of broken constraints, as they are resolved after the evolution process and may not reflect a minimisation of the QUBO problem, but as long as the fraction is small then the lowest energy solutions can still be valid. As can be seen in \cref{fig:chain-strength}, a chain strength greater than \num{30} reduced the number of broken chains to zero, but the lowest energy of valid solutions was minimised at a lower value of \num{20}. For further problems, a chain strength of \num{25} was chosen as a compromise between energy and chain break fraction minimisation.
+Optimisation of both the chain strength and anneal time per sample solver properties can be seen in \cref{fig:solver-configuration}. For both scores, increasing the chain strength leads to a direct decrease in the fraction of chains broken. However, the chain break fraction does not necessarily need to be exactly zero for valid solutions to be returned. Chain breaks increase the likelihood of broken constraints, as they are resolved after the evolution process and may not reflect a minimisation of the QUBO problem, but as long as the fraction is small then the lowest energy solutions can still be valid. Both scores also demonstrate a minimum point in the lowest energies of the returned sample sets. Before this point, the chain strength is too weak to enforce the homogeneity of the chain, leading to more chain breaks and increased energy from their resolution. After this point, the chain strength overwhelms the other terms in the QUBO model, resulting in a priority to maintain chains, at the detriment of the minimisation of objective terms. In order to choose a suitable chain strength, a compromise has to be made between the minimisation of the energy and the fraction of broken chains: a chain strength of \num{25} was chosen for Haydn Op.\ 1, and \num{30} for Beethoven Op.\ 67, to meet this compromise. The embeddings for Beethoven Op.\ 67 have longer chains in general, due to the higher connectivity of the QUBO model, so its higher chain strength accounts for the increased difficulty in keeping longer chains single-valued.
 
-Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only be increased to a maximum of \qty{300}{\us} for a single problem submission due to time limits imposed by the solver. In theory, as $t\to\infty$, the energy of the samples should tend to the ground state energy due to the adiabatic theorem; here the energy seems to decrease exponentially to some asymptotic value. It may be that the solutions found are already close to the true minimisation of the QUBO problem (but unlikely at such short time scales), or that there is some local minimum due to small spectral gaps that requires a longer anneal time to resolve [???]. In the interest of time and the desire to increase the number of reads, an anneal time per sample of \qty{200}{\us} was chosen for future problems.
+Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only be increased to a maximum of \qty{300}{\us} for a problem submission of \num{1000} reads due to time limits imposed by the solver. In theory, as $t\to\infty$, the energy of the samples should tend to the ground state energy due to the adiabatic theorem; here, we do observe a general decreasing trend, but not one that is particularly steady. It may be that the solutions found are already close to the true minimisation of the QUBO problem (but unlikely at such short time scales), or that there is some local minimum due to small spectral gaps that requires a longer anneal time to resolve [???]. In the interest of time and the desire to increase the number of reads, an anneal time per sample of \qty{200}{\us} was chosen for both Haydn Op.\ 1 and Beethoven Op.\ 67.
 
 \begin{figure}
-    \centering\small
-    \begin{subfigure}{\textwidth}
+    \centering\tiny
+    \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includesvg[width=.75\linewidth]{haydn-chain-strength.svg}
+        \includesvg[width=\linewidth]{haydn-solver-config.svg}
         \caption{}
         \label{fig:chain-strength}
-    \end{subfigure}
-    \begin{subfigure}{\textwidth}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includesvg[width=.75\linewidth]{haydn-anneal-time.svg}
+        \includesvg[width=\linewidth]{beethoven-solver-config.svg}
         \caption{}
         \label{fig:anneal-time}
     \end{subfigure}
@@ -449,21 +450,22 @@ Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only 
     \label{fig:solver-configuration}
 \end{figure}
 
-Having tuned the Lagrange parameters and sampler configuration to increase the probability of finding the most optimal solutions, we compare the returned solutions to classical optimisation algorithms solving the same problem. D-Wave provides a selection of classical samplers that can return solutions to QUBO problems, two of which are used in this study. The steepest descent method blah blah, and despite its apparent rudimentary nature is still very widely used for solving optimisation problems [CITE]. Simulated annealing, on the other hand, works very similarly to quantum annealing, but instead uses a "temperature" value to escape local minima. This method gives a more direct comparison of the effectiveness of quantum and classical approaches.
+Having tuned the Lagrange parameters and sampler configuration, we compare the returned solutions to classical optimisation algorithms solving the same problem. D-Wave provides a selection of classical samplers that can return solutions to QUBO problems, two of which are used in this study. The steepest descent method blah blah, and despite its apparent rudimentary nature is still very widely used for solving optimisation problems [CITE]. Simulated annealing, on the other hand, works very similarly to quantum annealing, but instead uses a "temperature" value to escape local minima. This method gives a more direct comparison of the effectiveness of quantum and classical approaches.
 
-A comparison of the solutions returned by the different solvers for both pieces can be seen in \cref{fig:reads}. Quantum annealing consistently provides lower-energy solutions than steepest descent, although fails to beat simulated annealing by a small margin. For the larger problem posed by Beethoven Op.\ 67, ...Why???
+A comparison of the lowest-energy solutions returned by the different solvers for both pieces can be seen in \cref{fig:reads}, whilst varying the total number of reads. The maximum number of reads for a single problem was limited to \num{2000} due to the solver time constraints previously mentioned. Both pieces demonstrate very little variation in lowest-energy solutions returned by quantum annealing as the total number of reads is increased. This could be a sign that the lower end of the energy distribution of solutions is already well-sampled with a small number of reads, so increasing reads would only provide marginal gains. Both classical methods also vary very little, which is to be expected due to their deterministic nature.
+Looking at Haydn Op.\ 1, quantum annealing consistently provides lower-energy solutions than steepest descent, although fails to surpass simulated annealing by a small margin. On the other hand, quantum annealing performs poorly at providing low-energy solutions against both classical methods for Beethoven Op.\ 67. This may be due to the high connectivity of the model posed by this score, which substantially increases the lengths of the chains required to embed the problem. Best fit lines found via the damped least-squares method [CITE Levenberg-Marquardt algorithm] suggest that the lowest-energy solutions returned by quantum annealing would surpass simulated annealing at approximately \num{2672.1} and \num{13197.1} reads for Haydn Op.\ 1 and Beethoven Op.\ 67 respectively, requiring a runtime over six times the current maximum for the latter to be advantageous.
 
 \begin{figure}
-    \centering\small
+    \centering\scriptsize
     \includesvg[width=.75\textwidth]{compare-reads.svg}
-    \caption{Comparison of quantum annealing (QA) with steepest descent (SD) and simulated annealing (SA) classical solvers, varying the number of reads. Quantum annealing consistently provides lower-energy solutions than steepest descent, although fails to beat simulated annealing.}
+    \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) sample set energies, varying the number of reads. Best-fit lines found via the damped least-squares method.}
     \label{fig:reads}
 \end{figure}
 
 \begin{figure}
-    \centering\small
+    \centering\scriptsize
     \includesvg[width=.75\textwidth]{compare-entropy.svg}
-    \caption{Comparison of quantum annealing (QA) with steepest descent (SD) and simulated annealing (SA) classical solvers, varying the number of reads. Quantum annealing consistently provides lower-energy solutions than steepest descent, although fails to beat simulated annealing.}
+    \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) entropies of lowest-energy samples, varying the number of reads. Best-fit lines found via the damped least-squares method.}
     \label{fig:entropy}
 \end{figure}
 
@@ -534,6 +536,9 @@ Currently, no regard is taken to the exact instrumentation of the final arrangem
 The MIS formulation works well for reducing a score into a single polyphonic part, as the inclusion of a phrase within the final arrangement lends naturally to the binary variables used. However, a more useful application would be the ability to reduce a score to any fewer number of parts, whether that be multiple monophonic instruments (e.g.\ string quartet) or a polyphonic instrument (e.g.\ piano). To achieve this, the QUBO would need to be altered to allow some edges into the final subset. One suitable formulation would be a graph colouring problem: colouring the vertices of a graph $G$ with a set of $n$ colours such that no edge connects two vertices of the same colour. In this context, the number of colours would be the number of desired parts—after solving, each disjoint set of colours would become a monophonic part, the combination of which becomes the final reduction (in this way, the MIS problem can be seen as a colouring problem where $n=1$).
 
 Although it can be argued that music cannot be objectively ``scored'', nonetheless, the quality of the produced arrangements needs to be judged in some way. One suggestion is that the ``goodness'' of music can only be measured via a Turing-like test, where human subjects are presented with a selection of both human- and computer-generated scores, and asked to categorise them . To this extent, a good measure of the arrangements produced by this method would be to compare them against popular arrangements of the same score composed by human professionals, via a series of blind trials. If the participants fail to identify the computer compositions from the human ones more often than random chance, then it can be said that the generated arrangements are of sufficiently good quality.
+
+% Music perspective
+From a music perspective, there are multiple ways the produced arrangements could be enhanced.
 
 To conclude, this paper has shown the automatic reduction of music via quantum annealing. By formulating a score into a function to be minimised, the annealing process can identify parts of the original to become the final arrangement. An automatic process of this sort would be useful to a wide calibre of musicians, removing the time and skill barrier to produce such arrangements, whilst still retaining a sufficient level of quality, keeping music accessible to all. Just as science and business do already, it can be hoped that the arts take advantage of promising new technologies as well.
 
