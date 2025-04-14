@@ -92,14 +92,14 @@ def plotLagrange(df: pd.DataFrame) -> None:
     x = grouped["Node multiplier"].unique()
     y = grouped["Edge multiplier"].unique()
 
-    x , y = np.meshgrid(x, y)
-    z = grouped.pivot(index="Edge multiplier", columns="Node multiplier", values="Broken").values
+    X, Y = np.meshgrid(x, y)
+    Z = grouped.pivot(index="Edge multiplier", columns="Node multiplier", values="Broken").values
 
     plt.figure(figsize=(8,8))
     ax = plt.axes(projection ='3d')
-    ax.plot_surface(x, y, z)
+    ax.plot_surface(X, Y, Z)
 
-    ax.plot_surface(x, y, z, cmap='viridis')
+    ax.plot_surface(X, Y, Z, cmap='viridis')
     ax.grid(False)
     ax.xaxis.pane.set_edgecolor('black')
     ax.yaxis.pane.set_edgecolor('black')
@@ -110,9 +110,12 @@ def plotLagrange(df: pd.DataFrame) -> None:
 
     ax.view_init(elev=15, azim=50)
 
-    ax.set_xlim(1, 9)
-    ax.set_ylim(1, 9)
-    ax.set_zlim(0, z.max())
+    ax.set_xlim(1, x.max())
+    ax.set_ylim(1, y.max())
+    ax.set_zlim(0, Z.max())
     ax.set_xlabel("Vertex multiplier")
     ax.set_ylabel("Edge multiplier")
     ax.set_zlabel("Broken constraints")
+
+    ax.contourf(X, Y, Z, zdir='x', offset=-40, cmap='coolwarm')
+    ax.contourf(X, Y, Z, zdir='y', offset=40, cmap='coolwarm')

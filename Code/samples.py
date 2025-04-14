@@ -14,7 +14,7 @@ def firstValid(sampleset: SampleSet, G: nx.Graph):
     return filtered.first
 
 
-def duplicates(sample: dict, G: nx.Graph) -> list:
+def duplicates(sample: dict, G: nx.Graph) -> int:
     '''
     Finds the number of nodes that have been assigned more than once.
     '''
@@ -47,9 +47,10 @@ def totalEntropy(sample: dict, G: nx.Graph) -> float:
 
 def extractChosen(sample: dict) -> dict:
     '''
-    Extract the indices chosen phrases from a sample in the form `{("Instrument", "Phrase number"): "Assignment"}`.
+    Extract the indices chosen phrases from a sample in the form `{("Instrument", Phrase number): "Assignment"}`.
     '''
 
-    processNode = lambda node : re.match(r"(.+)_(\d+)_(.+)", node).groups()
+    pattern = r"^(.+)_(\d+)_(.+)$"
+    processNode = lambda node : re.match(pattern, node).groups()
     # ("Instrument", Phrase number): "Assignment"
-    return {(processNode(x)[0], int(processNode(x)[1])): processNode(x)[2] for x in sample if sample[x] == 1}
+    return {(processNode(x)[0], int(processNode(x)[1])): processNode(x)[2] for x in sample if sample[x] == 1 and processNode(x)[2] != "0"}
