@@ -40,8 +40,8 @@ Vary B to remove overlaps
 
 ### TODO
 
-- [ ] Rewrite quantum annealing
-- [ ] Rewrite music arrangement
+- [x] Rewrite quantum annealing
+- [x] Rewrite music arrangement
 - [ ] Write results
 - [ ] Write conclusion
 - [ ] Write introduction
@@ -51,4 +51,4 @@ Vary B to remove overlaps
 - [ ] Write appendices
 - [ ] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
 - [ ] Tidy code
-- [ ] Rename repository
+- [x] Rename repository
