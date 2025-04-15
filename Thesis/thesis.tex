@@ -18,6 +18,7 @@
 
 % Maths formatting
 \usepackage{amsmath}
+\usepackage{braket}
 
 \usepackage{amsthm}
 \newtheorem*{theorem}{Theorem}
@@ -115,19 +116,21 @@ Before we consider quantum annealing, we must first discuss adiabatic quantum co
 
 \begin{theorem}[Adiabatic theorem]
     A physical system remains in its instantaneous eigenstate if a given perturbation is acting on it slowly enough and if there is a gap between the eigenvalue and the rest of the Hamiltonian's spectrum. \cite{born_beweis_1928}
+    \label{thm:adiabatic}
 \end{theorem}
 
-During a truly adiabatic process, there is a perfect conservation of entropy within the system, so that system must remain in its energy eigenstate. This theorem can also be seen as a consequence of the energy-time uncertainty relation, which can be expressed as
-\begin{equation}
-    \Delta E\,T \ge \frac{\hbar}{2}
-    \label{eq:energy-time}
-\end{equation}
-where here we define $\Delta E$ as the uncertainty in energy eigenstate and $T$ the time interval over which the system is evolved. As $T\to\infty$ we allow $\Delta E\to0$, meaning the exact energy eigenstate of the system can be known. A typical evolution of the Hamiltonian of the system can be expressed as
+A linear evolution of the Hamiltonian of the system can be expressed as
 \begin{equation}
     H(t)=\left(1- \frac{t}{T}\right)H_0 + \frac{t}{T}H_p
     \label{eq:time-evolution}
 \end{equation}
-where we are evolving from an initial Hamiltonian $H_0$ to a final Hamiltonian $H_p$.
+where we are evolving from an initial Hamiltonian $H_0$ to a final Hamiltonian $H_p$ over a time interval $T$. If we start in the $n$th state of $H_0$, then, given that the evolution is slow enough and that there is some energy difference between eigenstates (i.e.\ non-degenerate), $H(t)$ will remain in the $n$th instantaneous eigenstate throughout evolution and end in the $n$th state of $H_p$. How ``slow'' the evolution needs to be is determined by the minimum energy gap of the instantaneous Hamiltonians; an approximate adiabaticity criterion can be given by
+\begin{equation}
+    \frac{\hbar\braket{\psi_m|\dot{H}|\psi_n}}{(E_n-E_m)^2} \ll 1
+    \label{eq:energy-gap}
+\end{equation}
+where we have used the largest matrix element between a pair of eigenstates $\psi_{n,m}$, and ${E_n-E_m}$ is the minimum energy gap. It can be seen that a smaller energy gap requires a slower evolution in order to remain adiabatic, and that for degenerate energies ($\Delta E=0$) no adiabatic evolution is possible. 
+
 This technique is useful as it allows particular eigenstates (usually the ground state) of a very complicated Hamiltonian ($H_p$) to be found simply by evolving from a Hamiltonian whose eigenstate is easy to find and prepare ($H_0$). Importantly, this process is universal and deterministic---if the system starts in the ground state of $H_0$, then it is guaranteed to be in the ground state of $H_p$ after evolution.
 
 However, since a truly adiabatic process takes infinitely many steps and therefore an infinite amount of time, this is not possible in practice. Instead, the adiabaticity condition of AQC can be relaxed to allow a shortening of the evolution time---this is quantum annealing\footnote{In metallurgical terms, annealing is the process of heating and cooling a material to alter its physical properties. Much like its metallurgical counterpart, quantum annealing allows a system to settle into a more useful final state.}. Over these shortened timescales ($T\sim\unit{\us}$), the process is now heuristic and the eigenstate after evolution is no longer guaranteed, but follows a probability distribution. The advantage of this method is that a particular evolution can be run many times, sampling the distribution of final states until an acceptable outcome is found.
@@ -177,7 +180,7 @@ Often, the topology of a QPU doesn't allow an exact one-to-one mapping of a prob
 
 QPU annealers (also known as solvers) have many other parameters that can be tuned, influencing exactly how the annealing process is carried out and significantly affecting the quality of solutions [CITE SOLVER WEBSITE]. Aside from chain strength, others that this study considers are anneal time per sample and number of reads. Both these parameters affect the total QPU access time, and so finding a balance between them is key to minimising the time to solution.
 
-As mentioned previously, the time interval for each sample (evolution) is short in order to relax the adiabatic condition. For simple problems this is sufficient to return optimal solutions with a high likelihood, however, as the problem size increases this may no longer be the case. For a problem with $N$ qubits there are $2^N$ energy levels, with the relative size of spectral gaps (differences between energy levels) decreasing with $N$ [ASK ABOUT THIS]. As seen in \cref{eq:energy-time}, smaller spectral gaps ($\Delta E$) require longer anneal times ($T$) to prevent excitation to higher energy states, such that the uncertainty in energy eigenstate is not large enough to eclipse this gap. (minimum energy gap?) The exact time evolution during this interval can also be customised to control results further \cite{khezri_customized_2022}, although this is beyond the scope of this study.
+As mentioned previously, the time interval for each sample (evolution) is short in order to relax the adiabatic condition. For simple problems this is sufficient to return optimal solutions with a high likelihood, however, as the problem size increases this may no longer be the case. For a problem with $N$ qubits there are $2^N$ energy levels, with the relative size of spectral gaps (differences between energy levels) decreasing with $N$ [ASK ABOUT THIS]. As seen in \cref{eq:energy-gap}, smaller spectral gaps ($\Delta E$) require longer anneal times ($T$) to prevent excitation to higher energy states, such that the uncertainty in energy eigenstate is not large enough to eclipse this gap. (minimum energy gap?) The exact time evolution during this interval can also be customised to control results further \cite{khezri_customized_2022}, although this is beyond the scope of this study.
 
 A benefit of shortened anneal times is that the system can be evolved and measured (sampled) many times, increasing the likelihood that a lower-energy solution from the distribution will be found. An evolution sampled many times creates a distribution in solution energy: for a simple QUBO model with a sparse matrix $Q$, this distribution may be biased towards lower energies therefore needing fewer samples; for a complicated matrix with many entries, the sampled distribution tends towards a Gaussian [RANDOM MATRIX LIT], with many more reads necessary to be likely to sample from the tail end. The density of a problem matrix can be found from a QUBO model of the form of \cref{eq:qubo} as
 \begin{equation}
@@ -408,6 +411,17 @@ An example of the output of the LBDM can be seen in \cref{fig:phrase-extraction}
     \label{fig:phrase-extraction}
 \end{figure}
 
+Once the QUBO models had been created, they were embedded into the QPU architecture. The scaling of the number of qubits required with the number of arrangement instruments for both pieces can be seen in \cref{fig:qubits}. It's important to differentiate between \emph{logical} qubits, which are the variables that define the problem, and \emph{physical} qubits, which exist in the QPU itself onto which the problem is embedded. The number of logical qubits required is well-defined as $N(n+1)$ where $N$ is the number of phrases and $n$ the number of instruments, and so increases linearly (except for $n=1$ in which case only $N$ qubits are required since slack variables are not needed). In contrast, the number of physical qubits increases more quickly, shown here with a quadratic fit. We are reminded that the maximum degree of a qubit in a D-Wave QPU is \num{15}, that is, each qubit can only connect with \num{15} other qubits; any more than this and we require qubits to be chained. The difference between physical and logical qubits can be seen as the number of extra qubits required in chains to provide the desired connectivity. Beethoven Op.\ 67 shows this difference pronouncedly: despite requiring fewer logical qubits than Haydn Op.\ 1 (owing to its smaller number of phrases), the number of physical qubits required is consistently higher. The original score contains over twice the instrument parts, meaning its phrases have more overlaps needing a greater degree of connectivity from its variables. Due to this rapid increase in physical qubits, Beethoven Op.\ 67 problems could not be embedded onto the QPU for $n>4$, although the projected number of qubits required has been shown on the plot. Haydn Op.\ 1 embeddings were comfortably below the qubit limit (shown by the dotted line) up to the problem maximum of $n=4$.
+
+\begin{figure}
+    \centering\footnotesize
+    \includesvg[width=\textwidth]{embedding.svg}
+    \caption[Number of qubits required for problems of different instruments.]{Number of qubits required for problems of different instruments, with the dotted line marking the maximum number of accessible qubits in a D-Wave QPU (\num{5640}). Logical qubits (equivalent to the number of variables) shown as solid lines, physical qubits required to embed the problem shown as points with a dashed line quadratic fit. Shaded region represents a theoretical extrapolation to arrangement for a higher number of instruments.}
+    \label{fig:qubits}
+\end{figure}
+
+\subsection{Parameter tuning}
+
 The tuning of the Lagrange parameters $A_m$ and $B_m$ can be seen in \cref{fig:lagrange}. These two parameters were varied together as the complexity of the QUBO equation makes it hard to predict how the terms interact. In terms of reducing the number of broken constraints, the edge multiplier ($B_m$) can be seen to have the most importance, although an increase in the vertex multiplier ($A_m$) is still requried to reduce this number to exactly zero in order to produce a valid solution. The parameters used for subsequent models were $A_m=6$ and $B_m=6$, which can be seen to fulfil \cref{eq:lagrange} as expected. Each constraint parameter gives an increase in energy roughly double the potential energy decrease for a broken constraint, a value which has been shown before (???) [CITE LIT]. This does not guarantee that no constraints are broken in the lowest-energy solutions, however, non-zero broken constraints will be rare. From this point onwards, only the lowest-energy solutions with zero broken constraints are considered.
 
 \begin{figure}
@@ -418,13 +432,14 @@ The tuning of the Lagrange parameters $A_m$ and $B_m$ can be seen in \cref{fig:l
     \label{fig:lagrange}
 \end{figure}
 
-An example of the distribution of a returned sample set can be seen in \cref{fig:histogram}. The most optimal solutions lie in the leftmost portion of the distribution, corresponding to the lowest energies. The Gaussian nature of this distribution changed very little throughout parameter configuration process, hinting at the possibility that the problem models were already complicated enough to resemble random matrices. How sparse is the problem graph? $(nodes + edges)/nodes^2$
+An example of the energy distribution of a returned sample set can be seen in \cref{fig:histograms}, using Haydn Op.\ 1 with $n=3$. As the number of reads tends to infinity, this distribution should reflect the true distribution of the energy eigenvalues of the optimisation problem, and at \num{2000} reads already seems to be well-sampled. For a problem with $N$ variables there are $2^N$ energy levels, in this case being $2^{768}\sim 10^{231}$ levels.\footnote{To put that into perspective, the Universe is said to contain about $10^{24}$ stars.} The most optimal solutions lie in the leftmost portion of the distribution, corresponding to the lowest energies. The distribution is very symmetric, meaning the probability of returning these low-energies is not favourable. How sparse is the problem graph?
+The spectral gap distribution can also be seen, which measures the difference in energy between adjacent eigenstates. and takes the form of an exponential decay, with many samples having very small ($<0.1$) energy gaps, implying that many of the energy eigenstates are degenerate. According to \cref{eq:energy-gap}, depending on the location of these small energy gaps, this could mean that longer evolution times are required to remain in a low-energy state and find optimal solutions.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=.75\textwidth]{example-image-a}
-    \caption{Histogram example of a returned sample set.}
-    \label{fig:histogram}
+\begin{figure}[h]
+    \centering\footnotesize
+    \includesvg[width=\textwidth]{haydn-histograms.svg}
+    \caption{Example of a returned sample set from solving the Haydn Op.\ 1 problem for $n=3$, \num{2000} reads. \textbf{Left:} Histogram of the sample energies. \textbf{Right:} Histogram of the gaps in the energy spectrum (gaps greater than \num{1.0} not shown). Exponential decay fitted with decay parameter \num{11.168809}.}
+    \label{fig:histograms}
 \end{figure}
 
 Optimisation of both the chain strength and anneal time per sample solver properties can be seen in \cref{fig:solver-configuration}. For both scores, increasing the chain strength leads to a direct decrease in the fraction of chains broken. However, the chain break fraction does not necessarily need to be exactly zero for valid solutions to be returned. Chain breaks increase the likelihood of broken constraints, as they are resolved after the evolution process and may not reflect a minimisation of the QUBO problem, but as long as the fraction is small then the lowest energy solutions can still be valid. Both scores also demonstrate a minimum point in the lowest energies of the returned sample sets. Before this point, the chain strength is too weak to enforce the homogeneity of the chain, leading to more chain breaks and increased energy from their resolution. After this point, the chain strength overwhelms the other terms in the QUBO model, resulting in a priority to maintain chains, at the detriment of the minimisation of objective terms. In order to choose a suitable chain strength, a compromise has to be made between the minimisation of the energy and the fraction of broken chains: a chain strength of \num{25} was chosen for Haydn Op.\ 1, and \num{30} for Beethoven Op.\ 67, to meet this compromise. The embeddings for Beethoven Op.\ 67 have longer chains in general, due to the higher connectivity of the QUBO model, so its higher chain strength accounts for the increased difficulty in keeping longer chains single-valued.
@@ -432,7 +447,7 @@ Optimisation of both the chain strength and anneal time per sample solver proper
 Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only be increased to a maximum of \qty{300}{\us} for a problem submission of \num{1000} reads due to time limits imposed by the solver. In theory, as $t\to\infty$, the energy of the samples should tend to the ground state energy due to the adiabatic theorem; here, we do observe a general decreasing trend, but not one that is particularly steady. It may be that the solutions found are already close to the true minimisation of the QUBO problem (but unlikely at such short time scales), or that there is some local minimum due to small spectral gaps that requires a longer anneal time to resolve [???]. In the interest of time and the desire to increase the number of reads, an anneal time per sample of \qty{200}{\us} was chosen for both Haydn Op.\ 1 and Beethoven Op.\ 67.
 
 \begin{figure}
-    \centering\tiny
+    \centering\footnotesize
     \begin{subfigure}[t]{.5\textwidth}
         \centering
         \includesvg[width=\linewidth]{haydn-solver-config.svg}
@@ -450,51 +465,48 @@ Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only 
     \label{fig:solver-configuration}
 \end{figure}
 
+\subsection{Comparison to classical algorithms}
+
 Having tuned the Lagrange parameters and sampler configuration, we compare the returned solutions to classical optimisation algorithms solving the same problem. D-Wave provides a selection of classical samplers that can return solutions to QUBO problems, two of which are used in this study. The steepest descent method blah blah, and despite its apparent rudimentary nature is still very widely used for solving optimisation problems [CITE]. Simulated annealing, on the other hand, works very similarly to quantum annealing, but instead uses a "temperature" value to escape local minima. This method gives a more direct comparison of the effectiveness of quantum and classical approaches.
 
 A comparison of the lowest-energy solutions returned by the different solvers for both pieces can be seen in \cref{fig:reads}, whilst varying the total number of reads. The maximum number of reads for a single problem was limited to \num{2000} due to the solver time constraints previously mentioned. Both pieces demonstrate very little variation in lowest-energy solutions returned by quantum annealing as the total number of reads is increased. This could be a sign that the lower end of the energy distribution of solutions is already well-sampled with a small number of reads, so increasing reads would only provide marginal gains. Both classical methods also vary very little, which is to be expected due to their deterministic nature.
 Looking at Haydn Op.\ 1, quantum annealing consistently provides lower-energy solutions than steepest descent, although fails to surpass simulated annealing by a small margin. On the other hand, quantum annealing performs poorly at providing low-energy solutions against both classical methods for Beethoven Op.\ 67. This may be due to the high connectivity of the model posed by this score, which substantially increases the lengths of the chains required to embed the problem. Best fit lines found via the damped least-squares method [CITE Levenberg-Marquardt algorithm] suggest that the lowest-energy solutions returned by quantum annealing would surpass simulated annealing at approximately \num{2672.1} and \num{13197.1} reads for Haydn Op.\ 1 and Beethoven Op.\ 67 respectively, requiring a runtime over six times the current maximum for the latter to be advantageous.
 
-\begin{figure}
-    \centering\scriptsize
-    \includesvg[width=.75\textwidth]{compare-reads.svg}
+\begin{figure}[h]
+    \centering\footnotesize
+    \includesvg[width=\textwidth]{compare-reads.svg}
     \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) sample set energies, varying the number of reads. Best-fit lines found via the damped least-squares method.}
     \label{fig:reads}
 \end{figure}
 
-\begin{figure}
-    \centering\scriptsize
-    \includesvg[width=.75\textwidth]{compare-entropy.svg}
+\begin{figure}[h]
+    \centering\footnotesize
+    \includesvg[width=\textwidth]{compare-entropy.svg}
     \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) entropies of lowest-energy samples, varying the number of reads. Best-fit lines found via the damped least-squares method.}
     \label{fig:entropy}
 \end{figure}
 
-\begin{figure}
-    \centering\small
-    \includesvg[width=.75\textwidth]{scaling.svg}
-    \caption{Scaling with number of instruments.}
+\subsection{Scaling}
+
+\begin{figure}[h]
+    \centering\footnotesize
+    \includesvg[width=\textwidth]{scaling-energy.svg}
+    \caption{Comparing the lowest energies returned by classical solvers against quantum annealing. Difference from quantum annealing energy shown.}
     \label{fig:energy-scaling}
 \end{figure}
 
-\begin{figure}
-    \includegraphics[width=.5\textwidth]{example-image-a}
-    \caption{Increase in variables with number of instruments (one for linear terms one for quadratic terms)}
-    \label{fig:qubit-scaling}
+\begin{figure}[h]
+    \centering\footnotesize
+    \includesvg[width=\textwidth]{scaling-time.svg}
+    \caption{Comparing the lowest energies returned by classical solvers against quantum annealing. Difference from quantum annealing energy shown.}
+    \label{fig:time-scaling}
 \end{figure}
-
-\begin{figure}
-    \includegraphics[width=.5\textwidth]{example-image-a}
-    \caption{Comparing time to solution with number of instruments}
-    \label{fig:times}
-\end{figure}
-
 
 \begin{enumerate}
     \item Score length
     \item Number of instruments
 \end{enumerate}
 
-!!!comparing time to solution
 For QA only looking at annealing time, not QPU access time (which includes sampling, readout, programming time) as this is a limitation of the technology rather than the method
 
 \section{Conclusions}
@@ -519,6 +531,8 @@ change in anneal schedule, pause/quench
 graph partitioning
 a priori lagrange parameters (Nelder-Mead)
 unbalanced penalisation vs slack penalisation (would reduce number of variables)
+
+Other classical samplers exist that were not compared to (e.g. tabu), could be more sophisticated to solve this sort of problem.
 
 
 In the case of Beethoven's String Quartet No.\ 10, this method can be said to be successful in reducing the score to a single monophonic part. A sufficient number of phrases are identified to allow the key melodic lines to be picked out from each part, and the weighted MIS formulation results in a final arrangement that is not musically uninteresting. Here, only one solution was picked arbitrarily; if desired, each of the degenerate lowest energy solutions could be examined individually to isolate the one that is considered most ``musical'', safe in the knowledge that all of them are valid.
