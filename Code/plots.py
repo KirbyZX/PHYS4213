@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import networkx as nx
 import numpy as np
+from scipy.optimize import curve_fit
 
 from samples import extractChosen
 
@@ -50,7 +51,7 @@ def plotHistogram(sampleset: pd.DataFrame) -> None:
     Plots the histogram of a sampleset.
     '''
 
-    N, _, patches = plt.hist(sampleset["energy"], bins=500, log=True)
+    N, _, patches = plt.hist(sampleset["energy"], bins=100)
 
     norm = mpl.colors.LogNorm(1, N.max())
     for thisfrac, thispatch in zip(N, patches):
@@ -59,9 +60,33 @@ def plotHistogram(sampleset: pd.DataFrame) -> None:
 
     plt.xlabel("Energy")
     plt.ylabel("Count")
-    #plt.xscale("symlog", linthresh=20, linscale=0.1)
-    #plt.xlim(-30,0)
-    #plt.xticks([-30,-20,-10,0])
+
+
+def plotEnergyGaps(df: pd.DataFrame) -> None:   
+
+    sorted = df.sort_values("energy")
+    gaps = [sorted["energy"].iloc[i+1] - sorted["energy"].iloc[i] for i in range(len(sorted)-1)]
+
+    gaps = [g for g in gaps if g <= 1]
+
+    N, _, patches = plt.hist(gaps, bins=100)
+
+    norm = mpl.colors.LogNorm(1, N.max())
+    for thisfrac, thispatch in zip(N, patches):
+        color = plt.cm.viridis(norm(thisfrac))
+        thispatch.set_facecolor(color)
+
+    f = lambda x,A,t: A * np.exp(-t*x)
+    r = np.linspace(0,1,100)
+    (A, t), _ = curve_fit(f, r, N)
+
+    print(A, t)
+    plt.plot(r, f(r, A, t))
+    
+    plt.xlim(0,1)
+    plt.xlabel("Energy gap")
+    plt.ylabel("Count")
+
 
 def plotBoundaryStrength(df: pd.DataFrame, threshold: float) -> None:
     '''

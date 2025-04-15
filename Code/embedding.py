@@ -8,7 +8,7 @@ from dimod import BinaryQuadraticModel, to_networkx_graph
 from qubo import createBQM
 
 
-def findEmbedding(bqm: BinaryQuadraticModel) -> None:
+def findEmbedding(bqm: BinaryQuadraticModel) -> dict:
 
     embedding = find_embedding(to_networkx_graph(bqm), DWaveSampler().to_networkx_graph(), verbose=1)
     return embedding
