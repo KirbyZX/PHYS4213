@@ -47,7 +47,6 @@
 
 % Rename environments
 \renewcommand{\listfigurename}{List of figures}
-\renewcommand{\listtablename}{List of tables}
 
 %\usepackage{float}
 
@@ -189,44 +188,37 @@ Quantum annealing has already been applied to a widge array of optimisation prob
 \section{Music arrangement}
 \label{sec:arrangement}
 
-The first evidence of humans writing music is theorised to have originated as early as 2000BC [CITE]; since then, it has become a hallmark of the human experience, so much so that the \emph{Voyager I} probe carries over 50 tracks of music from across the world as a message to potential extraterrestrial life [CITE]. Whilst some musicians would compose entirely new music, others would build upon and adapt previously composed pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style, to create an \emph{arrangement}. One of the most famous examples of this is \textit{Pictures at an Exhibition}, a piano suite written by Modest Mussorgsky, but more commonly known for its orchestral arrangement by Maurice Ravel.
-Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory, structure, and style. Composers use their creativity and intuition to create a piece that is both musically interesting and emotionally engaging whilst still remaining faithful to the source material—a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
+Music has become a hallmark of the human experience---so much so that the \textit{Voyager 1} probe carries 90 minutes of music from across the world as a message to potential extraterrestrial life \cite{nasa_golden_2024}. Whilst some musicians compose entirely new music, others adapt previously-written pieces for practical or artistic reasons, whether that be in terms of instrumentation, medium, or style. This is \emph{arrangement}.
+Traditionally, the arrangement of music is a complex process that requires a deep understanding of musical theory. Arrangers use their skill and creativity to create a piece that is both musically interesting and emotionally engaging, whilst still remaining faithful to the source material---a challenging and often time-consuming process. Perhaps it is unsurprising, then, that there has been interest in automating this process.
 
-One of the earliest examples of this can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century. The roll of dice would determine the order of pre-composed musical phrases, allowing for the creation of new music without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
-The introduction of computers in the 20th century allowed for more sophisticated methods of music arrangement. Composers could now transpose and manipulate musical parts digitally, without the need to transcribe parts by hand. Moving into the 21st century, more advanced techniques such as genetic algorithms and neural networks have been used to arrange music, with varying degrees of success. However, these methods are limited by the complexity of the problem and the need for extensive training data.
+One of the earliest examples of the attempted automation of arrangement can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century [CITE]. The roll of dice would determine the order of pre-composed musical phrases, arranging them into new combinations without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
+The introduction of computers in the 20th century allowed for more sophisticated methods of music arrangement. Composers could now transpose and manipulate musical parts digitally, without the need to transcribe parts by hand. Moving into the 21st century, more advanced techniques such as genetic algorithms [CITE] and neural networks [CITE] have been used to arrange music, with varying degrees of success. The rearrangement of a piece can have a great effect on how the listener interprets it, and doing this effectively is still a pertinent issue many musicians face. 
 
-Music arrangement refers to the art of rewriting a musical score in a new setting, style, or structure, whilst still maintaining the essence of the original. A classical example of this is Mussorgsky's \emph{Pictures at an Exhibition}, which is well known for its orchestral arrangement by Ravel but was originally a piano solo. A more contemporary example would be ???'s rendition of \emph{The Star-Spangled Banner} at the ??? Super Bowl, which caused much controversy due to its laid-back style during a time of conflict in Cuba? The rearrangement of a piece can have a great effect on how the listener interprets it, and doing this effectively is still a pertinent issue many musicians face.
-
-Traditionally, it's a time-consuming blah blah blah. However, in this study we aim to formulate music arrangement as an optimisation problem, which can be solved like any other via quantum annealing. It has been shown that music arrangement can be reduced to an NP-hard problem \cite{moses_computational_2016}, by considering the special case of music \emph{reduction}. Reduction is a form of arrangement whereby the number of instrument parts only gets smaller, and we define here subject to the following conditions:
+In this study, we aim to formulate music arrangement as an optimisation problem, which can be solved via quantum annealing. It has been shown that music arrangement can be reduced to an NP problem \cite{moses_computational_2016}, by considering the special case of music \emph{reduction}. Reduction is a form of arrangement whereby the number of instrument parts only gets smaller, and is defined here subject to the following conditions\footnote{This is not a universal definition of reduction, but one that is useful for this study.}:
 
 \begin{condition}[Uncreative]
-    All music in the arrangement must come from the original, in the same order.
+    All music must come from the original, in the same order.
     \label{con:uncreative}
 \end{condition}
 \begin{condition}[Non-degenerate]
-    Music played in one arrangement part cannot be played in another.
+    Music played in one part cannot be played in another.
     \label{con:non-degenerate}
 \end{condition}
 \begin{condition}[Monophonic]
-    Each part in the arrangement can only contain music from a single part in the original at any time.
+    Each part can only play music from one original part at a time.
     \label{con:monophonic}
 \end{condition}
 
-Holistically, reduction aims to fit as much original music into the parts of the arrangement, whilst still being playable. Notably, these constraints forgo the need to compose new music, a very subjective endeavour that is not handled well by optimisation.
+Holistically, reduction aims to fit as much original music into the arrangement as possible, whilst still being playable. Notably, these constraints forgo the need to compose new music, a creative endeavour that is very subjective. This study will focus wholly on music reduction defined by these constraints.
 
-The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on European Classical-era (?) small ensemble and orchestral music, written in standard Western notation. A brief taxonomy of a typical score is as follows: a standard score is split up into parts, which can be played by a single instrument or an instrument section. Each part is further divided into bars (sometimes known as measures) which contain the notes that the instrument plays. If an instrument plays more than one note at a time, it is known as polyphonic (otherwise monophonic).
+The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on Western classical small ensemble and orchestral music, written in modern staff notation. A brief taxonomy of a typical score is as follows: a standard score is split into parts, which can be played by a single instrument or an instrument section. Each part is further divided into bars (sometimes known as measures) which contain the notes that the instrument plays. If an instrument plays more than one note at a time, it is known as polyphonic (otherwise monophonic)---for the purposes of this study, all instruments will be treated as monophonic.
 
-...continuation of tradition.
+Whilst the automation of music might seem irreverent to some, the application of each new technology, from the printing press to the computer, heralds a new way to preserve the continuation of tradition. The next section outlines an original framework by which to arrange music quantumly.
 
 % Theory, anyone could apply these steps. Then talk about practicalities in results (or in code appendix)
 \section{Proposed framework}
 
-Previous approaches to the automatic arrangement of music have relied on classical methods such as neural networks  or recursive classical algorithms in order to produce arrangements that are musically sound. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, a new approach to the automatic arrangement of music is proposed by applying quantum annealing.
-
-It has been shown that the arrangement of music can be formulated as a combinatorial optimisation problem \cite{moses_computational_2016}: given a set of musical phrases, each phrase can be assigned a binary variable and formulated into a Boolean satisfiability (SAT) problem, with variables assigned to clauses according to their compatibility. A valid solution would be an assignment of values such that the Boolean expression is satisfied, corresponding to the phrases included in the final arrangement . Phrases are chosen as the smallest unit of music instead of notes to best preserve important melodic lines and harmonies, which may sound dissonant or confusing if split up.
-
-
-We propose a new framework for the arrangement of music via quantum annealing, which has not been studied before at time writing. A toy example of the proposed method can be seen in \cref{fig:toy}.
+Previous approaches to the automatic arrangement of music have relied on classical methods in order to produce arrangements that are musically sound. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, we propose a new framework for the arrangement of music via quantum annealing, an application which has not been studied before at time writing. A toy example of the proposed method can be seen in \cref{fig:toy}.
 
 \subsection{Score preprocessing}
 
@@ -236,7 +228,7 @@ The beginning of any arrangement process is an original musical score. However, 
 
 \subsection{Phrase identification}
 
-First, the music needs to be quantised. This could very easily be done by using predefined elements such as bars or notes, but these units on their own lack any intrinsic musical meaning. Similar to how a sentence might be split up into lexical phrases, instead of individial words or syllables, a line of music can be segmented into musical phrases, each representing a contained melodic or rhythmic idea. By preserving these important melodic lines and harmonies, we maintain the essence and familiarity of the original score, which is the core principle of arrangement as outlined in \cref{sec:arrangement}.
+First, the music needs to be quantised. This could very easily be done by using predefined elements such as bars or notes, but these units on their own lack any intrinsic musical meaning. Similar to how a sentence might be split up into lexical phrases, instead of individial words or syllables, a line of music can be segmented into musical phrases, each representing a contained melodic or rhythmic idea. By preserving these smallest units of melodic lines and harmonies, we maintain the essence and familiarity of the original score, which is one of the core principle of arrangement.
 
 The approach taken in this study is the local boundary detection model (LBDM) \cite{cambouropoulos_lbdm_2011}, which aims to identify the boundaries between phrases by calculating the degree of change between successive notes; larger differences between notes would show an increased likelihood of a boundary, exploiting the fact that the starts and ends of phrases are usually characterised by a high degree of variation [CITE?]. The strength of a boundary on a particular note is calculated over two of its parameters: pitch, and inter-onset interval (IOI), the time until the next note. This is chosen over note duration as it is often more noticeable to the listener [CITE] (pithy quote about hearing the gaps between notes?). The boundary strength $S$ for a particular parameter $x$ at note $i$ is given by
 \begin{equation}
