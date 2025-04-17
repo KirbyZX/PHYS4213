@@ -4,7 +4,7 @@
 \usepackage{times}
 
 \usepackage[font=small, labelfont=bf]{caption}
-\usepackage[subrefformat=parens]{subcaption}
+\usepackage[labelformat=parens, labelfont=bf, subrefformat=parens]{subcaption}
 
 \usepackage[indent=0pt]{parskip}
 \usepackage{setspace}
@@ -298,32 +298,6 @@ for a set of $n$ colours then the QUBO model for proper vertex colouring can be 
 \end{equation}
 where $A,B$ are the Lagrange parameters, and we have introduced the slack variables $s_v\in\{0,1\}$ (CHECK NOTATION).\footnote{This reduces to the maximum independent set problem when $n=1$.} The first term implements the single-colour constraint (or vertex constraint) by increasing the energy by $A$ each time a vertex is coloured more than once. The nature of a reduction implies that not all phrases will be played, so the inclusion of the slack variables (specifically when $s_x=0$) allows a vertex not to be coloured at all. Similarly, the second term implements the colour-adjacency constraint (or edge constraint) by increasing the energy by $B$ for each pair of identically-coloured vertices connected by an edge. When this function is minimised (strictly zero, in this case), all the conditions are met for a valid arrangement. The $x_{v,i}$ can then be read off from the solution and cross-referenced with their corresponding phrases to give the final score, an example of which can be seen in \cref{fig:toy-arrangement}.
 
-\begin{figure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\linewidth]{example-image-a}
-        \caption{}
-        \label{fig:toy-phrases}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\linewidth]{example-image-b}
-        \caption{}
-        \label{fig:toy-graph}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\linewidth]{example-image-b}
-        \caption{}
-        \label{fig:toy-solution}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\linewidth]{example-image-a}
-        \caption{}
-        \label{fig:toy-arrangement}
-    \end{subfigure}
-
-    \caption[A toy example demonstrating the proposed framework.]{A toy example demonstrating the proposed framework. \subref{fig:toy-phrases} An example score of three parts, with phrases identified by the LBDM coloured. \subref{fig:toy-graph} A graph of the score, with the colour of each node corresponding to its phrase, and edges connecting overlapping phrases. \subref{fig:toy-solution} One possible solution of proper vertex colouring, with $n=2$. \subref{fig:toy-arrangement} The score representation of the final arrangement.}
-    \label{fig:toy}
-\end{figure}
-
 \subsection{Musical entropy}
 
 A valid arrangement of phrases does not good music make. To ensure the produced arrangement is as musically interesting as possible, each vertex of the graph can be weighted to introduce a bias according to its phrase's `musicality'. The idea of a musical `utility' has been used before with classical algorithms \cite{huang_towards_2012} and to assess playability rules [PIANO REDUCTION CITATION]. Here we quantify this by calculating the \emph{musical entropy} of a phrase \cite{li_entropy_2019}.
@@ -356,7 +330,7 @@ Weights can also be added to edges, to bias the selection of pairs of vertexes. 
 \end{equation}
 where $W$ is now a matrix holding the weights for each edge, and $D$ is the Lagrange parameter.
 
-Finally, we introduce a bias towards the assignment of vertices to specific colours, based on the instrument the colour represents. It has been shown that instrument parts within a score can be categorised into distinct `arrangement elements', or roles, which reflect their musical function within the piece \cite{owsinski_mixing_2017}. Here we consider only three: lead, often including melodic/countermelodic lines; rhythm, providing harmony; and foundation, the fundamental bass line. Rudimentarily, we can classify phrases into these three categories by their entropy. Melodic lines often vary more, have higher entropy, and therefore should be classed as lead, whereas lower-entropy phrases should tend towards rhythm or bass. By defining threshold entropy values for each category, phrases can be given a bias towards instruments that have been assigned that category. For example, a flute part assigned a lead in the arrangement should contain more high-entropy phrases than a cello part assigned as foundation. The corresponding objective term takes the form
+Finally, we introduce a bias towards the assignment of vertices to specific colours, based on the instrument the colour represents. It has been shown that instrument parts within a score can be categorised into distinct `arrangement elements', or roles, which reflect their musical function within the piece \cite{owsinski_mixing_2017}. Here we consider only three: lead, often including melodic or countermelodic lines; rhythm, providing harmony; and foundation, the fundamental bass line. Rudimentarily, we can classify phrases into these three categories by their entropy. Melodic lines often vary more, have higher entropy, and therefore should be classed as lead, whereas lower-entropy phrases should tend towards rhythm or bass. By defining threshold entropy values for each category, phrases can be given a bias towards instruments that have been assigned that category. For example, a flute part assigned a lead in the arrangement should contain more high-entropy phrases than a cello part assigned as foundation. The corresponding objective term takes the form
 \begin{equation}
     f_E(x) = -E\sum_{v\in V}\sum_{i=1}^n \theta(W_v - W_{\text{th},i})x_{v,i}
 \end{equation}
@@ -395,6 +369,30 @@ Once the problem has been submitted to a quantum annealer and a sample set retur
 
 This is the point where music post-processing can be applied. In this study, phrases are shifted up or down octaves depending on the pitch range of the target instrument, to ensure playability whilst minimally affecting the essence of the original.
 
+\begin{figure}[h]
+    \centering\footnotesize
+    \begin{subfigure}{.8\textwidth}
+        \includesvg[width=\linewidth]{toy-score.svg}
+        \caption{}
+        \label{fig:toy-score}
+    \end{subfigure}
+    \par\bigskip
+    \begin{subfigure}{0.5\textwidth}
+        \includesvg[width=\linewidth]{toy-solution.svg}
+        \caption{}
+        \label{fig:toy-graph}
+    \end{subfigure}
+    \par\bigskip
+    \begin{subfigure}{.8\textwidth}
+        \includesvg[width=\linewidth]{toy-arrangement.svg}
+        \caption{}
+        \label{fig:toy-arrangement}
+    \end{subfigure}
+
+    \caption[A toy example demonstrating a simplified version of the proposed framework.]{A toy example demonstrating the proposed framework. \textbf{\subref{fig:toy-score}} An example score of three parts, with phrases identified by the LBDM coloured. \textbf{\subref{fig:toy-graph}} A graph of the score, with the colour and label of each vertex corresponding to its phrase, and edges connecting overlapping phrases. One possible solution of proper vertex colouring, with $n=1$, is shown by the outlined vertices. \textbf{\subref{fig:toy-arrangement}} The score representation of the final arrangement.}
+    \label{fig:toy}
+\end{figure}
+
 \section{Results}
 
 The outlined framework was applied to two scores: Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn (hereon referred to as Haydn Op.\ 1), and Symphony No.\ 5 in C minor, Op.\ 67, I.\ Allegro con brio, by Ludwig van Beethoven (referred to as Beethoven Op.\ 67). Haydn Op.\ 1 is of the Baroque style, consisting of 63 bars with four instrument parts that play consistently throughout the piece, structured into short, well-defined phrases. This score was chosen as it was expected that the LBDM would be reasonably successful in discretising the piece, and that its short length and smaller instrumentation would result in a manageable number of variables to be embedded into the QPU. Beethoven Op.\ 67 is of the Romantic style and was shortened to the first 21 bars, with 12 instrument parts that are introduced at different times in the piece. This score was chosen for limit-testing purposes, as its larger instrumentation greatly increases the connectivity of the problem. Notably, the piece is also very well-known meaning the constructed arrangements would be more familiar.
@@ -424,7 +422,7 @@ The spectral gap distribution can also be seen, which measures the difference in
 \begin{figure}[h]
     \centering\footnotesize
     \includesvg[width=\textwidth]{haydn-histograms.svg}
-    \caption{Example of a returned sample set from solving the Haydn Op.\ 1 problem for $n=3$, \num{2000} reads. \textbf{Left:} Histogram of the sample energies. \textbf{Right:} Histogram of the gaps in the energy spectrum (gaps greater than \num{1.0} not shown). Exponential decay fitted with decay parameter \num{11.168809}.}
+    \caption{Example of a returned sample set from solving the Haydn Op.\ 1 problem for $n=3$, \num{2000} reads. \textbf{(Left)} Histogram of the sample energies. \textbf{(Right)} Histogram of the gaps in the energy spectrum (gaps greater than \num{1.0} not shown). Exponential decay fitted with decay parameter \num{11.168809}.}
     \label{fig:histograms}
 \end{figure}
 
@@ -433,9 +431,18 @@ The spectral gap distribution can also be seen, which measures the difference in
 Next, the Lagrange parameters $A_m$ and $B_m$ were tuned, the results of which can be seen in \cref{fig:lagrange}. These two parameters were varied together as the complexity of the QUBO model with such a large number of variables makes it hard to predict how the terms interact. The number of broken constraints was taken as the sum of overlaps and duplicates combined. In terms of reducing this number, the edge multiplier ($B_m$) can be seen to have the most importance, although an increase in the vertex multiplier ($A_m$) is still required to reduce this number to exactly zero in order to produce a valid solution. The parameters used for subsequent models were $A_m=6,B_m=6$ for Haydn Op.\ 1 and $A_m=6,B_m=12$ for Beethoven Op.\ 67, which can be seen to fulfil \cref{eq:lagrange} as expected. The higher edge multiplier required for Beethoven Op.\ 67 can be seen as an effect of its increased connectivity; the original score has over twice the number of instrument parts, increasing both the number of edges in the problem graph and the number of constraints that can be broken. Each constraint parameter gives an increase in energy roughly double the potential energy decrease for a broken constraint, a value which has been shown before (???) [CITE LIT]. The tuning of these parameters does not necessarily guarantee that no constraints are broken in the lowest-energy solutions, however, they will be rare.
 
 \begin{figure}[ht]
-    \centering\footnotesize
-    \includesvg[width=.5\textwidth]{haydn-lagrange.svg}
-    \caption{Parametric plot from tuning the Lagrange parameters $A_m$ (vertex multiplier) and $B_m$ (edge multiplier). It can be seen that increasing the edge multiplier results in the most drastic change in the number of constraints broken. The QUBO equation for each pair of parameters was solved 10 times, and the mean taken.}
+    \centering\tiny
+    \begin{subfigure}{.5\textwidth}
+        \includesvg[width=\linewidth]{haydn-lagrange.svg}
+        \caption{}
+        \label{fig:haydn-lagrange}
+    \end{subfigure}\hfill
+    \begin{subfigure}{.5\textwidth}
+        \includesvg[width=\linewidth]{beethoven-lagrange.svg}
+        \caption{}
+        \label{fig:beethoven-lagrange}
+    \end{subfigure}
+    \caption{Parametric plot tuning the Lagrange parameters $A_m$ (vertex multiplier) and $B_m$ (edge multiplier). It can be seen that increasing the edge multiplier results in the most drastic change in the number of constraints broken. The QUBO equation for each pair of parameters was solved 10 times, and the mean taken. Chosen values marked with a cross. \textbf{\subref{fig:haydn-lagrange}} Haydn Op.\ 1 parameters varied up to a maximum of 9, with $A_m=6,B_m=6$ chosen. \textbf{\subref{fig:beethoven-lagrange}} Beethoven Op.\ 67 parameters varied up to a maximum of 12, with $A_m=6,B_m=12$ chosen.}
     \label{fig:lagrange}
 \end{figure}
 
@@ -445,20 +452,8 @@ Variation of anneal time can be seen in \cref{fig:anneal-time}. This could only 
 
 \begin{figure}[ht]
     \centering\footnotesize
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \includesvg[width=\linewidth]{haydn-solver-config.svg}
-        \caption{}
-        \label{fig:chain-strength}
-    \end{subfigure}\hfill
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \includesvg[width=\linewidth]{beethoven-solver-config.svg}
-        \caption{}
-        \label{fig:anneal-time}
-    \end{subfigure}
-    
-    \caption[Optimisation of the solver configuration.]{Optimisation of the solver configuration. \subref{fig:chain-strength} Variation of the fraction of chains broken and energy with chain strength of the lowest energy samples in a sampleset of 1000 reads, using the default anneal time (\qty{20}{\us}). Each data point was sampled ?? times, with the mean and standard error calculated. \subref{fig:anneal-time} Variation of ?? with anneal time per sample of the lowest energy samples in a sampleset of 1000 reads, using the default chain strength (\num{32}).}
+    \includesvg[width=\textwidth]{solver-config.svg}
+    \caption[Optimisation of the solver configuration.]{Optimisation of the solver configuration. \textbf{(Top)} Variation of the fraction of chains broken and energy with chain strength of the lowest energy samples in a sampleset of 1000 reads, using the default anneal time (\qty{20}{\us}). Each data point was sampled ?? times, with the mean and standard error calculated. \textbf{(Bottom)} Variation of ?? with anneal time per sample of the lowest energy samples in a sampleset of 1000 reads, using the default chain strength (\num{32}).}
     \label{fig:solver-configuration}
 \end{figure}
 
@@ -471,7 +466,7 @@ A comparison of the lowest-energy solutions returned by the different solvers fo
 Looking at Haydn Op.\ 1, quantum annealing consistently provides considerably better lower-energy solutions than steepest descent, and surpasses simulated annealing by a small margin at reads upwards of \num{800}.
 On the other hand, quantum annealing performs poorly at providing low-energy solutions against both classical methods for Beethoven Op.\ 67. This may be due to the high connectivity of the model posed by this score, which substantially increases the lengths of the chains required to embed the problem. Best fit lines found via the damped least-squares method [CITE Levenberg-Marquardt algorithm] suggest that the lowest-energy solutions returned by quantum annealing would surpass simulated annealing at approximately \num{13197.1} reads, requiring a runtime over six times the current limit to be advantageous.
 
-\begin{figure}[hb]
+\begin{figure}[ht]
     \centering\footnotesize
     \includesvg[width=\textwidth]{compare-reads.svg}
     \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) sample set energies, varying the number of reads, at $n=3$. Best-fit lines found via the damped least-squares method.}
@@ -480,7 +475,7 @@ On the other hand, quantum annealing performs poorly at providing low-energy sol
 
 A similar comparison can be seen in \cref{fig:entropy}, but this time comparing the other model objective, musical entropy. We note that, unlike sample energy, the model aims to maximise this value. Both pieces display very little variation in entropy with the number of reads. Similar to the comparison in energy, quantum annealing performs better than the classical algorithms in solving the Haydn Op.\ 1 problem, consistently providing higher-entropy solutions, whilst performing consistently worse for Beethoven Op.\ 67. This is perhaps unsurprising, as energy and entropy are intrinsically linked in the QUBO model, with a minimisation in energy likely leading to a maximisation of entropy. However, the entropy value does give more information about the perceived ``quality'' of the solution, such as how effectively phrases have been assigned according to instrument roles.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering\footnotesize
     \includesvg[width=\textwidth]{compare-entropy.svg}
     \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) entropies of the same lowest-energy samples as \cref{fig:reads}, varying the number of reads. Best-fit lines found via the damped least-squares method.}
