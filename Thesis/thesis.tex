@@ -20,6 +20,11 @@
 \usepackage{amsmath}
 \usepackage{braket}
 
+% Clever references
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+\crefname{condition}{Condition}{Conditions}
+
 \usepackage{amsthm}
 \newtheorem*{theorem}{Theorem}
 \theoremstyle{definition}
@@ -39,11 +44,6 @@
 
 %\usepackage{multirow} % Multi-row cells in tables
 %\usepackage{booktabs} % Nice table separators
-
-% Clever references
-\usepackage[hidelinks]{hyperref}
-\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
-\crefname{condition}{Condition}{Conditions}
 
 % Rename environments
 \renewcommand{\listfigurename}{List of figures}
@@ -194,7 +194,7 @@ Traditionally, the arrangement of music is a complex process that requires a dee
 One of the earliest examples of the attempted automation of arrangement can be seen in the \textit{Musikalisches Würfelspiel} (``musical dice game'') system popular in the 18th century [CITE]. The roll of dice would determine the order of pre-composed musical phrases, arranging them into new combinations without the need for a composer. This system was engaged by the likes of Bach and Mozart, although fell out of fashion the following century.
 The introduction of computers in the 20th century allowed for more sophisticated methods of music arrangement. Composers could now transpose and manipulate musical parts digitally, without the need to transcribe parts by hand. Moving into the 21st century, more advanced techniques such as genetic algorithms [CITE] and neural networks [CITE] have been used to arrange music, with varying degrees of success. The rearrangement of a piece can have a great effect on how the listener interprets it, and doing this effectively is still a pertinent issue many musicians face. 
 
-In this study, we aim to formulate music arrangement as an optimisation problem, which can be solved via quantum annealing. It has been shown that music arrangement can be reduced to an NP problem \cite{moses_computational_2016}, by considering the special case of music \emph{reduction}. Reduction is a form of arrangement whereby the number of instrument parts only gets smaller, and is defined here subject to the following conditions\footnote{This is not a universal definition of reduction, but one that is useful for this study.}:
+In this study, we aim to formulate music arrangement as an optimisation problem, which can be solved via quantum annealing. It has been shown that music arrangement can be reduced to an NP problem \cite{moses_computational_2016}, by considering the special case of music \emph{reduction}. Reduction is a form of arrangement whereby the number of instrument parts only gets smaller, and is defined here subject to the following conditions:
 
 \begin{condition}[Uncreative]
     All music must come from the original, in the same order.
@@ -209,7 +209,7 @@ In this study, we aim to formulate music arrangement as an optimisation problem,
     \label{con:monophonic}
 \end{condition}
 
-Holistically, reduction aims to fit as much original music into the arrangement as possible, whilst still being playable. Notably, these constraints forgo the need to compose new music, a creative endeavour that is very subjective. This study will focus wholly on music reduction defined by these constraints.
+Holistically, reduction aims to fit as much original music into the arrangement as possible, whilst still being playable. Notably, these constraints forgo the need to compose new music, a creative endeavour that is very subjective. This study will focus wholly on music reduction defined by these constraints.\footnote{This is not a universal definition of reduction, but one that is useful for this study.}
 
 The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on Western classical small ensemble and orchestral music, written in modern staff notation. A brief taxonomy of a typical score is as follows: a standard score is split into parts, which can be played by a single instrument or an instrument section. Each part is further divided into bars (sometimes known as measures) which contain the notes that the instrument plays. If an instrument plays more than one note at a time, it is known as polyphonic (otherwise monophonic)---for the purposes of this study, all instruments will be treated as monophonic.
 
@@ -222,17 +222,15 @@ Previous approaches to the automatic arrangement of music have relied on classic
 
 \subsection{Score preprocessing}
 
-The beginning of any arrangement process is an original musical score. However, before reduction can begin, the score must undergo preprocessing to ensure the produced arrangement will fulfil the conditions outlined in \cref{sec:arrangement}. In particular, \cref{con:monophonic} demands that all phrases must be strictly monophonic. Some instruments (e.g.\ strings) are capable of playing multiple notes at a time, whereas others (e.g.\ woodwind) physically cannot. Additionally, composers will often write several voice parts for orchestral sections, which can be played by individuals within the section simultaneosly. Both the cases of chords and voices break this condition, and so without knowing how phrases will be assigned, all music must therefore be reduced to monophony to ensure universal playability. We remove all but a single note from chords and multi-part voicings within the score before moving onto the next stage.
-
-% Embedded metadata within the score allows it to be broken down into its constituent parts, bars, and notes, as well as containing information about the instrumentation and structure. Each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score). 
+Before reduction can begin, a musical score must undergo preprocessing to ensure the produced arrangement will fulfil the conditions outlined in \cref{sec:arrangement}. In particular, \cref{con:monophonic} demands that all music must be strictly monophonic. The score is broken down into its constituent parts, bars, and notes---each note is represented by a vector of features, such as pitch and duration, as well as its position within the wider piece, which can be measured as an offset (the number of beats from the start of the score). Some instruments (e.g.\ strings) are capable of playing multiple notes at a time (chords), whereas others (e.g.\ woodwind) physically cannot. Additionally, composers will often write several voice parts for orchestral sections, which can be played by individuals within the section simultaneously. Both the cases of chords and voices break this condition, and so without knowing how phrases will be assigned, all music must therefore be reduced to monophony to ensure universal playability. We remove all but a single note (in this case the one highest in pitch) from chords and multi-part voicings within the score before moving onto the next stage.
 
 \subsection{Phrase identification}
 
-First, the music needs to be quantised. This could very easily be done by using predefined elements such as bars or notes, but these units on their own lack any intrinsic musical meaning. Similar to how a sentence might be split up into lexical phrases, instead of individial words or syllables, a line of music can be segmented into musical phrases, each representing a contained melodic or rhythmic idea. By preserving these smallest units of melodic lines and harmonies, we maintain the essence and familiarity of the original score, which is one of the core principle of arrangement.
+First, the music needs to be quantised. This could very easily be done by using predefined elements such as bars or notes, but these units on their own lack any intrinsic musical meaning. Similar to how a sentence might be split up into lexical phrases, instead of individial words or syllables, a line of music can be segmented into musical phrases, each representing a contained melodic or rhythmic idea. By preserving these smallest units of melodic lines and harmonies, we maintain the essence and familiarity of the original score, which is one of the core principles of arrangement.
 
-The approach taken in this study is the local boundary detection model (LBDM) \cite{cambouropoulos_lbdm_2011}, which aims to identify the boundaries between phrases by calculating the degree of change between successive notes; larger differences between notes would show an increased likelihood of a boundary, exploiting the fact that the starts and ends of phrases are usually characterised by a high degree of variation [CITE?]. The strength of a boundary on a particular note is calculated over two of its parameters: pitch, and inter-onset interval (IOI), the time until the next note. This is chosen over note duration as it is often more noticeable to the listener [CITE] (pithy quote about hearing the gaps between notes?). The boundary strength $S$ for a particular parameter $x$ at note $i$ is given by
+The approach taken in this study is the local boundary detection model (LBDM) \cite{cambouropoulos_lbdm_2011}, which aims to identify the boundaries between phrases by calculating the degree of change between successive notes; larger differences between notes would show an increased likelihood of a boundary, exploiting the fact that the starts and ends of phrases are usually characterised by a high degree of variation [CITE]. The strength of a boundary on a particular note is calculated over two of its parameters: pitch, and inter-onset interval (IOI), which is the time until the next note. This is chosen over note duration alone as it is often more noticeable to the listener [CITE].\footnote{``Music is the space between the notes as much as the notes themselves; it's defined as much by silence as by sound.'' (Claude Debussy)} The boundary strength $S_{x,i}$ for a particular parameter $x$ at note $i$ is given by
 \begin{equation}
-    S_{x,i}=x_i\cdot (r_{i-1, i} + r_{i, i+1})
+    S_{x,i}=x_i(r_{i-1, i} + r_{i, i+1})
     \label{eq:boundary-strength}
 \end{equation}
 where $r_{i, i+1}$ is the degree of change of a parameter between notes $i$ and $i+1$, given by
@@ -240,27 +238,27 @@ where $r_{i, i+1}$ is the degree of change of a parameter between notes $i$ and 
     r_{i, i+1}=\frac{|x_{i}-x_{i+1}|}{x_{i}+x_{i+1}} \,.
     \label{eq:degree-change}
 \end{equation}
-In this way, a note with a high boundary strength would signal the start of a new musical phrase. The set of strengths for each parameter is normalised to the range $[0,1]$ (CHECK NOTATION) via
+In this way, a note with a high boundary strength would be very different to adjacent notes and signal the start of a new musical phrase. The set of strengths $S_i$ for each parameter is normalised to $[0,1]$ via
 \begin{equation}
-    S_{x,i}'=\frac{S_{x.i}-\min(S_x)}{\max(S_x)-\min(S_x)}
+    S_{x,i}'=\frac{S_{x,i}-\min(S_i)}{\max(S_i)-\min(S_i)}
     \label{eq:normalisation}
 \end{equation}
 to ensure the analysis remains generalised across all pieces.
-Finally, to find the total boundary strength, the strengths of each parameter are summed with a weighting, using weights derived by trial-and-error ($1/3$ for pitch and $2/3$ for IOI). The balance between these two parameters is a matter of taste and can be changed based on the perceived accuracy of the identified boundaries. If a note's total boundary strength surpasses a specified threshold, it is considered a boundary and signals the start of a new phrase. Boundaries are always taken at the beginning and end of a score.
+Finally, to find the total boundary strength, the strengths of each parameter are summed with a weighting, using weights derived by trial-and-error ($1/3$ for pitch and $2/3$ for IOI). The balance between these two parameters is a matter of taste and can be changed based on the perceived accuracy of the identified boundaries. If a note's total boundary strength surpasses a specified threshold, it is considered a boundary and marks the start of a new phrase. Boundaries are always taken at the beginning and end of a score.
 
-This model is run on each instrument part in a score; once a list of boundaries is created, the phrases can be defined by taking a boundary and the one following as the start and end points. Each phrase is labelled according to the part it belongs to and its phrase index within that part, allowing the phrases to be easily referenced and reconstructed into a new score once the optimisation is complete. An example of the output of the LBDM can be seen in \cref{fig:toy-score}.
+This model is run on each instrument part in a score; once a list of boundaries is created, the phrases can be defined by taking all notes between successive boundaries. Each phrase is labelled according to the part it belongs to and its phrase index within that part, allowing the phrases to be easily referenced and reconstructed into a new score once the optimisation is complete. An example of the output of the LBDM can be seen in \cref{fig:toy-score}.
 
 \subsection{Problem formulation}
 
-How can the arrangement of these phrases, in fulfilment of the constraints outlined previously, be expressed as an optimisation problem that can be solved via quantum annealing? There are many pre-existing NP problems that can be solved in this way, including Boolean satisfiability and set theory \cite{lucas_ising_2014}. Here we show that the music arrangement problem can be reduced to a graph theory problem known as \emph{proper vertex colouring}.
+How can the arrangement of these phrases, in fulfilment of the constraints outlined previously, be expressed as an optimisation problem that can be solved via quantum annealing? There are many pre-existing NP problems that can be solved in this way, including Boolean satisfiability and set packing \cite{lucas_ising_2014}. Here we show that the music arrangement problem can be reduced to a graph theory problem known as \emph{proper vertex colouring}.
 
-A graph $G$ can be defined as $G=(V,E)$, where $V$ is a set of vertices (or nodes) and $E$ is a set of edges that defines relationships between the vertices. Vertices are considered `adjacent' or `connected' if they have an edge between them. These constructions (?) are useful to model pairwise relations between objects, and there exist a number of graph optimisation problems, each with a variety of applications.\footnote{The travelling salesman problem is often represented as a graph theory problem, with vertices representing cities and edges the routes between them.} This study uses a problem in the category of graph colouring known as proper vertex colouring.
+A graph $G$ can be defined as $G=(V,E)$, where $V$ is a set of vertices (or nodes) and $E$ is a set of edges that defines relationships between the vertices. Vertices are considered ``adjacent'' or ``connected'' if they have an edge between them. These constructions are useful to model pairwise relations between objects, and there exist a number of graph optimisation problems, each with a variety of applications.\footnote{The travelling salesman problem is often represented as a graph theory problem, with vertices representing cities and edges the routes between them.} Proper vertex colouring is a problem in the category of graph colouring.
 
 \begin{definition}[Proper vertex colouring]
     The assignment of colours to the vertices of a graph such that no two adjacent vertices share the same colour.
 \end{definition}
 
-In this case, each phrase is represented by a vertex, with edges connecting vertices that overlap (i.e.\ played different parts at the same time). The assignment of `colours' to these vertices then represents the part in the arrangement that plays the phrase. An example of a graph constructed in this way can be seen in \cref{fig:toy-graph}. This can be seen to fulfil the conditions outlined previously: \cref{con:uncreative} is met by only considering phrases identified from the original score; \cref{con:non-degenerate} is met by only allowing each vertex at most one colour, preventing a phrase being played twice simultaneously; \cref{con:monophonic} is met by adjacent colours constraint, meaning a single part cannot play two overlapping phrases simultaneously. 
+In this case, each phrase is represented by a vertex, with edges connecting phrases that overlap (i.e.\ play at the same time). The assignment of ``colours'' to these vertices then represents the part in the arrangement that plays the phrase. An example of a graph constructed in this way can be seen in \cref{fig:toy-graph}. This can be seen to fulfil the necessary conditions: \cref{con:uncreative} is met by only considering phrases identified from the original score; \cref{con:non-degenerate} is met by only allowing each vertex at most one colour, preventing a phrase being played twice; \cref{con:monophonic} is met by the adjacent colours constraint, meaning a part cannot play two overlapping phrases simultaneously (and therefore becoming polyphonic). 
 
 If we define $x_{v,i}$ to be a binary variable such that
 \begin{equation}
@@ -276,80 +274,9 @@ for a set of $n$ colours then the QUBO model for proper vertex colouring can be 
     f(x)=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}
     \label{eq:colouring}
 \end{equation}
-where $A,B$ are the Lagrange parameters, and we have introduced the slack variables $s_v\in\{0,1\}$ (CHECK NOTATION).\footnote{This reduces to the maximum independent set problem when $n=1$.} The first term implements the single-colour constraint (or vertex constraint) by increasing the energy by $A$ each time a vertex is coloured more than once. The nature of a reduction implies that not all phrases will be played, so the inclusion of the slack variables (specifically when $s_x=0$) allows a vertex not to be coloured at all. Similarly, the second term implements the colour-adjacency constraint (or edge constraint) by increasing the energy by $B$ for each pair of identically-coloured vertices connected by an edge. When this function is minimised (strictly zero, in this case), all the conditions are met for a valid arrangement. The $x_{v,i}$ can then be read off from the solution and cross-referenced with their corresponding phrases to give the final score, an example of which can be seen in \cref{fig:toy-arrangement}.
+where $A,B$ are the Lagrange parameters, and we have introduced the slack variables $s_v\in\{0,1\}$.\footnote{This reduces to the maximum independent set problem when $n=1$.} The first term implements the single-colour constraint (or vertex constraint) by increasing the energy by $A$ each time a vertex is coloured more than once ($\sum_{i=1}^{n} x_{v,i}>1$). The nature of a reduction implies that not all phrases will be played, so the inclusion of the slack variables (specifically when $s_v=0$) allows a vertex not to be coloured at all. Similarly, the second term implements the colour-adjacency constraint (or edge constraint) by increasing the energy by $B$ for each pair of identically-coloured vertices connected by an edge (i.e.\ $\sum_{i=1}^n x_{u,i}x_{v,i}=1$). When this function is minimised (strictly zero, in this case), the proper vertex colouring problem is solved and all the conditions are met for a valid arrangement. The $x_{v,i}$ can then be read off from the solution and cross-referenced with their corresponding phrases to give the final score, an example of which can be seen in \cref{fig:toy-arrangement}.
 
-\subsection{Musical entropy}
-
-A valid arrangement of phrases does not good music make. To ensure the produced arrangement is as musically interesting as possible, each vertex of the graph can be weighted to introduce a bias according to its phrase's `musicality'. The idea of a musical `utility' has been used before with classical algorithms \cite{huang_towards_2012} and to assess playability rules [PIANO REDUCTION CITATION]. Here we quantify this by calculating the \emph{musical entropy} of a phrase \cite{li_entropy_2019}.
-
-Entropy can be seen as how much information a variable contains; in this context, a phrase with a higher entropy would indicate a higher level of variation and complexity, increasing the likelihood of it being more `musical'. Maximisation of phrase entropy would then result in the creation of richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
-\begin{equation}
-    H(X):=-\sum_i P(x_i)\log_2 P(x_i)
-    \label{eq:entropy}
-\end{equation}
-where each $x_i$ is a possible value of $X$ and ${\sum_i P(x_i)=1}$. In this context, the random variable is a musical note, considering its possible values in terms of both pitch and duration.
-
-Pitch entropy is calculated by considering the distribution of pitches in a phrase. The probabilities of each pitch $x_i$ can be found by
-\begin{equation}
-    P(x_i)=\frac{n_i}{N}
-    \label{eq:prob-dist}
-\end{equation}
-where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more `interesting' and so should have a higher bias to be included in the final arrangement.
-Rhythm entropy is calculated in a similar manner, but considering the duration of the note instead. This is also calculated using \cref{eq:prob-dist}, but instead considering $x_i$ as possible duration values.
-The total entropy of a phrase is then the sum of the pitch and rhythm entropies.
-
-We can modify \cref{eq:qubo} to include vertex weights by adding an objective term that looks like
-\begin{equation}
-    f_C(x)=-C\sum_{v\in V}\sum_{i=1}^n W_v x_{v,i}
-\end{equation}
-where $W$ is a vector holding the weights for each vertex, and $C$ is the associated Lagrange parameter. Objective terms are negative to ensure than the minimisation of this function results in the maximisation of the objective (the sum of the total weights).
-
-Weights can also be added to edges, to bias the selection of pairs of vertexes. Here we assign edge weights as the absolute difference between the weights of the vertices it connects, adding a tendency to colour connected vertices that have very different weights. Musically, this means simultaneous phrases are more likely to be picked if their musical entropies differ; complex, strongly varying, high-entropy phrases may sound noisy and confusing if played together, so this choice allows each high-entropy phrase to be accompanied by a simpler, low-entropy one. The associated objective term modification to \cref{eq:qubo} looks like
-\begin{equation}
-    f_D(x)=-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum{i<j}^n x_{u,i}x_{v,j}
-\end{equation}
-where $W$ is now a matrix holding the weights for each edge, and $D$ is the Lagrange parameter.
-
-Finally, we introduce a bias towards the assignment of vertices to specific colours, based on the instrument the colour represents. It has been shown that instrument parts within a score can be categorised into distinct `arrangement elements', or roles, which reflect their musical function within the piece \cite{owsinski_mixing_2017}. Here we consider only three: lead, often including melodic or countermelodic lines; rhythm, providing harmony; and foundation, the fundamental bass line. Rudimentarily, we can classify phrases into these three categories by their entropy. Melodic lines often vary more, have higher entropy, and therefore should be classed as lead, whereas lower-entropy phrases should tend towards rhythm or bass. By defining threshold entropy values for each category, phrases can be given a bias towards instruments that have been assigned that category. For example, a flute part assigned a lead in the arrangement should contain more high-entropy phrases than a cello part assigned as foundation. The corresponding objective term takes the form
-\begin{equation}
-    f_E(x) = -E\sum_{v\in V}\sum_{i=1}^n \theta(W_v - W_{\text{th},i})x_{v,i}
-\end{equation}
-where $W_{\text{th},i}$ is the threshold value for the category of instrument $i$, $\theta$ is the Heaviside step function, and $E$ is the Lagrange parameter.
-
-Together, the final QUBO model is
-\begin{align}
-    f(x)&=f_{A,B}+f_C+f_D+f_E \notag\\
-    &=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i} \notag\\
-    &-C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{i<j}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(W_v-W_{\text{th},i})x_{v,i}
-    \label{eq:problem-qubo}
-\end{align}
-which requires $N(n+1)$ variables, where $N$ is the total number of phrases.
-
-\subsection{Lagrange parameter analysis}
-
-To ensure that the minimisation of \cref{eq:problem-qubo} does indeed fulfil the constraints necessary for a valid arrangement as outlined before, the Lagrange parameters must be tuned. It is possible for this to be done \textit{a priori} [CITE], however, with five parameters, a full parametric analysis would be complicated, so this study focuses on an empirical approach.
-
-Nonetheless, a quick algebraic calculation can help reduce the problem. The model given by \cref{eq:problem-qubo} contains two constraints, each which aims to fulfil a different condition. The vertex constraint (labelled with $A$) upholds \cref{con:non-degenerate}, the breaking of which would introduce phrases being duplicated across parts in the final arrangement. The edge constraint (labelled with $B$) upholds \cref{con:monophonic}, preventing phrases that overlap being played by the same part. The number of duplicates and overlaps needs to be strictly zero in order for a solution to be valid therefore these Lagranage parameters need to be large enough to facilitate this.
-
-In a worst-case scenario, a vertex included in the solution would lower the energy maximally whilst breaking a constraint. To ensure that this results in an overall increase in energy, and is therefore less likely, we can derive the inequality
-\begin{equation}
-    A + B > C\max(W) + D\max(W) + E
-\end{equation}
-where $\max(W)$ denotes the largest entry of the weight matrix. To allow a similar analysis across problems with different weights, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the expression
-\begin{equation}
-    A_m + B_m > 2 + E_m \,.
-    \label{eq:lagrange}
-\end{equation}
-
-In this study we set $E_m=1$ as bias towards part types is preferred but not essential. The values of $A_m$ and $B_m$ can then be found by performing parametric variation and measuring the number of broken constraints (duplicates and overlaps) in the lowest energy solutions. Parameter values should be just large enough to fulfil constraints, whilst not being too large as to overwhelm the other terms in the QUBO equation [CITE] and affect the quality of solutions.
-
-\subsection{Solution interpretation}
-
-Once the problem has been submitted to a quantum annealer and a sample set returned, we can finally construct the arrangement. Of the distribution of samples, the lowest-energy valid (i.e.\ no duplicates or overlaps) sample is picked to be the solution. The binary variables assigning vertices to colours can be read off and interpreted as phrases and instruments, respectively, allowing the music of the original score to be transformed into the final arrangement.
-
-This is the point where music post-processing can be applied. In this study, phrases are shifted up or down octaves depending on the pitch range of the target instrument, to ensure playability whilst minimally affecting the essence of the original.
-
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering\footnotesize
     \begin{subfigure}{.8\textwidth}
         \includesvg[width=\linewidth]{toy-score.svg}
@@ -372,6 +299,75 @@ This is the point where music post-processing can be applied. In this study, phr
     \caption[A toy example demonstrating a simplified version of the proposed framework.]{A toy example demonstrating the proposed framework. \textbf{\subref{fig:toy-score}} An example score of three parts, with phrases identified by the LBDM coloured. \textbf{\subref{fig:toy-graph}} A graph of the score, with the colour and label of each vertex corresponding to its phrase, and edges connecting overlapping phrases. One possible solution of proper vertex colouring, with $n=1$, is shown by the outlined vertices. \textbf{\subref{fig:toy-arrangement}} The score representation of the final arrangement.}
     \label{fig:toy}
 \end{figure}
+
+\subsection{Musical entropy}
+
+Despite having a valid arrangement of phrases, this does not guarantee that the music produced will have any sense of ``musicality''. To ensure the arrangement is as musically interesting as possible, each vertex of the graph can be weighted to introduce a bias according to its phrase's ``musicality''. The idea of a musical ``utility'' has been used before with classical reduction algorithms \cite{huang_towards_2012} and to assess playability rules \cite{chiu_automatic_2009}. Here we quantify this by calculating a phrase's \emph{musical entropy}.
+
+Entropy can be seen as how much information a random variable contains; in this context, a phrase with a higher entropy would indicate a higher level of variation and complexity, which can be seen as a likelihood of it being more ``musical'' \cite{li_entropy_2019}. Maximisation of phrase entropy would therefore result in the creation of richer arrangements. For a discrete random variable $X$ with a probability distribution $P(X)$, the Shannon entropy is defined as
+\begin{equation}
+    H(X):=-\sum_i P(x_i)\log_2 P(x_i)
+    \label{eq:entropy}
+\end{equation}
+where each $x_i$ is a possible value of $X$ and ${\sum_i P(x_i)=1}$. In this context, the random variable is a musical note, considering its possible values in terms of both pitch and duration.
+
+Pitch entropy is calculated by considering the distribution of pitches in a phrase. The probabilities of each pitch $x_i$ can be found by
+\begin{equation}
+    P(x_i)=\frac{n_i}{N}
+    \label{eq:prob-dist}
+\end{equation}
+where $n_i$ is the number of times pitch $x_i$ appears in the phrase and $N$ is the total number of notes in the phrase. A phrase with a greater variety of pitches (and thus greater entropy) will likely be more ``interesting'' and so should have a higher bias to be included in the final arrangement.
+Rhythm entropy is calculated in a similar manner, but instead considering $x_i$ as possible duration values.
+The total entropy of a phrase is then the sum of the pitch and rhythm entropies combined.
+
+We can modify the QUBO model of \cref{eq:qubo} to consider vertex weights by adding an objective term that looks like
+\begin{equation}
+    f_C(x)=-C\sum_{v\in V}\sum_{i=1}^n W_v x_{v,i}
+\end{equation}
+where $W$ is a vector holding the weights for each vertex, and $C$ is the associated Lagrange parameter. Objective terms are negative to ensure than the minimisation of the function results in the maximisation of the objective (here the sum of the total weights).
+
+Weights can also be added to edges, to bias the selection of pairs of vertices. Here we assign edge weights as the absolute difference between the weights of the vertices it connects, adding a tendency to colour connected vertices that have very different weights. Musically, this means simultaneous phrases are more likely to be picked if their musical entropies differ; complex, strongly varying, high-entropy phrases may sound noisy and confusing if played together, so this choice allows each high-entropy phrase to be accompanied by a simpler, low-entropy one. The associated objective term modification to \cref{eq:qubo} looks like
+\begin{equation}
+    f_D(x)=-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{i<j}^n x_{u,i}x_{v,j}
+\end{equation}
+where $W$ is now a matrix holding the weights for each edge, and $D$ is the Lagrange parameter.
+
+Finally, we introduce a bias towards the assignment of vertices to specific colours, based on the instrument the colour represents. It has been shown that instrument parts within a score can be categorised into distinct ``arrangement elements'', or roles, which reflect their musical function within the piece \cite{owsinski_mixing_2017}. Here we consider only three: lead, often including melodic or countermelodic lines; rhythm, providing harmony; and foundation, the fundamental bass line. Rudimentarily, we can classify phrases into these three categories by their entropy. Melodic lines often vary more, have higher entropy, and therefore should be classed as lead, whereas lower-entropy phrases should tend towards rhythm or bass. By defining threshold entropy values for each category, phrases can be given a bias towards instruments that have been assigned that category. For example, a flute part assigned lead in the arrangement should contain more high-entropy phrases than a cello part assigned as foundation. The corresponding objective term takes the form
+\begin{equation}
+    f_E(x) = -E\sum_{v\in V}\sum_{i=1}^n \theta(W_v - W_{\text{th},i})x_{v,i}
+\end{equation}
+where $W_{\text{th},i}$ is the threshold value for the category of instrument $i$, $\theta$ is the Heaviside step function, and $E$ is the Lagrange parameter. In this study we take $W_{\text{th},l}=2\max(W)/3$ to be the threshold value for lead and $W_{\text{th},r}=\max(W)/3$ the threshold for rhythm (where $\max(W)$ denotes the largest entry of the weight matrix), in order to divide phrases equally between the three categories (assuming a uniform distribution of entropy).
+
+Taking these functions together, the final QUBO model is
+\begin{align}
+    f(x)&=f_{A,B}+f_C+f_D+f_E \notag\\
+    &=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i} \notag\\
+    &-C\sum_{v \in V}\sum_{i=1}^n W_{v,v}x_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{i<j}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(W_v-W_{\text{th},i})x_{v,i}
+    \label{eq:problem-qubo}
+\end{align}
+which requires $N(n+1)$ variables, where $N$ is the total number of phrases.
+
+\subsection{Lagrange parameter analysis}
+
+To ensure that the minimisation of \cref{eq:problem-qubo} does indeed fulfil the constraints necessary for a valid arrangement, the Lagrange parameters must be tuned. The very nature of the problem means a full parametric analysis would be complicated, so this study focuses on an empirical approach.
+Nonetheless, a quick algebraic calculation can help reduce the problem. The model given by \cref{eq:problem-qubo} contains two constraints, each which aims to fulfil a different condition. The vertex constraint (labelled with $A$) upholds \cref{con:non-degenerate}, the breaking of which would introduce phrases being duplicated in the final arrangement. The edge constraint (labelled with $B$) upholds \cref{con:monophonic}, preventing phrases that overlap being played by the same part. The number of duplicates and overlaps needs to be strictly zero in order for a solution to be valid therefore these Lagranage parameters need to be large enough to facilitate this.
+
+In a worst-case scenario, a vertex included in the solution would break both these constraints---to ensure that this results in an overall increase in energy, and is therefore less likely, we can derive the inequality
+\begin{equation}
+    A + B > C\max(W) + D\max(W) + E \,.
+\end{equation}
+To allow a similar analysis across problems with different weight matrices, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the expression
+\begin{equation}
+    A_m + B_m > 2 + E_m \,.
+    \label{eq:lagrange}
+\end{equation}
+
+In this study we set $E_m=1$ as bias towards part roles is preferred but not essential. The values of $A_m$ and $B_m$ can then be found by performing parametric variation and measuring the number of broken constraints (duplicates and overlaps) in the lowest-energy solutions. Parameter values should be just large enough to fulfil \cref{eq:lagrange}, whilst not being too large as to overwhelm the other terms in the QUBO equation and affect the quality of solutions [CITE].
+
+\subsection{Solution interpretation}
+
+Once the problem has been submitted to a quantum annealer and a distribution of solutions returned, we can finally construct the arrangement. Out of all the samples, the lowest-energy valid (i.e.\ no duplicates or overlaps) sample is picked to be the solution. The binary variables assigning vertices to colours can be read off and interpreted as phrases and instruments, respectively, allowing the music of the original score to be transformed into the final arrangement.
+At this point, music post-processing can also be applied. In this study, phrases are shifted up or down octaves depending on the pitch range of the target instrument, to ensure playability. An example of an arranged score can be seen in \cref{fig:toy-arrangement}.
 
 \section{Results}
 
@@ -524,62 +520,31 @@ To conclude, this paper has shown the automatic reduction of music via quantum a
 
 \clearpage
 \appendix
+\setcounter{figure}{0}
 
 \section{Code overview}
 \label{app:code}
 
 The full repository of code used in this study can be found at \url{https://github.com/kirbyzx/quantum-arrangement}.
 
-Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit. Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain.
+Music can be represented by many digital formats, each with their own benefits---in this study we choose to use MusicXML [CITE], a variant of the well-establish XML (extensible markup language) format. This format focuses on the interactive representation of standard sheet music, describing musical notes, rests, and other symbols, as well as the structure of the music, such as the arrangement of notes into bars, parts, and scores. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries that provide extensive resources for manipulating, translating, and creating MusicXML files, allowing scores to be broken down and reconstructed as fit. Although not as prevalent as other file formats, there exist a number of online libraries and databases of MusicXML files provided in the public domain. \cref{fig:haydn-score}
 
-\section{Examples}
+\section{Scores}
 \label{app:examples}
+\renewcommand{\thefigure}{B\arabic{figure}}
+
+The following are the original scores used for testing this framework, alongside\dots
 
 \begin{figure}
     \includegraphics[width=\textwidth,page=1]{haydn-score.pdf}
     \caption{Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn, bars 1--16.}
+    \label{fig:haydn-score}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=\textwidth,page=1]{beethoven-op67.pdf}
     \caption{Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven, bars 1--8.}
 \end{figure}
-
-Start with an undirected graph $G=(V,E)$ and a set of $n$ colours, which represent the parts for which we are arranging, with each being an independent set. Denote $x_{v,i}$ to be a binary variable such that
-\begin{equation*}
-    x_{v,i} =
-    \begin{cases}
-        1 & \text{if vertex $v$ is colour $i$} \\
-        0 & \text{otherwise}
-    \end{cases}
-    \,,
-\end{equation*}
-which requires $nV$ variables. The energy is
-\begin{equation*}
-    H = H_A + H_B + H_C + H_D \,.
-\end{equation*}
-
-Each vertex is coloured exactly once:
-\begin{equation*}
-    H_A = A\sum_{v \in V}\left(1-\sum_{i=1}^{n} x_{v,i}\right)^2
-\end{equation*}
-
-Vertices of the same colour are not connected by an edge:
-\begin{equation*}
-    H_B = B\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}
-\end{equation*}
-
-Maximise the weighting of selected vertices:
-\begin{equation*}
-    H_C = -C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}
-\end{equation*}
-
-Maximise the weighting of included edges:
-\begin{equation*}
-    H_D = -D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}
-\end{equation*}
-
-It can be seen that for $n=1$ this reduces to the MIS problem. For a score with $p$ parts, it will be impossible to colour the graph exactly with $n<p$; the parameter $A$ should be small enough to allow for some vertices to remain uncoloured. The lowest energy solutions will return coloured independent subsets of $G$ that each represents a monophonic part of the final arrangement.
 
 \clearpage
 
