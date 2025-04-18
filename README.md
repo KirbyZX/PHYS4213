@@ -44,11 +44,11 @@ Vary B to remove overlaps
 - [x] Rewrite music arrangement
 - [ ] Write results
 - [ ] Write conclusion
-- [ ] Write introduction
-- [ ] Write abstract
-- [ ] Check references
+- [x] Write introduction
+- [ ] Write abstract 
 - [ ] Write scientific summary
-- [ ] Write appendices
+- [ ] Check references
+- [ ] Write appendices (tables of arrangement instruments, scores, problem graphs)
 - [ ] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
-- [ ] Tidy code
 - [x] Rename repository
+- [ ] Tidy code
