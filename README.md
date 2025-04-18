@@ -42,13 +42,13 @@ Vary B to remove overlaps
 
 - [x] Rewrite quantum annealing
 - [x] Rewrite music arrangement
-- [ ] Write results
-- [ ] Write conclusion
+- [x] Write results
+- [x] Write conclusion
 - [x] Write introduction
+- [ ] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
+- [ ] Write appendices (tables of arrangement instruments, scores, problem graphs)
 - [ ] Write abstract 
 - [ ] Write scientific summary
 - [ ] Check references
-- [ ] Write appendices (tables of arrangement instruments, scores, problem graphs)
-- [ ] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
 - [x] Rename repository
 - [ ] Tidy code
