@@ -1,6 +1,6 @@
 lines.linewidth : 1
 lines.marker : o
-lines.markersize : 5
+lines.markersize : 4
 scatter.marker : o
 
 xtick.direction : in

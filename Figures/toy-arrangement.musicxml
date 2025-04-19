@@ -3,7 +3,7 @@
 <score-partwise version="4.0">
   <identification>
     <encoding>
-      <encoding-date>2025-04-17</encoding-date>
+      <encoding-date>2025-04-19</encoding-date>
       <software>music21 v.9.3.0</software>
     </encoding>
   </identification>
@@ -14,12 +14,12 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="P006fad5a18053c028341f7546b3d2499">
+    <score-part id="P3d5dd7081d8acb69a3251f9a3b595832">
       <part-name />
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="P006fad5a18053c028341f7546b3d2499">
+  <part id="P3d5dd7081d8acb69a3251f9a3b595832">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -38,16 +38,16 @@
         <duration>5040</duration>
         <type>eighth</type>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>D</step>
           <octave>5</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>D</step>
           <octave>5</octave>
@@ -55,10 +55,10 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>down</stem>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>D</step>
           <octave>5</octave>
@@ -66,10 +66,10 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>down</stem>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
         <beam number="1">end</beam>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>G</step>
           <octave>5</octave>
@@ -77,10 +77,10 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>down</stem>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>A</step>
           <octave>5</octave>
@@ -88,10 +88,10 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>down</stem>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
         <beam number="1">end</beam>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>B</step>
           <octave>5</octave>
@@ -99,10 +99,10 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>down</stem>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
       </note>
-      <note color="#D62728">
+      <note color="#EE6677">
         <pitch>
           <step>A</step>
           <octave>5</octave>
@@ -110,22 +110,22 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>down</stem>
-        <notehead color="#D62728" parentheses="no">normal</notehead>
+        <notehead color="#EE6677" parentheses="no">normal</notehead>
         <beam number="1">end</beam>
       </note>
     </measure>
     <!--========================= Measure 2 ==========================-->
     <measure implicit="no" number="2">
-      <note color="#FF7F0E">
+      <note color="#66CCEE">
         <pitch>
           <step>G</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <notehead color="#FF7F0E" parentheses="no">normal</notehead>
+        <notehead color="#66CCEE" parentheses="no">normal</notehead>
       </note>
-      <note color="#FF7F0E">
+      <note color="#66CCEE">
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -133,10 +133,10 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>up</stem>
-        <notehead color="#FF7F0E" parentheses="no">normal</notehead>
+        <notehead color="#66CCEE" parentheses="no">normal</notehead>
         <beam number="1">begin</beam>
       </note>
-      <note color="#FF7F0E">
+      <note color="#66CCEE">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -144,17 +144,17 @@
         <duration>5040</duration>
         <type>eighth</type>
         <stem>up</stem>
-        <notehead color="#FF7F0E" parentheses="no">normal</notehead>
+        <notehead color="#66CCEE" parentheses="no">normal</notehead>
         <beam number="1">end</beam>
       </note>
-      <note color="#FF7F0E">
+      <note color="#66CCEE">
         <pitch>
           <step>G</step>
           <octave>4</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
-        <notehead color="#FF7F0E" parentheses="no">normal</notehead>
+        <notehead color="#66CCEE" parentheses="no">normal</notehead>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

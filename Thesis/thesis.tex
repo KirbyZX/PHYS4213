@@ -247,7 +247,7 @@ Previous approaches to the automatic arrangement of music have relied on classic
         \label{fig:toy-arrangement}
     \end{subfigure}
 
-    \caption{A toy example demonstrating a simplified version of the proposed framework. \textbf{\subref{fig:toy-score}} An example score of three parts. Phrases identified by the LBDM have been outlined. \textbf{\subref{fig:toy-graph}} A graph of the score, with the colour and label of each vertex corresponding to its phrase, and edges connecting overlapping phrases. One possible solution of proper vertex colouring, with $n=1$, is shown by the outlined vertices. \textbf{\subref{fig:toy-arrangement}} The score representation of the final arrangement.}
+    \caption{Toy example demonstrating a simplified version of the proposed framework. \textbf{\subref{fig:toy-score}} Example score of three parts. Phrases identified by the LBDM have been coloured and outlined. \textbf{\subref{fig:toy-graph}} Graph of the score, with the colour and label of each vertex corresponding to its phrase, and edges connecting overlapping phrases. One possible solution of proper vertex colouring, with $n=1$, is shown by the outlined vertices. \textbf{\subref{fig:toy-arrangement}} Score representation of the final arrangement.}
     \label{fig:toy}
 \end{figure}
 
@@ -391,7 +391,7 @@ An example of the output of the LBDM can be seen in \cref{fig:phrase-extraction}
 \begin{figure}[!t]
     \centering\footnotesize
     \includesvg[width=\textwidth]{embedding.svg}
-    \caption[Number of qubits required for problems of different instruments.]{Number of qubits required for problems of different instruments, with the dotted line marking the maximum number of accessible qubits in a D-Wave QPU (\num{5640}). Logical qubits (equivalent to the number of variables) shown as solid lines, physical qubits required to embed the problem shown as points with a dashed line quadratic fit. Shaded region represents a theoretical extrapolation to arrangement for a higher number of instruments.}
+    \caption{Number of qubits required for problems of different instruments, with the dotted line marking the maximum number of accessible qubits in a D-Wave QPU (\num{5640}). Logical qubits (equivalent to the number of variables) shown as solid lines, physical qubits required to embed the problem shown as points with a dashed line quadratic fit. Shaded region represents a theoretical extrapolation to arrangement for a higher number of instruments.}
     \label{fig:qubits}
 \end{figure}
 
@@ -403,7 +403,7 @@ The spectral gap distribution can also be seen, which measures the difference in
 \begin{figure}[t]
     \centering\footnotesize
     \includesvg[width=\textwidth]{haydn-histograms.svg}
-    \caption{Example of a returned sample set from solving the Haydn Op.\ 1 problem for $n=3$, \num{2000} reads. \textbf{Left:} Histogram of the sample energies. \textbf{Right:} Histogram of the gaps in the energy spectrum (gaps greater than \num{1.0} not shown).}
+    \caption{Example of a returned sample set of \num{2000} reads from solving the Haydn Op.\ 1 problem with $n=3$. \textbf{(Left)} Histogram of sample energies. \textbf{(Right)} Histogram of gaps in the energy spectrum (gaps greater than \num{1.0} not shown).}
     \label{fig:histograms}
 \end{figure}
 
@@ -414,7 +414,7 @@ Next, the Lagrange parameters $A_m$ and $B_m$ were tuned, the results of which c
 \begin{figure}[!b]
     \centering\footnotesize
     \includesvg[width=\linewidth]{lagrange-parameters.svg}
-    \caption{Parametric plot tuning the Lagrange parameters $A_m$ (vertex multiplier) and $B_m$ (edge multiplier). The QUBO equation for each pair of parameters was solved 10 times, and the mean number of broken constraints in the lowest-energy solution taken. Chosen values marked with a cross. \textbf{Left:} Haydn Op.\ 1 parameters varied up to a maximum of 9, with $A_m=6,B_m=6$ chosen. \textbf{Right:} Beethoven Op.\ 67 parameters varied up to a maximum of 12, with $A_m=6,B_m=12$ chosen.}
+    \caption{Parametric plots tuning the Lagrange parameters $A_m$ (vertex multiplier) and $B_m$ (edge multiplier). QUBO equation for each pair of parameters solved five times at \num{500} reads, with the mean number of broken constraints in the lowest-energy solution taken. Chosen values marked with a cross. \textbf{(Left)} Haydn Op.\ 1 parameters varied up to a maximum of 9 with $n=3$, $A_m=6,B_m=6$ chosen. \textbf{(Right)} Beethoven Op.\ 67 parameters varied up to a maximum of 12 with $n=4$, $A_m=6,B_m=12$ chosen.}
     \label{fig:lagrange}
 \end{figure}
 
@@ -423,7 +423,7 @@ Optimisation of both the chain strength and anneal time per sample solver proper
 \begin{figure}[!t]
     \centering\footnotesize
     \includesvg[width=\textwidth]{solver-config.svg}
-    \caption[Optimisation of the solver configuration.]{Optimisation of the solver configuration. Each data point was sampled five times, with the mean and standard error calculated. \textbf{Top:} Variation of the fraction of chains broken (squares) and energy (circles) with chain strength of the lowest energy samples in a sample set of 1000 reads, using the default anneal time (\qty{20}{\us}).  \textbf{Bottom:} Variation of lowest energy with anneal time per sample in a sample set of 1000 reads, using the updated chain strength.}
+    \caption{Optimisation of the solver configuration. Each data point sampled five times at \num{1000} reads, with the mean and standard error calculated. \textbf{(Top)} Variation of the fraction of chains broken (red triangles) and energy (blue circles) of the lowest energy samples with chain strength, using the default anneal time (\qty{20}{\us}).  \textbf{(Bottom)} Variation of lowest energy with anneal time per sample, using the updated chain strength.}
     \label{fig:solver-configuration}
 \end{figure}
 
@@ -441,14 +441,14 @@ Simulated annealing, on the other hand, is more complex and works similarly to q
 \begin{figure}[p]
     \centering\footnotesize
     \includesvg[width=\textwidth]{compare-reads.svg}
-    \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) sample set energies, varying the number of reads, at $n=3$. Best-fit lines found via a least-squares regression.}
+    \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) sample set energies with $n=3$, varying the number of reads. Each data point sampled five times, with the mean and standard error calculated. Best-fit lines found via a least-squares regression.}
     \label{fig:reads}
 \end{figure}
 
 \begin{figure}[p]
     \centering\footnotesize
     \includesvg[width=\textwidth]{compare-entropy.svg}
-    \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) entropies of the same lowest-energy samples as \cref{fig:reads}, varying the number of reads. Best-fit lines found via the least-squares method.}
+    \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) entropies of the same lowest-energy samples as \cref{fig:reads}. Best-fit lines found via the least-squares regression.}
     \label{fig:entropy}
 \end{figure}
 
@@ -463,7 +463,7 @@ A similar comparison can be seen in \cref{fig:entropy}, but this time comparing 
 \begin{figure}[!b]
     \centering\footnotesize
     \includesvg[width=\textwidth]{scaling.svg}
-    \caption{Comparing the solutions returned by classical solvers against quantum annealing, at \num{2000} reads. Difference from quantum annealing shown, with a positive difference signifying an advantage towards quantum annealing. \textbf{Top:} Lowest-energy samples of the returned sample set. \textbf{Bottom:} Time to solution, in seconds.}
+    \caption{Comparing solutions returned by classical solvers against quantum annealing. Each data point sampled five times at \num{2000} reads, with the mean and standard error calculated. Difference from quantum annealing shown, with a positive difference signifying an advantage towards quantum annealing. \textbf{(Top)} Lowest-energy samples of the returned sample set. \textbf{(Bottom)} Time to solution, in seconds.}
     \label{fig:scaling}
 \end{figure}
 

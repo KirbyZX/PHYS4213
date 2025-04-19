@@ -88,13 +88,13 @@ def plotEnergyGaps(df: pd.DataFrame) -> None:
     plt.ylabel("Count")
 
 
-def plotBoundaryStrength(df: pd.DataFrame, threshold: float) -> None:
+def plotBoundaryStrength(df: pd.DataFrame, threshold: float, colour: str) -> None:
     '''
     Plots the boundary strengths of a stream.
     '''
 
-    plt.scatter(df["Offset"], df["Strength"], s=5)
-    plt.hlines(threshold, 0, df["Offset"].max(), linestyles="dashed")
+    plt.scatter(df["Offset"], df["Strength"], c=colour, marker="x")
+    plt.hlines(threshold, 0, df["Offset"].max(), linestyles=":", colors="k")
 
     plt.xlim(0, df["Offset"].max())
     plt.ylim(0,1)
