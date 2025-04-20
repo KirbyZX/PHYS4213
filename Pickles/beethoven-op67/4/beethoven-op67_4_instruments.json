@@ -1,25 +1,25 @@
 {
     "Violin I": {
         "role": "lead",
-        "colour": "red",
+        "colour": "#4477AA",
         "clef": "TrebleClef"
     },
 
     "Violin II": {
         "role": "lead",
-        "colour": "blue",
+        "colour": "#CC6677",
         "clef": "TrebleClef"
     },
 
     "Viola": {
         "role": "rhythm",
-        "colour": "green",
+        "colour": "#DDCC77",
         "clef": "AltoClef"
     },
 
     "Violoncello": {
         "role": "foundation",
-        "colour": "purple",
+        "colour": "#117733",
         "clef": "BassClef"
     }
 }

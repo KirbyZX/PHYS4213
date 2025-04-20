@@ -15,7 +15,7 @@ def composeArrangement(sample: dict, score: stream.Score, phrases: pd.DataFrame,
     ts = score.parts[0].flatten().timeSignature
 
     for i in arrParts:
-        arrParts[i].append(getattr(instrument, i)())
+        arrParts[i].append(getattr(instrument, i.split()[0])())
         arrParts[i].clef = getattr(clef, instruments[i]["clef"])()
         arrParts[i].keySignature = ks
         arrParts[i].timeSignature = ts
@@ -28,7 +28,7 @@ def composeArrangement(sample: dict, score: stream.Score, phrases: pd.DataFrame,
         phrase = flat.getElementsByOffset(phrases.loc[index, "Start"], phrases.loc[index, "End"], includeEndBoundary=False).stream()
 
         # Get lowest note of assigned instrument
-        inst = getattr(instrument, chosen[index])()
+        inst = getattr(instrument, chosen[index].split()[0])()
         lowestNote = inst.lowestNote
 
         # Check ambitus
@@ -58,7 +58,7 @@ def saveToMidi(s: stream.Stream, filepath: str) -> None:
     mf.write()
     mf.close()
 
-def shiftOctave(s: stream.Stream, o: int):
+def shiftOctave(s: stream.Stream, o: int) -> None:
     '''
     Shift the octave of all notes in a stream.
     '''
@@ -66,7 +66,7 @@ def shiftOctave(s: stream.Stream, o: int):
     for el in s.recurse().notes:
         el.octave += o
 
-def flattenVoices(score: stream.Score):
+def flattenVoices(score: stream.Score) -> None:
     '''
     Remove all voices except one for each part.
     '''
@@ -80,7 +80,7 @@ def flattenVoices(score: stream.Score):
         v.replace(newClef, oldClef, recurse=True)
         score.replace(part, v)
 
-def flattenChords(stream: stream.Stream):
+def flattenChords(stream: stream.Stream) -> None:
     '''
     Replace all chords with their highest note.
     '''
