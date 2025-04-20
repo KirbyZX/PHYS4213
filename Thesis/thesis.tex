@@ -7,19 +7,23 @@
 \DeclareUnicodeCharacter{2212}{$-$} % Minus sign
 \DeclareUnicodeCharacter{03BC}{µ}
 
+% Localisation
 \usepackage[british]{babel}
 \usepackage{csquotes}
 
+% Captions
 \usepackage[font=small, labelfont=bf]{caption}
 \usepackage[labelformat=parens, labelfont=bf, subrefformat=parens]{subcaption}
 
+% Spacing
 \usepackage[indent=0pt]{parskip}
 \usepackage{setspace}
 \onehalfspacing
 
+% Graphics
 \usepackage{graphics,graphicx}
 \usepackage{svg}
-\graphicspath{{../Figures/}}
+\graphicspath{{../Figures/}, {../Examples/}}
 \usepackage{float}
 
 % Maths formatting
@@ -32,17 +36,22 @@
 \usepackage[nameinlink,capitalise,noabbrev]{cleveref}
 \crefname{condition}{Condition}{Conditions}
 
+% Theorems
 \usepackage{amsthm}
 \newtheorem*{theorem}{Theorem}
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
 \newtheorem{condition}{Condition}
 
+% Tables
+\usepackage{booktabs}
+
 % Bibliography
 \usepackage[style=trad-abbrv, maxnames=2, date=year, backend=biber, sorting=none]{biblatex}
 \addbibresource{thesis.bib}
 
 \usepackage{xurl}
+\usepackage{chngcntr}
 
 % Number formatting
 \usepackage[mode=text]{siunitx}
@@ -51,8 +60,6 @@
     range-phrase=--, range-units=single
 }
 
-%\usepackage{multirow} % Multi-row cells in tables
-%\usepackage{booktabs} % Nice table separators
 
 \title{\Huge \bfseries Quantum annealing\\for music arrangement}
 \author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\normalsize Supervised by\\\normalsize Prof Robert Potvliege \& Dr Omer Rathore}
@@ -224,18 +231,18 @@ Whilst the automation of music might seem irreverent to some, the application of
 
 Previous approaches to the automatic arrangement of music have relied on classical methods in order to produce arrangements that are musically sound. However, these methods are limited by the complexity of the problem and the need for extensive training data. In this study, we propose a new framework for the arrangement of music via quantum annealing, an application which has not been studied before at time of writing. A toy example of the proposed method can be seen in \cref{fig:toy}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering\footnotesize
     \begin{subfigure}{\textwidth}
         \centering
-        \includesvg[width=.75\linewidth]{toy-score.svg}
+        \includesvg[width=.8\linewidth]{toy-score.svg}
         \caption{}
         \label{fig:toy-score}
     \end{subfigure}
     \par\bigskip
     \begin{subfigure}{\textwidth}
         \centering
-        \includesvg[width=.75\linewidth]{toy-solution.svg}
+        \includesvg[width=.5\linewidth]{toy-graph.svg}
         \caption{}
         \label{fig:toy-graph}
     \end{subfigure}
@@ -342,7 +349,7 @@ Finally, we introduce a bias towards the assignment of vertices to specific colo
 \begin{equation}
     f_E(x) = -E\sum_{v\in V}\sum_{i=1}^n \theta(W_v - W_{\text{th},i})x_{v,i}
 \end{equation}
-where $W_{\text{th},i}$ is the threshold value for the category of instrument $i$, $\theta$ is the Heaviside step function, and $E$ is the Lagrange parameter. In this study we take $W_{\text{th},l}=2\max(W)/3$ to be the threshold value for lead and $W_{\text{th},r}=\max(W)/3$ the threshold for rhythm (where $\max(W)$ denotes the largest entry of the weight matrix), in order to divide phrases equally between the three categories (assuming a uniform distribution of entropy).
+where $W_{\text{th},i}$ is the threshold value for the category of instrument $i$, $\theta$ is the Heaviside step function, and $E$ is the Lagrange parameter. In this study we take ${W_{\text{th},l}=2\max(W)/3}$ to be the threshold value for lead and ${W_{\text{th},r}=\max(W)/3}$ the threshold for rhythm (where $\max(W)$ denotes the largest entry of the weight matrix), in order to divide phrases equally between the three categories (assuming a uniform distribution of entropy).
 
 Taking these functions together, the final QUBO model is
 \begin{align}
@@ -362,7 +369,7 @@ In a worst-case scenario, a vertex included in the solution would break both the
 \begin{equation}
     A + B > C\max(W) + D\max(W) + E \,.
 \end{equation}
-To allow a similar analysis across problems with different weight matrices, we set $C=D=1$ and introduce new parameters $X_m$ that scale with the maximum weight, such that $X = X_m\max(W)$, giving us the expression
+To allow a similar analysis across problems with different weight matrices, we set ${C=D=1}$ and introduce new parameters $X_m$, such that ${X = X_m\max(W)}$, giving us the expression
 \begin{equation}
     A_m + B_m > 2 + E_m \,.
     \label{eq:lagrange}
@@ -397,7 +404,7 @@ An example of the output of the LBDM can be seen in \cref{fig:phrase-extraction}
 
 Once the QUBO models had been created, they were embedded into the QPU architecture. The scaling of the number of qubits required with the number of arrangement instruments for both pieces can be seen in \cref{fig:qubits}. It's important again to differentiate between \emph{logical} qubits, which are the variables that define the problem, and \emph{physical} qubits, which exist in the QPU itself onto which the problem is embedded. The number of logical qubits required is well-defined as $N(n+1)$ where $N$ is the number of phrases and $n$ the number of instruments, and so increases linearly with $n$ (except for $n=1$ in which case only $N$ qubits are required since slack variables are not needed). In contrast, the number of physical qubits increases more quickly, shown here with a quadratic fit. We are reminded that the maximum degree of a qubit in a D-Wave QPU is \num{15}, that is, each qubit can only connect with \num{15} other qubits; any more than this and we require qubits to be chained. The difference between physical and logical qubits can be seen as the number of extra qubits required in chains to provide the desired connectivity. Beethoven Op.\ 67 shows this difference significantly: despite requiring fewer logical qubits than Haydn Op.\ 1 (owing to its smaller number of phrases), the number of physical qubits required is consistently higher. The original score contains over twice the instrument parts, meaning its phrases have more overlaps needing a greater degree of connectivity from its variables. Due to this rapid increase in physical qubits, Beethoven Op.\ 67 models could not be embedded onto the QPU for $n>4$, although the projected number of qubits required has been shown on the plot. Haydn Op.\ 1 embeddings were comfortably below the qubit limit (shown by the dotted line) up to the piece maximum of $n=4$. Subsequently, Haydn Op.\ 1 was chosen to be arranged for up to four instruments, but instead as a traditional woodwind quartet (Flute, Oboe, Clarinet, Bassoon). Beethoven Op.\ 67 was also chosen to be arranged for up to four instruments, but now as a string quartet (Violin I, Violin II, Viola, Violoncello). Full details can be found in \cref{app:examples}. Once these embeddings were calculated, the problems could be sent to the QPU for solving.
 
-An example of the energy distribution of a returned sample set can be seen in \cref{fig:histograms}, using Haydn Op.\ 1 with $n=3$. As the number of reads tends to infinity, this distribution should reflect the true distribution of the energy eigenvalues of the optimisation problem, and at \num{2000} reads already seems to be well-sampled.\footnote{For this particular problem there are $2^{768}\sim 10^{231}$ levels. To put that into perspective, the Universe is said to contain about $10^{24}$ stars.} The most optimal solutions lie in the leftmost tail of the distribution, corresponding to the lowest energies. The distribution is very symmetric, meaning the probability of returning these low-energies is not favourable, but not impossible.
+An example of the energy distribution of a returned sample set can be seen in \cref{fig:histograms}, using Haydn Op.\ 1 with $n=3$. All energies presented in this study have arbitrary units, and the absolute values simply reflect the size of the problem---what's important is the difference in energy between solutions. As the number of reads tends to infinity, this distribution should reflect the true distribution of the energy eigenvalues of the optimisation problem, and at \num{2000} reads already seems to be well-sampled.\footnote{For this particular problem there are $2^{768}\sim 10^{231}$ levels. To put that into perspective, the Universe is said to contain about $10^{24}$ stars.} The most optimal solutions lie in the leftmost tail of the distribution, corresponding to the lowest energies. The distribution is very symmetric, meaning the probability of returning these low-energies is not favourable, but not impossible.
 The spectral gap distribution can also be seen, which measures the difference in energy between adjacent eigenstates. It takes the form of an exponential decay, with many samples having very small ($<0.1$) energy gaps, implying that many of the energy eigenstates are degenerate. According to \cref{eq:energy-gap}, depending on the location of these small energy gaps, this could mean that longer evolution times are required to remain in a low-energy state and find optimal solutions.
 
 \begin{figure}[t]
@@ -409,12 +416,14 @@ The spectral gap distribution can also be seen, which measures the difference in
 
 \subsection{Parameter tuning}
 
-Next, the Lagrange parameters $A_m$ and $B_m$ were tuned, the results of which can be seen in \cref{fig:lagrange}. These two parameters were varied together as the complexity of the QUBO model with such a large number of variables makes it hard to predict how the terms interact. The number of broken constraints was taken as the sum of overlaps and duplicates combined. In terms of reducing this number, the edge multiplier ($B_m$) can be seen to have the most importance, although an increase in the vertex multiplier ($A_m$) is still required to reduce this number to exactly zero in order to produce a valid solution. The parameters used for subsequent models were $A_m=6,B_m=6$ for Haydn Op.\ 1 and $A_m=6,B_m=12$ for Beethoven Op.\ 67, which can be seen to fulfil \cref{eq:lagrange} as expected. The higher edge multiplier required for Beethoven Op.\ 67 can be seen as an effect of its increased connectivity; the original score has over twice the number of instrument parts, increasing both the number of edges in the problem graph and the number of constraints that could possibly be broken. The tuning of these parameters does not necessarily guarantee that no constraints are broken in the lowest-energy solutions, however, they will be less likely.
+Next, the Lagrange parameters $A_m$ and $B_m$ were tuned, the results of which can be seen in \cref{fig:lagrange}. These two parameters were varied together as the complexity of the QUBO model with such a large number of variables makes it hard to predict how the terms interact.
+% Volatility of parameter space?
+The number of broken constraints was taken as the sum of overlaps and duplicates combined. In terms of reducing this number, the edge multiplier ($B_m$) can be seen to have the most importance, although an increase in the vertex multiplier ($A_m$) is still required to reduce this number to exactly zero in order to produce a valid solution. The parameters used for subsequent models were $A_m=6,B_m=6$ for Haydn Op.\ 1 and $A_m=6,B_m=12$ for Beethoven Op.\ 67, which can be seen to fulfil \cref{eq:lagrange} as expected. The higher edge multiplier required for Beethoven Op.\ 67 can be seen as an effect of its increased connectivity; the original score has over twice the number of instrument parts, increasing both the number of edges in the problem graph and the number of constraints that could possibly be broken. The tuning of these parameters does not necessarily guarantee that no constraints are broken in the lowest-energy solutions, however, they will be less likely.
 
 \begin{figure}[!b]
     \centering\footnotesize
     \includesvg[width=\linewidth]{lagrange-parameters.svg}
-    \caption{Parametric plots tuning the Lagrange parameters $A_m$ (vertex multiplier) and $B_m$ (edge multiplier). QUBO equation for each pair of parameters solved five times at \num{500} reads, with the mean number of broken constraints in the lowest-energy solution taken. Chosen values marked with a cross. \textbf{(Left)} Haydn Op.\ 1 parameters varied up to a maximum of 9 with $n=3$, $A_m=6,B_m=6$ chosen. \textbf{(Right)} Beethoven Op.\ 67 parameters varied up to a maximum of 12 with $n=4$, $A_m=6,B_m=12$ chosen.}
+    \caption{Parametric plots tuning the Lagrange parameters $A_m$ (vertex multiplier) and $B_m$ (edge multiplier). QUBO equation for each pair of parameters solved three times at \num{500} reads, with the mean number of broken constraints in the lowest-energy solution taken. Chosen values marked with a cross. \textbf{(Left)} Haydn Op.\ 1 parameters varied up to a maximum of \num{8} with $n=3$, $A_m=6,B_m=6$ chosen. \textbf{(Right)} Beethoven Op.\ 67 parameters varied up to a maximum of \num{12} with $n=4$, $A_m=6,B_m=12$ chosen.}
     \label{fig:lagrange}
 \end{figure}
 
@@ -463,7 +472,7 @@ A similar comparison can be seen in \cref{fig:entropy}, but this time comparing 
 \begin{figure}[!b]
     \centering\footnotesize
     \includesvg[width=\textwidth]{scaling.svg}
-    \caption{Comparing solutions returned by classical solvers against quantum annealing. Each data point sampled five times at \num{2000} reads, with the mean and standard error calculated. Difference from quantum annealing shown, with a positive difference signifying an advantage towards quantum annealing. \textbf{(Top)} Lowest-energy samples of the returned sample set. \textbf{(Bottom)} Time to solution, in seconds.}
+    \caption{Comparing solutions returned by steepest descent (red squares) and simulated annealing (green triangles) against quantum annealing. Each data point sampled five times at \num{2000} reads, with the mean and standard error calculated. Difference from quantum annealing shown, with a positive difference signifying an advantage towards quantum annealing. \textbf{(Top)} Lowest-energy samples of the returned sample set. \textbf{(Bottom)} Time to solution, in seconds.}
     \label{fig:scaling}
 \end{figure}
 
@@ -514,7 +523,7 @@ To conclude, this study has shown the application of quantum annealing to the au
 
 \clearpage
 \appendix
-\setcounter{figure}{0}
+\counterwithin{figure}{section}
 
 \section{Code overview}
 \label{app:code}
@@ -530,14 +539,48 @@ The full repository of code used in this study can be found at
 
 \section{Scores}
 \label{app:examples}
-\renewcommand{\thefigure}{B\arabic{figure}}
 
 The following are excerpts of the original scores used for testing this framework, alongside their associated arrangement instruments, problem graphs, and arrangement scores. All original files provided in the public domain. Audio examples can be found in the code repository.
 
-\begin{figure}
-    \includegraphics[width=\textwidth,page=1]{haydn-score.pdf}
-    \caption{Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn, bars 1--16.}
-    \label{fig:haydn-score}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth,page=1]{haydn-op1.pdf}
+        \caption{Original score, bars 1--16.}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[h]
+    \ContinuedFloat
+    \centering
+    \begin{subfigure}{\textwidth}
+        %\renewcommand{\arraystretch}{1.2} % Row spacing
+        \centering\setlength{\tabcolsep}{12pt}
+        \begin{tabular}{llr}
+            \toprule
+            $i$ & \textbf{Instrument} & \textbf{Role} \\
+            \midrule
+            1 & Flute & Lead \\
+            2 & Oboe & Rhythm \\
+            3 & Clarinet & Rhythm \\
+            4 & Bassoon & Foundation \\
+            \bottomrule
+        \end{tabular}
+        \caption{Arrangement instruments and their assigned roles.}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includesvg[width=\textwidth]{toy-graph.svg}
+        \caption{Problem graph with $n=3$, lowest-energy valid solution highlighted.}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[h]
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth,page=1]{haydn-op1.pdf}
+        \caption{Constructed arrangement from solution.}
+    \end{subfigure}
+    \caption{Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn.}
 \end{figure}
 
 \begin{figure}
