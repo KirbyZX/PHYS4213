@@ -157,17 +157,13 @@ where we have replaced the spins with Pauli matrices. This is known as the Ising
     H_0 = h_0\sum_{i=1}^{N}\sigma_i^x
 \end{equation}
 such that its ground state is an equal superposition of all possible states in the eigenbasis of $H_p$ \cite{boixo_experimental_2013}.
-
 Another way of expressing optimisation problems is via the QUBO (quadratic unconstrained binary optimisation) model. A QUBO model takes the form of a function
 \begin{equation}
     f(x)=\sum^N_{i<j}Q_{i,j}x_ix_j + \sum^N_{i=1}Q_{i,i}x_i
     \label{eq:qubo}
 \end{equation}
-to be minimised, where $x_i\in\{0,1\}$ is a new vector of binary variables, and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. The off-diagonal $Q_{i,j}$ terms are known as quadratic coefficients, and diagonal $Q_{i,i}$ terms as linear coefficients. These two models are mathematically equivalent, and each can be transformed to the other via a simple change of variable
-\begin{equation}
-    s_i = 2x_i - 1 \,.
-    \label{eq:qubo-ising}
-\end{equation}
+to be minimised, where $x_i\in\{0,1\}$ is a new vector of binary variables, and $Q$ is an $N\times N$ upper-diagonal matrix of real weights. The off-diagonal $Q_{i,j}$ terms are known as quadratic coefficients, and diagonal $Q_{i,i}$ terms as linear coefficients. These two models are mathematically equivalent, and each can be transformed to the other via a simple change of variable ${s_i = 2x_i - 1}$.
+
 Whilst there are merits for each model, this study exclusively uses QUBO models to express optimisation problems.
 
 \subsection{Quantum hardware}
@@ -530,62 +526,92 @@ To conclude, this study has shown the application of quantum annealing to the au
 
 All code in this study was written in the Python programming language. The most notable libraries used were those included in \href{https://docs.dwavequantum.com/en/latest/ocean}{\texttt{dwave-ocean-sdk}}\footnote{\url{https://docs.dwavequantum.com/en/latest/ocean}} for interface with the QPU and \href{https://www.music21.org/music21docs}{\texttt{music21}}\footnote{\url{https://www.music21.org/music21docs}} for the manipulation and visualisation of music.
 
-\href{https://www.musicxml.com}{MusicXML}\footnote{\url{https://www.musicxml.com}} was chosen for the digital representation of music. A variant of the established XML (extensible markup language) format, this format focuses on the interactive representation of standard sheet music, describing not just the note content but the structure of the score as well, such as the arrangement of notes into bars and parts. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as Python libraries (such as \texttt{music21}) that provide extensive resources for manipulating such files.
+\href{https://www.musicxml.com}{MusicXML}\footnote{\url{https://www.musicxml.com}} was chosen for the digital representation of music. A variant of the established XML (extensible markup language) format, this format focuses on the interactive representation of standard sheet music, describing not just the note content but the structure of the score as well, such as the arrangement of notes into bars and parts. It is widely supported by music notation software, allowing translation of music to graphic (PDF, PNG) and audio (MIDI, MP3) formats, as well as by Python libraries (such as \texttt{music21}) that provide extensive resources for manipulating such files.
 
 The full repository of code used in this study can be found at
 \begin{center}
     \url{https://github.com/kirbyzx/quantum-arrangement}.
 \end{center}
 
-\section{Scores}
+\section{Examples}
 \label{app:examples}
 
 The following are excerpts of the original scores used for testing this framework, alongside their associated arrangement instruments, problem graphs, and arrangement scores. All original files provided in the public domain. Audio examples can be found in the code repository.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \begin{subfigure}{\textwidth}
         \includegraphics[width=\textwidth,page=1]{haydn-op1.pdf}
         \caption{Original score, bars 1--16.}
     \end{subfigure}
 \end{figure}
-
-\begin{figure}[h]
+\begin{figure}[ht]
     \ContinuedFloat
     \centering
     \begin{subfigure}{\textwidth}
-        %\renewcommand{\arraystretch}{1.2} % Row spacing
         \centering\setlength{\tabcolsep}{12pt}
-        \begin{tabular}{llr}
+        \begin{tabular}{lllr}
             \toprule
-            $i$ & \textbf{Instrument} & \textbf{Role} \\
+            $i$ & \textbf{Instrument} & \textbf{Colour} & \textbf{Role} \\
             \midrule
-            1 & Flute & Lead \\
-            2 & Oboe & Rhythm \\
-            3 & Clarinet & Rhythm \\
-            4 & Bassoon & Foundation \\
+            1 & Flute & blue & lead \\
+            2 & Oboe & red & rhythm \\
+            3 & Clarinet & yellow & rhythm \\
+            4 & Bassoon & green & foundation \\
             \bottomrule
         \end{tabular}
         \caption{Arrangement instruments and their assigned roles.}
     \end{subfigure}
     \begin{subfigure}{\textwidth}
-        \includesvg[width=\textwidth]{toy-graph.svg}
-        \caption{Problem graph with $n=3$, lowest-energy valid solution highlighted.}
+        \includesvg[width=\textwidth]{haydn-graph.svg}
+        \caption{Proper vertex colouring with $n=3$, lowest-energy valid solution coloured.}
     \end{subfigure}
 \end{figure}
-
-\begin{figure}[h]
+\begin{figure}[ht]
     \ContinuedFloat
     \begin{subfigure}{\textwidth}
-        \includegraphics[width=\textwidth,page=1]{haydn-op1.pdf}
-        \caption{Constructed arrangement from solution.}
+        \includegraphics[width=\textwidth,page=1]{haydn-arr.pdf}
+        \caption{Constructed arrangement from solution. Note that, due to the nature of the reconstruction, the music may be poorly formatted and incomplete.}
     \end{subfigure}
     \caption{Quartet No.\ 1 in B-flat major, Op.\ 1, by Joseph Haydn.}
 \end{figure}
 
-\begin{figure}
-    \includegraphics[width=\textwidth,page=1]{beethoven-op67.pdf}
-    \caption{Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven, bars 1--8.}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth,page=1]{beethoven-op67.pdf}
+        \caption{Original score, bars 1--8.}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[ht]
+    \ContinuedFloat
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering\setlength{\tabcolsep}{12pt}
+        \begin{tabular}{lllr}
+            \toprule
+            $i$ & \textbf{Instrument} & \textbf{Colour} & \textbf{Role} \\
+            \midrule
+            1 & Violin I & blue & lead \\
+            2 & Violin II & red & lead \\
+            3 & Viola & yellow & rhythm \\
+            4 & Violoncello & green & foundation \\
+            \bottomrule
+        \end{tabular}
+        \caption{Arrangement instruments and their assigned roles.}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includesvg[width=\textwidth]{beethoven-graph.svg}
+        \caption{Proper vertex colouring with $n=3$, lowest-energy valid solution coloured.}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[ht]
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth,page=1]{beethoven-arr.pdf}
+        \caption{Constructed arrangement from solution. Note that, due to the nature of the reconstruction, the music may be poorly formatted and incomplete.}
+    \end{subfigure}
+    \caption{Symphony No.\ 5 in C minor, Op.\ 67, by Ludwig van Beethoven.}
 \end{figure}
 
 \clearpage

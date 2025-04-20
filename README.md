@@ -45,10 +45,10 @@ Vary B to remove overlaps
 - [x] Write results
 - [x] Write conclusion
 - [x] Write introduction
-- [ ] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
-- [ ] Write appendices (tables of arrangement instruments, scores, problem graphs)
+- [x] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
+- [x] Write appendices (tables of arrangement instruments, scores, problem graphs)
 - [ ] Write abstract 
 - [ ] Write scientific summary
 - [ ] Check references
 - [x] Rename repository
-- [ ] Tidy code
+- [ ] Tidy repository
