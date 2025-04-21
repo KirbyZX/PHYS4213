@@ -62,7 +62,7 @@
 
 
 \title{\Huge \bfseries Quantum annealing\\for music arrangement}
-\author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\normalsize Supervised by\\\normalsize Prof Robert Potvliege \& Dr Omer Rathore}
+\author{Lucas Kirby\\\normalsize Department of Physics, University of Durham\\\\\normalsize Supervised by\\\normalsize Dr Robert Potvliege \& Dr Omer Rathore}
 \date{\normalsize 23 April 2025}
 
 \begin{document}
@@ -74,7 +74,9 @@
 \addcontentsline{toc}{section}{Abstract}
 \begin{abstract}              
 
-Music arrangement is usually a complex and time-consuming process; this paper aims to provide an automatic method by which to arrange music via a quantum computing technique called quantum annealing. By splitting a score into a set of phrases, these phrases can form a quadratic unconstrained binary optimisation (QUBO), a function which the quantum computer aims to minimise by choosing the values of discrete variables. At the end of the optimisation process, the resulting chosen values describe the final arrangement, which can then be interpreted into sheet music.
+Quantum annealing is an adiabatic quantum computing technique that has the potential to solve optimisation problems much faster than classical algorithms. This study proposes the novel application of quantum annealing to music arrangement---the adaptation of previously-written compositions---by framing arrangement as an optimisation problem. The original framework is applied to two scores: Quartet No.\ 1 in B-flat major, Op.\ 1, by
+Joseph Haydn, and Symphony No.\ 5 in C minor, Op.\ 67,
+I.\ Allegro con brio, by Ludwig van Beethoven. It is shown that a quantum annealer successfully produces arrangements in fulfilment of the imposed constraints, and, whilst often performing on par with classical algorithms, displays an optimisation and time advantage at some problem sizes.
 
 \end{abstract}
 
@@ -98,7 +100,7 @@ Music arrangement is usually a complex and time-consuming process; this paper ai
 % Background to quantum computing
 The field of quantum computing has its foundations as early as the 1980s, with the suggestion that hardware following the laws of quantum mechanics could be faster and more powerful than its classical counterpart \cite{feynman_simulating_1982}.
 Quantum computers, which leverage quantum mechanical phenomena to perform calculations, store information as qubits (``quantum bits'') which can exploit effects such as superposition and entanglement to increase computing power.
-As quantum computers developed, along with them came the possibility to solve complex problems usually intractable to even the most powerful classical computers, an advantage dubbed ``quantum supremacy'' \cite{preskill_supremacy_2012}. This is not to say that quantum computers can solve problems that are impossible for classical computers, but that they can solve them faster. A collaboration between Google AI Quantum and NASA became the first to claim quantum supremacy in 2019 \cite{arute_quantum_2019}, although this claim has since been refuted \cites{pednault_leveraging_2019}{mccormick_race_2022}. More recently, D-Wave Quantum Systems Inc.\ claimed to have demonstrated quantum supremacy simulating quantum critical dynamics, performing magnetic materials simulations in minutes that would take nearly one million years using classical supercomputers \cite{king_beyond_2025}. However, this claim too was quickly challenged \cites{tindall_dynamics_2025}{mauron_challenging_2025}. Skepticism about quantum computers has existed since their conception \cite{unruh_maintaining_1995} and is still ongoing \cite{brooks_quantum_2023}, but this does not prevent many from being optimistic about future applications.
+As quantum computers developed, along with them came the possibility to solve complex problems usually intractable to even the most powerful classical computers, an advantage dubbed ``quantum supremacy'' \cite{preskill_supremacy_2012}. This is not to say that quantum computers can solve problems that are impossible for classical computers, but that they can solve them faster. A collaboration between Google AI Quantum and NASA became the first to claim quantum supremacy in 2019 \cite{arute_quantum_2019}, although this claim has since been refuted \cites{pednault_leveraging_2019}{mccormick_race_2022}. More recently, D-Wave Quantum Systems Inc.\ claimed to have demonstrated quantum supremacy simulating quantum critical dynamics, performing magnetic materials simulations in minutes that would take nearly one million years using classical supercomputers \cite{king_beyond_2025}. However, this claim too was quickly challenged \cites{tindall_dynamics_2025}{mauron_challenging_2025}. Scepticism about quantum computers has existed since their conception \cite{unruh_maintaining_1995} and is still ongoing \cite{brooks_quantum_2023}, but this does not prevent many from being optimistic about future applications.
 
 Since its inception, two methods of quantum computing have been developed: gate-based computing and adiabatic quantum computing.
 % Gate-based
@@ -135,7 +137,7 @@ where the system is evolving from an initial Hamiltonian $H_0$ to a final Hamilt
     \frac{\hbar\braket{\psi_m|\dot{H}|\psi_n}}{(E_n-E_m)^2} \ll 1
     \label{eq:energy-gap}
 \end{equation}
-where we have used the largest matrix element between a pair of adjacent eigenstates $\psi_{n,m}$, and ${E_n-E_m}$ is the minimum energy gap \cite{sakurai_quantum_2020}. It can be seen that a smaller energy gap requires a slower evolution in order to remain adiabatic, and that for degenerate energies ($\Delta E=0$) no adiabatic evolution is possible. 
+where we have used the largest matrix element between a pair of adjacent eigenstates $\psi_{n,m}$, and ${E_n-E_m}$ is the minimum energy gap \cite{sakurai_quantum_2020}. It can be seen that a smaller energy gap requires a slower evolution in order to remain adiabatic, and that for degenerate energies ($\Delta E=0$) no adiabatic evolution is possible.
 
 This technique is useful as it allows particular eigenstates (usually the ground state) of a very complicated Hamiltonian ($H_p$) to be found simply by evolving from a Hamiltonian whose eigenstate is easy to find and prepare ($H_0$) \cite{farhi_quantum_2001}. Importantly, this process is universal and deterministic---if the system starts in the ground state of $H_0$, then it is guaranteed to be in the ground state of $H_p$ after adiabatic evolution.
 
@@ -190,8 +192,6 @@ Interaction with D-Wave QPUs is handled through their Leap quantum cloud service
 
 Quantum annealing has already been applied to a wide array of optimisation problems: this study explores a novel creative application of this computing technique---music arrangement.
 
-% !!!Nick Chansellor paper, why quantum annealing?
-
 \section{Music arrangement}
 \label{sec:arrangement}
 
@@ -220,7 +220,7 @@ Holistically, reduction aims to fit as much original music into the arrangement 
 
 The beginning of any arrangement process is an original musical score. There exist a myriad of musical styles, genres, instruments, and notations, each as expressive and meaningful as the next. To maintain a manageable scope, this study focuses on Western classical small ensemble and orchestral music, written in modern staff notation. A brief taxonomy of a typical score is as follows: a standard score is split into parts, which can be played by a single instrument or an instrument section. Each part is further divided into bars (sometimes known as measures) which contain the notes that the instrument plays. If an instrument plays more than one note at a time, it is known as polyphonic (otherwise monophonic)---for the purposes of this study, all instruments will be treated as monophonic.
 
-Whilst the automation of music might seem irreverent to some, the application of each new technology, from the printing press to the computer, heralds a new way to preserve the continuation of tradition. The next section outlines an original framework by which to arrange music quantumly.
+Whilst the automation of music might seem irreverent to some, the application of each new technology, from the printing press to the computer, heralds a new way to preserve the continuation of tradition. The next section outlines an original framework by which to arrange music in a quantum manner.
 
 % Theory, anyone could apply these steps. Then talk about practicalities in results (or in code appendix)
 \section{Proposed framework}
@@ -359,7 +359,7 @@ which requires $N(n+1)$ variables, where $N$ is the total number of phrases.
 \subsection{Lagrange parameter analysis}
 
 To ensure that the minimisation of \cref{eq:problem-qubo} does indeed fulfil the constraints necessary for a valid arrangement, the Lagrange parameters must be tuned. The very nature of the problem means a full parametric analysis would be complicated, so this study focuses on an empirical approach.
-Nonetheless, a quick algebraic calculation can help reduce the problem. The model given by \cref{eq:problem-qubo} contains two constraints, each of which aims to fulfil a different condition. The vertex constraint (labelled with $A$) upholds \cref{con:non-degenerate}, the breaking of which would introduce phrases being duplicated in the final arrangement. The edge constraint (labelled with $B$) upholds \cref{con:monophonic}, preventing phrases that overlap being played by the same part. The number of duplicates and overlaps needs to be strictly zero in order for a solution to be valid therefore these Lagranage parameters need to be large enough to facilitate this.
+Nonetheless, a quick algebraic calculation can help reduce the problem. The model given by \cref{eq:problem-qubo} contains two constraints, each of which aims to fulfil a different condition. The vertex constraint (labelled with $A$) upholds \cref{con:non-degenerate}, the breaking of which would introduce phrases being duplicated in the final arrangement. The edge constraint (labelled with $B$) upholds \cref{con:monophonic}, preventing phrases that overlap being played by the same part. The number of duplicates and overlaps needs to be strictly zero in order for a solution to be valid therefore these Lagrange parameters need to be large enough to facilitate this.
 
 In a worst-case scenario, a vertex included in the solution would break both these constraints---to ensure that this results in an overall increase in energy, and is therefore less likely, we can derive the inequality
 \begin{equation}
@@ -438,11 +438,6 @@ Anneal time per sample could only be increased to a maximum of \qty{300}{\us} fo
 
 Having tuned the Lagrange parameters and solver configuration, we compare returned solutions from the QPU to classical optimisation algorithms solving the same problem. D-Wave provides a selection of heuristic classical samplers that can return solutions to QUBO problems, two of which are used in this study.
 
-The steepest descent method, the discrete analogue of gradient descent, takes steps according to a local minimisation---the dimension along which to descend is determined by the variable flip that causes the greatest reduction in energy \cite{dwave_samplers}. The initial state of the solver is randomised for each sample so, although it is guaranteed to find a local minimum with enough steps, for a complex problem with many such minima the same solution won't necessarily be returned. Despite its apparent rudimentary nature, this method is still very widely used for solving optimisation problems.
-
-% Reword this explanation
-Simulated annealing, on the other hand, is more complex and works similarly to quantum annealing, but instead of evolving over a time interval, the evolution is instead determined by a ``temperature'' parameter $T$ \cite{kirkpatrick_optimization_1983}. At each step, the probability $P$ of moving between states depends on the difference in energy $\Delta E$ and $T$. At all times, $P>0$ even if $\Delta E$---however, as $T\to 0$, $P\to0$ if $\Delta>0$ and is positive otherwise. This evolution of $P$ means that the system can initially climb potential barriers, before settling into minima as the temperature decreases. In this implementation, temperature schedule is varied between samples, changing both the initial and final $T$ values. Due to its similarity, this method is often used as a direct comparison between quantum and classical approaches \cite{albash_demonstration_2018}.
-
 \begin{figure}[p]
     \centering\footnotesize
     \includesvg[width=\textwidth]{compare-reads.svg}
@@ -456,6 +451,11 @@ Simulated annealing, on the other hand, is more complex and works similarly to q
     \caption{Comparison between quantum annealing (QA), steepest descent (SD), and simulated annealing (SA) entropies of the same lowest-energy samples as \cref{fig:reads}. Best-fit lines found via the least-squares regression.}
     \label{fig:entropy}
 \end{figure}
+
+The steepest descent method, the discrete analogue of gradient descent, takes steps according to a local minimisation---the dimension along which to descend is determined by the variable flip that causes the greatest reduction in energy \cite{dwave_samplers}. The initial state of the solver is randomised for each sample so, although it is guaranteed to find a local minimum with enough steps, for a complex problem with many such minima the same solution won't necessarily be returned. Despite its apparent rudimentary nature, this method is still very widely used for solving optimisation problems.
+
+% Reword this explanation
+Simulated annealing, on the other hand, is more complex and works similarly to quantum annealing, but instead of evolving over a time interval, the evolution is instead determined by a ``temperature'' parameter $T$ \cite{kirkpatrick_optimization_1983}. At each step, the probability $P$ of moving between states depends on the difference in energy $\Delta E$ and $T$. At all times, $P>0$ even if $\Delta E$---however, as $T\to 0$, $P\to0$ if $\Delta>0$ and is positive otherwise. This evolution of $P$ means that the system can initially climb potential barriers, before settling into minima as the temperature decreases. In this implementation, temperature schedule is varied between samples, changing both the initial and final $T$ values. Due to its similarity, this method is often used as a direct comparison between quantum and classical approaches \cite{albash_demonstration_2018}.
 
 A comparison of the lowest-energy solutions returned by the different solvers for both pieces can be seen in \cref{fig:reads}, whilst varying the total number of reads. The maximum number of reads for a single problem was limited to \num{2000} due to the solver time constraints previously mentioned. Both pieces demonstrate very little variation in lowest-energy solutions returned by quantum annealing as the total number of reads is increased. This could be a sign that the lower end of the energy distribution was already well-sampled with a small number of reads, so increasing reads would only provide marginal gains. Both classical methods also vary very little, which is to be expected due to their semi-deterministic nature.
 Looking at Haydn Op.\ 1, quantum annealing consistently provides considerably better lower-energy solutions than steepest descent, and surpasses simulated annealing by a small margin at reads upwards of \num{800}.
@@ -619,6 +619,6 @@ The following are excerpts of the original scores used for testing this framewor
 \section*{Scientific summary for a general audience} % 200 words
 \addcontentsline{toc}{section}{Scientific summary for a general audience}
 
-The arrangement of music by hand is usually a difficult and time-consuming process, requiring a deep understanding of musical theory and structure. This study aims to automate this process via quantum computing, a technique that relies on the use of qubits, which can exist in a superposition of states. A music score can be split up into a sequence of phrases by looking at how much adjacent notes differ from each other, and turned into a graph representation with nodes and edges, where each node is a phrase, and edges between nodes mean they overlap. This graph can then be sent to a quantum computer in order to select nodes according to a set of rules that determine the properties of the arrangement. Once the nodes have been selected, the corresponding phrases can be reconstructed to create the final score. Here, an excerpt of Beethoven's String Quartet No.\ 10 is reduced to a single part, suitable for a solo instrument.
+Quantum computing is a technique that relies on the use of qubits, which can exist in a superposition of states, giving it the potential to solve problems much faster than classical computers. For the first time, this study applies a particular quantum computing method to music arrangement, the adaptation of previously-written compositions, by framing arrangement as an optimisation problem. A musical score can be transformed into a graph of nodes and edges, where each node is a section of music, and edges between nodes meaning they overlap. This graph can then be sent to a quantum computer in order to select nodes according to a set of rules that determine the properties of the arrangement. Once the nodes have been selected, the corresponding music can then be reconstructed to create the final arrangement. Here, this process is applied to Quartet No.\ 1 (Op.\ 1) by Joseph Haydn and Symphony No.\ 5 (Op.\ 67) by Ludwig van Beethoven. The quantum method successfully returns arrangements in accordance with the imposed rules, at times showing some advantage over classical methods.
 
 \end{document}
