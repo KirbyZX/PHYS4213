@@ -1,42 +1,16 @@
 # Quantum annealing for music arrangement
 
-AQC is broader umbrella, universal, deterministic, can be applied to anything
-annealing relaxes the adiabaticity, turns into stochastic, might end up with excited states
-heuristic, not deterministic
+## Abstract
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+Quantum annealing is an adiabatic quantum computing technique that has the potential to solve optimisation problems much faster than classical algorithms. This study proposes the novel application of quantum annealing to music arrangement—the adaptation of previously-written compositions—by framing arrangement as an optimisation problem. A musical score is transformed into a graph of vertices and edges, which can then be solved as a graph colouring problem by a quantum computer. The original framework is applied to two scores: Quartet No. 1 in B-flat major, Op. 1, by Joseph Haydn, and Symphony No. 5 in C minor, Op. 67, I. Allegro con brio, by Ludwig van Beethoven. It is shown that a quantum annealer successfully produces arrangements meeting the imposed conditions. Whilst often performing on par with classical algorithms, the quantum method displays optimisation and time advantages at some problem sizes.
 
+## Overview
 
 `scoreWriter.py`
 `boundaryDetection.py`
 `graphConstructor.py`
 `qubo.py`
 `embedding.py`
-
-Maximum connectivity of each node is 15 in Pegasus architecture
-However, in the Haydn example we require worst-case connectivity of up to 16
-
-$$
-f(x)=A\sum_{v \in V}\left(s_v-\sum_{i=1}^{n} x_{v,i}\right)^2+A\sum_{(u,v) \in E}\sum_{i=1}^n x_{u,i}x_{v,i}-C\sum_{v \in V}\sum_{i=1}^n W_vx_{v,i}-D\sum_{(u,v)\in E}W_{uv}\sum_{i=1}^n\sum_{j=1}^n x_{u,i}x_{v,j}-E\sum_{v \in V}\sum_{i=1}^n\theta(S_v-S_{\text{th},i})x_{v,i}
-$$
-where $\theta$ is the Heaviside step function.
-
-Set $C=D=1$ implies
-$$
-A>2\max(W)+E
-$$
-
-$A=B=E=\max(W)$ edge constraint broken, node constraint broken
-
-Vary A to remove duplicates
-
-Vary B to remove overlaps
 
 ### TODO
 
@@ -47,8 +21,8 @@ Vary B to remove overlaps
 - [x] Write introduction
 - [x] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
 - [x] Write appendices (tables of arrangement instruments, scores, problem graphs)
-- [ ] Write abstract 
-- [ ] Write scientific summary
-- [ ] Check references
+- [x] Write abstract 
+- [x] Write scientific summary
+- [x] Check references
 - [x] Rename repository
 - [ ] Tidy repository
