@@ -6,23 +6,11 @@ Quantum annealing is an adiabatic quantum computing technique that has the poten
 
 ## Overview
 
-`scoreWriter.py`
-`boundaryDetection.py`
-`graphConstructor.py`
-`qubo.py`
-`embedding.py`
-
-### TODO
-
-- [x] Rewrite quantum annealing
-- [x] Rewrite music arrangement
-- [x] Write results
-- [x] Write conclusion
-- [x] Write introduction
-- [x] Check formatting of plots (SVG, dpi=600, 4:3, text, colours)
-- [x] Write appendices (tables of arrangement instruments, scores, problem graphs)
-- [x] Write abstract 
-- [x] Write scientific summary
-- [x] Check references
-- [x] Rename repository
-- [ ] Tidy repository
+|Folder|Description|
+|---|---|
+|`Code`|Python files and Jupyter notebooks used to create the framework|
+|`Data`|Solutions returned from both quantum and classical solvers|
+|`Examples`|Graphic and audio files of original scores and arrangements|
+|`Figures`|Report figures in SVG format|
+|`Pickles`|Configuration and data files for the arrangement process|
+|`Thesis`|Report and bibliography in LaTeX format
